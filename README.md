@@ -7,12 +7,12 @@
 
 ### Fluent
 
-(image)
-
+[(image)](https://github.com/veryboringhwl/veryboring-theme/blob/main/assets/placeholder%201.png)
+placeholder
 ### Dark
 
-(image)
-
+[(image)](https://github.com/veryboringhwl/veryboring-theme/blob/main/assets/placeholder%202.png)
+placeholder
 ## Installation
 
 ### Automatic
