@@ -1,0 +1,16 @@
+{
+  "name": "Boring",
+  "description": "a spicetify theme",
+  "preview": "assets/placeholder1.png",
+  "readme": "README.md",
+  "usercss": "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/user.css",
+  "schemes": "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/color.ini",
+  "include": ["https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/theme.js"],
+  "authors": [
+    {
+      "name": "veryboringhwl",
+      "url": "https://github.com/veryboringhwl"
+    }
+  ],
+  "tags": []
+}
