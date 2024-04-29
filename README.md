@@ -7,12 +7,11 @@
 
 ### Fluent
 
-[[(image)](https://github.com/veryboringhwl/veryboring-theme/blob/main/assets/placeholder%201.png)](https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/cf91f44dd253f807b755f00ef1c40c064befa2e3/assets/placeholder%201.png)
+![(image)](https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/cf91f44dd253f807b755f00ef1c40c064befa2e3/assets/placeholder%201.png)
 placeholder
 ### Dark
 
-[[(image)](https://github.com/veryboringhwl/veryboring-theme/blob/main/assets/placeholder%202.png)
-](https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/cf91f44dd253f807b755f00ef1c40c064befa2e3/assets/placeholder%201.png)placeholder
+![(image)](https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/cf91f44dd253f807b755f00ef1c40c064befa2e3/assets/placeholder%201.png)placeholder
 ## Installation
 
 ### Automatic
