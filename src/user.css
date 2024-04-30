@@ -1,6 +1,27 @@
-/* FONTS */
+
+
+/*******************
+*                  *
+*       TODO:      *
+*                  *
+********************
+IMPORATNT:
+FIX GREEN THING (sometimes works???)
+marketplace header in top how???? bloom does it good (using css)
+get equaliser working (bloom)
+puts the colors into color.ini
+
+NOT IMPORTANT:
+Fluent colour scheme (idc someone else do it)
+Banner in playlist head
+Probably more stuff
+*/
+
+/* WHOLE PAGE */
 * {
   font-family: 'Segoe UI Variable Display', 'Segoe UI Variable Text', 'Segoe UI' !important;
+  box-shadow: none !important;
+
 }
 
 /* TRANSPARENT WINDOWS CONTROL */
@@ -20,11 +41,9 @@ body::after {
   border-radius: 4px;
   height: 32px;
   border-radius: 8px;
-  transition: 0.2s ease
 }
 
 .x-searchInput-searchInputInput:focus {
-  -webkit-box-shadow: none;
   border-bottom: #00ffa1 solid 2px;
   outline: none;
 }
@@ -44,7 +63,41 @@ body::after {
 }
 
 .progress-bar--isDragging {
-  transition-duration: 100ms !important;
+  transition-duration: 0ms !important;
+}
+
+/* PROGRESS BAR SLIDER */
+
+.progress-bar__slider {
+  background-color: #373737 !important;
+  border: 6px solid #373737;
+  box-shadow: 0 0 3px 0 #080808 !important;
+  box-sizing: content-box !important;
+  width: 8px;
+  height: 8px;
+  opacity: 1 !important;
+  display: block;
+  margin-left: -10px;
+}
+
+.progress-bar__slider::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #00ffa1;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border-radius: 50%;
+}
+
+.progress-bar__slider:hover::after {
+  transform: scale(1.25);
+}
+
+.progress-bar__slider:active::after {
+  transform: scale(0.8);
 }
 
 /* NOW PLAYING BAR */
@@ -104,7 +157,7 @@ body::after {
 
 .main-topBar-historyButtons .main-topBar-button {
   border-radius: 25%;
-  background-color: #1c1c1c;}
+  background-color: #ffffff;}
 
 .main-addButton-active:focus,
 .main-addButton-active:hover,
@@ -112,8 +165,42 @@ body::after {
   color: #00ffa1 !important;
 }
 
+[aria-label='Friend Activity'] {
+  --background-base: #191919 !important;
+}
+[aria-label="What’s New"] {
+  --background-base: #191919 !important;
+}
 
+.Button-sc-1dqy6lx-0.Button-textBase-medium-medium-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle.encore-over-media-set.main-userWidget-boxCondensed {
+  background-color: #191919 !important;
+}
 /* SCROLL BAR */
+
+.os-scrollbar {
+  cursor: pointer;
+  display: unset;
+}
+
+.os-scrollbar-handle {
+  border-radius: 99px !important;
+  background: var(--spice-subtext) !important;
+}
+
+.os-scrollbar-vertical {
+  width: 4px !important;
+  margin-right: 5px;
+  transition: width 150ms ease !important;
+}
+
+.os-scrollbar-vertical:hover,
+.os-scrollbar-vertical:active {
+  width: 5px !important;
+}
+
+.os-scrollbar-horizontal {
+  display: none;
+}
 
 /* MAKE HOVER GREY + GREEN BIT */
 
@@ -146,7 +233,6 @@ body::after {
 	display: none;
 }
 
-.main-navBar-navBarLinkActive > .navBar-navBarLink-accent,
 .main-yourLibraryX-navLinkActive > .main-yourLibraryX-navLink-accent {
   display: block !important;
 }
@@ -205,23 +291,3 @@ body::after {
 
 
 /* TEST FEATURES */
-
-
-
-
-
-
-
-
-
-
-
-/* todo:
-FIX GREEN THING
-marketplace header in top howwwwww????? bloom does it good
-Probably more stuff
-
-Banner in playlist head
-get equaliser working (bloom)
-*/
-
