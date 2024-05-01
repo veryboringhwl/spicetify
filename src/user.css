@@ -17,6 +17,12 @@ Banner in playlist head
 Probably more stuff
 */
 
+
+:root {
+  /*green = 00ffa1*/
+  /*blue = 4f70be*/
+
+}
 /* WHOLE PAGE */
 * {
   font-family: 'Segoe UI Variable Display', 'Segoe UI Variable Text', 'Segoe UI' !important;
@@ -44,7 +50,7 @@ body::after {
 }
 
 .x-searchInput-searchInputInput:focus {
-  border-bottom: #00ffa1 solid 2px;
+  border-bottom: var(--spice-test) solid 2px;
   outline: none;
 }
 
@@ -57,8 +63,8 @@ body::after {
 
 .progress-bar {
   --bg-color: rgba(255,555,255,.2);
-  --fg-color: #00ffa1;
-  --is-active-fg-color: #00ffa1;
+  --fg-color: var(--spice-test);
+  --is-active-fg-color: var(--spice-test);
   transition: --progress-bar-transform 1s linear !important;
 }
 
@@ -85,7 +91,7 @@ body::after {
   position: absolute;
   width: 10px;
   height: 10px;
-  background-color: #00ffa1;
+  background-color: var(--spice-test);
   top: 50%;
   left: 50%;
   translate: -50% -50%;
@@ -103,7 +109,7 @@ body::after {
 /* NOW PLAYING BAR */
 
 .Root__now-playing-bar {
-  background-color: #121212 !important;
+  background-color: var(--spice-main) !important;
   border-radius: 8px;
 }
 
@@ -117,7 +123,7 @@ body::after {
   transform: scale(1.2) !important;
   margin-right: 10px;
   margin-left: 10px;
-  box-shadow: #252525;
+  box-shadow: var(--maincolor);
 }
 
 .main-nowPlayingWidget-nowPlaying {
@@ -148,21 +154,21 @@ body::after {
 /* BUTTONS */
 
 .main-genericButton-buttonActive::after {
-  background-color: #00ffa1 !important;
+  background-color: var(--spice-test) !important;
 }
 
 .main-genericButton-buttonActive {
-  color: #00ffa1 !important;
+  color: var(--spice-test) !important;
 }
 
 .main-topBar-historyButtons .main-topBar-button {
   border-radius: 25%;
-  background-color: #ffffff;}
+  background-color: #191919;}
 
 .main-addButton-active:focus,
 .main-addButton-active:hover,
 .main-addButton-active {
-  color: #00ffa1 !important;
+  color: var(--spice-test) !important;
 }
 
 [aria-label='Friend Activity'] {
@@ -209,11 +215,15 @@ body::after {
 }
 
 .main-yourLibraryX-navLinkActive.active {
-	background-color: #202020;
+	background-color: #373737;
+  /*373737 for fluent
+  202020 for dark*/
 }
 
 .main-yourLibraryX-navLink:hover {
-	background-color: #2A2A2A;
+	background-color: #373737;
+  /*373737 for fluent
+  2A2A2A for dark*/
 }
 
 .main-yourLibraryX-navLink {
@@ -227,7 +237,7 @@ body::after {
 	position: absolute;
 	width: 4px;
 	height: 25px;
-	background-color: #00ffa1;
+	background-color: var(--spice-test);
 	border-radius: 7px;
 	left: 12px;
 	display: none;
@@ -252,7 +262,7 @@ body::after {
 }
 
 .main-yourLibraryX-navLinkActive svg {
-  color: #00ffa1 !important;
+  color: var(--spice-test) !important;
   animation: bounce 175ms ease-out forwards;
 }
 
@@ -265,7 +275,7 @@ body::after {
 
 /*marketplace cards have green border*/
 .marketplace-card--installed {
-	border: 1px solid #00ffa1;
+	border: 1px solid var(--spice-test);
 }
 
 /*adds a gradient in libraryx scroll*/
@@ -291,3 +301,4 @@ body::after {
 
 
 /* TEST FEATURES */
+
