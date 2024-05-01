@@ -1,24 +1,24 @@
 <div align = "center">
 <h1>Veryboring theme</h1>
-<p>Spicetify theme inspired by Bloom, Fluent and Comfy</p>
+<p>Spicetify theme inspired by Bloom and Fluent</p>
 </div>
 
 ## Preview
 
 ### Fluent
 
-![(image)](https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/cf91f44dd253f807b755f00ef1c40c064befa2e3/assets/placeholder%202.png)
+![(image)](https://raw.githubusercontent.com/veryboringhwl/Spicetify-Theme/main/assets/placeholder2.png?token=GHSAT0AAAAAACRT5YFW22B4KRFGCKV4FFIAZRSNYAA)
 
 ### Dark
 
-![(image)](https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/cf91f44dd253f807b755f00ef1c40c064befa2e3/assets/placeholder%201.png)
+![(image)](https://raw.githubusercontent.com/veryboringhwl/Spicetify-Theme/main/assets/placeholder1.png?token=GHSAT0AAAAAACRT5YFXWSZDETFODQCQTBVCZRSNXQQ)
 ## Installation
 
 ### Automatic
 Windows → PowerShell:
 
 ```powershell
-iwr -useb https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/veryboringhwl/spicetify-theme/main/install.ps1 | iex
 ```
 ### Manual installation
 1. Clone the repo
@@ -28,7 +28,7 @@ iwr -useb https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/
 4. Open Powershell and run these commands to apply
 
 ```powershell
- spicetify config current_theme "veryboring theme"
+ spicetify config current_theme "spicetify-theme"
  spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 inject_theme_js 1
  spicetify apply
 ```
