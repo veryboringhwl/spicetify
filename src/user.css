@@ -6,23 +6,18 @@
 *                  *
 ********************
 IMPORATNT:
-FIX GREEN THING (sometimes works???)
-marketplace header in top how???? bloom does it good (using css)
 get equaliser working (bloom)
-puts the colors into color.ini
+puts the colors into color.ini (partly)
+icons
 
 NOT IMPORTANT:
-Fluent colour scheme (idc someone else do it)
-Banner in playlist head
+FIX GREEN THING (sometimes works???)
+marketplace header in top how???? bloom does it good (using css)
+Banner in playlist head(comfy)
+light colour scheme
 Probably more stuff
 */
 
-
-:root {
-  /*green = 00ffa1*/
-  /*blue = 4f70be*/
-
-}
 /* WHOLE PAGE */
 * {
   font-family: 'Segoe UI Variable Display', 'Segoe UI Variable Text', 'Segoe UI' !important;
@@ -42,11 +37,14 @@ body::after {
 }
 
 /* SEARCH */
+
+.x-searchInput-searchInputInput{
+  background-color: var(--spice-sidebar);
+}
 .x-searchInput-searchInputInput,
 .x-searchInput-searchInputInput:hover {
   border-radius: 4px;
   height: 32px;
-  border-radius: 8px;
 }
 
 .x-searchInput-searchInputInput:focus {
@@ -62,7 +60,7 @@ body::after {
 }
 
 .progress-bar {
-  --bg-color: rgba(255,555,255,.2);
+  --bg-color: rgba(255,255,255,.2);
   --fg-color: var(--spice-test);
   --is-active-fg-color: var(--spice-test);
   transition: --progress-bar-transform 1s linear !important;
@@ -75,8 +73,8 @@ body::after {
 /* PROGRESS BAR SLIDER */
 
 .progress-bar__slider {
-  background-color: #373737 !important;
-  border: 6px solid #373737;
+  background-color: #343434 !important;
+  border: 6px solid #343434;
   box-shadow: 0 0 3px 0 #080808 !important;
   box-sizing: content-box !important;
   width: 8px;
@@ -163,7 +161,7 @@ body::after {
 
 .main-topBar-historyButtons .main-topBar-button {
   border-radius: 25%;
-  background-color: #191919;}
+  background-color: var(--spice-sidebar);}
 
 .main-addButton-active:focus,
 .main-addButton-active:hover,
@@ -172,14 +170,14 @@ body::after {
 }
 
 [aria-label='Friend Activity'] {
-  --background-base: #191919 !important;
+  --background-base: var(--spice-sidebar) !important;
 }
 [aria-label="What’s New"] {
-  --background-base: #191919 !important;
+  --background-base: var(--spice-sidebar) !important;
 }
 
 .Button-sc-1dqy6lx-0.Button-textBase-medium-medium-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle.encore-over-media-set.main-userWidget-boxCondensed {
-  background-color: #191919 !important;
+  background-color: var(--spice-sidebar) !important;
 }
 /* SCROLL BAR */
 
@@ -201,7 +199,7 @@ body::after {
 
 .os-scrollbar-vertical:hover,
 .os-scrollbar-vertical:active {
-  width: 5px !important;
+  width: 6px !important;
 }
 
 .os-scrollbar-horizontal {
@@ -215,13 +213,13 @@ body::after {
 }
 
 .main-yourLibraryX-navLinkActive.active {
-	background-color: #373737;
+	background-color: var(--spice-highlight-elevated);
   /*373737 for fluent
   202020 for dark*/
 }
 
 .main-yourLibraryX-navLink:hover {
-	background-color: #373737;
+	background-color: var(--spice-highlight);
   /*373737 for fluent
   2A2A2A for dark*/
 }
@@ -298,7 +296,6 @@ body::after {
 [aria-label="Go forward"] path {
   d: path("M8.7045.2838C8.3111-.1038 7.678-.0992 7.2904.2942 6.9027.6876 6.9074 1.3208 7.3008 1.7084L12.6712 6.9998H1C.5 6.9998 0 7.4475 0 8 0 8.5521.5 8.9998 1 8.9998H12.6646L7.3008 14.2847C6.9074 14.6723 6.9027 15.3055 7.2904 15.6989 7.678 16.0923 8.3111 16.097 8.7045 15.7094L15.6287 8.887C16.1256 8.3974 16.1256 7.5958 15.6287 7.1062L8.7045.2838Z") !important;
 }
-
 
 /* TEST FEATURES */
 
