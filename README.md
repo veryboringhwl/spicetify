@@ -7,18 +7,18 @@
 
 ### Fluent
 
-![(image)](https://raw.githubusercontent.com/veryboringhwl/Spicetify-Theme/main/assets/placeholder2.png?token=GHSAT0AAAAAACRT5YFW22B4KRFGCKV4FFIAZRSNYAA)
+![(image)](assets/fluent.png)
 
 ### Dark
 
-![(image)](https://raw.githubusercontent.com/veryboringhwl/Spicetify-Theme/main/assets/placeholder1.png?token=GHSAT0AAAAAACRT5YFXWSZDETFODQCQTBVCZRSNXQQ)
+![(image)](assets/dark.png)
 
 ### Light
 
-![(image)](https://raw.githubusercontent.com/veryboringhwl/Spicetify-Theme/main/assets/placeholder1.png?token=GHSAT0AAAAAACRT5YFXWSZDETFODQCQTBVCZRSNXQQ)
+![(image)](assets/light.png)
 ## Installation
 
-### Automatic
+### Auto Installation
 Windows → PowerShell:
 
 ```powershell
@@ -36,7 +36,8 @@ iwr -useb https://raw.githubusercontent.com/veryboringhwl/spicetify-theme/main/i
  spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 inject_theme_js 1
  spicetify apply
 ```
-### Manual Uninstallation
+
+### Uninstallation
 
 ```powershell
 spicetify config color_scheme ''
@@ -44,7 +45,8 @@ spicetify config current_theme marketplace
 spicetify apply
 ```
 
-## Colour scheme (Manual install only)
+## Colour scheme
+### (Manual install only)
 The colour schemes are `dark` `fluent` `light`. Apply using 
 
 `spicetify config color_scheme <colour scheme>`
