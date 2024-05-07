@@ -1,5 +1,7 @@
 (function theme() {
-  
+
+  // SELECTED NAVITEMS
+
   function waitForElements(elementSelectors, func, attempts = 50) {
     const queries = elementSelectors.map((elementSelector) =>
       document.querySelector(elementSelector)

@@ -7,25 +7,24 @@
 ********************
 IMPORATNT:
 get equaliser working (bloom)
-puts the colors into color.ini (partly)
-icons
+icons (only navbar partly done)
 
 NOT IMPORTANT:
 FIX GREEN THING (sometimes works???)
 marketplace header in top how???? bloom does it good (using css)
-Banner in playlist head(comfy)
-light colour scheme
+Banner in playlist head(comfy does it)
 Probably more stuff
 */
 
 /* WHOLE PAGE */
+
 * {
   font-family: 'Segoe UI Variable Display', 'Segoe UI Variable Text', 'Segoe UI' !important;
   box-shadow: none !important;
-
 }
 
 /* TRANSPARENT WINDOWS CONTROL */
+
 body::after {
   content: '';
   position: absolute;
@@ -41,9 +40,10 @@ body::after {
 .x-searchInput-searchInputInput{
   background-color: var(--spice-sidebar);
 }
+
 .x-searchInput-searchInputInput,
 .x-searchInput-searchInputInput:hover {
-  border-radius: 4px;
+  border-radius: 7px;
   height: 32px;
 }
 
@@ -53,6 +53,7 @@ body::after {
 }
 
 /* PROGRESS BAR */
+
 @property --progress-bar-transform {
 	inherits: true;
 	initial-value: 0%;
@@ -73,8 +74,8 @@ body::after {
 /* PROGRESS BAR SLIDER */
 
 .progress-bar__slider {
-  background-color: #343434 !important;
-  border: 6px solid #343434;
+  background-color: var(--spice-highlight) !important;
+  border: 6px solid var(--spice-highlight);
   box-shadow: 0 0 3px 0 #080808 !important;
   box-sizing: content-box !important;
   width: 8px;
@@ -104,7 +105,22 @@ body::after {
   transform: scale(0.8);
 }
 
+.x-progressBar-progressBarBg, .x-progressBar-sliderArea {
+  background-color: var(--spice-highlight-elevated);
+}
+
 /* NOW PLAYING BAR */
+
+.main-playPauseButton-button svg {
+  height: 20px;
+  width: 20px;
+  transform: scale(1.5);
+}
+
+.main-playPauseButton-button {
+  background-color: transparent;
+  color: var(--spice-text)
+}
 
 .Root__now-playing-bar {
   background-color: var(--spice-main) !important;
@@ -137,18 +153,6 @@ body::after {
   transform: translateX(-8px) scale(1) !important;
 }
 
-/* PLAY BUTTON */
-.main-playPauseButton-button svg {
-  height: 20px;
-  width: 20px;
-  transform: scale(1.5);
-}
-
-.main-playPauseButton-button {
-  background-color: transparent;
-  color: #ffffff
-}
-
 /* BUTTONS */
 
 .main-genericButton-buttonActive::after {
@@ -179,6 +183,7 @@ body::after {
 .Button-sc-1dqy6lx-0.Button-textBase-medium-medium-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle.encore-over-media-set.main-userWidget-boxCondensed {
   background-color: var(--spice-sidebar) !important;
 }
+
 /* SCROLL BAR */
 
 .os-scrollbar {
@@ -194,7 +199,6 @@ body::after {
 .os-scrollbar-vertical {
   width: 4px !important;
   margin-right: 5px;
-  transition: width 150ms ease !important;
 }
 
 .os-scrollbar-vertical:hover,
@@ -214,14 +218,10 @@ body::after {
 
 .main-yourLibraryX-navLinkActive.active {
 	background-color: var(--spice-highlight-elevated);
-  /*373737 for fluent
-  202020 for dark*/
 }
 
 .main-yourLibraryX-navLink:hover {
 	background-color: var(--spice-highlight);
-  /*373737 for fluent
-  2A2A2A for dark*/
 }
 
 .main-yourLibraryX-navLink {
@@ -264,7 +264,19 @@ body::after {
   animation: bounce 175ms ease-out forwards;
 }
 
+/* PLAYLIST PAGE */
+
+.main-trackList-trackList {
+  padding: 8px;
+  background-color: var(--spice-card);
+  border-radius: 7px;
+}
+
 /* MISC */
+
+.main-yourLibraryX-libraryContainer .os-scrollbar-handle {
+  visibility: hidden;
+}
 
 /*shift lyrics a bit*/
 .BeautifulLyricsPage .Lyrics {
@@ -305,7 +317,6 @@ body::after {
   d: path("M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z") !important;
 }
 
-
 [aria-label="Volume off"] path {
   d: path("M8.463.2449c.6247-.5557 1.612-.1124 1.612.7239v12.0094c0 .8355-.9874 1.2788-1.612.7239l-3.4813-3.0954a.5812.5812 90 00-.386-.1473H1.7438A1.7438 1.7438 90 010 8.7164V5.2313a1.7438 1.7438 90 011.7438-1.7438h2.852a.5812.5812 90 00.386-.1473l3.4805-3.0946Zm.4495 1.1547L5.7544 4.2082A1.7438 1.7438 90 014.5957 4.65H1.7438a.5812.5812 90 00-.5813.5813v3.4852c0 .3216.2604.5813.5813.5813h2.852a1.7438 1.7438 90 011.1586.4417l3.1581 2.8078V1.4004ZM11.0205 4.8205a.5812.5812 90 01.8215 0L13.175 6.1535l1.333-1.333a.5812.5812 90 11.8215.8215L13.9965 6.975l1.333 1.333a.5812.5812 90 11-.8215.8215L13.175 7.7965l-1.333 1.333a.5812.5812 90 11-.8215-.8215L12.3535 6.975l-1.333-1.333a.5812.5812 90 010-.8215Z") !important;
 }
@@ -337,5 +348,6 @@ body::after {
 [id="BeautifulLyricsFullscreenButton"] {
   display:none;
 }
+
 /* TEST FEATURES */
 
