@@ -49,7 +49,7 @@ spicetify apply
 ### (Manual install only)
 The colour schemes are `dark` `fluent` `light`. Apply using 
 
-`spicetify config color_scheme <colour scheme>`
+```spicetify config color_scheme <colour scheme>```
 
 ## Credits
 Based off of
