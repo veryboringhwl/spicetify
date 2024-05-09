@@ -1,7 +1,12 @@
+//TODO: 
+// Settings icon
+// add sliders into settings
+// other
+
+
 (function theme() {
 
   // SELECTED NAVITEMS
-
   function waitForElements(elementSelectors, func, attempts = 50) {
     const queries = elementSelectors.map((elementSelector) =>
       document.querySelector(elementSelector)
@@ -21,5 +26,14 @@
       navItem.appendChild(navItemAccent);
     });
   });
+
+
+  // WINDOWS ZOOM VARIABLE (taken from comfy)
+  function updateZoomVariable() {
+    var devicePixelRatio = window.devicePixelRatio || 1;
+    document.documentElement.style.setProperty('--zoom', devicePixelRatio);
+  }
+  updateZoomVariable();
+  window.addEventListener('resize', updateZoomVariable);
 
 })();
