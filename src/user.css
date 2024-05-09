@@ -31,8 +31,8 @@ body::after {
   right: 0;
   z-index: 999;
   backdrop-filter: brightness(2.12);
-  width: calc(135px / var(--zoom, 1));
-  height: calc(40px / var(--zoom, 1));
+  width: 135px;
+  height: 40px;
 }
 
 /* SEARCH */

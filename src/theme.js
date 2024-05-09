@@ -3,7 +3,6 @@
 // add sliders into settings
 // other
 
-
 (function theme() {
 
   // SELECTED NAVITEMS
@@ -26,14 +25,5 @@
       navItem.appendChild(navItemAccent);
     });
   });
-
-
-  // WINDOWS ZOOM VARIABLE (taken from comfy)
-  function updateZoomVariable() {
-    var devicePixelRatio = window.devicePixelRatio || 1;
-    document.documentElement.style.setProperty('--zoom', devicePixelRatio);
-  }
-  updateZoomVariable();
-  window.addEventListener('resize', updateZoomVariable);
 
 })();
