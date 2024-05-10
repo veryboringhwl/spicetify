@@ -24,6 +24,11 @@ Windows → PowerShell:
 ```powershell
 iwr -useb https://raw.githubusercontent.com/veryboringhwl/spicetify-theme/main/install.ps1 | iex
 ```
+
+Linux and MacOS → Bash:
+```bash
+curl -fsSL https://raw.githubusercontent.com/veryboringhwl/spicetify-theme/main/install.sh | sh
+```
 ### Manual installation
 1. Clone the repo
 2. Navigate to ```%appdata%\spicetify\themes```

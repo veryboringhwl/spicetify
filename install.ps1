@@ -38,22 +38,22 @@ if ($PSVersionTable.PSVersion.Major -gt $PSMinVersion) {
   # Check ~\.spicetify\Themes directory already exists
   $spicePath = spicetify -c | Split-Path
   $sp_dot_dir = "$spicePath\Themes"
-  Write-Part "MAKING FOLDER  "; Write-Emphasized "$sp_dot_dir\test"
-  Remove-Item -Recurse -Force "$sp_dot_dir\test" -ErrorAction Ignore
-  New-Item -Path "$sp_dot_dir\test" -ItemType Directory | Out-Null
+  Write-Part "MAKING FOLDER  "; Write-Emphasized "$sp_dot_dir\boring"
+  Remove-Item -Recurse -Force "$sp_dot_dir\boring" -ErrorAction Ignore
+  New-Item -Path "$sp_dot_dir\boring" -ItemType Directory | Out-Null
   Write-Done
 
   # Clone to .spicetify.
   Write-Part "DOWNLOADING    "; Write-Emphasized $sp_dot_dir
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/color.ini" -UseBasicParsing -OutFile "$sp_dot_dir\test\color.ini"
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/user.css" -UseBasicParsing -OutFile "$sp_dot_dir\test\user.css"
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/theme.js" -UseBasicParsing -OutFile "$sp_dot_dir\test\theme.js"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/color.ini" -UseBasicParsing -OutFile "$sp_dot_dir\boring\color.ini"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/user.css" -UseBasicParsing -OutFile "$sp_dot_dir\boring\user.css"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/theme.js" -UseBasicParsing -OutFile "$sp_dot_dir\boring\theme.js"
   Write-Done
 
   # Installing.
   Write-Part "INSTALLING `r`n"
   spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 inject_theme_js 1
-  spicetify config current_theme test
+  spicetify config current_theme boring
   Write-Done	
   
   # applying.
