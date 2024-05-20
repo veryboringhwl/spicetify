@@ -297,12 +297,29 @@ div#context-menu::before,
   border-radius: 7px;
 }
 
-.main-trackList-trackListHeader .main-trackList-rowSectionIndex,
-.main-trackList-trackListRow>.main-trackList-rowSectionIndex {
+/*Remove tracklist index (from comfy)*/
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
   opacity: 0;
 }
 
-.main-trackList-trackListRow>.main-trackList-rowSectionIndex {
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowSectionIndex {
+  background: rgba(var(--spice-rgb-play-button), 0.5);
+  opacity: 1;
+}
+
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowSectionIndex {
+  color: var(--spice-sidebar);
+  border-radius: var(--border-radius);
+}
+
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow > .main-trackList-rowSectionIndex {
   position: relative;
   z-index: 1000;
   top: 8px;
@@ -313,25 +330,29 @@ div#context-menu::before,
   text-indent: -1000px;
 }
 
-.main-trackList-indexable .main-trackList-trackListRowGrid {
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="3"] .main-trackList-trackListRowGrid,
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="4"] .main-trackList-trackListRowGrid,
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="5"] .main-trackList-trackListRowGrid,
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="6"] .main-trackList-trackListRowGrid {
   padding-left: 2px;
 }
 
-.main-trackList-indexable[aria-colcount="3"] .main-trackList-trackListRowGrid {
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="3"] .main-trackList-trackListRowGrid {
   grid-template-columns: [index] 0px [first] var(--col1, 4fr) [last] minmax(120px, var(--col2, 1fr)) !important;
 }
 
-.main-trackList-indexable[aria-colcount="4"] .main-trackList-trackListRowGrid {
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="4"] .main-trackList-trackListRowGrid {
   grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr)) !important;
 }
 
-.main-trackList-indexable[aria-colcount="5"] .main-trackList-trackListRowGrid {
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="5"] .main-trackList-trackListRowGrid {
   grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important;
 }
 
-.main-trackList-indexable[aria-colcount="6"] .main-trackList-trackListRowGrid {
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="6"] .main-trackList-trackListRowGrid {
   grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [last] minmax(120px, var(--col5, 1fr)) !important;
 }
+
 
 /* EQUALISER GIF (from bloom)*/
 
@@ -442,44 +463,4 @@ div#context-menu::before,
 
 [aria-label="Expand Your Library"] .Svg-sc-ytk21e-0.Svg-img-icon-medium path {
   d: path("M3.3 1.1H4.4C5.5592 1.1 6.5099 1.998 6.594 3.1359L6.6 3.3V18.7C6.6 19.8592 5.702 20.8099 4.5641 20.894L4.4 20.9H3.3C2.1408 20.9 1.1901 20.002 1.106 18.8641L1.1 18.7V3.3C1.1 2.1408 1.998 1.1901 3.1359 1.106L3.3 1.1H4.4 3.3ZM9.9 1.1H11C12.1592 1.1 13.1099 1.998 13.194 3.1359L13.2 3.3V18.7C13.2 19.8592 12.302 20.8099 11.1641 20.894L11 20.9H9.9C8.7408 20.9 7.7901 20.002 7.706 18.8641L7.7 18.7V3.3C7.7 2.1408 8.598 1.1901 9.7359 1.106L9.9 1.1H11 9.9ZM17.5717 3.3005C18.4952 3.3005 19.3407 3.8842 19.6507 4.781L19.7024 4.9528 23.0189 17.8734C23.3077 18.9958 22.6743 20.1403 21.5925 20.5042L21.4349 20.5508 20.369 20.8247C20.1864 20.8709 20.0016 20.894 19.8212 20.894 18.8988 20.894 18.0523 20.3093 17.7432 19.4124L17.6916 19.2406 14.374 6.3212C14.0864 5.1977 14.7188 4.0541 15.8014 3.6903L15.9591 3.6438 17.0239 3.3699C17.2065 3.3226 17.3913 3.3005 17.5717 3.3005ZM4.4 2.75H3.3C3.0301 2.75 2.8055 2.9456 2.7589 3.2015L2.75 3.3V18.7C2.75 18.9688 2.9447 19.1943 3.2012 19.2411L3.3 19.25H4.4C4.6699 19.25 4.8945 19.0544 4.9411 18.7986L4.95 18.7V3.3C4.95 3.0311 4.7553 2.8057 4.4988 2.7589L4.4 2.75ZM11 2.75H9.9C9.6301 2.75 9.4055 2.9456 9.3589 3.2015L9.35 3.3V18.7C9.35 18.9688 9.5447 19.1943 9.8012 19.2411L9.9 19.25H11C11.2698 19.25 11.4946 19.0544 11.5411 18.7986L11.55 18.7V3.3C11.55 3.0311 11.3553 2.8057 11.0988 2.7589L11 2.75ZM17.5728 4.9505 17.5031 4.9548 17.4342 4.9682 16.3694 5.241C16.1769 5.2904 16.0757 5.4203 16.0317 5.495 15.9974 5.5531 15.9484 5.6619 15.9554 5.8016L15.9723 5.912 19.2899 18.8304C19.3625 19.1142 19.6166 19.244 19.8212 19.244L19.89 19.2397 19.9587 19.2264 21.0246 18.9525C21.2867 18.886 21.4557 18.6404 21.4367 18.3812L21.4206 18.2837 18.1041 5.3631C18.0304 5.0804 17.7774 4.9505 17.5728 4.9505Z") !important;
-}
-
-/* TEST FEATURES */
-
-/*stolen from comfy*/
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListHeader .main-trackList-rowSectionIndex,
-.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
-  opacity: 0
-}
-
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow>.main-trackList-rowSectionIndex,
-.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow>.main-trackList-rowSectionIndex {
-  position: relative;
-  z-index: 1000;
-  top: 8px;
-  left: 56px;
-  width: 40px;
-  height: 40px;
-  justify-content: center;
-  text-indent: -1000px
-}
-
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="3"] .main-trackList-trackListRowGrid {
-  padding-left: 2px;
-  grid-template-columns: [index] 0px [first] var(--col1, 4fr) [last] minmax(120px, var(--col2, 1fr)) !important
-}
-
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="4"] .main-trackList-trackListRowGrid {
-  padding-left: 2px;
-  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr)) !important
-}
-
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="5"] .main-trackList-trackListRowGrid {
-  padding-left: 2px;
-  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important
-}
-
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="6"] .main-trackList-trackListRowGrid {
-  padding-left: 2px;
-  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [last] minmax(120px, var(--col5, 1fr)) !important
 }
