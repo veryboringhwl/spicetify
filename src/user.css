@@ -109,6 +109,10 @@ body::after {
 }
 
 /* NOW PLAYING BAR */
+.main-trackInfo-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
 
 .main-playPauseButton-button svg {
   height: 20px;
@@ -271,14 +275,13 @@ body::after {
 
 .main-contextMenu-menu {
   border-radius: 7px;
-  background-color: var(--spice-rgb-cards);
-
+  background-color: var(--spice-rgb-card);
 }
 
 div#context-menu::before,
 .main-contextMenu-menu:before {
   content: "";
-  border: 2px solid var(--spice-rgb-card);
+  border: 2px solid var(--spice-card);
   border-radius: 7px;
   backdrop-filter: blur(100px) saturate(0.55) brightness(0.8);
   position: absolute;
@@ -293,66 +296,72 @@ div#context-menu::before,
 
 .main-trackList-trackList {
   padding: 8px;
-  background-color: rgb(var(--spice-card));
+  background-color: rgba(var(--spice-rgb-card), 0.6);
   border-radius: 7px;
 }
 
-/*Remove tracklist index (from comfy)*/
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
-  opacity: 0;
+/* Remove tracklist index (from comfy) */
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) {
+  .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
+    opacity: 0
+  }
+
+  .main-trackList-trackListRow {
+
+    .main-trackList-rowImagePlayPauseButton,
+    .main-trackList-rowSectionIndex {
+      color: var(--spice-sidebar);
+      border-radius: var(--border-radius)
+    }
+
+    &:hover .main-trackList-rowImagePlayPauseButton,
+    &:hover .main-trackList-rowSectionIndex,
+    &:focus-within .main-trackList-rowImagePlayPauseButton,
+    &:focus-within .main-trackList-rowSectionIndex,
+    &.main-trackList-active .main-trackList-rowImagePlayPauseButton,
+    &.main-trackList-active .main-trackList-rowSectionIndex {
+      background: rgba(var(--spice-rgb-play-button), .5);
+      opacity: 1
+    }
+
+    >.main-trackList-rowSectionIndex {
+      position: relative;
+      z-index: 1000;
+      top: 8px;
+      left: 56px;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
+      text-indent: -1000px
+    }
+  }
 }
 
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowSectionIndex,
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowSectionIndex,
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowSectionIndex {
-  background: rgba(var(--spice-rgb-play-button), 0.5);
-  opacity: 1;
-}
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img) {
 
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayButton,
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayPauseButton,
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowSectionIndex {
-  color: var(--spice-sidebar);
-  border-radius: var(--border-radius);
-}
+  [aria-colcount="3"] .main-trackList-trackListRowGrid,
+  [aria-colcount="4"] .main-trackList-trackListRowGrid,
+  [aria-colcount="5"] .main-trackList-trackListRowGrid,
+  [aria-colcount="6"] .main-trackList-trackListRowGrid {
+    padding-left: 2px
+  }
 
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow > .main-trackList-rowSectionIndex {
-  position: relative;
-  z-index: 1000;
-  top: 8px;
-  left: 56px;
-  width: 40px;
-  height: 40px;
-  justify-content: center;
-  text-indent: -1000px;
-}
+  [aria-colcount="3"] .main-trackList-trackListRowGrid {
+    grid-template-columns: [index]0 [first]var(--col1, 4fr)[last]minmax(120px, var(--col2, 1fr)) !important
+  }
 
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="3"] .main-trackList-trackListRowGrid,
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="4"] .main-trackList-trackListRowGrid,
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="5"] .main-trackList-trackListRowGrid,
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="6"] .main-trackList-trackListRowGrid {
-  padding-left: 2px;
-}
+  [aria-colcount="4"] .main-trackList-trackListRowGrid {
+    grid-template-columns: [index]0 [first]minmax(120px, var(--col1, 4fr))[var1]minmax(120px, var(--col2, 2fr))[last]minmax(120px, var(--col3, 1fr)) !important
+  }
 
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="3"] .main-trackList-trackListRowGrid {
-  grid-template-columns: [index] 0px [first] var(--col1, 4fr) [last] minmax(120px, var(--col2, 1fr)) !important;
-}
+  [aria-colcount="5"] .main-trackList-trackListRowGrid {
+    grid-template-columns: [index]0 [first]minmax(120px, var(--col1, 6fr))[var1]minmax(120px, var(--col2, 4fr))[var2]minmax(120px, var(--col3, 3fr))[last]minmax(120px, var(--col4, 1fr)) !important
+  }
 
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="4"] .main-trackList-trackListRowGrid {
-  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr)) !important;
+  [aria-colcount="6"] .main-trackList-trackListRowGrid {
+    grid-template-columns: [index]0 [first]minmax(120px, var(--col1, 6fr))[var1]minmax(120px, var(--col2, 4fr))[var2]minmax(120px, var(--col3, 3fr))[var3]minmax(120px, var(--col4, 2fr))[last]minmax(120px, var(--col5, 1fr)) !important
+  }
 }
-
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="5"] .main-trackList-trackListRowGrid {
-  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important;
-}
-
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="6"] .main-trackList-trackListRowGrid {
-  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [last] minmax(120px, var(--col5, 1fr)) !important;
-}
-
 
 /* EQUALISER GIF (from bloom)*/
 
@@ -378,9 +387,8 @@ div#context-menu::before,
   content-visibility: hidden;
 }
 
-
 /* MISC */
-
+/*removes scrollbar in libx*/
 .main-yourLibraryX-libraryContainer .os-scrollbar-handle {
   visibility: hidden;
 }
@@ -409,6 +417,11 @@ div#context-menu::before,
 /*if nothing in navitems removes the back bit*/
 .main-yourLibraryX-entryPoints:first-child:has(.main-yourLibraryX-navItems:empty) {
   display: none;
+}
+
+/*removes the brief underline*/
+.main-yourLibraryX-navItems * {
+  text-decoration: none !important;
 }
 
 /* ICONS */
