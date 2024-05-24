@@ -1,6 +1,6 @@
 <div align = "center">
-<h1>Boring theme</h1>
-<p>Boring theme inspired by Bloom and Fluent</p>
+<h1>Spicetify theme</h1>
+<p>Spicetify theme inspired by Bloom and Fluent</p>
 </div>
 
 ## Preview
@@ -22,15 +22,15 @@
 Windows → PowerShell:
 
 ```powershell
-iwr -useb https://raw.githubusercontent.com/veryboringhwl/spicetify-theme/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/veryboringhwl/spicetify/main/install.ps1 | iex
 ```
 
 Linux and MacOS → Bash:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/veryboringhwl/spicetify-theme/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/veryboringhwl/spicetify/main/install.sh | sh
 ```
 ### Manual installation
-1. Clone the repo
+1. Clone or download the repo
 2. Navigate to ```%appdata%\spicetify\themes```
 3. Move `src` folder into `themes`
 4. Rename `src` to `boring`

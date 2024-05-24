@@ -45,9 +45,9 @@ if ($PSVersionTable.PSVersion.Major -gt $PSMinVersion) {
 
   # Clone to .spicetify.
   Write-Part "DOWNLOADING    "; Write-Emphasized $sp_dot_dir
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/color.ini" -UseBasicParsing -OutFile "$sp_dot_dir\boring\color.ini"
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/user.css" -UseBasicParsing -OutFile "$sp_dot_dir\boring\user.css"
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/veryboring-theme/main/src/theme.js" -UseBasicParsing -OutFile "$sp_dot_dir\boring\theme.js"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/color.ini" -UseBasicParsing -OutFile "$sp_dot_dir\boring\color.ini"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/user.css" -UseBasicParsing -OutFile "$sp_dot_dir\boring\user.css"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/theme.js" -UseBasicParsing -OutFile "$sp_dot_dir\boring\theme.js"
   Write-Done
 
   # Installing.
@@ -61,9 +61,11 @@ if ($PSVersionTable.PSVersion.Major -gt $PSMinVersion) {
   spicetify backup
   spicetify apply
   Write-Done
+
+  # prevents closing
+  Read-host -prompt "Press any button to exit..."
 }
 else {
   Write-Part "`nYour Powershell version is less than "; Write-Emphasized "$PSMinVersion";
   Write-Part "`nPlease, update your Powershell downloading the "; Write-Emphasized "'Windows Management Framework'"; Write-Part " greater than "; Write-Emphasized "$PSMinVersion"
 }
-Read-host -prompt "Press any button to exit..."
