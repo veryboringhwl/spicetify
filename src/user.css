@@ -28,8 +28,12 @@ body::after {
   right: 0;
   z-index: 999;
   backdrop-filter: brightness(2.12);
-  width: calc(135px / var(--zoom, 1));
-  height: calc(40px / var(--zoom, 1));
+  width: calc(135px / var(--zoom));
+  height: calc(40px / var(--zoom));
+}
+
+:root:has(.global-nav) body::after {
+  height: calc(64px/var(--zoom, 1)) !important
 }
 
 /* SEARCH */
@@ -115,8 +119,8 @@ body::after {
 }
 
 .main-playPauseButton-button svg {
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
   transform: scale(1.5);
 }
 
@@ -143,11 +147,6 @@ body::after {
   box-shadow: var(--maincolor);
 }
 
-.main-nowPlayingWidget-nowPlaying {
-  display: -webkit-box !important;
-  width: 70% !important;
-}
-
 .Button-small-small-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle:hover {
   transform: unset !important;
 }
@@ -166,6 +165,7 @@ body::after {
   color: var(--spice-test) !important;
 }
 
+.main-topBar-buddyFeed,
 .main-topBar-historyButtons .main-topBar-button {
   border-radius: 25%;
   background-color: var(--spice-sidebar);
@@ -281,9 +281,8 @@ body::after {
 div#context-menu::before,
 .main-contextMenu-menu:before {
   content: "";
-  border: 2px solid var(--spice-card);
   border-radius: 7px;
-  backdrop-filter: blur(100px) saturate(0.55) brightness(0.8);
+  backdrop-filter: blur(50px) saturate(0.55) brightness(0.8);
   position: absolute;
   top: 0;
   left: 0;
