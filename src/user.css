@@ -300,30 +300,54 @@ div#context-menu::before,
 }
 
 /* Remove tracklist index (from comfy) */
-.main-trackList-trackList:has(.main-trackList-rowSectionStart img, .main-trackList-rowSectionStart .main-trackList-rowImageFallback) {
-  .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
-    opacity: 0
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListHeader .main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
+  opacity: 0;
   }
 
-  .main-trackList-trackListRow {
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowSectionIndex {
+  background: rgba(var(--spice-rgb-play-button), 0.5);
+}
 
-    .main-trackList-rowImagePlayPauseButton,
-    .main-trackList-rowSectionIndex {
-      color: var(--spice-sidebar);
-      border-radius: var(--border-radius)
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton {
+  opacity: 1;
     }
 
-    &:hover .main-trackList-rowImagePlayPauseButton,
-    &:hover .main-trackList-rowSectionIndex,
-    &:focus-within .main-trackList-rowImagePlayPauseButton,
-    &:focus-within .main-trackList-rowSectionIndex,
-    &.main-trackList-active .main-trackList-rowImagePlayPauseButton,
-    &.main-trackList-active .main-trackList-rowSectionIndex {
-      background: rgba(var(--spice-rgb-play-button), .5);
-      opacity: 1
-    }
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowImagePlayButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayPauseButton,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowSectionIndex {
+  color: var(--spice-sidebar);
+  border-radius: var(--border-radius);
+  transition: 200ms opacity, 200ms background;
+}
 
-    >.main-trackList-rowSectionIndex {
+.main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow>.main-trackList-rowSectionIndex,
+.main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow>.main-trackList-rowSectionIndex {
       position: relative;
       z-index: 1000;
       top: 8px;
@@ -331,35 +355,27 @@ div#context-menu::before,
       width: 40px;
       height: 40px;
       justify-content: center;
-      text-indent: -1000px
-    }
-  }
+  text-indent: -1000px;
 }
 
-.main-trackList-indexable:has(.main-trackList-rowSectionStart img) {
-
-  [aria-colcount="3"] .main-trackList-trackListRowGrid,
-  [aria-colcount="4"] .main-trackList-trackListRowGrid,
-  [aria-colcount="5"] .main-trackList-trackListRowGrid,
-  [aria-colcount="6"] .main-trackList-trackListRowGrid {
-    padding-left: 2px
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="3"] .main-trackList-trackListRowGrid {
+  padding-left: 2px;
+  grid-template-columns: [index] 0px [first] var(--col1, 4fr) [last] minmax(120px, var(--col2, 1fr)) !important;
   }
 
-  [aria-colcount="3"] .main-trackList-trackListRowGrid {
-    grid-template-columns: [index]0 [first]var(--col1, 4fr)[last]minmax(120px, var(--col2, 1fr)) !important
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="4"] .main-trackList-trackListRowGrid {
+  padding-left: 2px;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr)) !important;
   }
 
-  [aria-colcount="4"] .main-trackList-trackListRowGrid {
-    grid-template-columns: [index]0 [first]minmax(120px, var(--col1, 4fr))[var1]minmax(120px, var(--col2, 2fr))[last]minmax(120px, var(--col3, 1fr)) !important
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="5"] .main-trackList-trackListRowGrid {
+  padding-left: 2px;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important;
   }
 
-  [aria-colcount="5"] .main-trackList-trackListRowGrid {
-    grid-template-columns: [index]0 [first]minmax(120px, var(--col1, 6fr))[var1]minmax(120px, var(--col2, 4fr))[var2]minmax(120px, var(--col3, 3fr))[last]minmax(120px, var(--col4, 1fr)) !important
-  }
-
-  [aria-colcount="6"] .main-trackList-trackListRowGrid {
-    grid-template-columns: [index]0 [first]minmax(120px, var(--col1, 6fr))[var1]minmax(120px, var(--col2, 4fr))[var2]minmax(120px, var(--col3, 3fr))[var3]minmax(120px, var(--col4, 2fr))[last]minmax(120px, var(--col5, 1fr)) !important
-  }
+.main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="6"] .main-trackList-trackListRowGrid {
+  padding-left: 2px;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [last] minmax(120px, var(--col5, 1fr)) !important;
 }
 
 /* EQUALISER GIF (from bloom)*/
