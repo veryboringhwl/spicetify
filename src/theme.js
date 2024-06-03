@@ -56,20 +56,64 @@
       const optionRow = document.createElement("div");
       optionRow.classList.add("themeOptionRow");
       optionRow.innerHTML = `
-				<span class="themeOptionDesc">${desc}</span>
-					<button class="themeOptionToggle">
-						<span class="toggleWrapper">
-							<span class="toggle"></span>
-						</span>
-					</button>`;
+        <span class="themeOptionDesc">${desc}</span>
+        <button class="themeOptionToggle">
+            <span class="toggleWrapper">
+                <span class="toggle"></span>
+            </span>
+        </button>`;
       optionRow.setAttribute("name", name);
+      optionRow.setAttribute("data-default", defaultValue);
+
+      const toggle = optionRow.querySelector(".toggle");
+      const savedValue = JSON.parse(localStorage.getItem(name));
+      if (savedValue !== null ? savedValue : defaultValue) {
+        toggle.classList.add("enabled");
+      }
+
       optionRow.querySelector("button").addEventListener("click", () => {
-        const toggle = optionRow.querySelector(".toggle");
         toggle.classList.toggle("enabled");
       });
-      const isEnabled = JSON.parse(localStorage.getItem(name)) ?? defVal;
-      optionRow.querySelector(".toggle").classList.toggle("enabled", isEnabled);
+
       optionList.append(optionRow);
+    }
+
+    function createCarousel(items) {
+      const carouselContainer = document.createElement("div");
+      carouselContainer.classList.add("carouselcontainer");
+
+      const carousel = document.createElement("div");
+      carousel.classList.add("carousel");
+
+      items.forEach(itemText => {
+        const item = document.createElement("div");
+        item.classList.add("carouselitem");
+        item.innerText = itemText;
+        carousel.append(item);
+      });
+
+      const left = document.createElement("button");
+      left.classList.add("carouselcontrol", "prev");
+      left.innerText = "<";
+      left.addEventListener("click", () => scrollCarousel(-1));
+
+      const right = document.createElement("button");
+      right.classList.add("carouselcontrol", "next");
+      right.innerText = ">";
+      right.addEventListener("click", () => scrollCarousel(1));
+
+      carouselContainer.append(left, carousel, right);
+
+      function scrollCarousel(direction) {
+        const scrollAmount = carousel.clientWidth / 2;
+        carousel.scrollBy({
+          top: 0,
+          left: scrollAmount * direction,
+          behavior: 'smooth'
+        });
+      }
+
+      return carouselContainer;
     }
 
     const content = document.createElement("div");
@@ -78,11 +122,32 @@
     header.innerText = "Theme Settings";
     content.append(header);
 
+    const carouselItems = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9"];
+    const carousel = createCarousel(carouselItems);
+    content.append(carousel);
+
     const optionList = document.createElement("div");
     createOption("hidetracklistnum", "Hide tracklist numbers:", false);
     createOption("hidenowplayview", "Hide now playing view:", false);
+    createOption("switchlayout", "Makes left sidebar in front of npb:", false);
+    createOption("newlayout", "Moves play icon first and then cover art:", false);
 
     content.append(optionList);
+
+    const resetButton = document.createElement("button");
+    resetButton.id = "resetbutton";
+    resetButton.textContent = "Reset";
+    resetButton.addEventListener("click", () => {
+      [...optionList.children].forEach(option => {
+        const toggle = option.querySelector(".toggle");
+        const defaultValue = option.getAttribute("data-default") === "true";
+        toggle.classList.toggle("enabled", defaultValue);
+        const optionName = option.getAttribute("name");
+        localStorage.removeItem(optionName);
+      });
+      updateCSS();
+    });
+    content.append(resetButton);
 
     const saveButton = document.createElement("button");
     saveButton.id = "savebutton";
@@ -92,14 +157,10 @@
         const toggle = option.querySelector(".toggle");
         const optionName = option.getAttribute("name");
         const isEnabled = toggle.classList.contains("enabled");
-        if (isEnabled !== JSON.parse(localStorage.getItem(optionName))) {
-          localStorage.setItem(optionName, isEnabled);
-          console.log(`Theme: ${optionName} set to ${isEnabled}`);
-        }
+        localStorage.setItem(optionName, JSON.stringify(isEnabled));
       });
-      parseOptions();
+      updateCSS();
     });
-
     content.append(saveButton);
 
     return content;
@@ -117,13 +178,25 @@
     true
   );
   button.element.classList.toggle("hidden", false);
-  const config = {};
 
-  function parseOptions() {
-    config.hidetracklistnum = JSON.parse(localStorage.getItem("hidetracklistnum")) ?? false;
-    config.hidenowplayview = JSON.parse(localStorage.getItem("hidenowplayview")) ?? false;
+  function updateCSS() {
+    const body = document.body;
+    const options = {
+      hidetracklistnum: JSON.parse(localStorage.getItem("hidetracklistnum")),
+      hidenowplayview: JSON.parse(localStorage.getItem("hidenowplayview")),
+      switchlayout: JSON.parse(localStorage.getItem("switchlayout")),
+      newlayout: JSON.parse(localStorage.getItem("newlayout"))
+    };
+
+    Object.entries(options).forEach(([option, value]) => {
+      if (value) {
+        body.classList.add(`${option}-true`);
+      } else {
+        body.classList.remove(`${option}-true`);
+      }
+    });
   }
 
-  parseOptions();
+  document.addEventListener("DOMContentLoaded", updateCSS);
 
 })();
