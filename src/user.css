@@ -561,57 +561,9 @@ span.toggle.enabled {
   font-size: 12px;
   font-weight: bold;
   outline: none;
+  margin-left: 12px;
 }
 
 #savebutton:active {
   background-color: var(--spice-button-active);
-}
-
-.carouselcontainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 0;
-  overflow: hidden;
-  background-color: var(--spice-main);
-  border-radius: 8px;
-  padding: 10px;
-}
-
-.carousel {
-  display: flex;
-  overflow: hidden;
-  scroll-behavior: smooth;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.carouselitem {
-  flex: 0 0 auto;
-  width: 110px;
-  margin: 0 5px;
-  background-color: var(--spice-highlight);
-  color: var(--spice-text);
-  text-align: center;
-  padding: 8px;
-  border-radius: 8px;
-}
-
-.carouselcontrol {
-  background-color: var(--spice-highlight);
-  border: none;
-  color: var(--spice-text);
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 18px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-}
-
-.carouselcontrol:active {
-  background-color: var(--spice-highlight-elevated);
 }
