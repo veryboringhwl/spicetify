@@ -69,53 +69,11 @@
       optionList.append(optionRow);
     }
 
-    function createCarousel(items) {
-      const carouselContainer = document.createElement("div");
-      carouselContainer.classList.add("carouselcontainer");
-
-      const carousel = document.createElement("div");
-      carousel.classList.add("carousel");
-
-      items.forEach(itemText => {
-        const item = document.createElement("div");
-        item.classList.add("carouselitem");
-        item.innerText = itemText;
-        carousel.append(item);
-      });
-
-      const left = document.createElement("button");
-      left.classList.add("carouselcontrol", "prev");
-      left.innerText = "<";
-      left.addEventListener("click", () => scrollCarousel(-1));
-
-      const right = document.createElement("button");
-      right.classList.add("carouselcontrol", "next");
-      right.innerText = ">";
-      right.addEventListener("click", () => scrollCarousel(1));
-
-      carouselContainer.append(left, carousel, right);
-
-      function scrollCarousel(direction) {
-        const scrollAmount = carousel.clientWidth / 2;
-        carousel.scrollBy({
-          top: 0,
-          left: scrollAmount * direction,
-          behavior: 'smooth'
-        });
-      }
-
-      return carouselContainer;
-    }
-
     const content = document.createElement("div");
 
     const header = document.createElement("h2");
     header.textContent = "Theme Settings";
     content.append(header);
-
-    const carouselItems = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9"];
-    const carousel = createCarousel(carouselItems);
-    content.append(carousel);
 
     const optionList = document.createElement("div");
     createOption("hidetracklistnum", "Hide tracklist numbers:", false);

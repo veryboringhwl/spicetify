@@ -6,6 +6,9 @@
 IMPORATNT:
 icons (only navbar partly done)
 Replace arialabel with classname
+Create a section for theme settings
+make icons its own folder and link using backgroud-image: url(icons/<thing>.svg)
+
 
 NOT IMPORTANT:
 FIX GREEN THING (sometimes works???)
@@ -15,15 +18,21 @@ Banner in playlist head(comfy does it)
 
 /* WHOLE PAGE */
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 * {
-  font-family: 'Segoe UI Variable Display', 'Segoe UI Variable Text', 'Segoe UI' !important;
+  font-family: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI" !important;
   box-shadow: none !important;
 }
 
 /* TRANSPARENT WINDOWS CONTROL */
 
 body::after {
-  content: '';
+  content: "";
   position: absolute;
   right: 0;
   z-index: 999;
@@ -33,7 +42,7 @@ body::after {
 }
 
 :root:has(.global-nav) body::after {
-  height: calc(64px/var(--zoom, 1)) !important
+  height: calc(64px / var(--zoom, 1)) !important;
 }
 
 /* SEARCH */
@@ -59,11 +68,11 @@ body::after {
 @property --progress-bar-transform {
   inherits: true;
   initial-value: 0%;
-  syntax: '<percentage>';
+  syntax: "<percentage>";
 }
 
 .progress-bar {
-  --bg-color: rgba(255, 255, 255, .2);
+  --bg-color: rgba(255, 255, 255, 0.2);
   --fg-color: var(--spice-test);
   --is-active-fg-color: var(--spice-test);
   transition: --progress-bar-transform 1s linear !important;
@@ -88,7 +97,7 @@ body::after {
 }
 
 .progress-bar__slider::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 10px;
   height: 10px;
@@ -136,7 +145,11 @@ body::after {
 
 .main-nowPlayingBar-nowPlayingBar {
   height: 90px !important;
-  margin-right: 16px;
+  margin-right: 12px;
+}
+
+.main-nowPlayingBar-volumeBar {
+  margin-right: 0px;
 }
 
 .main-coverSlotCollapsed-container {
@@ -151,7 +164,7 @@ body::after {
   transform: unset !important;
 }
 
-.main-nowPlayingWidget-coverExpanded>.main-coverSlotCollapsed-container {
+.main-nowPlayingWidget-coverExpanded > .main-coverSlotCollapsed-container {
   transform: translateX(-8px) scale(1) !important;
 }
 
@@ -177,7 +190,7 @@ body::after {
   color: var(--spice-test) !important;
 }
 
-[aria-label='Friend Activity'] {
+[aria-label="Friend Activity"] {
   --background-base: var(--spice-sidebar) !important;
 }
 
@@ -232,7 +245,6 @@ body::after {
 .main-yourLibraryX-navLink {
   border-radius: 7px;
   min-height: 47px;
-  min-width: 49px;
   padding-left: 11px;
 }
 
@@ -246,7 +258,7 @@ body::after {
   display: none;
 }
 
-.main-yourLibraryX-navLinkActive>.main-yourLibraryX-navLink-accent {
+.main-yourLibraryX-navLinkActive > .main-yourLibraryX-navLink-accent {
   display: block !important;
 }
 
@@ -275,15 +287,13 @@ body::after {
 
 .main-contextMenu-menu {
   border-radius: 7px;
-  background-color: var(--spice-rgb-card);
-}
+  background-color: rgba(var(--spice-rgb-card), 0.8) !important;}
 
 div#context-menu::before,
 .main-contextMenu-menu:before {
   content: "";
   border-radius: 7px;
-  backdrop-filter: blur(50px) saturate(0.55) brightness(0.8);
-  position: absolute;
+  backdrop-filter: blur(35px) saturate(2);  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -303,7 +313,7 @@ div#context-menu::before,
 .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListHeader .main-trackList-rowSectionIndex,
 .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
   opacity: 0;
-}
+  }
 
 .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
 .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowSectionIndex,
@@ -333,7 +343,7 @@ div#context-menu::before,
 .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayButton,
 .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton {
   opacity: 1;
-}
+    }
 
 .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowImagePlayButton,
 .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowImagePlayPauseButton,
@@ -348,30 +358,30 @@ div#context-menu::before,
 
 .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow>.main-trackList-rowSectionIndex,
 .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow>.main-trackList-rowSectionIndex {
-  position: relative;
-  z-index: 1000;
-  top: 8px;
-  left: 56px;
-  width: 40px;
-  height: 40px;
-  justify-content: center;
+      position: relative;
+      z-index: 1000;
+      top: 8px;
+      left: 56px;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
   text-indent: -1000px;
 }
 
 .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="3"] .main-trackList-trackListRowGrid {
   padding-left: 2px;
   grid-template-columns: [index] 0px [first] var(--col1, 4fr) [last] minmax(120px, var(--col2, 1fr)) !important;
-}
+  }
 
 .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="4"] .main-trackList-trackListRowGrid {
   padding-left: 2px;
   grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr)) !important;
-}
+  }
 
 .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="5"] .main-trackList-trackListRowGrid {
   padding-left: 2px;
   grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important;
-}
+  }
 
 .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="6"] .main-trackList-trackListRowGrid {
   padding-left: 2px;
@@ -380,7 +390,8 @@ div#context-menu::before,
 
 /* EQUALISER GIF (from bloom)*/
 
-.main-devicePicker-header>.main-devicePicker-nowPlayingActiveIcon[src*='equaliser'] {
+.main-devicePicker-header
+  > .main-devicePicker-nowPlayingActiveIcon[src*="equaliser"] {
   mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
   background: var(--spice-test);
   content-visibility: hidden;
@@ -430,7 +441,9 @@ div#context-menu::before,
 }
 
 /*if nothing in navitems removes the back bit*/
-.main-yourLibraryX-entryPoints:first-child:has(.main-yourLibraryX-navItems:empty) {
+.main-yourLibraryX-entryPoints:first-child:has(
+    .main-yourLibraryX-navItems:empty
+  ) {
   display: none;
 }
 
@@ -493,14 +506,6 @@ div#context-menu::before,
   d: path("M3.3 1.1H4.4C5.5592 1.1 6.5099 1.998 6.594 3.1359L6.6 3.3V18.7C6.6 19.8592 5.702 20.8099 4.5641 20.894L4.4 20.9H3.3C2.1408 20.9 1.1901 20.002 1.106 18.8641L1.1 18.7V3.3C1.1 2.1408 1.998 1.1901 3.1359 1.106L3.3 1.1H4.4 3.3ZM9.9 1.1H11C12.1592 1.1 13.1099 1.998 13.194 3.1359L13.2 3.3V18.7C13.2 19.8592 12.302 20.8099 11.1641 20.894L11 20.9H9.9C8.7408 20.9 7.7901 20.002 7.706 18.8641L7.7 18.7V3.3C7.7 2.1408 8.598 1.1901 9.7359 1.106L9.9 1.1H11 9.9ZM17.5717 3.3005C18.4952 3.3005 19.3407 3.8842 19.6507 4.781L19.7024 4.9528 23.0189 17.8734C23.3077 18.9958 22.6743 20.1403 21.5925 20.5042L21.4349 20.5508 20.369 20.8247C20.1864 20.8709 20.0016 20.894 19.8212 20.894 18.8988 20.894 18.0523 20.3093 17.7432 19.4124L17.6916 19.2406 14.374 6.3212C14.0864 5.1977 14.7188 4.0541 15.8014 3.6903L15.9591 3.6438 17.0239 3.3699C17.2065 3.3226 17.3913 3.3005 17.5717 3.3005ZM4.4 2.75H3.3C3.0301 2.75 2.8055 2.9456 2.7589 3.2015L2.75 3.3V18.7C2.75 18.9688 2.9447 19.1943 3.2012 19.2411L3.3 19.25H4.4C4.6699 19.25 4.8945 19.0544 4.9411 18.7986L4.95 18.7V3.3C4.95 3.0311 4.7553 2.8057 4.4988 2.7589L4.4 2.75ZM11 2.75H9.9C9.6301 2.75 9.4055 2.9456 9.3589 3.2015L9.35 3.3V18.7C9.35 18.9688 9.5447 19.1943 9.8012 19.2411L9.9 19.25H11C11.2698 19.25 11.4946 19.0544 11.5411 18.7986L11.55 18.7V3.3C11.55 3.0311 11.3553 2.8057 11.0988 2.7589L11 2.75ZM17.5728 4.9505 17.5031 4.9548 17.4342 4.9682 16.3694 5.241C16.1769 5.2904 16.0757 5.4203 16.0317 5.495 15.9974 5.5531 15.9484 5.6619 15.9554 5.8016L15.9723 5.912 19.2899 18.8304C19.3625 19.1142 19.6166 19.244 19.8212 19.244L19.89 19.2397 19.9587 19.2264 21.0246 18.9525C21.2867 18.886 21.4557 18.6404 21.4367 18.3812L21.4206 18.2837 18.1041 5.3631C18.0304 5.0804 17.7774 4.9505 17.5728 4.9505Z") !important;
 }
 
-/*
--------------------
-  TEST FEATURES
--------------------
-*/
-
-
-
 /* THEME SETTINGS */
 
 .themeOptionRow {
@@ -522,7 +527,7 @@ span.toggleWrapper {
   border-radius: 12px;
   display: flex;
   align-items: center;
-  cursor: pointer
+  cursor: pointer;
 }
 
 span.toggle {
@@ -531,7 +536,7 @@ span.toggle {
   border-radius: 10px;
   background-color: white;
   margin-left: 2px;
-  transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95)
+  transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 span.toggleWrapper:has(span.toggle.enabled) {
@@ -561,7 +566,6 @@ span.toggle.enabled {
   font-size: 12px;
   font-weight: bold;
   outline: none;
-  margin-left: 12px;
 }
 
 #savebutton:active {
