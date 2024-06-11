@@ -6,12 +6,8 @@
 IMPORATNT:
 icons (only navbar partly done)
 Replace arialabel with classname
-Create a section for theme settings
-make icons its own folder and link using backgroud-image: url(icons/<thing>.svg)
-
 
 NOT IMPORTANT:
-FIX GREEN THING (sometimes works???)
 maybe put topbar in header(cant move windows/doesnt look amazing)
 Banner in playlist head(comfy does it)
 */
@@ -121,53 +117,6 @@ body::after {
   background-color: var(--spice-highlight);
 }
 
-/* NOW PLAYING BAR */
-.main-trackInfo-name {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.main-playPauseButton-button svg {
-  height: 22px;
-  width: 22px;
-  transform: scale(1.5);
-}
-
-.main-playPauseButton-button {
-  background-color: transparent;
-  color: var(--spice-text)
-}
-
-.Root__now-playing-bar {
-  background-color: var(--spice-main) !important;
-  border-radius: 8px;
-}
-
-.main-nowPlayingBar-nowPlayingBar {
-  height: 90px !important;
-  margin-right: 12px;
-}
-
-.main-nowPlayingBar-volumeBar {
-  margin-right: 0px;
-}
-
-.main-coverSlotCollapsed-container {
-  border-radius: 4px !important;
-  transform: scale(1.2) !important;
-  margin-right: 10px;
-  margin-left: 10px;
-  box-shadow: var(--maincolor);
-}
-
-.Button-small-small-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle:hover {
-  transform: unset !important;
-}
-
-.main-nowPlayingWidget-coverExpanded > .main-coverSlotCollapsed-container {
-  transform: translateX(-8px) scale(1) !important;
-}
-
 /* BUTTONS */
 
 .main-genericButton-buttonActive::after {
@@ -202,6 +151,11 @@ body::after {
   background-color: var(--spice-sidebar) !important;
 }
 
+.main-avatar-image,
+.main-userWidget-boxCondensed {
+  border-radius: 7px !important;
+}
+
 /* SCROLL BAR */
 
 .os-scrollbar {
@@ -226,6 +180,10 @@ body::after {
 
 .os-scrollbar-horizontal {
   display: none;
+}
+
+.main-yourLibraryX-libraryContainer .os-scrollbar-handle {
+  visibility: hidden;
 }
 
 /* MAKE HOVER GREY + GREEN BIT */
@@ -287,13 +245,15 @@ body::after {
 
 .main-contextMenu-menu {
   border-radius: 7px;
-  background-color: rgba(var(--spice-rgb-card), 0.8) !important;}
+  background-color: rgba(var(--spice-rgb-card), 0.85) !important;
+}
 
 div#context-menu::before,
 .main-contextMenu-menu:before {
   content: "";
   border-radius: 7px;
-  backdrop-filter: blur(35px) saturate(2);  position: absolute;
+  backdrop-filter: blur(25px) saturate(1.33) brightness(0.75);
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -390,8 +350,7 @@ div#context-menu::before,
 
 /* EQUALISER GIF (from bloom)*/
 
-.main-devicePicker-header
-  > .main-devicePicker-nowPlayingActiveIcon[src*="equaliser"] {
+.main-devicePicker-header>.main-devicePicker-nowPlayingActiveIcon[src*='equaliser'] {
   mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
   background: var(--spice-test);
   content-visibility: hidden;
@@ -413,11 +372,63 @@ div#context-menu::before,
   content-visibility: hidden;
 }
 
-/* MISC */
-/*removes scrollbar in libx*/
-.main-yourLibraryX-libraryContainer .os-scrollbar-handle {
-  visibility: hidden;
+/* NOW PLAYING BAR */
+
+.main-trackInfo-name {
+  font-size: 1rem;
+  font-weight: 500;
 }
+
+.test-true .main-playPauseButton-button svg {
+  height: 22px;
+  width: 22px;
+  transform: scale(1.5);
+}
+
+.test-true .main-playPauseButton-button {
+  background-color: transparent !important;
+  color: var(--spice-text);
+}
+
+.Root__now-playing-bar {
+  background-color: var(--spice-main) !important;
+  border-radius: 8px;
+}
+
+.main-nowPlayingBar-nowPlayingBar {
+  height: 85px !important;
+  margin-right: 12px;
+}
+
+.main-nowPlayingBar-volumeBar {
+  margin-right: 0px;
+}
+
+.main-coverSlotCollapsed-container {
+  border-radius: 4px !important;
+  transform: scale(1.2) !important;
+  margin-right: 10px;
+  margin-left: 10px;
+  box-shadow: var(--maincolor);
+}
+
+.Button-small-small-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle:hover {
+  transform: unset !important;
+}
+
+.main-nowPlayingWidget-coverExpanded > .main-coverSlotCollapsed-container {
+  transform: translateX(-8px) scale(1) !important;
+}
+
+/* PLAYLIST PAGE */
+
+.main-trackList-trackList {
+  padding: 8px;
+  background-color: rgba(var(--spice-rgb-card), 0.8);
+  border-radius: 7px;
+}
+
+/* MISC */
 
 /*shift lyrics a bit*/
 .BeautifulLyricsPage .Lyrics {
@@ -429,10 +440,11 @@ div#context-menu::before,
   border: 1px solid var(--spice-test);
 }
 
-/*adds a gradient in libraryx scroll (deosnt work)*/
+/*adds a gradient in libraryx scroll (doesnt work)*/
 .main-yourLibraryX-isScrolled {
-  -webkit-box-shadow: 0 20px 10px -10px var(--background-base);
-  box-shadow: 0 20px 10px -10px var(--background-base);
+  -webkit-box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.1s ease;
 }
 
 /*shift the browse all in search up a bit*/
