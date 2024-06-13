@@ -2,6 +2,7 @@
 //add sliders into settings
 //change css based on the toggles
 //get carousel working
+//album art in playlist header/lyrics
 
 (function theme() {
 
@@ -57,7 +58,42 @@
   // Content acutally shown
 
   const Content = () => {
-    function createOption(name, desc) {
+    const content = document.createElement("div");
+    const optionList = document.createElement("div");
+    const options = [
+      {
+        name: "hidetracklistnum",
+        desc: "Hide tracklist numbers:",
+        defaultValue: false,
+      },
+      {
+        name: "hidenowplayview",
+        desc: "Hide now playing view:",
+        defaultValue: false,
+      },
+      {
+        name: "switchlayout",
+        desc: "Makes left sidebar in front of npb:",
+        defaultValue: true,
+      },
+      {
+        name: "newlayout",
+        desc: "Gives the new layout in npb:",
+        defaultValue: true,
+      },
+      {
+        name: "horizontalnav",
+        desc: "Makes navlinks horizontal:",
+        defaultValue: false,
+      },
+      {
+        name: "transplaypause",
+        desc: "Transparent play pause button:",
+        defaultValue: true,
+      },
+    ];
+
+    const createOption = ({ name, desc, defaultValue }) => {
       const optionRow = document.createElement("div");
       optionRow.classList.add("themeOptionRow");
       optionRow.innerHTML = `
@@ -68,68 +104,124 @@
             </span>
         </button>`;
       optionRow.setAttribute("name", name);
+      optionRow.setAttribute("default", defaultValue);
+
+      const toggle = optionRow.querySelector(".toggle");
+      const savedValue = JSON.parse(localStorage.getItem(name));
+      if (savedValue !== null ? savedValue : defaultValue) {
+        toggle.classList.add("enabled");
+      }
+
       optionRow.querySelector("button").addEventListener("click", () => {
-        optionRow.querySelector(".toggle").classList.toggle("enabled");
+        toggle.classList.toggle("enabled");
       });
+
       optionList.append(optionRow);
+    };
+
+    function createCarousel(items) {
+      const carouselContainer = document.createElement("div");
+      carouselContainer.classList.add("carouselcontainer");
+
+      const carousel = document.createElement("div");
+      carousel.classList.add("carousel");
+
+      items.forEach((itemText) => {
+        const item = document.createElement("div");
+        item.classList.add("carouselitem");
+        item.innerText = itemText;
+        carousel.append(item);
+      });
+
+      const left = document.createElement("button");
+      left.classList.add("carouselcontrol", "prev");
+      left.innerText = "<";
+      left.addEventListener("click", () => scrollCarousel(-1));
+
+      const right = document.createElement("button");
+      right.classList.add("carouselcontrol", "next");
+      right.innerText = ">";
+      right.addEventListener("click", () => scrollCarousel(1));
+
+      carouselContainer.append(left, carousel, right);
+
+      function scrollCarousel(direction) {
+        const scrollAmount = carousel.clientWidth / 2;
+        carousel.scrollBy({
+          top: 0,
+          left: scrollAmount * direction,
+          behavior: "smooth",
+        });
+      }
+
+      return carouselContainer;
     }
 
-    const content = document.createElement("div");
+    const carouselItems = [
+      "Item 1",
+      "Item 2",
+      "Item 3",
+      "Item 4",
+      "Item 5",
+      "Item 6",
+      "Item 7",
+      "Item 8",
+      "Item 9",
+    ];
+    const carousel = createCarousel(carouselItems);
+    content.append(carousel);
 
-    const header = document.createElement("h2");
-    header.textContent = "Theme Settings";
-    content.append(header);
-
-    const optionList = document.createElement("div");
-    createOption("hidetracklistnum", "Hide tracklist numbers:", false);
-    createOption("hidenowplayview", "Hide now playing view:", false);
-    createOption("switchlayout", "Makes left sidebar in front of npb:", false);
-    createOption("newlayout", "Moves play icon first and then cover art:", false);
-
+    options.forEach(createOption);
     content.append(optionList);
 
-    const resetButton = document.createElement("button");
-    resetButton.id = "resetbutton";
-    resetButton.textContent = "Reset";
-    resetButton.addEventListener("click", () => {
-      [...optionList.children].forEach(option => {
-        option.querySelector(".toggle").classList.remove("enabled");
-        localStorage.removeItem(option.getAttribute("name"));
+    const createButton = (id, text, onClick) => {
+      const button = document.createElement("button");
+      button.id = id;
+      button.textContent = text;
+      button.addEventListener("click", onClick);
+      content.append(button);
+    };
+
+    createButton("resetbutton", "Reset", () => {
+      [...optionList.children].forEach((option) => {
+        const toggle = option.querySelector(".toggle");
+        const defaultValue = option.getAttribute("default") === "true";
+        toggle.classList.toggle("enabled", defaultValue);
+        localStorage.setItem(
+          option.getAttribute("name"),
+          JSON.stringify(defaultValue)
+        );
       });
     });
-    content.append(resetButton);
 
-    const saveButton = document.createElement("button");
-    saveButton.id = "savebutton";
-    saveButton.textContent = "Save";
-    saveButton.addEventListener("click", () => {
-      [...optionList.children].forEach(option => {
+    createButton("savebutton", "Save", () => {
+      [...optionList.children].forEach((option) => {
         const toggle = option.querySelector(".toggle");
-        localStorage.setItem(option.getAttribute("name"), JSON.stringify(toggle.classList.contains("enabled")));
+        localStorage.setItem(
+          option.getAttribute("name"),
+          JSON.stringify(toggle.classList.contains("enabled"))
+        );
       });
       updateCSS();
     });
-    content.append(saveButton);
 
     return content;
   };
 
   const updateCSS = () => {
     const body = document.body;
-    const options = {
-      hidetracklistnum: JSON.parse(localStorage.getItem("hidetracklistnum")),
-      hidenowplayview: JSON.parse(localStorage.getItem("hidenowplayview")),
-      switchlayout: JSON.parse(localStorage.getItem("switchlayout")),
-      newlayout: JSON.parse(localStorage.getItem("newlayout")),
-      horizontalnav: JSON.parse(localStorage.getItem("horizontalnav")),
-      test: JSON.parse(localStorage.getItem("test")),
-      npvlargerlyrics: JSON.parse(localStorage.getItem("npvlargerlyrics")),
-
-    };
-
-    for (const [option, value] of Object.entries(options)) {
+    const options = [
+      "hidetracklistnum",
+      "hidenowplayview",
+      "switchlayout",
+      "newlayout",
+      "horizontalnav",
+      "transplaypause",
+    ];
+    options.forEach((option) => {
+      const value = JSON.parse(localStorage.getItem(option));
       body.classList.toggle(`${option}-true`, value);
-    }
+    });
   };
 
   document.addEventListener("DOMContentLoaded", updateCSS);
@@ -147,26 +239,5 @@
     false,
     true
   );
-  button.element.classList.toggle("hidden", false);
-
-  function updateCSS() {
-    const body = document.body;
-    const options = {
-      hidetracklistnum: JSON.parse(localStorage.getItem("hidetracklistnum")),
-      hidenowplayview: JSON.parse(localStorage.getItem("hidenowplayview")),
-      switchlayout: JSON.parse(localStorage.getItem("switchlayout")),
-      newlayout: JSON.parse(localStorage.getItem("newlayout"))
-    };
-
-    Object.entries(options).forEach(([option, value]) => {
-      if (value) {
-        body.classList.add(`${option}-true`);
-      } else {
-        body.classList.remove(`${option}-true`);
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", updateCSS);
-
+  updateCSS();
 })();
