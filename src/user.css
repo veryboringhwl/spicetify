@@ -500,7 +500,22 @@ span.toggle.enabled {
   font-size: 17px;
 }
 
-#savebutton {
+.resetbutton {
+  background-color: #ff0033;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.resetbutton:active {
+  background-color: #ff1435;
+  scale: 1.05;
+}
+
+
+.savebutton {
   background-color: var(--spice-button);
   color: #fff;
   border: none;
@@ -512,6 +527,6 @@ span.toggle.enabled {
   outline: none;
 }
 
-#savebutton:active {
+.savebutton:active {
   background-color: var(--spice-button-active);
 }
