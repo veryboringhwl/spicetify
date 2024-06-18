@@ -5,25 +5,19 @@
 
 ## Preview
 
-| Color              |  Screenshot                           |
-|--------------------|---------------------------------------|
-| Dark               | ![(dark)](assets/dark.png)           |
-| Light              | ![(light)](assets/light.png)          |
-| Bloom Dark         | ![(bloomdark)](assets/bloomdark.png)      |
-| Spotify            | ![(spotify)](assets/spotify.png)        |
-
-## Features
-- Settings Menu
-- stuff 
-- lots of stuff
-- more stuff
+| Color                 |  Screenshot                           |
+|-----------------------|---------------------------------------|
+| Dark                  | ![(image)](assets/dark.png)           |
+| Light                 | ![(image)](assets/light.png)          |
+| Bloom Dark            | ![(image)](assets/bloomdark.png)      |
+| Spotify               | ![(image)](assets/spotify.png)        |
 
 ## Installation
 
 ### Auto Installation
 Windows → PowerShell:
 
-```pwsh
+```powershell
 iwr -useb https://raw.githubusercontent.com/veryboringhwl/spicetify/main/install.ps1 | iex
 ```
 
