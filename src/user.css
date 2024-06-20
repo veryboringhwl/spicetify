@@ -450,6 +450,10 @@ div#context-menu::before,
   ) !important;
 }
 
+/*Theme options*/
+
+
+
 /* THEME SETTINGS */
 
 .themeOptionRow {
@@ -513,7 +517,6 @@ span.toggle.enabled {
   background-color: #ff1435;
   scale: 1.05;
 }
-
 
 .savebutton {
   background-color: var(--spice-button);

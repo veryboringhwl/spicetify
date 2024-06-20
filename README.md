@@ -1,28 +1,36 @@
 <div>
 <h1>Spicetify theme</h1>
-<p>Spicetify theme inspired by Bloom and Comfy</p>
+<p>A Customizable Spicetify theme inspired by Bloom and Comfy. </p>
 </div>
 
 ## Preview
 
-| Color                 |  Screenshot                           |
-|-----------------------|---------------------------------------|
-| Dark                  | ![(image)](assets/dark.png)           |
-| Light                 | ![(image)](assets/light.png)          |
-| Bloom Dark            | ![(image)](assets/bloomdark.png)      |
-| Spotify               | ![(image)](assets/spotify.png)        |
+| Color              |  Screenshot                            |
+|--------------------|----------------------------------------|
+| Dark               | ![(dark)](assets/dark.png)             |
+| Light              | ![(light)](assets/light.png)           |
+| Bloom Dark         | ![(bloomdark)](assets/bloomdark.png)   |
+| Spotify            | ![(spotify)](assets/spotify.png)       |
+
+<!-- 
+## Features
+- Settings Menu
+- Dynamic lyrics background 
+- Multiple colour schemes
+- Customisable built in snippets/layouts
+-->
 
 ## Installation
 
 ### Auto Installation
 Windows → PowerShell:
 
-```powershell
+```pwsh
 iwr -useb https://raw.githubusercontent.com/veryboringhwl/spicetify/main/install.ps1 | iex
 ```
 
 Linux and MacOS → Bash:
-```bash
+```sh
 curl -fsSL https://raw.githubusercontent.com/veryboringhwl/spicetify/main/install.sh | sh
 ```
 
