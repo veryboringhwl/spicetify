@@ -4,12 +4,12 @@
 *                  *
 ********************
 IMPORATNT:
-icons (only navbar partly done)
-Replace arialabel with classname
+Replace arialabel with classname(may doesnt need to be done)
+Banner in playlist head(dont know how to do
 
 NOT IMPORTANT:
 maybe put topbar in header(cant move windows/doesnt look amazing)
-Banner in playlist head(comfy does it)
+icons (only navbar partly done)
 */
 
 /* WHOLE PAGE */
@@ -55,7 +55,7 @@ body::after {
 }
 
 .x-searchInput-searchInputInput:focus {
-  border-bottom: var(--spice-test) solid 2px;
+  border-bottom: var(--spice-accent) solid 2px;
   outline: none;
 }
 
@@ -69,8 +69,8 @@ body::after {
 
 .progress-bar {
   --bg-color: rgba(255, 255, 255, 0.2);
-  --fg-color: var(--spice-test);
-  --is-active-fg-color: var(--spice-test);
+  --fg-color: var(--spice-accent);
+  --is-active-fg-color: var(--spice-accent);
   transition: --progress-bar-transform 1s linear !important;
 }
 
@@ -97,7 +97,7 @@ body::after {
   position: absolute;
   width: 10px;
   height: 10px;
-  background-color: var(--spice-test);
+  background-color: var(--spice-accent);
   top: 50%;
   left: 50%;
   translate: -50% -50%;
@@ -120,11 +120,11 @@ body::after {
 /* BUTTONS */
 
 .main-genericButton-buttonActive::after {
-  background-color: var(--spice-test) !important;
+  background-color: var(--spice-accent) !important;
 }
 
 .main-genericButton-buttonActive {
-  color: var(--spice-test) !important;
+  color: var(--spice-accent) !important;
 }
 
 .main-topBar-buddyFeed,
@@ -136,7 +136,7 @@ body::after {
 .main-addButton-active:focus,
 .main-addButton-active:hover,
 .main-addButton-active {
-  color: var(--spice-test) !important;
+  color: var(--spice-accent) !important;
 }
 
 [aria-label="Friend Activity"] {
@@ -186,40 +186,6 @@ body::after {
   visibility: hidden;
 }
 
-/* MAKE HOVER GREY + GREEN BIT */
-
-.main-yourLibraryX-navItem {
-  padding: 2px 0px !important;
-}
-
-.main-yourLibraryX-navLinkActive.active {
-  background-color: var(--spice-highlight-elevated);
-}
-
-.main-yourLibraryX-navLink:hover {
-  background-color: var(--spice-highlight);
-}
-
-.main-yourLibraryX-navLink {
-  border-radius: 7px;
-  min-height: 47px;
-  padding-left: 11px;
-}
-
-.main-yourLibraryX-navLink-accent {
-  position: absolute;
-  width: 4px;
-  height: 25px;
-  background-color: var(--spice-test);
-  border-radius: 7px;
-  left: 12px;
-  display: none;
-}
-
-.main-yourLibraryX-navLinkActive>.main-yourLibraryX-navLink-accent {
-  display: block !important;
-}
-
 /* GREEN ICON + BOUNCE */
 
 @keyframes bounce {
@@ -237,7 +203,7 @@ body::after {
 }
 
 .main-yourLibraryX-navLinkActive svg {
-  color: var(--spice-test) !important;
+  color: var(--spice-accent) !important;
   animation: bounce 175ms ease-out forwards;
 }
 
@@ -252,7 +218,7 @@ div#context-menu::before,
 .main-contextMenu-menu:before {
   content: "";
   border-radius: 7px;
-  backdrop-filter: blur(25px) saturate(1.33) brightness(0.75);
+  backdrop-filter: blur(25px) saturate(1.75) brightness(0.75);
   position: absolute;
   top: 0;
   left: 0;
@@ -263,9 +229,9 @@ div#context-menu::before,
 
 /* EQUALISER GIF (from bloom)*/
 
-.main-devicePicker-header>.main-devicePicker-nowPlayingActiveIcon[src*='equaliser'] {
+.main-devicePicker-header>.main-devicePicker-nowPlayingActiveIcon[src*="equaliser"] {
   mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
-  background: var(--spice-test);
+  background: var(--spice-accent);
   content-visibility: hidden;
   mask-repeat: no-repeat;
   scale: 0.8;
@@ -273,7 +239,7 @@ div#context-menu::before,
 
 .view-homeShortcutsGrid-shortcut .view-homeShortcutsGrid-equaliser {
   mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
-  background: var(--spice-test);
+  background: var(--spice-accent);
   content-visibility: hidden;
   width: 14px;
   height: 13px;
@@ -281,7 +247,7 @@ div#context-menu::before,
 
 .main-trackList-playingIcon {
   mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
-  background: var(--spice-test);
+  background: var(--spice-accent);
   content-visibility: hidden;
 }
 
@@ -330,6 +296,11 @@ div#context-menu::before,
   border-radius: 7px;
 }
 
+.main-actionBarBackground-background {
+  background-image: linear-gradient(rgba(var(--spice-rgb-shadow), 0.5) 0,
+      var(--background-base) 100%) !important;
+}
+
 /* MISC */
 
 /*shift lyrics a bit*/
@@ -339,7 +310,7 @@ div#context-menu::before,
 
 /*marketplace cards have green border*/
 .marketplace-card--installed {
-  border: 1px solid var(--spice-test);
+  border: 1px solid var(--spice-accent);
 }
 
 /*adds a gradient in libraryx scroll (doesnt work)*/
@@ -435,6 +406,87 @@ div#context-menu::before,
     ) !important;
 }
 
+
+/* THEME SETTINGS */
+
+.themeOptionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.themeOptionToggle {
+  display: flex;
+  background-color: transparent !important;
+  border: none;
+}
+
+span.toggleWrapper {
+  width: 42px;
+  height: 25px;
+  background-color: var(--spice-button-disabled);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+span.toggle {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: white;
+  margin-left: 2px;
+  transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+span.toggleWrapper:has(span.toggle.enabled) {
+  background-color: var(--spice-button);
+}
+
+span.toggle.enabled {
+  margin-left: 20px;
+}
+
+.themeOptionRow {
+  margin-bottom: 7px;
+  background-color: var(--spice-highlight);
+  padding: 7px;
+  border-radius: 7px;
+  padding-left: 13px;
+  font-size: 17px;
+}
+
+.resetbutton {
+  background-color: #ff0033;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.resetbutton:active {
+  background-color: #ff1435;
+}
+
+.savebutton {
+  background-color: var(--spice-button);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  outline: none;
+}
+
+.savebutton:active {
+  background-color: var(--spice-button-active);
+}
+
 /* THEME OPTIONS */
 .transplaypause .main-playPauseButton-button svg {
   height: 22px;
@@ -504,190 +556,55 @@ div#context-menu::before,
 }
 
 /* Remove tracklist index (from comfy) */
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListHeader
-  .main-trackList-rowSectionIndex,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListHeader
-  .main-trackList-rowSectionIndex {
-  opacity: 0;
+
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListHeader .main-trackList-rowSectionIndex,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
+  opacity: 0
 }
 
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow:hover
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow:hover
-  .main-trackList-rowSectionIndex,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow:focus-within
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow:focus-within
-  .main-trackList-rowSectionIndex,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow.main-trackList-active
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow.main-trackList-active
-  .main-trackList-rowSectionIndex,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow:hover
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow:hover
-  .main-trackList-rowSectionIndex,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow:focus-within
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow:focus-within
-  .main-trackList-rowSectionIndex,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow.main-trackList-active
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow.main-trackList-active
-  .main-trackList-rowSectionIndex {
-  background: rgba(var(--spice-rgb-play-button), 0.5);
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowSectionIndex,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowSectionIndex,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowSectionIndex,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowSectionIndex,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowSectionIndex,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowSectionIndex {
+  background: rgba(var(--spice-rgb-play-button), 0.5)
 }
 
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow:hover
-  .main-trackList-rowImagePlayButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow:hover
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow:focus-within
-  .main-trackList-rowImagePlayButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow:focus-within
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow.main-trackList-active
-  .main-trackList-rowImagePlayButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow.main-trackList-active
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow:hover
-  .main-trackList-rowImagePlayButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow:hover
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow:focus-within
-  .main-trackList-rowImagePlayButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow:focus-within
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow.main-trackList-active
-  .main-trackList-rowImagePlayButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow.main-trackList-active
-  .main-trackList-rowImagePlayPauseButton {
-  opacity: 1;
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton {
+  opacity: 1
 }
 
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow
-  .main-trackList-rowImagePlayButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow
-  .main-trackList-rowSectionIndex,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow
-  .main-trackList-rowImagePlayButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow
-  .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow
-  .main-trackList-rowSectionIndex {
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowImagePlayButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowSectionIndex,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowSectionIndex {
   color: var(--spice-sidebar);
   border-radius: var(--border-radius);
-  transition: 200ms opacity, 200ms background;
+  transition: 200ms opacity, 200ms background
 }
 
-.hidetracklistnum
-  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
-  .main-trackList-trackListRow
-  > .main-trackList-rowSectionIndex,
-.hidetracklistnum
-  .main-trackList-trackList:has(
-    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
-  )
-  .main-trackList-trackListRow
-  > .main-trackList-rowSectionIndex {
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow>.main-trackList-rowSectionIndex,
+.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow>.main-trackList-rowSectionIndex {
   position: relative;
   z-index: 1000;
   top: 8px;
@@ -695,65 +612,27 @@ div#context-menu::before,
   width: 40px;
   height: 40px;
   justify-content: center;
-  text-indent: -1000px;
+  text-indent: -1000px
 }
 
-.hidetracklistnum
-  .main-trackList-indexable:has(
-    .main-trackList-rowSectionStart img
-  )[aria-colcount="3"]
-  .main-trackList-trackListRowGrid {
+.hidetracklistnum .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="3"] .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns: [index] 0px [first] var(--col1, 4fr) [last] minmax(
-      120px,
-      var(--col2, 1fr)
-    ) !important;
+  grid-template-columns: [index] 0px [first] var(--col1, 4fr) [last] minmax(120px, var(--col2, 1fr)) !important
 }
 
-.hidetracklistnum
-  .main-trackList-indexable:has(
-    .main-trackList-rowSectionStart img
-  )[aria-colcount="4"]
-  .main-trackList-trackListRowGrid {
+.hidetracklistnum .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="4"] .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns:
-    [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(
-      120px,
-      var(--col2, 2fr)
-    )
-    [last] minmax(120px, var(--col3, 1fr)) !important;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr)) !important
 }
 
-.hidetracklistnum
-  .main-trackList-indexable:has(
-    .main-trackList-rowSectionStart img
-  )[aria-colcount="5"]
-  .main-trackList-trackListRowGrid {
+.hidetracklistnum .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="5"] .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns:
-    [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
-      120px,
-      var(--col2, 4fr)
-    )
-    [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important
 }
 
-.hidetracklistnum
-  .main-trackList-indexable:has(
-    .main-trackList-rowSectionStart img
-  )[aria-colcount="6"]
-  .main-trackList-trackListRowGrid {
+.hidetracklistnum .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="6"] .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns:
-    [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
-      120px,
-      var(--col2, 4fr)
-    )
-    [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(
-      120px,
-      var(--col4, 2fr)
-    )
-    [last] minmax(120px, var(--col5, 1fr)) !important;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [last] minmax(120px, var(--col5, 1fr)) !important
 }
 
 .switchlayout .Root__top-container {
@@ -834,85 +713,4 @@ div#context-menu::before,
 
 .hidenowplayview .main-playbackBarRemainingTime-container {
   min-width: unset;
-}
-
-
-/* THEME SETTINGS */
-
-.themeOptionRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-button.themeOptionToggle {
-  display: flex;
-  background-color: transparent !important;
-  border: none;
-}
-
-span.toggleWrapper {
-  width: 42px;
-  height: 25px;
-  background-color: var(--spice-button-disabled);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-span.toggle {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background-color: white;
-  margin-left: 2px;
-  transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-}
-
-span.toggleWrapper:has(span.toggle.enabled) {
-  background-color: var(--spice-button);
-}
-
-span.toggle.enabled {
-  margin-left: 20px;
-}
-
-.themeOptionRow {
-  margin-bottom: 7px;
-  background-color: var(--spice-highlight);
-  padding: 7px;
-  border-radius: 7px;
-  padding-left: 13px;
-  font-size: 17px;
-}
-
-.resetbutton {
-  background-color: #ff0033;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.resetbutton:active {
-  background-color: #ff1435;
-}
-
-.savebutton {
-  background-color: var(--spice-button);
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: bold;
-  outline: none;
-}
-
-.savebutton:active {
-  background-color: var(--spice-button-active);
 }
