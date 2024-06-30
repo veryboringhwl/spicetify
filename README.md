@@ -1,7 +1,6 @@
-<div>
-<h1>Spicetify theme</h1>
-<p>A Customizable Spicetify theme inspired by Bloom and Comfy. </p>
-</div>
+# Spicetify theme
+
+A customisable Spicetify theme inspired by Fluent UI design
 
 ## Preview
 
@@ -12,13 +11,13 @@
 | Bloom Dark         | ![(bloomdark)](assets/bloomdark.png)   |
 | Spotify            | ![(spotify)](assets/spotify.png)       |
 
-<!-- 
+
 ## Features
 - Settings Menu
 - Dynamic lyrics background 
 - Multiple colour schemes
 - Customisable built in snippets/layouts
--->
+
 
 ## Installation
 
