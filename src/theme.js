@@ -1,6 +1,5 @@
-//TODO:
-//Add
 (function theme() {
+
 	if (!(Spicetify.Player.data && Spicetify.Platform))
 		return setTimeout(theme, 100);
 
@@ -14,6 +13,16 @@
 			setTimeout(() => waitForElements(selectors, func, timeout - 1), 500);
 		}
 	};
+
+	const updateSong = () => {
+		let img = Spicetify.Player.data.item.metadata.image_xlarge_url;
+		img = img.includes("spotify:image:")
+			? img.replace("spotify:image:", "https://i.scdn.co/image/")
+			: img;
+		document.documentElement.style.setProperty("--image_url", `url("${img}")`);
+	};
+	Spicetify.Player.addEventListener("songchange", updateSong);
+	updateSong();
 
   waitForElements([".main-yourLibraryX-navItem"], () => {
     const navItems = document.querySelectorAll(
@@ -147,7 +156,6 @@
   buttonContainer.className = "buttonContainer";
   buttonContainer.appendChild(createButton("resetbutton", "Reset", resetOptions));
   buttonContainer.appendChild(createButton("savebutton", "Save", saveOptions));
-  
   content.appendChild(buttonContainer);
 
 	new Spicetify.Topbar.Button(
