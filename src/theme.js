@@ -1,7 +1,7 @@
 (function theme() {
-
-	if (!(Spicetify.Player.data && Spicetify.Platform))
+	if (!(Spicetify.Player.data && Spicetify.Platform)) {
 		return setTimeout(theme, 100);
+	}
 
 	const waitForElements = (selectors, func, timeout = 100) => {
 		const elements = selectors.map((selector) =>
@@ -14,12 +14,13 @@
 		}
 	};
 
+	// DYNAMIC BACKGROUND ON LYRICS PAGE
 	const updateSong = () => {
-		let img = Spicetify.Player.data.item.metadata.image_xlarge_url;
-		img = img.includes("spotify:image:")
-			? img.replace("spotify:image:", "https://i.scdn.co/image/")
-			: img;
-		document.documentElement.style.setProperty("--image_url", `url("${img}")`);
+		const img = Spicetify.Player.data.item.metadata.image_xlarge_url.replace(
+			"spotify:image:",
+			"https://i.scdn.co/image/",
+		);
+		document.documentElement.style.setProperty("--image", `url("${img}")`);
 	};
 	Spicetify.Player.addEventListener("songchange", updateSong);
 	updateSong();
@@ -38,7 +39,6 @@
   });
 
   // WINDOWS ZOOM VARIABLE (taken from comfy)
-
   let cache = devicePixelRatio;
 	const updateZoomVariable = (override = false) => {
 		const ratio = devicePixelRatio;
@@ -54,7 +54,6 @@
 	window.addEventListener("resize", () => updateZoomVariable(false));
 
 	// SETTINGS OPTIONS
-
     const createOption = ({ name, desc, defaultValue }) => {
       const optionRow = document.createElement("div");
     optionRow.className = "themeOptionRow";
@@ -134,7 +133,9 @@
     if (!categories[category]) {
       const container = document.createElement("div");
       container.className = `${category.toLowerCase()}Container`;
-      container.appendChild(createHeader(category, `${category.toLowerCase()}Header`));
+			container.appendChild(
+				createHeader(category, `${category.toLowerCase()}Header`),
+			);
       categories[category] = container;
     }
   }
