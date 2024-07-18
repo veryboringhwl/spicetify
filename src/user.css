@@ -22,7 +22,6 @@ body {
 
 * {
   font-family: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI" !important;
-  box-shadow: none !important;
 }
 
 /* TRANSPARENT WINDOWS CONTROL */
@@ -33,8 +32,8 @@ body::after {
   right: 0;
   z-index: 999;
   backdrop-filter: brightness(2.12);
-  width: calc(135px / var(--zoom));
-  height: calc(40px / var(--zoom));
+  width: calc(135px / var(--zoom, 1));
+  height: calc(40px) / var(--zoom, 1);
 }
 
 :root:has(.global-nav) body::after {
@@ -278,7 +277,6 @@ div#context-menu::before,
   transform: scale(1.2) !important;
   margin-right: 10px;
   margin-left: 10px;
-  box-shadow: var(--maincolor);
 }
 
 .Button-small-small-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle:hover {
@@ -292,7 +290,7 @@ div#context-menu::before,
 /* LYRICS PAGE*/
 
 .lyrics-lyricsContainer-LyricsBackground {
-  background-image: var(--image_url);
+  background-image: var(--image);
   background-size: cover;
   filter: blur(10px) brightness(0.8);
   transition: background-image 0.5s ease-in-out;
@@ -323,8 +321,16 @@ div#context-menu::before,
 
 .main-trackList-trackList {
   padding: 8px;
-  background-color: rgba(var(--spice-rgb-card), 0.8);
+  background-color: var(--spice-card);
   border-radius: 7px;
+}
+
+.main-entityHeader-shadow {
+  box-shadow: 0 0px 25px rgba(var(--spice-rgb-shadow), .33);
+}
+ 
+.main-actionBarBackground-background {
+  background-image: linear-gradient(rgba(var(--spice-rgb-shadow), 0.49) 0,var(--background-base) 100%) !important;
 }
 
 /* MISC */
@@ -341,7 +347,6 @@ div#context-menu::before,
 
 /*adds a gradient in libraryx scroll (doesnt work)*/
 .main-yourLibraryX-isScrolled {
-  -webkit-box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
   box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.1s ease;
 }
@@ -490,7 +495,7 @@ span.toggle.enabled {
   padding: 8px;
 }
 
-.resetbutton {
+.resetButton {
   background-color: #ff0033;
   color: #fff;
   border: none;
@@ -500,12 +505,12 @@ span.toggle.enabled {
   font-weight: bold;
 }
 
-.resetbutton:active {
+.resetButton:active {
   background-color: #ff1435;
   scale: 1.05;
 }
 
-.savebutton {
+.saveButton {
   background-color: var(--spice-button);
   color: #fff;
   border: none;
@@ -516,7 +521,7 @@ span.toggle.enabled {
   margin-left: 12px;
 }
 
-.savebutton:active {
+.saveButton:active {
   background-color: var(--spice-button-active);
   scale: 1.05;
 }

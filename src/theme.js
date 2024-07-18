@@ -39,19 +39,41 @@
   });
 
   // WINDOWS ZOOM VARIABLE (taken from comfy)
-  let cache = devicePixelRatio;
-	const updateZoomVariable = (override = false) => {
-		const ratio = devicePixelRatio;
-		if (ratio !== cache || override) {
-			cache = ratio;
-			document.documentElement.style.setProperty(
-				"--zoom",
-				window.outerWidth / window.innerWidth || 1,
-			);
-    }
-	};
-  updateZoomVariable(true);
-	window.addEventListener("resize", () => updateZoomVariable(false));
+	function updateZoomVariable() {
+		let prevOuterWidth = window.outerWidth;
+		let prevInnerWidth = window.innerWidth;
+		let prevRatio = window.devicePixelRatio;
+		let startup = true;
+
+		function checkChanges() {
+			const newOuterWidth = window.outerWidth;
+			const newInnerWidth = window.innerWidth;
+			const newRatio = window.devicePixelRatio;
+			if (
+				startup ||
+				((prevOuterWidth <= 160 || prevRatio !== newRatio) &&
+					(prevOuterWidth !== newOuterWidth ||
+						prevInnerWidth !== newInnerWidth))
+			) {
+				const modified = newOuterWidth / newInnerWidth || 1;
+				document.documentElement.style.setProperty("--zoom", modified);
+				console.debug(
+					`[Comfy-Event]: Zoom Updated: ${newOuterWidth} / ${newInnerWidth} = ${modified}`,
+				);
+
+				prevOuterWidth = newOuterWidth;
+				prevInnerWidth = newInnerWidth;
+				prevRatio = newRatio;
+			}
+
+			requestAnimationFrame(checkChanges);
+		}
+
+		checkChanges();
+		startup = false;
+	}
+
+	updateZoomVariable();
 
 	// SETTINGS OPTIONS
     const createOption = ({ name, desc, defaultValue }) => {
@@ -155,8 +177,8 @@
   
   const buttonContainer = document.createElement("div");
   buttonContainer.className = "buttonContainer";
-  buttonContainer.appendChild(createButton("resetbutton", "Reset", resetOptions));
-  buttonContainer.appendChild(createButton("savebutton", "Save", saveOptions));
+	buttonContainer.appendChild(createButton("resetButton", "Reset", resetOptions),);
+	buttonContainer.appendChild(createButton("saveButton", "Save", saveOptions));
   content.appendChild(buttonContainer);
 
 	new Spicetify.Topbar.Button(
