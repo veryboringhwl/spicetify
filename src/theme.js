@@ -100,6 +100,53 @@
 		return optionRow;
 	};
 
+	const createCarousel = (items) => {
+		const carouselContainer = document.createElement("div");
+		carouselContainer.className = "carouselContainer";
+		const carousel = document.createElement("div");
+		carousel.className = "carousel";
+
+		for (const itemText of items) {
+			const item = document.createElement("div");
+			item.className = "carouselItem";
+			item.textContent = itemText;
+			item.addEventListener("click", () => {
+				document
+					.getElementById(`${itemText.toLowerCase()}Header`)
+					?.scrollIntoView({ behavior: "smooth" });
+			});
+			carousel.appendChild(item);
+		}
+
+		const createControl = (direction, text) => {
+			const button = document.createElement("button");
+			button.className = `carouselControl ${direction}`;
+			button.textContent = text;
+			button.addEventListener("click", () => {
+				carousel.scrollBy({
+					left: (carousel.clientWidth / 2) * (direction === "prev" ? -1 : 1),
+					behavior: "smooth",
+				});
+			});
+			return button;
+		};
+
+		carouselContainer.append(
+			createControl("prev", "<"),
+			carousel,
+			createControl("next", ">"),
+		);
+		return carouselContainer;
+	};
+
+	const createHeader = (text, id) => {
+		const header = document.createElement("h2");
+		header.textContent = text;
+		header.className = "themeHeader";
+		header.id = id;
+		return header;
+	};
+
 	const createButton = (className, text, onClick) => {
       const button = document.createElement("button");
 		button.className = className;
@@ -166,7 +213,19 @@
     categories[opt.category].appendChild(createOption(opt));
 	}
 
+	const carouselItems = [
+		"Layouts",
+		"Snippets",
+		"num",
+		"num2",
+		"Item 5",
+		"Item 6",
+		"Item 7",
+		"Item 8",
+		"Item 9",
+	];
 	const content = document.createElement("div");
+	content.appendChild(createCarousel(carouselItems));
   
   const optionContainer = document.createElement("div");
   optionContainer.className = "optionContainer";
