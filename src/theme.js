@@ -113,6 +113,16 @@
       );
     });
 
+    if (tippy) {
+      Spicetify.Tippy(optionRow, {
+        ...Spicetify.TippyProps,
+        content: tippy,
+        placement: "top-start",
+        delay: [0, 0],
+        offset: [-40, 0],
+      });
+    }
+
     return optionRow;
   };
 
@@ -273,9 +283,19 @@
   });
 
   const content = createElement("div");
-
-  content.appendChild(createCarousel(["Layouts", "Snippets", "num", "num2"]));
-
+  content.appendChild(
+    createCarousel([
+      "Layouts",
+      "Snippets",
+      "num",
+      "num2",
+      "Item 5",
+      "Item 6",
+      "Item 7",
+      "Item 8",
+      "Item 9",
+    ])
+  );
 
   const optionContainer = createElement("div", "optionContainer");
   Object.values(categories).forEach((container) =>
@@ -284,7 +304,9 @@
   content.appendChild(optionContainer);
 
   const buttonContainer = createElement("div", "buttonContainer");
-  buttonContainer.appendChild(createButton("resetButton", "Reset", resetOptions));
+  buttonContainer.appendChild(
+    createButton("resetButton", "Reset", resetOptions)
+  );
   buttonContainer.appendChild(createButton("saveButton", "Save", saveOptions));
   content.appendChild(buttonContainer);
 
