@@ -59,23 +59,6 @@
     return optionRow;
   };
 
-  const createDropdown = (optionRow, prefixedName, defaultValue, options) => {
-    const controlContainer = optionRow.querySelector(".themeOptionControl");
-    const select = createElement("select", "themeOptionDropdown");
-    options.forEach(({ value, label }) => {
-      const option = createElement("option");
-      option.value = value;
-      option.textContent = label;
-      select.appendChild(option);
-    });
-    controlContainer.appendChild(select);
-    select.value = JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
-    select.addEventListener("change", () => {
-      settingsCache[prefixedName] = select.value;
-    });
-    return select;
-  };
-
   const createToggle = (optionRow, prefixedName, defaultValue) => {
     const controlContainer = optionRow.querySelector(".themeOptionControl");
     const toggleButton = createElement("button", "themeOptionToggle");
@@ -102,9 +85,6 @@
     switch (type) {
       case "toggle":
         createToggle(optionRow, prefixedName, defaultValue);
-        break;
-      case "dropdown":
-        createDropdown(optionRow, prefixedName, defaultValue, options);
         break;
       default:
         console.error(`Unknown control type: ${type}`);
