@@ -12,7 +12,9 @@ maybe put topbar in header(cant move windows/doesnt look amazing)
 icons (only navbar partly done)
 */
 
-/* WHOLE PAGE */
+/*
+MARK: WHOLE PAGE
+*/
 
 html,
 body {
@@ -24,8 +26,9 @@ body {
   font-family: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI" !important;
 }
 
-/* TRANSPARENT WINDOWS CONTROL */
-
+/*
+MARK: TRANSPARENT WINDOWS CONTROLS
+*/
 body::after {
   content: "";
   position: absolute;
@@ -33,18 +36,20 @@ body::after {
   z-index: 999;
   backdrop-filter: brightness(2.12);
   width: calc(135px / var(--zoom, 1));
-  height: calc(40px) / var(--zoom, 1);
+  height: calc(40px / var(--zoom, 1));
 }
 
 :root:has(.global-nav) body::after {
   height: calc(64px / var(--zoom, 1)) !important;
 }
 
-/* SEARCH */
-
+/*
+MARK: SEARCH BAR
+*/
 .x-searchInput-searchInputInput {
-  background-color: var(--spice-sidebar);
+  background-color: var(--spice-sidebar) !important;
   color: var(--spice-text) !important;
+  box-shadow: none !important;
 }
 
 .x-searchInput-searchInputInput,
@@ -58,8 +63,9 @@ body::after {
   outline: none;
 }
 
-/* PROGRESS BAR */
-
+/*
+MARK: PROGRESS BAR
+*/
 @property --progress-bar-transform {
   inherits: true;
   initial-value: 0%;
@@ -116,7 +122,9 @@ body::after {
   background-color: var(--spice-highlight);
 }
 
-/* BUTTONS */
+/*
+MARK: BUTTONS
+*/
 
 .main-genericButton-buttonActive::after {
   background-color: var(--spice-accent) !important;
@@ -126,36 +134,24 @@ body::after {
   color: var(--spice-accent) !important;
 }
 
-.main-topBar-buddyFeed,
-.main-topBar-historyButtons .main-topBar-button {
-  border-radius: 25%;
-  background-color: var(--spice-sidebar);
-}
-
-.main-addButton-active:focus,
-.main-addButton-active:hover,
-.main-addButton-active {
-  color: var(--spice-accent) !important;
-}
-
-[aria-label="Friend Activity"] {
-  --background-base: var(--spice-sidebar) !important;
-}
-
-[aria-label="What’s New"] {
-  --background-base: var(--spice-sidebar) !important;
-}
-
-.Button-sc-1dqy6lx-0.Button-textBase-medium-medium-buttonTertiary-condensedAll-useBrowserDefaultFocusStyle.encore-over-media-set.main-userWidget-boxCondensed {
-  background-color: var(--spice-sidebar) !important;
-}
-
 .main-avatar-image,
-.main-userWidget-boxCondensed {
-  border-radius: 7px !important;
+.main-userWidget-boxCondensed,
+.main-topBar-buddyFeed,
+.main-topBar-historyButtons .main-topBar-button,
+.main-topBar-buddyFeed,
+.main-userWidget-boxCondensed,
+.main-userWidget-boxCondensed:hover,
+.main-userWidget-boxCondensed:focus-visible,
+.main-userWidget-boxCondensed[data-context-menu-open=true],
+.main-topBar-whatsNewFeed {
+  background-color: var(--spice-sidebar) !important;
+  border-radius: 7px;
+
 }
 
-/* SCROLL BAR */
+/*
+MARK: SCROLL BAR
+*/
 
 .os-scrollbar {
   cursor: pointer;
@@ -185,8 +181,9 @@ body::after {
   visibility: hidden;
 }
 
-/* GREEN ICON + BOUNCE */
-
+/*
+MARK: LIBX NAV BAR
+*/
 @keyframes bounce {
   0% {
     transform: translate(0, -25%);
@@ -226,7 +223,10 @@ div#context-menu::before,
   z-index: -1;
 }
 
-/* EQUALISER GIF (from bloom)*/
+/*
+MARK: EQUALISER GIF
+from bloom
+*/
 
 .main-devicePicker-header
   > .main-devicePicker-nowPlayingActiveIcon[src*="equaliser"] {
@@ -251,8 +251,9 @@ div#context-menu::before,
   content-visibility: hidden;
 }
 
-/* NOW PLAYING BAR */
-
+/*
+MARK: NOW PLAYING BAR
+*/
 .main-trackInfo-name {
   font-size: 1rem;
   font-weight: 500;
@@ -287,7 +288,9 @@ div#context-menu::before,
   transform: translateX(-8px) scale(1) !important;
 }
 
-/* LYRICS PAGE*/
+/*
+MARK: LYRICS PAGE
+*/
 
 .lyrics-lyricsContainer-LyricsBackground {
   background-image: var(--image);
@@ -317,7 +320,9 @@ div#context-menu::before,
   color: rgba(var(--spice-rgb-subtext), 0.75);
 }
 
-/* PLAYLIST PAGE */
+/*
+MARK: PLAYLIST PAGE
+*/
 
 .main-trackList-trackList {
   padding: 8px;
@@ -333,7 +338,9 @@ div#context-menu::before,
   background-image: linear-gradient(rgba(var(--spice-rgb-shadow), 0.49) 0,var(--background-base) 100%) !important;
 }
 
-/* MISC */
+/*
+MARK: MISCELLANEOUS
+*/
 
 /*shift lyrics a bit*/
 .BeautifulLyricsPage .Lyrics {
@@ -370,7 +377,9 @@ div#context-menu::before,
   color: rgba(var(--spice-rgb-subtext), 1);
 }
 
-/* ICONS */
+/*
+MARK: ICONS
+*/
 
 [aria-label="Go back"] path {
   d: path("M7.2949 15.7152C7.6883 16.1028 8.3215 16.0981 8.7091 15.7047 9.0967 15.3113 9.092 14.6782 8.6986 14.2906L3.3283 8.9992H15C15.5 9.005 16 8.639 16 8.012 16 7.417 15.5 7.014 15 7.025H3.3349L8.6986 1.7143C9.092 1.3267 9.0967.6935 8.7091.3001 8.3215-.0933 7.6883-.098 7.2949.2896L.3707 7.112C-.1262 7.6016-.1262 8.4032.3707 8.8928L7.2949 15.7152Z"
@@ -472,7 +481,7 @@ span.toggle {
 }
 
 span.toggleWrapper:has(span.toggle.enabled) {
-  background-color: var(--spice-button);
+  background-color: var(--spice-button-active);
 }
 
 span.toggle.enabled {
