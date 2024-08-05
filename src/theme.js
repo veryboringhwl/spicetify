@@ -18,6 +18,133 @@
     }
   };
 
+  const createElement = (tag, className, textContent = "") => {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (textContent) element.textContent = textContent;
+    return element;
+  };
+
+  const createButton = (className, textContent, onClick) => {
+    const button = createElement("button", className, textContent);
+    button.addEventListener("click", onClick);
+    return button;
+  };
+
+  const createTippy = (element, content) => {
+    if (content) {
+      Spicetify.Tippy(element, {
+        ...Spicetify.TippyProps,
+        content: content,
+        placement: "top-start",
+        delay: [0, 0],
+        offset: [-40, 0],
+        onShow(instance) {
+          instance.popper.classList.add("options-tippy");
+        },
+      });
+    }
+  };
+
+  const createOptionRow = ({ name, desc, prefixedName, defaultValue }) => {
+    const optionRow = createElement("div", "themeOptionRow");
+    optionRow.innerHTML = `
+      <div class="themeOptionContent">
+        <div class="themeOptionName">${name}</div>
+        <div class="themeOptionDesc">${desc}</div>
+      </div>
+      <div class="themeOptionControl"></div>`;
+    optionRow.dataset.name = prefixedName;
+    optionRow.dataset.default = JSON.stringify(defaultValue);
+    return optionRow;
+  };
+
+  const createDropdown = (optionRow, prefixedName, defaultValue, options) => {
+    const controlContainer = optionRow.querySelector(".themeOptionControl");
+    const select = createElement("select", "themeOptionDropdown");
+    options.forEach(({ value, label }) => {
+      const option = createElement("option");
+      option.value = value;
+      option.textContent = label;
+      select.appendChild(option);
+    });
+    controlContainer.appendChild(select);
+    select.value = JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
+    select.addEventListener("change", () => {
+      settingsCache[prefixedName] = select.value;
+    });
+    return select;
+  };
+
+  const createToggle = (optionRow, prefixedName, defaultValue) => {
+    const controlContainer = optionRow.querySelector(".themeOptionControl");
+    const toggleButton = createElement("button", "themeOptionToggle");
+    toggleButton.innerHTML = '<span class="toggleWrapper"><span class="toggle"></span></span>';
+    controlContainer.appendChild(toggleButton);
+
+    const toggle = toggleButton.querySelector(".toggle");
+    const isEnabled = JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
+    toggle.classList.toggle("enabled", isEnabled);
+
+    toggleButton.addEventListener("click", () => {
+      toggle.classList.toggle("enabled");
+      settingsCache[prefixedName] = toggle.classList.contains("enabled");
+    });
+
+    return toggle;
+  };
+
+  const createControl = (option) => {
+    const { type, name, desc, defaultValue, options, tippy } = option;
+    const prefixedName = `theme:${name}`;
+    const optionRow = createOptionRow({ name, desc, prefixedName, defaultValue });
+
+    switch (type) {
+      case "toggle":
+        createToggle(optionRow, prefixedName, defaultValue);
+        break;
+      case "dropdown":
+        createDropdown(optionRow, prefixedName, defaultValue, options);
+        break;
+      default:
+        console.error(`Unknown control type: ${type}`);
+        return null;
+    }
+
+    createTippy(optionRow, tippy);
+    return optionRow;
+  };
+
+  const createCarousel = (items) => {
+    const carouselContainer = createElement("div", "carouselContainer");
+    const carousel = createElement("div", "carousel");
+
+    items.forEach((itemText) => {
+      const item = createElement("div", "carouselItem", itemText);
+      item.addEventListener("click", () => {
+        document.getElementById(`${itemText.toLowerCase()}Header`)?.scrollIntoView({ behavior: "smooth" });
+      });
+      carousel.appendChild(item);
+    });
+
+    const createControlButton = (direction, text) => {
+      const button = createButton(`carouselControl ${direction}`, text, () => {
+        carousel.scrollBy({
+          left: (carousel.clientWidth / 2) * (direction === "prev" ? -1 : 1),
+          behavior: "smooth",
+        });
+      });
+      return button;
+    };
+
+    carouselContainer.append(
+      createControlButton("prev", "<"),
+      carousel,
+      createControlButton("next", ">")
+    );
+    return carouselContainer;
+  };
+
   /*
   MARK: DYNAMIC LYRICS BACKGROUND
   */
@@ -82,105 +209,7 @@
   MARK: THEME SETTINGS FUNCTIONS
   */
 
-  const createElement = (tag, className, textContent = "") => {
-    const element = document.createElement(tag);
-    if (className) element.className = className;
-    if (textContent) element.textContent = textContent;
-    return element;
-  };
-
-  const createButton = (className, textContent, onClick) => {
-    const button = createElement("button", className, textContent);
-    button.addEventListener("click", onClick);
-    return button;
-  };
-
-  const createTippy = (element, content) => {
-    if (content) {
-      Spicetify.Tippy(element, {
-        ...Spicetify.TippyProps,
-        content: content,
-        placement: "top-start",
-        delay: [0, 0],
-        offset: [-40, 0],
-        onShow(instance) {
-          instance.popper.classList.add("options-tippy");
-        },
-      });
-    }
-  };
-
-  const createOptionRow = ({ name, desc, prefixedName, defaultValue }) => {
-    const optionRow = createElement("div", "themeOptionRow");
-    optionRow.innerHTML = `
-      <div class="themeOptionContent">
-        <div class="themeOptionName">${name}</div>
-        <div class="themeOptionDesc">${desc}</div>
-      </div>
-        <button class="themeOptionToggle">
-            <span class="toggleWrapper">
-                <span class="toggle"></span>
-            </span>
-        </button>`;
-    optionRow.dataset.name = prefixedName;
-    optionRow.dataset.default = defaultValue;
-
-    const toggle = optionRow.querySelector(".toggle");
-    const isEnabled =
-      JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
-    toggle.classList.toggle("enabled", isEnabled);
-
-    optionRow.querySelector("button").addEventListener("click", () => {
-      toggle.classList.toggle("enabled");
-      localStorage.setItem(
-        prefixedName,
-        JSON.stringify(toggle.classList.contains("enabled"))
-      );
-    });
-
-    if (tippy) {
-      Spicetify.Tippy(optionRow, {
-        ...Spicetify.TippyProps,
-        content: tippy,
-        placement: "top-start",
-        delay: [0, 0],
-        offset: [-40, 0],
-      });
-    }
-
-    return optionRow;
-  };
-
-  const createCarousel = (items) => {
-    const carouselContainer = createElement("div", "carouselContainer");
-    const carousel = createElement("div", "carousel");
-
-    items.forEach((itemText) => {
-      const item = createElement("div", "carouselItem", itemText);
-      item.addEventListener("click", () => {
-        document.getElementById(`${itemText.toLowerCase()}Header`)?.scrollIntoView({ behavior: "smooth" });
-      });
-      carousel.appendChild(item);
-    });
-
-    const createControlButton = (direction, text) => {
-      const button = createButton(`carouselControl ${direction}`, text, () => {
-        carousel.scrollBy({
-          left: (carousel.clientWidth / 2) * (direction === "prev" ? -1 : 1),
-          behavior: "smooth",
-        });
-      });
-      return button;
-    };
-
-    carouselContainer.append(
-      createControlButton("prev", "<"),
-      carousel,
-      createControlButton("next", ">")
-    );
-    return carouselContainer;
-  };
-
+  const settingsCache = {};
   const resetOptions = () => {
     const options = document.querySelectorAll(".themeOptionRow");
     for (const option of options) {
@@ -192,16 +221,17 @@
     }
   };
 
-  const saveOptions = () => {
-    document.querySelectorAll(".themeOptionRow").forEach((option) => {
-      const toggle = option.querySelector(".toggle");
-      localStorage.setItem(
-        option.dataset.name,
-        JSON.stringify(toggle.classList.contains("enabled"))
-      );
+  const saveOptions = async () => {
+    Object.entries(settingsCache).forEach(([prefixedName, value]) => {
+      localStorage.setItem(prefixedName, JSON.stringify(value));
     });
-    updateCSS();
+    await updateCSS();
+    const spotifyMode = settingsCache["theme:Spotify-mode"];
+    if (spotifyMode) {
+      await changeSpotifyMode(spotifyMode);
+    }
   };
+
 
   const updateCSS = () => {
     options.forEach(({ name, type, defaultValue }) => {
@@ -289,18 +319,18 @@
     },
   ];
 
-  const categories = options.reduce((acc, { category }) => {
-    if (!acc[category]) {
-      const container = createElement(
-        "div",
-        `${category.toLowerCase()}Container`
-      );
-      container.appendChild(createElement("h2", "themeHeader", category));
-      container.id = `${category.toLowerCase()}Header`;
-      acc[category] = container;
+  const categories = {};
+  options.forEach((option) => {
+    if (!categories[option.category]) {
+      categories[option.category] = createElement("div", `${option.category.toLowerCase()}Container`);
+      categories[option.category].appendChild(createElement("h2", "themeHeader", option.category));
+      categories[option.category].id = `${option.category.toLowerCase()}Header`;
     }
-    return acc;
-  }, {});
+    const control = createControl(option);
+    if (control) {
+      categories[option.category].appendChild(control);
+    }
+  });
 
   options.forEach((opt) => {
     const optionElement = createOption(opt);
