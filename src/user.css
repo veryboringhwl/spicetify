@@ -61,6 +61,16 @@ MARK: SEARCH BAR
 .x-searchInput-searchInputInput:focus {
   border-bottom: var(--spice-accent) solid 2px;
   outline: none;
+}s
+
+/*make marketplace search bar match fluent*/
+.searchbar--bar__wrapper,
+.searchbar-bar {
+  height: 37px !important;
+}
+
+.searchbar-bar:focus {
+  border-bottom: var(--spice-accent) solid 2px !important;
 }
 
 /*
@@ -126,13 +136,15 @@ MARK: PROGRESS BAR
 MARK: BUTTONS
 */
 
+/*
+what does this do
 .main-genericButton-buttonActive::after {
   background-color: var(--spice-accent) !important;
 }
 
 .main-genericButton-buttonActive {
   color: var(--spice-accent) !important;
-}
+} */
 
 .main-avatar-image,
 .main-userWidget-boxCondensed,
@@ -203,6 +215,15 @@ MARK: LIBX NAV BAR
   animation: bounce 175ms ease-out forwards;
 }
 
+.main-yourLibraryX-navLink-accent {
+  position: absolute;
+  width: 4px;
+  height: 25px;
+  border-radius: 7px;
+  left: 12px;
+  display: none;
+}
+
 /* CONTEXT MENU */
 
 .main-contextMenu-menu {
@@ -265,7 +286,7 @@ MARK: NOW PLAYING BAR
 }
 
 .main-nowPlayingBar-nowPlayingBar {
-  height: 85px !important;
+  height: 80px !important;
   margin-right: 12px;
 }
 
@@ -335,7 +356,7 @@ MARK: PLAYLIST PAGE
 }
  
 .main-actionBarBackground-background {
-  background-image: linear-gradient(rgba(var(--spice-rgb-shadow), 0.49) 0,var(--background-base) 100%) !important;
+  background-image: linear-gradient(rgba(var(--spice-rgb-shadow), 0.49999) 0,var(--background-base) 100%) !important;
 }
 
 /*
@@ -459,6 +480,7 @@ button.themeOptionToggle {
   display: flex;
   background-color: transparent !important;
   border: none;
+  padding-right: 7px;
 }
 
 span.toggleWrapper {
@@ -477,7 +499,7 @@ span.toggle {
   border-radius: 10px;
   background-color: white;
   margin-left: 2px;
-  transition: 0.25s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 span.toggleWrapper:has(span.toggle.enabled) {
@@ -488,6 +510,7 @@ span.toggle.enabled {
   margin-left: 20px;
 }
 
+/*Options*/
 .themeOptionRow {
   display: flex;
   justify-content: space-between;
@@ -512,6 +535,8 @@ span.toggle.enabled {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 15px;
+  width: 85px;
 }
 
 .resetButton:active {
@@ -527,7 +552,9 @@ span.toggle.enabled {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 15px;
   margin-left: 12px;
+  width: 85px;
 }
 
 .saveButton:active {
@@ -535,29 +562,104 @@ span.toggle.enabled {
   scale: 1.05;
 }
 
-/* THEME OPTIONS */
-.transplaypause .main-playPauseButton-button svg {
-  height: 22px;
-  width: 22px;
-  transform: scale(1.5);
-}
-.transplaypause .main-playPauseButton-button {
-  background-color: transparent !important;
-  color: var(--spice-text);
+/*Carousel*/
+.carouselContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  overflow: hidden;
+  border-radius: 8px;
+  padding: 10px;
 }
 
-.npvlargerlyrics .main-buddyFeed-content.Jg9Sdg82oTVV58xFeM2i.main-nowPlayingView-content.main-nowPlayingView-gradient .main-buddyFeed-header {
+.carousel {
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
   display: none;
 }
-.npvlargerlyrics .main-nowPlayingView-coverArt {
-  width: 85px;
+
+.carouselItem {
+  flex: 0 0 auto;
+  width: 110px;
+  margin: 0 2px;
+  background-color: rgba(var(--spice-rgb-highlight),0.8);
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
 }
-.npvlargerlyrics .main-nowPlayingView-coverArtContainer {
-  min-height: unset !important;
-  height: 85px !important;
+
+.carouselItem:active {
+  scale: 1.05;
+  filter: brightness(1.2);
 }
-.npvlargerlyrics .main-nowPlayingView-nowPlayingGrid {
-  flex-direction: unset;
+
+.carouselControl {
+  background-color: rgba(var(--spice-rgb-highlight),0.6);
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 18px;
+  width: 40px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.carouselControl:active {
+  scale: 1.05;
+  filter: brightness(1.2);
+}
+
+.carouselControl.prev{
+  margin-right:3px;
+}
+
+.carouselControl.next {
+  margin-left: 3px;
+}
+
+/*
+MARK: THEME OPTIONS
+*/
+
+.homeheader .main-home-homeHeader {
+  display: none;
+}
+
+.homeheader .main-topBar-background {
+  background-color: var(--spice-main) !important;
+}
+
+.homeheader .main-topBar-overlay {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.homeheader .main-home-filterChipsSection.fIvMht6B9HdROywMNJZ4:after {
+  background-color: var(--spice-main) !important;
+}
+
+.highlightnav .main-yourLibraryX-navItem {
+  padding: 2px 0px !important;
+}
+
+.highlightnav .main-yourLibraryX-navLinkActive.active {
+  background-color: var(--spice-highlight-elevated);
+  padding-left: 12px;
+}
+
+.highlightnav .main-yourLibraryX-navLink:hover {
+  background-color: var(--spice-highlight);
+}
+
+.highlightnav .main-yourLibraryX-navLink {
+  border-radius: 7px;
+  min-height: 42px;
+  padding-left: 10px;
 }
 .npvlargerlyrics .main-nowPlayingView-contextItemInfo .main-trackInfo-name {
   font-size: 1.2rem;
