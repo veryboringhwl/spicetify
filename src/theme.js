@@ -226,75 +226,89 @@
  
 	const options = [
 	  {
+      type: "toggle",
 		 category: "Layouts",
-		 name: "prelibx",
-		 desc: "Pre libx layout:",
+      name: "PreLibX",
+      desc: "Switches to old layout ~2023 (Pre LibX)",
 		 defaultValue: false,
 	  },
 	  {
+      type: "toggle",
 		 category: "Layouts",
-		 name: "testlayout",
-		 desc: "Test layout:",
+      name: "TestLayout",
+      desc: "New test layout in now playing bar",
 		 defaultValue: false,
+      tippy: 'This is not compatible with "newlayout"',
 	  },
 	  {
+      type: "toggle",
 		 category: "Layouts",
 		 name: "newlayout",
-		 desc: "Gives the new layout in npb:",
+      desc: "Switches Playbar and Cover art in now playing bar",
 		 defaultValue: false,
 	  },
 	  {
+      type: "toggle",
 		 category: "Layouts",
 		 name: "switchlayout",
-		 desc: "Makes left sidebar in front of npb:",
+      desc: "Makes left sidebar go infront of the now playing bar",
 		 defaultValue: true,
 	  },
 	  {
+      type: "toggle",
 		 category: "Snippets",
 		 name: "hidetracklistnum",
-		 desc: "Hide tracklist numbers:",
+      desc: "Hide tracklist numbers in playlist page",
 		 defaultValue: true,
 	  },
 	  {
+      type: "toggle",
 		 category: "Snippets",
 		 name: "hidenowplayview",
-		 desc: "Hide now playing view:",
+      desc: "Hide cover art in now playing bar",
 		 defaultValue: false,
 	  },
 	  {
+      type: "toggle",
 		 category: "Snippets",
 		 name: "horizontalnav",
-		 desc: "Makes navlinks horizontal:",
+      desc: "Makes navlinks horizontal (Home, Search, Marketplace)",
 		 defaultValue: false,
+      tippy: 'Not compatible with "highlightnav and navlinkaccent"',
 	  },
 	  {
+      type: "toggle",
 		 category: "Snippets",
-		 name: "transplaypause",
-		 desc: "Transparent play pause button:",
+      name: "transplayicon",
+      desc: "Transparent play/pause button in now playing bar",
 		 defaultValue: true,
 	  },
 	  {
+      type: "toggle",
 		 category: "Snippets",
 		 name: "npvlargerlyrics",
-		 desc: "Now playing view has lyrics only:",
+      desc: "Now playing view (Right sidebar) has lyrics only",
 		 defaultValue: false,
 	  },
 	  {
+      type: "toggle",
 		 category: "Snippets",
 		 name: "navlinkaccent",
-		 desc: "Fluent selector on navlink:",
+      desc: "Coloured fluent selector in navlink",
 		 defaultValue: true,
 	  },
 	  {
+      type: "toggle",
 		 category: "Snippets",
 		 name: "highlightnav",
-		 desc: "Highlights on active/hover on navlink:",
+      desc: "Highlights navlink background on hover/active ",
 		 defaultValue: true,
 	  },
 	  {
+      type: "toggle",
 		 category: "Snippets",
 		 name: "homeheader",
-		 desc: "Removes colour from the home header",
+      desc: "Removes coloured gradient from the home page header",
 		 defaultValue: true,
 	  },
 	];
@@ -310,11 +324,6 @@
 	  if (control) {
 		 categories[option.category].appendChild(control);
 	  }
-	});
- 
-	options.forEach((opt) => {
-	  const optionElement = createOption(opt);
-	  categories[opt.category].appendChild(optionElement);
 	});
  
 	const content = createElement("div");
