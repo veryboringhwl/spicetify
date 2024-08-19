@@ -372,11 +372,9 @@ MARK: MISCELLANEOUS
 .marketplace-card--installed {
   border: 1px solid var(--spice-accent);
 }
-
-/*adds a gradient in libraryx scroll (doesnt work)*/
-.main-yourLibraryX-isScrolled {
-  box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
-  transition: box-shadow 0.1s ease;
+/*marketplace rounded images*/
+.main-card-draggable .main-card-imageContainer {
+  border-radius: 5px;
 }
 
 /*shift the browse all in search up a bit*/
@@ -394,8 +392,9 @@ MARK: MISCELLANEOUS
   text-decoration: none !important;
 }
 
-.main-topBar-buddyFeed {
-  color: rgba(var(--spice-rgb-subtext), 1);
+/*make the tippy font bigger only in theme settings*/
+.options-tippy > div {
+  font-size: 16px !important;
 }
 
 /*
@@ -523,10 +522,29 @@ span.toggle.enabled {
   font-size: 17px;
 }
 
-.themeHeader {
-  padding: 8px;
+.themeOptionName {
+  font-weight: 500;
+  font-size: 18px;
 }
 
+.themeOptionDesc {
+  font-size: 15px;
+  margin-top: 5px;
+  color: var(--spice-subtext);
+}
+
+.themeHeader {
+  padding-bottom: 5px;
+}
+
+.themeOptionContent {
+  padding-top: 5px;
+  padding-bottom: 7px;
+}
+
+/* Dropdown styling */
+
+ /*Buttons*/
 .resetButton {
   background-color: #ff0033;
   color: #fff;
@@ -661,48 +679,141 @@ MARK: THEME OPTIONS
   min-height: 42px;
   padding-left: 10px;
 }
-.npvlargerlyrics .main-nowPlayingView-contextItemInfo .main-trackInfo-name {
-  font-size: 1.2rem;
-  font-weight: 550 !important;
-}
-.npvlargerlyrics .main-nowPlayingView-contextItemInfo .main-trackInfo-artists {
-  font-size: 0.9rem;
-}
-.npvlargerlyrics .main-nowPlayingView-panelOpenDiv {
-  gap: 5px;
-}
-.npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing .main-nowPlayingView-lyricsTitle {
-  font-size: 20px;
-  font-weight: 600 !important;
-}
-.npvlargerlyrics .TypeElement-finale-textSubdued-type {
-  font-size: 0.9rem;
-}
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-aboutArtistV2,
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-credits,
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-artistOnTour,
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-merch,
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-queue {
-  display: none;
-}
-.npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing {
-  max-height: 74cqh !important;
-}
-.npvlargerlyrics .main-nowPlayingView-lyricsContent .RootContainer {
-  height: 74cqh !important;
+
+.navlinkaccent .main-yourLibraryX-navLink-accent {
+  background-color: var(--spice-accent);
 }
 
-.horizontalnav ul#spicetify-sticky-list {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  span {
-    display: none;
-  }
+.navlinkaccent .main-yourLibraryX-navLinkActive > .main-yourLibraryX-navLink-accent {
+  display: block !important;
 }
-.horizontalnav .main-yourLibraryX-navItem {
-  padding: 0 !important;
+
+.PreLibX .main-yourLibraryX-libraryRootlist,
+.PreLibX .main-yourLibraryX-header,
+.PreLibX .main-yourLibraryX-filterArea,
+.PreLibX .main-yourLibraryX-navItems {
+  background-color: var(--spice-sidebar);
+}
+.PreLibX .main-yourLibraryX-navItems {
+  padding: 8px 12px 0px 12px;
+}
+
+.PreLibX .main-navBar-mainNav {
+  padding-top: 30px;
+  gap: 0;
+}
+
+.PreLibX .main-topBar-container {
+  padding-right: 120px;
+}
+.PreLibX .Root__top-container {
+  padding: 0;
+  gap: 0 !important;
+}
+
+.PreLibX .main-nowPlayingBar-nowPlayingBar {
+  border-style: solid !important;
+  background-color: var(--spice-player);
+  border-top-width: 1px;
+  border-color: var(--spice-card);
+  margin-right: 0px !important;
+  height: 88px !important;
+}
+
+.PreLibX .main-nowPlayingBar-right{
+  padding-right: 12px;
+}
+
+.PreLibX #spicetify-show-list {
+  background-color: var(--spice-sidebar);
+}
+
+.PreLibX .Root__main-view,
+.PreLibX .main-yourLibraryX-entryPoints,
+.PreLibX .Root__main-view,
+.PreLibX .Root__now-playing-bar,
+.PreLibX .ffFwfKcPDbmAPLXzxzKq {
+  border-radius: 0px !important;
+}
+/*shift x icon in npv*/
+.PreLibX .cZCuJDjrGA2QMXja_Sua {
+  height: 100%;
+  position: relative;
+}
+/*shift npv down to find close button*/
+.PreLibX .icNf66tgG3uxDMbCCIaN {
+  top: 50px;
+  position: absolute;
+  right: 8px;
+}
+.PreLibX .main-yourLibraryX-header {
+  padding: 0px;
+  padding-left: 14px;
+  padding-top: 4px;
+}
+.PreLibX .Wrapper-medium-leading {
+  margin-inline-end: 22px;
+}
+
+.PreLibX .main-topBar-historyButtons,
+.PreLibX .main-avatar-avatar {
+  -webkit-app-region: no-drag;
+}
+
+.PreLibX .main-topBar-topbarContent,
+.PreLibX .main-topBar-container>* {
+  -webkit-app-region: drag !important;
+}
+
+/*TestLayout*/
+.TestLayout footer.main-nowPlayingBar-container {
+  border: none;
+}
+.TestLayout .player-controls__buttons.player-controls__buttons--new-icons {
+  margin: 0 20px 0 30px;
+  width: fit-content;
+}
+.TestLayout .player-controls {
+  flex-direction: row;
+}
+.TestLayout .main-trackInfo-container {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.TestLayout .main-nowPlayingBar-center {
+  max-width: none;
+  flex-grow: 1;
+}
+.TestLayout .main-nowPlayingBar-right {
+  width: 280px;
+  margin-left: 20px;
+}
+
+.TestLayout .main-nowPlayingBar-left {
+  width: 20%;
+}
+.TestLayout button.main-playPauseButton-button {
+  background: none;
+  color: var(--spice-text);
+  --button-size: unset !important;
+}
+.TestLayout .main-playPauseButton-button svg {
+  height: 20px;
+  width: 21px;
+}
+
+.TestLayout .x-progressBar-fillColor {
+  transition: transform 1s linear;
+}
+.TestLayout .progress-bar__slider {
+  transition: left 1s linear;
+}
+.TestLayout .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .x-progressBar-fillColor,
+.TestLayout .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .progress-bar__slider {
+  transition: none;
+}
+.TestLayout .main-connectBar-connectBar {
+  border-radius: 0;
 }
 
 /* Remove tracklist index (from comfy) */
@@ -785,6 +896,8 @@ MARK: THEME OPTIONS
   grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [last] minmax(120px, var(--col5, 1fr)) !important
 }
 
+/*switch layout*/
+
 .switchlayout .Root__top-container {
   grid-template-areas:
     "left-sidebar main-view right-sidebar"
@@ -798,6 +911,8 @@ MARK: THEME OPTIONS
     "left-sidebar now-playing-bar now-playing-bar" !important;
   grid-template-rows: auto 1fr auto;
 }
+
+/*new layout*/
 
 .newlayout .main-nowPlayingWidget-coverArt .cover-art {
   width: 50px !important;
@@ -863,4 +978,97 @@ MARK: THEME OPTIONS
 
 .hidenowplayview .main-playbackBarRemainingTime-container {
   min-width: unset;
+}
+
+.horizontalnav ul#spicetify-sticky-list {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  span {
+    display: none;
+  }
+}
+.horizontalnav .main-yourLibraryX-navItem {
+  padding: 0 !important;
+}
+
+.npvlargerlyrics
+  .main-buddyFeed-content.Jg9Sdg82oTVV58xFeM2i.main-nowPlayingView-content.main-nowPlayingView-gradient
+  .main-buddyFeed-header {
+  display: none;
+}
+
+.npvlargerlyrics .main-nowPlayingView-coverArt {
+  width: 85px;
+}
+
+.npvlargerlyrics .main-nowPlayingView-coverArtContainer {
+  height: 85px !important;
+  width: 80px;
+}
+
+.npvlargerlyrics .main-nowPlayingView-nowPlayingGrid {
+  flex-direction: unset;
+}
+.npvlargerlyrics .main-nowPlayingView-contextItemInfo{
+  container-type: normal;
+}
+.npvlargerlyrics .main-nowPlayingView-contextItemInfo .main-trackInfo-name {
+  font-size: 1.2rem;
+  font-weight: 550 !important;
+}
+
+.npvlargerlyrics .main-nowPlayingView-contextItemInfo .main-trackInfo-artists {
+  font-size: 0.9rem;
+}
+
+.npvlargerlyrics .main-nowPlayingView-panelOpenDiv {
+  gap: 5px;
+}
+
+.npvlargerlyrics
+  .main-nowPlayingView-sectionHeaderSpacing
+  .main-nowPlayingView-lyricsTitle {
+  font-size: 20px;
+  font-weight: 600 !important;
+}
+
+.npvlargerlyrics .TypeElement-finale-textSubdued-type {
+  font-size: 0.9rem;
+}
+
+.npvlargerlyrics
+  .main-nowPlayingView-section.main-nowPlayingView-aboutArtistV2,
+.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-credits,
+.npvlargerlyrics
+  .main-nowPlayingView-section.main-nowPlayingView-artistOnTour,
+.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-merch,
+.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-queue {
+  display: none;
+}
+
+.npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing {
+  height: 66cqh;
+  max-height: 66.5cqh;
+}
+
+.npvlargerlyrics .main-nowPlayingView-lyricsContent .RootContainer {
+  height: 66cqh !important;
+}
+.npvlargerlyrics #BeautifulLyrics-CardView,
+.npvlargerlyrics #BeautifulLyrics-CardView .LyricsContent .ContentContainer {
+  height: 66cqh !important;
+  max-height: 66cqh !important;
+}
+
+.transplayicon .main-playPauseButton-button svg {
+  height: 22px;
+  width: 22px;
+  transform: scale(1.5);
+}
+
+.transplayicon .main-playPauseButton-button {
+  background-color: transparent !important;
+  color: var(--spice-text);
 }
