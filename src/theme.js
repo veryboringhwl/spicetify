@@ -212,7 +212,6 @@
 	  }
 	};
  
- 
 	const updateCSS = () => {
 	  options.forEach(({ name, type, defaultValue }) => {
 		 const prefixedName = `theme:${name}`;
@@ -223,6 +222,10 @@
 		 }
 	  });
 	};
+
+  /*
+  MARK: SETTINGS MENU OPTIONS
+  */
  
 	const options = [
 	  {

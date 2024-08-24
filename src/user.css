@@ -466,6 +466,26 @@ MARK: ICONS
     ) !important;
 }
 
+/*
+MARK: POPUP MODAL
+*/
+
+.GenericModal,
+.main-embedWidgetGenerator-container {
+  background-color: rgba(var(--spice-rgb-sidebar), 0.4) !important;
+  backdrop-filter: blur(20px) saturate(1.6) brightness(0.9);
+  max-height: 750px;
+  border-radius: 7px;
+}
+
+.GenericModal__overlay {
+  background-color: rgba(var(--spice-rgb-shadow), 0.75);
+  border-radius: 7px;
+}
+
+.main-trackCreditsModal-mainSection {
+  scrollbar-width: thin;
+}
 
 /* THEME SETTINGS */
 
@@ -475,6 +495,11 @@ MARK: ICONS
   align-items: center;
 }
 
+/*
+MARK: THEME SETTINGS UI
+*/
+
+/*toggle*/
 button.themeOptionToggle {
   display: flex;
   background-color: transparent !important;
