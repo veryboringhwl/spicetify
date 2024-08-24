@@ -474,7 +474,7 @@ MARK: POPUP MODAL
 .main-embedWidgetGenerator-container {
   background-color: rgba(var(--spice-rgb-sidebar), 0.4) !important;
   backdrop-filter: blur(20px) saturate(1.6) brightness(0.9);
-  max-height: 750px;
+  max-height: 800px;
   border-radius: 7px;
 }
 
@@ -487,19 +487,14 @@ MARK: POPUP MODAL
   scrollbar-width: thin;
 }
 
-/* THEME SETTINGS */
-
-.themeOptionRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 /*
 MARK: THEME SETTINGS UI
 */
 
-/*toggle*/
+/*
+MARK: THEME SETTINGS TOGGLE / DROPDOWN
+*/
+
 button.themeOptionToggle {
   display: flex;
   background-color: transparent !important;
@@ -534,7 +529,23 @@ span.toggle.enabled {
   margin-left: 20px;
 }
 
-/*Options*/
+.themeOptionDropdown {
+  background-color: var(--spice-tab-active);
+  border: 0;
+  border-radius: 4px;
+  color: rgba(var(--spice-rgb-selected-row), .7);
+  font-size: 14px;
+  font-weight: 400;
+  height: 32px;
+  letter-spacing: .24px;
+  line-height: 20px;
+  padding: 0 32px 0 12px;
+}
+
+/*
+MARK: THEME OPTION ROW
+*/
+
 .themeOptionRow {
   display: flex;
   justify-content: space-between;
@@ -605,7 +616,10 @@ span.toggle.enabled {
   scale: 1.05;
 }
 
-/*Carousel*/
+/*
+MARK: THEME SETTINGS CAROUSEL
+*/
+
 .carouselContainer {
   display: flex;
   align-items: center;
@@ -788,6 +802,10 @@ MARK: THEME OPTIONS
 .PreLibX .main-topBar-topbarContent,
 .PreLibX .main-topBar-container>* {
   -webkit-app-region: drag !important;
+}
+
+.PreLibX .LayoutResizer__inline-end {
+  inset-inline-end: -4px !important;
 }
 
 /*TestLayout*/
@@ -1014,8 +1032,10 @@ MARK: THEME OPTIONS
     display: none;
   }
 }
-.horizontalnav .main-yourLibraryX-navItem {
-  padding: 0 !important;
+
+.horizontalnav:has(.hightlightnav) .main-yourLibraryX-navLinkActive.active {
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .npvlargerlyrics
