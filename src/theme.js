@@ -463,12 +463,30 @@
 	new Spicetify.Topbar.Button(
 		"Theme Settings",
 		settingsIcon,
-		() =>
+		() => {
 			Spicetify.PopupModal.display({
 				title: "Theme Settings",
 				content: content,
 				isLarge: true,
-			}),
+			});
+
+			const headerContainer = createElement("div", "main-trackCreditsModal-btnContainer")
+			const closeButton = document.querySelector(".main-trackCreditsModal-closeBtn");
+			const header = document.querySelector(".main-trackCreditsModal-header");
+			const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+			svgElement.setAttribute("width", "18");
+			svgElement.setAttribute("height", "18");
+			svgElement.setAttribute("viewBox", "0 0 32 32");
+			svgElement.setAttribute("fill", "currentColor");
+			svgElement.innerHTML = `<path d="M16 0c8.84 0 16 7.16 16 16a16.026 16.026 90 01-10.9 15.18c-.8.16-1.1-.34-1.1-.76 0-.54.02-2.26.02-4.4 0-1.5-.5-2.46-1.08-2.96 3.56-.4 7.3-1.76 7.3-7.9 0-1.76-.62-3.18-1.64-4.3.16-.4.72-2.04-.16-4.24 0 0-1.34-.44-4.4 1.64-1.28-.36-2.64-.54-4-.54-1.36 0-2.72.18-4 .54-3.06-2.06-4.4-1.64-4.4-1.64-.88 2.2-.32 3.84-.16 4.24-1.02 1.12-1.64 2.56-1.64 4.3 0 6.12 3.72 7.5 7.28 7.9-.46.4-.88 1.1-1.02 2.14-.92.42-3.22 1.1-4.66-1.32-.3-.48-1.2-1.66-2.46-1.64-1.34.02-.54.76.02 1.06.68.38 1.46 1.8 1.64 2.26.32.9 1.36 2.62 5.38 1.88 0 1.34.02 2.6.02 2.98 0 .42-.3.9-1.1.76A15.99 15.99 90 010 16c0-8.84 7.16-16 16-16Z"></path>`;
+			const button = createButton("main-trackCreditsModal-closeBtn", "", () =>
+				window.open("https://github.com/veryboringhwl/spicetify")
+			);
+			button.appendChild(svgElement);
+			headerContainer.appendChild(button);
+			headerContainer.appendChild(closeButton);
+			header.appendChild(headerContainer);
+		},
 		false,
 		true
 	);
