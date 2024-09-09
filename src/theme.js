@@ -441,18 +441,43 @@
 	MARK: FUNCTIONS
 	*/
 
+  let appDevListener, employeeListener;
+
 	const changeSpotifyMode = async (mode) => {
+    const productState = Spicetify.Platform.UserAPI._product_state_service;
+
 		const modePairs = {
-			Normal: { "app-developer": "0", employee: "0" },
-			Developer: { "app-developer": "2", employee: "0" },
-			Employee: { "app-developer": "0", employee: "1" },
-			Both: { "app-developer": "2", employee: "1" },
+      Normal: { "app-developer": "0", "employee": "0" },
+      Developer: { "app-developer": "2", "employee": "0" },
+      Employee: { "app-developer": "0", "employee": "1" },
+      Both: { "app-developer": "2", "employee": "1" },
 		};
 
 		const pairs = modePairs[mode] || modePairs.Normal;
-		const productState = Spicetify.Platform.UserAPI._product_state_service;
-		await productState.putOverridesValues({ pairs });
-		// await Spicetify.Platform.UserAPI._product_state_service.putOverridesValues({ pairs: { "employee": "1" } });
+  
+    const setMode = async (key, value) => {
+      await productState.putValues({
+        pairs: { [key]: value },
+      });
+      return productState.subValues({ keys: [key] }, () => {
+        productState.putValues({
+          pairs: { [key]: value },
+        });
+      });
+    };
+  
+    appDevListener?.cancel();
+    employeeListener?.cancel();
+  
+    appDevListener = await setMode("app-developer", pairs["app-developer"]);
+    employeeListener = await setMode("employee", pairs["employee"]);
+  
+    try {
+      const currentState = await productState.getValues();
+      console.log("Current Spotify mode state:", currentState);
+    } catch (error) {
+      console.error("Error getting current Spotify mode state:", error);
+    }
 	};
 
 	/*
