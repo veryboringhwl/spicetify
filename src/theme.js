@@ -59,13 +59,7 @@
 		return optionRow;
 	};
 
-	const createDropdown = (
-		optionRow,
-		prefixedName,
-		defaultValue,
-		options,
-		run
-	) => {
+  const createDropdown = (optionRow, prefixedName, defaultValue, options) => {
 		const controlContainer = optionRow.querySelector(".themeOptionControl");
 		const select = createElement("select", "themeOptionDropdown");
 		options.forEach(({ value, label }) => {
@@ -78,13 +72,12 @@
 		select.value =
 			JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
 		select.addEventListener("change", () => {
-			const newValue = select.value;
-			settingsCache[prefixedName] = newValue;
+      settingsCache[prefixedName] = select.value;
 		});
 		return select;
 	};
 
-	const createToggle = (optionRow, prefixedName, defaultValue, run) => {
+  const createToggle = (optionRow, prefixedName, defaultValue) => {
 		const controlContainer = optionRow.querySelector(".themeOptionControl");
 		const toggleButton = createElement("button", "themeOptionToggle");
 		toggleButton.innerHTML =
@@ -105,8 +98,23 @@
 		return toggle;
 	};
 
+  const createInput = (optionRow, prefixedName, defaultValue) => {
+    const controlContainer = optionRow.querySelector(".themeOptionControl");
+    const input = createElement("input", "themeOptionInput");
+    input.type = "text";
+    input.value =
+      JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
+    controlContainer.appendChild(input);
+
+    input.addEventListener("change", () => {
+      settingsCache[prefixedName] = input.value;
+    });
+
+    return input;
+  };
+
 	const createControl = (option) => {
-		const { type, name, desc, defaultValue, options, tippy, run } = option;
+    const { type, name, desc, defaultValue, options, tippy } = option;
 		const prefixedName = `theme:${name}`;
 		const optionRow = createOptionRow({
 			name,
@@ -117,14 +125,14 @@
 
 		switch (type) {
 			case "toggle":
-				createToggle(optionRow, prefixedName, defaultValue, run);
+        createToggle(optionRow, prefixedName, defaultValue);
 				break;
 			case "dropdown":
-				createDropdown(optionRow, prefixedName, defaultValue, options, run);
+        createDropdown(optionRow, prefixedName, defaultValue, options);
 				break;
-			default:
-				console.error(`Unknown control type: ${type}`);
-				return null;
+      case "input":
+        createInput(optionRow, prefixedName, defaultValue);
+        break;
 		}
 
 		createTippy(optionRow, tippy);
@@ -264,22 +272,18 @@
 
 			if (type === "toggle") {
 				document.body.classList.toggle(name, value);
-			} // else if (type === "dropdown") {
-			// }
+      }
 		});
 	};
 
-	/*
-	MARK: SETTINGS MENU OPTIONS
-	*/
-
-	// Add this to end to run something with toggle
-	// run: (state) => {
-	//   console.log("Setting turned " + (state ? "on" : "off"));
-	//   if (state) prelibx();
-	// },
-
 	const options = [
+    {
+      type: "input",
+      category: "test",
+      name: "test-input",
+      desc: "Does something",
+      defaultValue: 1,
+    },
 		{
 			type: "toggle",
 			category: "Layouts",
@@ -307,7 +311,7 @@
 			type: "toggle",
 			category: "Layouts",
 			name: "switchlayout",
-			desc: "Makes left sidebar go infront of the now playing bar",
+      desc: "Makes left sidebar go in front of the now playing bar",
 			defaultValue: true,
 		},
 		{
@@ -358,7 +362,7 @@
 			type: "toggle",
 			category: "Snippets",
 			name: "highlightnav",
-			desc: "Highlights navlink background on hover/active ",
+      desc: "Highlights navlink background on hover/active",
 			defaultValue: true,
 			tippy: 'Not compatible with "Not compatible with horizontalnav"',
 		},
@@ -387,8 +391,8 @@
 			category: "test",
 			name: "change-Spotify-mode",
 			desc: "Changes Spotify Mode to either Normal, Developer or Employee",
-			defaultValue: "Employee",
-			tippy: "Only takes affect after a restart",
+      defaultValue: "Both",
+      tippy: "Only takes effect after a restart",
 			options: [
 				{ value: "Normal", label: "Normal" },
 				{ value: "Developer", label: "Developer" },
@@ -397,6 +401,7 @@
 			],
 			run: (value) => {
 				changeSpotifyMode(value);
+        console.log("changed to", value)
 			},
 		},
 	];
@@ -421,14 +426,10 @@
 
 	const content = createElement("div", "themeContainer");
 
-	content.appendChild(
-		createCarousel(["Layouts", "Snippets", "Appearance", "Test", "Other"])
-	);
+  content.appendChild(createCarousel(["Layouts", "Snippets", "Appearance", "Test", "Other"]));
 
 	const mainContainer = createElement("div", "optionContainer");
-	Object.values(categories).forEach((category) =>
-		mainContainer.appendChild(category)
-	);
+  Object.values(categories).forEach((category) => mainContainer.appendChild(category));
 	content.appendChild(mainContainer);
 
 	const buttonContainer = createElement("div", "buttonContainer");
