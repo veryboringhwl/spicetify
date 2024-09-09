@@ -61,7 +61,9 @@ MARK: SEARCH BAR
 .x-searchInput-searchInputInput:focus {
   border-bottom: var(--spice-accent) solid 2px;
   outline: none;
-}s
+}
+
+s
 
 /*make marketplace search bar match fluent*/
 .searchbar--bar__wrapper,
@@ -136,17 +138,6 @@ MARK: PROGRESS BAR
 MARK: BUTTONS
 */
 
-/*
-what does this do
-.main-genericButton-buttonActive::after {
-  background-color: var(--spice-accent) !important;
-}
-
-.main-genericButton-buttonActive {
-  color: var(--spice-accent) !important;
-} */
-
-.main-avatar-image,
 .main-userWidget-boxCondensed,
 .main-topBar-buddyFeed,
 .main-topBar-historyButtons .main-topBar-button,
@@ -157,8 +148,11 @@ what does this do
 .main-userWidget-boxCondensed[data-context-menu-open=true],
 .main-topBar-whatsNewFeed {
   background-color: var(--spice-sidebar) !important;
-  border-radius: 7px;
+  border-radius: 7px !important;
+}
 
+.main-avatar-image {
+  border-radius: 5px;
 }
 
 /*
@@ -196,6 +190,7 @@ MARK: SCROLL BAR
 /*
 MARK: LIBX NAV BAR
 */
+
 @keyframes bounce {
   0% {
     transform: translate(0, -25%);
@@ -275,10 +270,6 @@ from bloom
 /*
 MARK: NOW PLAYING BAR
 */
-.main-trackInfo-name {
-  font-size: 1rem;
-  font-weight: 500;
-}
 
 .Root__now-playing-bar {
   background-color: var(--spice-main) !important;
@@ -286,19 +277,37 @@ MARK: NOW PLAYING BAR
 }
 
 .main-nowPlayingBar-nowPlayingBar {
-  height: 80px !important;
-  margin-right: 12px;
+  height: 78px !important;
 }
 
-.main-nowPlayingBar-volumeBar {
-  margin-right: 0px;
+.main-nowPlayingWidget-coverArt .cover-art {
+  height: 60px !important;
+  width: 60px !important;
 }
 
-.main-coverSlotCollapsed-container {
-  border-radius: 4px !important;
-  transform: scale(1.2) !important;
-  margin-right: 10px;
-  margin-left: 10px;
+.main-trackInfo-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.HD9s7U5E1RLSWKpXmrqx{
+  display:grid;
+}
+
+.player-controls__buttons{
+  margin-bottom: 0px !important;
+}
+
+.Wrapper-small-only-small{
+  top: 5px !important;
+}
+
+/*
+MARK: HOME PAGE
+*/
+
+.view-homeShortcutsGrid-shortcut .view-homeShortcutsGrid-PlayButtonContainer .view-homeShortcutsGrid-playButton {
+  box-shadow: none !important;
 }
 
 .Button-small-small-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle:hover {
@@ -332,6 +341,7 @@ MARK: LYRICS PAGE
   text-shadow: 0 0 18px rgba(255, 255, 255, 0.6);
   font-size: 38px !important;
 }
+
 .lyrics-lyricsContainer-SyncedLyrics {
   top: -80px;
   position: relative;
@@ -356,25 +366,16 @@ MARK: PLAYLIST PAGE
 }
  
 .main-actionBarBackground-background {
-  background-image: linear-gradient(rgba(var(--spice-rgb-shadow), 0.49999) 0,var(--background-base) 100%) !important;
+  background-image: linear-gradient(rgba(var(--spice-rgb-shadow), 0.49999) 0, var(--background-base) 100%) !important;
 }
 
 /*
 MARK: MISCELLANEOUS
 */
 
-/*shift lyrics a bit*/
-.BeautifulLyricsPage .Lyrics {
-  padding-left: 10cqw;
-}
-
-/*marketplace cards have green border*/
-.marketplace-card--installed {
-  border: 1px solid var(--spice-accent);
-}
 /*marketplace rounded images*/
-.main-card-draggable .main-card-imageContainer {
-  border-radius: 5px;
+.main-cardImage-image{
+  border-radius: 6px;
 }
 
 /*shift the browse all in search up a bit*/
@@ -392,9 +393,13 @@ MARK: MISCELLANEOUS
   text-decoration: none !important;
 }
 
-/*make the tippy font bigger only in theme settings*/
-.options-tippy > div {
-  font-size: 16px !important;
+/*employee update button*/
+.YyUcY0HTiYikUOwhh29d {
+  background-color: var(--spice-button-active) !important;
+  color:var(--spice-sidebar) !important;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 7px !important;
 }
 
 /*
@@ -499,7 +504,6 @@ button.themeOptionToggle {
   display: flex;
   background-color: transparent !important;
   border: none;
-  padding-right: 7px;
 }
 
 span.toggleWrapper {
@@ -537,9 +541,25 @@ span.toggle.enabled {
   font-size: 14px;
   font-weight: 400;
   height: 32px;
+  width: 110px;
   letter-spacing: .24px;
   line-height: 20px;
-  padding: 0 32px 0 12px;
+  padding: 0px 18px 0 4px;
+}
+
+.themeOptionInput {
+  background-color: var(--spice-tab-active);
+  border: 0;
+  border-radius: 4px;
+  color: var(--spice-rgb-selected-row);
+  height: 32px;
+  width: 75px;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+}
+
+.themeOptionControl {
+  padding-right: 4px;
 }
 
 /*
@@ -555,7 +575,7 @@ MARK: THEME OPTION ROW
   padding: 7px;
   border-radius: 7px;
   padding-left: 13px;
-  font-size: 17px;
+  height: 82px;
 }
 
 .themeOptionName {
@@ -573,14 +593,22 @@ MARK: THEME OPTION ROW
   padding-bottom: 5px;
 }
 
-.themeOptionContent {
-  padding-top: 5px;
-  padding-bottom: 7px;
+.options-tippy>div {
+  font-size: 16px !important;
 }
 
-/* Dropdown styling */
+/*
+MARK: THEME SETTINGS BUTTONS
+*/
 
- /*Buttons*/
+.main-trackCreditsModal-closeBtn {
+  background-color: rgba(var(--spice-rgb-highlight), 0.8);
+  border-radius: 8px;
+  height: 34px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
 .resetButton {
   background-color: #ff0033;
   color: #fff;
@@ -644,7 +672,7 @@ MARK: THEME SETTINGS CAROUSEL
   flex: 0 0 auto;
   width: 110px;
   margin: 0 2px;
-  background-color: rgba(var(--spice-rgb-highlight),0.8);
+  background-color: rgba(var(--spice-rgb-highlight), 0.8);
   text-align: center;
   padding: 8px;
   border-radius: 8px;
@@ -656,12 +684,11 @@ MARK: THEME SETTINGS CAROUSEL
 }
 
 .carouselControl {
-  background-color: rgba(var(--spice-rgb-highlight),0.6);
+  background-color: rgba(var(--spice-rgb-highlight), 0.6);
   border: none;
   padding: 8px;
   border-radius: 8px;
   font-size: 18px;
-  width: 40px;
   height: 37px;
   display: flex;
   align-items: center;
@@ -672,8 +699,8 @@ MARK: THEME SETTINGS CAROUSEL
   filter: brightness(1.2);
 }
 
-.carouselControl.prev{
-  margin-right:3px;
+.carouselControl.prev {
+  margin-right: 3px;
 }
 
 .carouselControl.next {
@@ -723,7 +750,7 @@ MARK: THEME OPTIONS
   background-color: var(--spice-accent);
 }
 
-.navlinkaccent .main-yourLibraryX-navLinkActive > .main-yourLibraryX-navLink-accent {
+.navlinkaccent .main-yourLibraryX-navLinkActive>.main-yourLibraryX-navLink-accent {
   display: block !important;
 }
 
@@ -733,6 +760,7 @@ MARK: THEME OPTIONS
 .PreLibX .main-yourLibraryX-navItems {
   background-color: var(--spice-sidebar);
 }
+
 .PreLibX .main-yourLibraryX-navItems {
   padding: 8px 12px 0px 12px;
 }
@@ -745,6 +773,7 @@ MARK: THEME OPTIONS
 .PreLibX .main-topBar-container {
   padding-right: 120px;
 }
+
 .PreLibX .Root__top-container {
   padding: 0;
   gap: 0 !important;
@@ -759,7 +788,7 @@ MARK: THEME OPTIONS
   height: 88px !important;
 }
 
-.PreLibX .main-nowPlayingBar-right{
+.PreLibX .main-nowPlayingBar-right {
   padding-right: 12px;
 }
 
@@ -774,22 +803,26 @@ MARK: THEME OPTIONS
 .PreLibX .ffFwfKcPDbmAPLXzxzKq {
   border-radius: 0px !important;
 }
+
 /*shift x icon in npv*/
 .PreLibX .cZCuJDjrGA2QMXja_Sua {
   height: 100%;
   position: relative;
 }
+
 /*shift npv down to find close button*/
 .PreLibX .icNf66tgG3uxDMbCCIaN {
   top: 50px;
   position: absolute;
   right: 8px;
 }
+
 .PreLibX .main-yourLibraryX-header {
   padding: 0px;
   padding-left: 14px;
   padding-top: 4px;
 }
+
 .PreLibX .Wrapper-medium-leading {
   margin-inline-end: 22px;
 }
@@ -812,21 +845,26 @@ MARK: THEME OPTIONS
 .TestLayout footer.main-nowPlayingBar-container {
   border: none;
 }
+
 .TestLayout .player-controls__buttons.player-controls__buttons--new-icons {
   margin: 0 20px 0 30px;
   width: fit-content;
 }
+
 .TestLayout .player-controls {
   flex-direction: row;
 }
+
 .TestLayout .main-trackInfo-container {
   flex-grow: 1;
   flex-basis: 0;
 }
+
 .TestLayout .main-nowPlayingBar-center {
   max-width: none;
   flex-grow: 1;
 }
+
 .TestLayout .main-nowPlayingBar-right {
   width: 280px;
   margin-left: 20px;
@@ -835,11 +873,13 @@ MARK: THEME OPTIONS
 .TestLayout .main-nowPlayingBar-left {
   width: 20%;
 }
+
 .TestLayout button.main-playPauseButton-button {
   background: none;
   color: var(--spice-text);
   --button-size: unset !important;
 }
+
 .TestLayout .main-playPauseButton-button svg {
   height: 20px;
   width: 21px;
@@ -848,16 +888,20 @@ MARK: THEME OPTIONS
 .TestLayout .x-progressBar-fillColor {
   transition: transform 1s linear;
 }
+
 .TestLayout .progress-bar__slider {
   transition: left 1s linear;
 }
+
 .TestLayout .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .x-progressBar-fillColor,
 .TestLayout .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .progress-bar__slider {
   transition: none;
 }
+
 .TestLayout .main-connectBar-connectBar {
   border-radius: 0;
 }
+
 
 /* Remove tracklist index (from comfy) */
 
@@ -957,11 +1001,6 @@ MARK: THEME OPTIONS
 
 /*new layout*/
 
-.newlayout .main-nowPlayingWidget-coverArt .cover-art {
-  width: 50px !important;
-  height: 50px !important;
-}
-
 .newlayout .player-controls__buttons--new-icons {
   margin-bottom: 0px;
 }
@@ -1028,6 +1067,7 @@ MARK: THEME OPTIONS
   align-items: center;
   display: flex;
   flex-wrap: wrap;
+
   span {
     display: none;
   }
@@ -1038,9 +1078,7 @@ MARK: THEME OPTIONS
   padding-right: 12px;
 }
 
-.npvlargerlyrics
-  .main-buddyFeed-content.Jg9Sdg82oTVV58xFeM2i.main-nowPlayingView-content.main-nowPlayingView-gradient
-  .main-buddyFeed-header {
+.npvlargerlyrics .main-buddyFeed-content.Jg9Sdg82oTVV58xFeM2i.main-nowPlayingView-content.main-nowPlayingView-gradient .main-buddyFeed-header {
   display: none;
 }
 
@@ -1056,9 +1094,11 @@ MARK: THEME OPTIONS
 .npvlargerlyrics .main-nowPlayingView-nowPlayingGrid {
   flex-direction: unset;
 }
-.npvlargerlyrics .main-nowPlayingView-contextItemInfo{
+
+.npvlargerlyrics .main-nowPlayingView-contextItemInfo {
   container-type: normal;
 }
+
 .npvlargerlyrics .main-nowPlayingView-contextItemInfo .main-trackInfo-name {
   font-size: 1.2rem;
   font-weight: 550 !important;
@@ -1072,9 +1112,7 @@ MARK: THEME OPTIONS
   gap: 5px;
 }
 
-.npvlargerlyrics
-  .main-nowPlayingView-sectionHeaderSpacing
-  .main-nowPlayingView-lyricsTitle {
+.npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing .main-nowPlayingView-lyricsTitle {
   font-size: 20px;
   font-weight: 600 !important;
 }
@@ -1083,11 +1121,9 @@ MARK: THEME OPTIONS
   font-size: 0.9rem;
 }
 
-.npvlargerlyrics
-  .main-nowPlayingView-section.main-nowPlayingView-aboutArtistV2,
+.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-aboutArtistV2,
 .npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-credits,
-.npvlargerlyrics
-  .main-nowPlayingView-section.main-nowPlayingView-artistOnTour,
+.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-artistOnTour,
 .npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-merch,
 .npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-queue {
   display: none;
@@ -1101,18 +1137,20 @@ MARK: THEME OPTIONS
 .npvlargerlyrics .main-nowPlayingView-lyricsContent .RootContainer {
   height: 66cqh !important;
 }
+
 .npvlargerlyrics #BeautifulLyrics-CardView,
 .npvlargerlyrics #BeautifulLyrics-CardView .LyricsContent .ContentContainer {
   height: 66cqh !important;
   max-height: 66cqh !important;
 }
 
-.transplayicon .main-playPauseButton-button svg {
+.transplayicon [aria-label="Play"] svg {
   height: 22px;
   width: 22px;
   transform: scale(1.5);
 }
 
+.transplayicon [aria-label="Play"] > span,
 .transplayicon .main-playPauseButton-button {
   background-color: transparent !important;
   color: var(--spice-text);
