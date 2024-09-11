@@ -59,7 +59,7 @@
 		return optionRow;
 	};
 
-  const createDropdown = (optionRow, prefixedName, defaultValue, options) => {
+	const createDropdown = (optionRow, prefixedName, defaultValue, options) => {
 		const controlContainer = optionRow.querySelector(".themeOptionControl");
 		const select = createElement("select", "themeOptionDropdown");
 		options.forEach(({ value, label }) => {
@@ -72,12 +72,12 @@
 		select.value =
 			JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
 		select.addEventListener("change", () => {
-      settingsCache[prefixedName] = select.value;
+			settingsCache[prefixedName] = select.value;
 		});
 		return select;
 	};
 
-  const createToggle = (optionRow, prefixedName, defaultValue) => {
+	const createToggle = (optionRow, prefixedName, defaultValue) => {
 		const controlContainer = optionRow.querySelector(".themeOptionControl");
 		const toggleButton = createElement("button", "themeOptionToggle");
 		toggleButton.innerHTML =
@@ -98,23 +98,23 @@
 		return toggle;
 	};
 
-  const createInput = (optionRow, prefixedName, defaultValue) => {
-    const controlContainer = optionRow.querySelector(".themeOptionControl");
-    const input = createElement("input", "themeOptionInput");
-    input.type = "text";
-    input.value =
-      JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
-    controlContainer.appendChild(input);
+	const createInput = (optionRow, prefixedName, defaultValue) => {
+		const controlContainer = optionRow.querySelector(".themeOptionControl");
+		const input = createElement("input", "themeOptionInput");
+		input.type = "text";
+		input.value =
+			JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
+		controlContainer.appendChild(input);
 
-    input.addEventListener("change", () => {
-      settingsCache[prefixedName] = input.value;
-    });
+		input.addEventListener("change", () => {
+			settingsCache[prefixedName] = input.value;
+		});
 
-    return input;
-  };
+		return input;
+	};
 
 	const createControl = (option) => {
-    const { type, name, desc, defaultValue, options, tippy } = option;
+		const { type, name, desc, defaultValue, options, tippy } = option;
 		const prefixedName = `theme:${name}`;
 		const optionRow = createOptionRow({
 			name,
@@ -125,14 +125,14 @@
 
 		switch (type) {
 			case "toggle":
-        createToggle(optionRow, prefixedName, defaultValue);
+				createToggle(optionRow, prefixedName, defaultValue);
 				break;
 			case "dropdown":
-        createDropdown(optionRow, prefixedName, defaultValue, options);
+				createDropdown(optionRow, prefixedName, defaultValue, options);
 				break;
-      case "input":
-        createInput(optionRow, prefixedName, defaultValue);
-        break;
+			case "input":
+				createInput(optionRow, prefixedName, defaultValue);
+				break;
 		}
 
 		createTippy(optionRow, tippy);
@@ -272,18 +272,18 @@
 
 			if (type === "toggle") {
 				document.body.classList.toggle(name, value);
-      }
+			}
 		});
 	};
 
 	const options = [
-    {
-      type: "input",
-      category: "test",
-      name: "test-input",
-      desc: "Does something",
-      defaultValue: 1,
-    },
+		{
+			type: "input",
+			category: "test",
+			name: "test-input",
+			desc: "Does something",
+			defaultValue: 1,
+		},
 		{
 			type: "toggle",
 			category: "Layouts",
@@ -311,7 +311,7 @@
 			type: "toggle",
 			category: "Layouts",
 			name: "switchlayout",
-      desc: "Makes left sidebar go in front of the now playing bar",
+			desc: "Makes left sidebar go in front of the now playing bar",
 			defaultValue: true,
 		},
 		{
@@ -362,7 +362,7 @@
 			type: "toggle",
 			category: "Snippets",
 			name: "highlightnav",
-      desc: "Highlights navlink background on hover/active",
+			desc: "Highlights navlink background on hover/active",
 			defaultValue: true,
 			tippy: 'Not compatible with "Not compatible with horizontalnav"',
 		},
@@ -391,8 +391,8 @@
 			category: "test",
 			name: "change-Spotify-mode",
 			desc: "Changes Spotify Mode to either Normal, Developer or Employee",
-      defaultValue: "Both",
-      tippy: "Only takes effect after a restart",
+			defaultValue: "Both",
+			tippy: "Only takes effect after a restart",
 			options: [
 				{ value: "Normal", label: "Normal" },
 				{ value: "Developer", label: "Developer" },
@@ -401,7 +401,7 @@
 			],
 			run: (value) => {
 				changeSpotifyMode(value);
-        console.log("changed to", value)
+				console.log("changed to", value)
 			},
 		},
 	];
@@ -426,10 +426,10 @@
 
 	const content = createElement("div", "themeContainer");
 
-  content.appendChild(createCarousel(["Layouts", "Snippets", "Appearance", "Test", "Other"]));
+	content.appendChild(createCarousel(["Layouts", "Snippets", "Appearance", "Test", "Other"]));
 
 	const mainContainer = createElement("div", "optionContainer");
-  Object.values(categories).forEach((category) => mainContainer.appendChild(category));
+	Object.values(categories).forEach((category) => mainContainer.appendChild(category));
 	content.appendChild(mainContainer);
 
 	const buttonContainer = createElement("div", "buttonContainer");
@@ -441,43 +441,43 @@
 	MARK: FUNCTIONS
 	*/
 
-  let appDevListener, employeeListener;
+	let appDevListener, employeeListener;
 
 	const changeSpotifyMode = async (mode) => {
-    const productState = Spicetify.Platform.UserAPI._product_state_service;
+		const productState = Spicetify.Platform.UserAPI._product_state_service;
 
 		const modePairs = {
-      Normal: { "app-developer": "0", "employee": "0" },
-      Developer: { "app-developer": "2", "employee": "0" },
-      Employee: { "app-developer": "0", "employee": "1" },
-      Both: { "app-developer": "2", "employee": "1" },
+			Normal: { "app-developer": "0", "employee": "0" },
+			Developer: { "app-developer": "2", "employee": "0" },
+			Employee: { "app-developer": "0", "employee": "1" },
+			Both: { "app-developer": "2", "employee": "1" },
 		};
 
 		const pairs = modePairs[mode] || modePairs.Normal;
-  
-    const setMode = async (key, value) => {
-      await productState.putValues({
-        pairs: { [key]: value },
-      });
-      return productState.subValues({ keys: [key] }, () => {
-        productState.putValues({
-          pairs: { [key]: value },
-        });
-      });
-    };
-  
-    appDevListener?.cancel();
-    employeeListener?.cancel();
-  
-    appDevListener = await setMode("app-developer", pairs["app-developer"]);
-    employeeListener = await setMode("employee", pairs["employee"]);
-  
-    try {
-      const currentState = await productState.getValues();
-      console.log("Current Spotify mode state:", currentState);
-    } catch (error) {
-      console.error("Error getting current Spotify mode state:", error);
-    }
+
+		const setMode = async (key, value) => {
+			await productState.putValues({
+				pairs: { [key]: value },
+			});
+			return productState.subValues({ keys: [key] }, () => {
+				productState.putValues({
+					pairs: { [key]: value },
+				});
+			});
+		};
+
+		appDevListener?.cancel();
+		employeeListener?.cancel();
+
+		appDevListener = await setMode("app-developer", pairs["app-developer"]);
+		employeeListener = await setMode("employee", pairs["employee"]);
+
+		try {
+			const currentState = await productState.getValues();
+			console.log("Current Spotify mode state:", currentState);
+		} catch (error) {
+			console.error("Error getting current Spotify mode state:", error);
+		}
 	};
 
 	/*

@@ -4,12 +4,10 @@
 *                  *
 ********************
 IMPORATNT:
-Replace arialabel with classname(may doesnt need to be done)
 Banner in playlist head(dont know how to do
 
 NOT IMPORTANT:
 maybe put topbar in header(cant move windows/doesnt look amazing)
-icons (only navbar partly done)
 */
 
 /*
@@ -145,7 +143,7 @@ MARK: BUTTONS
 .main-userWidget-boxCondensed,
 .main-userWidget-boxCondensed:hover,
 .main-userWidget-boxCondensed:focus-visible,
-.main-userWidget-boxCondensed[data-context-menu-open=true],
+.main-userWidget-boxCondensed[data-context-menu-open="true"],
 .main-topBar-whatsNewFeed {
   background-color: var(--spice-sidebar) !important;
   border-radius: 7px !important;
@@ -240,6 +238,27 @@ div#context-menu::before,
 }
 
 /*
+MARK: POPUP MODAL
+*/
+
+.GenericModal,
+.main-embedWidgetGenerator-container {
+  background-color: rgba(var(--spice-rgb-sidebar), 0.4) !important;
+  backdrop-filter: blur(20px) saturate(1.6) brightness(0.9);
+  max-height: 800px;
+  border-radius: 7px;
+}
+
+.GenericModal__overlay {
+  background-color: rgba(var(--spice-rgb-shadow), 0.75);
+  border-radius: 7px;
+}
+
+.main-trackCreditsModal-mainSection {
+  scrollbar-width: thin;
+}
+
+/*
 MARK: EQUALISER GIF
 from bloom
 */
@@ -290,15 +309,15 @@ MARK: NOW PLAYING BAR
   font-weight: 500;
 }
 
-.HD9s7U5E1RLSWKpXmrqx{
-  display:grid;
+.HD9s7U5E1RLSWKpXmrqx {
+  display: grid;
 }
 
-.player-controls__buttons{
+.player-controls__buttons {
   margin-bottom: 0px !important;
 }
 
-.Wrapper-small-only-small{
+.Wrapper-small-only-small {
   top: 5px !important;
 }
 
@@ -306,12 +325,16 @@ MARK: NOW PLAYING BAR
 MARK: HOME PAGE
 */
 
-.view-homeShortcutsGrid-shortcut .view-homeShortcutsGrid-PlayButtonContainer .view-homeShortcutsGrid-playButton {
+.view-homeShortcutsGrid-shortcut
+  .view-homeShortcutsGrid-PlayButtonContainer
+  .view-homeShortcutsGrid-playButton {
   box-shadow: none !important;
 }
 
-.Button-small-small-buttonTertiary-iconOnly-useBrowserDefaultFocusStyle:hover {
-  transform: unset !important;
+.ix_8kg3iUb9VS5SmTnBY span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
+.view-homeShortcutsGrid-playButton > span > svg {
+  background: none !important;
+  color: var(--spice-text) !important;
 }
 
 .main-nowPlayingWidget-coverExpanded > .main-coverSlotCollapsed-container {
@@ -325,6 +348,7 @@ MARK: LYRICS PAGE
 .lyrics-lyricsContainer-LyricsBackground {
   background-image: var(--image);
   background-size: cover;
+  box-shadow: inset 0 0 200px #000000;
   filter: blur(10px) brightness(0.8);
   transition: background-image 0.5s ease-in-out;
 }
@@ -335,10 +359,11 @@ MARK: LYRICS PAGE
 
 .lyrics-lyricsContainer-SyncedLyrics .lyrics-lyricsContainer-LyricsLine {
   color: var(--spice-subtext);
+  font-weight: 700;
 }
 
 .lyrics-lyricsContainer-LyricsLine-active {
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
   font-size: 38px !important;
 }
 
@@ -349,6 +374,10 @@ MARK: LYRICS PAGE
 
 .lyrics-lyricsContainer-Karaoke-Word {
   color: rgba(var(--spice-rgb-subtext), 0.75);
+}
+
+.lyrics-lyricsContainer-UnsyncedLyricsPage {
+  z-index: 1;
 }
 
 /*
@@ -362,11 +391,14 @@ MARK: PLAYLIST PAGE
 }
 
 .main-entityHeader-shadow {
-  box-shadow: 0 0px 25px rgba(var(--spice-rgb-shadow), .33);
+  box-shadow: 0 0px 25px rgba(var(--spice-rgb-shadow), 0.33);
 }
- 
+
 .main-actionBarBackground-background {
-  background-image: linear-gradient(rgba(var(--spice-rgb-shadow), 0.49999) 0, var(--background-base) 100%) !important;
+  background-image: linear-gradient(
+    rgba(var(--spice-rgb-shadow), 0.49999) 0,
+    var(--background-base) 100%
+  ) !important;
 }
 
 /*
@@ -374,7 +406,7 @@ MARK: MISCELLANEOUS
 */
 
 /*marketplace rounded images*/
-.main-cardImage-image{
+.main-cardImage-image {
   border-radius: 6px;
 }
 
@@ -384,7 +416,9 @@ MARK: MISCELLANEOUS
 }
 
 /*if nothing in navitems removes the back bit*/
-.main-yourLibraryX-entryPoints:first-child:has(.main-yourLibraryX-navItems:empty) {
+.main-yourLibraryX-entryPoints:first-child:has(
+    .main-yourLibraryX-navItems:empty
+  ) {
   display: none;
 }
 
@@ -396,7 +430,7 @@ MARK: MISCELLANEOUS
 /*employee update button*/
 .YyUcY0HTiYikUOwhh29d {
   background-color: var(--spice-button-active) !important;
-  color:var(--spice-sidebar) !important;
+  color: var(--spice-sidebar) !important;
   font-weight: 500;
   font-size: 15px;
   border-radius: 7px !important;
@@ -407,68 +441,81 @@ MARK: ICONS
 */
 
 [aria-label="Go back"] path {
-  d: path("M7.2949 15.7152C7.6883 16.1028 8.3215 16.0981 8.7091 15.7047 9.0967 15.3113 9.092 14.6782 8.6986 14.2906L3.3283 8.9992H15C15.5 9.005 16 8.639 16 8.012 16 7.417 15.5 7.014 15 7.025H3.3349L8.6986 1.7143C9.092 1.3267 9.0967.6935 8.7091.3001 8.3215-.0933 7.6883-.098 7.2949.2896L.3707 7.112C-.1262 7.6016-.1262 8.4032.3707 8.8928L7.2949 15.7152Z"
-    ) !important;
+  d: path(
+    "M7.2949 15.7152C7.6883 16.1028 8.3215 16.0981 8.7091 15.7047 9.0967 15.3113 9.092 14.6782 8.6986 14.2906L3.3283 8.9992H15C15.5 9.005 16 8.639 16 8.012 16 7.417 15.5 7.014 15 7.025H3.3349L8.6986 1.7143C9.092 1.3267 9.0967.6935 8.7091.3001 8.3215-.0933 7.6883-.098 7.2949.2896L.3707 7.112C-.1262 7.6016-.1262 8.4032.3707 8.8928L7.2949 15.7152Z"
+  ) !important;
 }
 
 [aria-label="Go forward"] path {
-  d: path("M8.7045.2838C8.3111-.1038 7.678-.0992 7.2904.2942 6.9027.6876 6.9074 1.3208 7.3008 1.7084L12.6712 6.9998H1C.5 6.9998 0 7.4475 0 8 0 8.5521.5 8.9998 1 8.9998H12.6646L7.3008 14.2847C6.9074 14.6723 6.9027 15.3055 7.2904 15.6989 7.678 16.0923 8.3111 16.097 8.7045 15.7094L15.6287 8.887C16.1256 8.3974 16.1256 7.5958 15.6287 7.1062L8.7045.2838Z"
-    ) !important;
+  d: path(
+    "M8.7045.2838C8.3111-.1038 7.678-.0992 7.2904.2942 6.9027.6876 6.9074 1.3208 7.3008 1.7084L12.6712 6.9998H1C.5 6.9998 0 7.4475 0 8 0 8.5521.5 8.9998 1 8.9998H12.6646L7.3008 14.2847C6.9074 14.6723 6.9027 15.3055 7.2904 15.6989 7.678 16.0923 8.3111 16.097 8.7045 15.7094L15.6287 8.887C16.1256 8.3974 16.1256 7.5958 15.6287 7.1062L8.7045.2838Z"
+  ) !important;
 }
 
 .main-nowPlayingBar-nowPlayingBar [aria-label="Play"] path {
-  d: path("M3.3333 3.516c0-1.138 1.2173-1.8613 2.2167-1.318l8.2413 4.484c1.044.5687 1.044 2.0673 0 2.6353L5.55 13.8013C4.5507 14.3453 3.3333 13.6213 3.3333 12.484V3.516Z"
-    ) !important;
+  d: path(
+    "M3.3333 3.516c0-1.138 1.2173-1.8613 2.2167-1.318l8.2413 4.484c1.044.5687 1.044 2.0673 0 2.6353L5.55 13.8013C4.5507 14.3453 3.3333 13.6213 3.3333 12.484V3.516Z"
+  ) !important;
 }
 
 .main-nowPlayingBar-nowPlayingBar [aria-label="Pause"] path {
-  d: path("M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z"
-    ) !important;
+  d: path(
+    "M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z"
+  ) !important;
 }
 
 [aria-label="Volume off"] path {
-  d: path("M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.591 5.3904C10.8449 5.1366 11.2564 5.1366 11.5102 5.3904L13.0007 6.8808 14.491 5.3904C14.7449 5.1366 15.1564 5.1366 15.4102 5.3904 15.6641 5.6442 15.6641 6.0558 15.4102 6.3096L13.9199 7.8 15.4102 9.2904C15.6641 9.5442 15.6641 9.9558 15.4102 10.2096 15.1564 10.4634 14.7449 10.4634 14.491 10.2096L13.0007 8.7193 11.5102 10.2096C11.2564 10.4634 10.8449 10.4634 10.591 10.2096 10.3372 9.9558 10.3372 9.5442 10.591 9.2904L12.0814 7.8 10.591 6.3096C10.3372 6.0558 10.3372 5.6442 10.591 5.3904Z"
-    ) !important;
+  d: path(
+    "M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.591 5.3904C10.8449 5.1366 11.2564 5.1366 11.5102 5.3904L13.0007 6.8808 14.491 5.3904C14.7449 5.1366 15.1564 5.1366 15.4102 5.3904 15.6641 5.6442 15.6641 6.0558 15.4102 6.3096L13.9199 7.8 15.4102 9.2904C15.6641 9.5442 15.6641 9.9558 15.4102 10.2096 15.1564 10.4634 14.7449 10.4634 14.491 10.2096L13.0007 8.7193 11.5102 10.2096C11.2564 10.4634 10.8449 10.4634 10.591 10.2096 10.3372 9.9558 10.3372 9.5442 10.591 9.2904L12.0814 7.8 10.591 6.3096C10.3372 6.0558 10.3372 5.6442 10.591 5.3904Z"
+  ) !important;
 }
 
 [aria-label="Volume low"] path {
-  d: path("M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906Z"
-    ) !important;
+  d: path(
+    "M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906Z"
+  ) !important;
 }
 
 [aria-label="Volume medium"] path {
-  d: path("M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.5447 4.1454C10.7682 3.8644 11.177 3.8179 11.4579 4.0413L11.4591 4.0422 11.4603 4.0432 11.463 4.0454 11.47 4.0512 11.4895 4.0675C11.5049 4.0805 11.5248 4.0979 11.5486 4.1198 11.5961 4.1634 11.6596 4.2249 11.7334 4.3045 11.881 4.4637 12.0714 4.6968 12.2598 5.0069 12.6389 5.6302 13.0056 6.5577 13.0056 7.7981 13.0056 9.0385 12.6389 9.9669 12.2602 10.5912 12.0718 10.9017 11.8816 11.1354 11.7342 11.2949 11.6604 11.3747 11.597 11.4365 11.5495 11.4802 11.5238 11.5037 11.4977 11.5266 11.4712 11.5489L11.4602 11.5579 11.4591 11.5588C11.4591 11.5588 10.8788 11.8738 10.5456 11.4568 10.3225 11.1778 10.3666 10.7715 10.6432 10.5466L10.6453 10.545 10.6443 10.5459 10.6465 10.544 10.6453 10.545C10.6491 10.5417 10.6573 10.5347 10.6691 10.5238 10.6928 10.5019 10.7311 10.465 10.7793 10.4127 10.8761 10.308 11.0114 10.1432 11.1487 9.917 11.421 9.4679 11.7056 8.7699 11.7056 7.7981 11.7056 6.8264 11.4212 6.1298 11.1491 5.6822 11.0119 5.4567 10.8767 5.2926 10.7801 5.1884 10.7319 5.1364 10.6935 5.0996 10.67 5.078 10.6582 5.0672 10.6501 5.0601 10.6464 5.0569L10.6477 5.0579C10.3672 4.8343 10.3213 4.4261 10.5447 4.1454ZM10.6464 5.0569 10.6445 5.0554Z"
-    ) !important;
+  d: path(
+    "M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.5447 4.1454C10.7682 3.8644 11.177 3.8179 11.4579 4.0413L11.4591 4.0422 11.4603 4.0432 11.463 4.0454 11.47 4.0512 11.4895 4.0675C11.5049 4.0805 11.5248 4.0979 11.5486 4.1198 11.5961 4.1634 11.6596 4.2249 11.7334 4.3045 11.881 4.4637 12.0714 4.6968 12.2598 5.0069 12.6389 5.6302 13.0056 6.5577 13.0056 7.7981 13.0056 9.0385 12.6389 9.9669 12.2602 10.5912 12.0718 10.9017 11.8816 11.1354 11.7342 11.2949 11.6604 11.3747 11.597 11.4365 11.5495 11.4802 11.5238 11.5037 11.4977 11.5266 11.4712 11.5489L11.4602 11.5579 11.4591 11.5588C11.4591 11.5588 10.8788 11.8738 10.5456 11.4568 10.3225 11.1778 10.3666 10.7715 10.6432 10.5466L10.6453 10.545 10.6443 10.5459 10.6465 10.544 10.6453 10.545C10.6491 10.5417 10.6573 10.5347 10.6691 10.5238 10.6928 10.5019 10.7311 10.465 10.7793 10.4127 10.8761 10.308 11.0114 10.1432 11.1487 9.917 11.421 9.4679 11.7056 8.7699 11.7056 7.7981 11.7056 6.8264 11.4212 6.1298 11.1491 5.6822 11.0119 5.4567 10.8767 5.2926 10.7801 5.1884 10.7319 5.1364 10.6935 5.0996 10.67 5.078 10.6582 5.0672 10.6501 5.0601 10.6464 5.0569L10.6477 5.0579C10.3672 4.8343 10.3213 4.4261 10.5447 4.1454ZM10.6464 5.0569 10.6445 5.0554Z"
+  ) !important;
 }
 
 [aria-label="Volume high"] path {
-  d: path("M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.5447 4.1454C10.7682 3.8644 11.177 3.8179 11.4579 4.0413L11.4591 4.0422 11.4603 4.0432 11.463 4.0454 11.47 4.0512 11.4895 4.0675C11.5049 4.0805 11.5248 4.0979 11.5486 4.1198 11.5961 4.1634 11.6596 4.2249 11.7334 4.3045 11.881 4.4637 12.0714 4.6968 12.2598 5.0069 12.6389 5.6302 13.0056 6.5577 13.0056 7.7981 13.0056 9.0385 12.6389 9.9669 12.2602 10.5912 12.0718 10.9017 11.8816 11.1354 11.7342 11.2949 11.6604 11.3747 11.597 11.4365 11.5495 11.4802 11.5238 11.5037 11.4977 11.5266 11.4712 11.5489L11.4602 11.5579 11.4591 11.5588C11.4591 11.5588 10.8788 11.8738 10.5456 11.4568 10.3225 11.1778 10.3666 10.7715 10.6432 10.5466L10.6453 10.545 10.6443 10.5459 10.6465 10.544 10.6453 10.545C10.6491 10.5417 10.6573 10.5347 10.6691 10.5238 10.6928 10.5019 10.7311 10.465 10.7793 10.4127 10.8761 10.308 11.0114 10.1432 11.1487 9.917 11.421 9.4679 11.7056 8.7699 11.7056 7.7981 11.7056 6.8264 11.4212 6.1298 11.1491 5.6822 11.0119 5.4567 10.8767 5.2926 10.7801 5.1884 10.7319 5.1364 10.6935 5.0996 10.67 5.078 10.6582 5.0672 10.6501 5.0601 10.6464 5.0569L10.6477 5.0579C10.3672 4.8343 10.3213 4.4261 10.5447 4.1454ZM12.7569 1.4415C12.4761 1.2179 12.0673 1.2643 11.8435 1.5452 11.62 1.8259 11.667 2.2351 11.9475 2.4588L11.9618 2.4708C11.976 2.4827 11.9987 2.5023 12.029 2.5296 12.0897 2.5842 12.1801 2.6691 12.2905 2.7837 12.5115 3.0133 12.8103 3.3593 13.1099 3.8156 13.7084 4.7274 14.3043 6.069 14.3043 7.8053 14.3043 9.5414 13.7085 10.8802 13.1102 11.7891 12.8109 12.2439 12.5122 12.5886 12.2914 12.8171 12.1811 12.9311 12.0908 13.0157 12.0302 13.0699 11.9999 13.0971 11.9772 13.1166 11.963 13.1284L11.948 13.1408 11.9469 13.1418C11.6669 13.365 11.62 13.7729 11.8426 14.0536 12.0654 14.335 12.4753 14.3816 12.7568 14.1587L12.7995 14.1235C12.8236 14.1033 12.8567 14.0748 12.8977 14.0382 12.9793 13.965 13.0923 13.8589 13.2261 13.7206 13.4931 13.4443 13.845 13.0372 14.1961 12.5038 14.899 11.4361 15.6043 9.8525 15.6043 7.8053 15.6043 5.7581 14.899 4.1722 14.1965 3.1022 13.8455 2.5675 13.4937 2.1592 13.2269 1.882 13.0933 1.7433 12.9804 1.6368 12.8987 1.5633 12.8579 1.5265 12.8248 1.498 12.8007 1.4776L12.7716 1.4534 12.7624 1.4459 12.7592 1.4433 12.7569 1.4415ZM10.6464 5.0569 10.6445 5.0554Z"
-    ) !important;
+  d: path(
+    "M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.5447 4.1454C10.7682 3.8644 11.177 3.8179 11.4579 4.0413L11.4591 4.0422 11.4603 4.0432 11.463 4.0454 11.47 4.0512 11.4895 4.0675C11.5049 4.0805 11.5248 4.0979 11.5486 4.1198 11.5961 4.1634 11.6596 4.2249 11.7334 4.3045 11.881 4.4637 12.0714 4.6968 12.2598 5.0069 12.6389 5.6302 13.0056 6.5577 13.0056 7.7981 13.0056 9.0385 12.6389 9.9669 12.2602 10.5912 12.0718 10.9017 11.8816 11.1354 11.7342 11.2949 11.6604 11.3747 11.597 11.4365 11.5495 11.4802 11.5238 11.5037 11.4977 11.5266 11.4712 11.5489L11.4602 11.5579 11.4591 11.5588C11.4591 11.5588 10.8788 11.8738 10.5456 11.4568 10.3225 11.1778 10.3666 10.7715 10.6432 10.5466L10.6453 10.545 10.6443 10.5459 10.6465 10.544 10.6453 10.545C10.6491 10.5417 10.6573 10.5347 10.6691 10.5238 10.6928 10.5019 10.7311 10.465 10.7793 10.4127 10.8761 10.308 11.0114 10.1432 11.1487 9.917 11.421 9.4679 11.7056 8.7699 11.7056 7.7981 11.7056 6.8264 11.4212 6.1298 11.1491 5.6822 11.0119 5.4567 10.8767 5.2926 10.7801 5.1884 10.7319 5.1364 10.6935 5.0996 10.67 5.078 10.6582 5.0672 10.6501 5.0601 10.6464 5.0569L10.6477 5.0579C10.3672 4.8343 10.3213 4.4261 10.5447 4.1454ZM12.7569 1.4415C12.4761 1.2179 12.0673 1.2643 11.8435 1.5452 11.62 1.8259 11.667 2.2351 11.9475 2.4588L11.9618 2.4708C11.976 2.4827 11.9987 2.5023 12.029 2.5296 12.0897 2.5842 12.1801 2.6691 12.2905 2.7837 12.5115 3.0133 12.8103 3.3593 13.1099 3.8156 13.7084 4.7274 14.3043 6.069 14.3043 7.8053 14.3043 9.5414 13.7085 10.8802 13.1102 11.7891 12.8109 12.2439 12.5122 12.5886 12.2914 12.8171 12.1811 12.9311 12.0908 13.0157 12.0302 13.0699 11.9999 13.0971 11.9772 13.1166 11.963 13.1284L11.948 13.1408 11.9469 13.1418C11.6669 13.365 11.62 13.7729 11.8426 14.0536 12.0654 14.335 12.4753 14.3816 12.7568 14.1587L12.7995 14.1235C12.8236 14.1033 12.8567 14.0748 12.8977 14.0382 12.9793 13.965 13.0923 13.8589 13.2261 13.7206 13.4931 13.4443 13.845 13.0372 14.1961 12.5038 14.899 11.4361 15.6043 9.8525 15.6043 7.8053 15.6043 5.7581 14.899 4.1722 14.1965 3.1022 13.8455 2.5675 13.4937 2.1592 13.2269 1.882 13.0933 1.7433 12.9804 1.6368 12.8987 1.5633 12.8579 1.5265 12.8248 1.498 12.8007 1.4776L12.7716 1.4534 12.7624 1.4459 12.7592 1.4433 12.7569 1.4415ZM10.6464 5.0569 10.6445 5.0554Z"
+  ) !important;
 }
 
 [aria-label="Next"] path {
-  d: path("M15.75 3a.75.75 90 10-1.5 0v12a.75.75 90 101.5 0V3ZM2.25 3.7103c0-1.068 1.209-1.689 2.0775-1.0665l7.8525 5.6303a1.3125 1.3125 90 01-.0562 2.1713l-7.8525 5.037C3.3975 16.0425 2.25 15.4155 2.25 14.3775V3.7103Z"
-    ) !important;
+  d: path(
+    "M15.75 3a.75.75 90 10-1.5 0v12a.75.75 90 101.5 0V3ZM2.25 3.7103c0-1.068 1.209-1.689 2.0775-1.0665l7.8525 5.6303a1.3125 1.3125 90 01-.0562 2.1713l-7.8525 5.037C3.3975 16.0425 2.25 15.4155 2.25 14.3775V3.7103Z"
+  ) !important;
 }
 
 [aria-label="Previous"] path {
-  d: path("M2.0625 15a.75.75 90 101.5 0V3a.75.75 90 10-1.5 0v12ZM15.5625 14.2898c0 1.068-1.209 1.689-2.0775 1.0665L5.6325 9.726a1.3125 1.3125 90 01.0562-2.1713l7.8525-5.037c.8738-.561 2.0212.0668 2.0212 1.1048v10.6673Z"
-    ) !important;
+  d: path(
+    "M2.0625 15a.75.75 90 101.5 0V3a.75.75 90 10-1.5 0v12ZM15.5625 14.2898c0 1.068-1.209 1.689-2.0775 1.0665L5.6325 9.726a1.3125 1.3125 90 01.0562-2.1713l7.8525-5.037c.8738-.561 2.0212.0668 2.0212 1.1048v10.6673Z"
+  ) !important;
 }
 
 [aria-label="Connect to a device"] path {
-  d: path("M5.71 1.142H13.704C14.3347 1.142 14.846 1.6533 14.846 2.284V9.136C14.846 9.7667 14.3347 10.278 13.704 10.278H7.994V11.42H10.278V12.562H7.994V13.704H11.991C12.3063 13.704 12.562 13.4483 12.562 13.133 12.562 12.8177 12.3063 12.562 11.991 12.562H11.42V11.42H13.704C14.9655 11.42 15.988 10.3975 15.988 9.136V2.284C15.988 1.0226 14.9655 0 13.704 0H5.71C4.4486 0 3.426 1.0226 3.426 2.284V4.568H4.568V2.284C4.568 1.6533 5.0793 1.142 5.71 1.142ZM2.855 12.562C2.5396 12.562 2.284 12.8177 2.284 13.133 2.284 13.4483 2.5396 13.704 2.855 13.704H3.997C4.3124 13.704 4.568 13.4483 4.568 13.133 4.568 12.8177 4.3124 12.562 3.997 12.562H2.855ZM1.713 5.71C.7669 5.71 0 6.4769 0 7.423V14.275C0 15.221.7669 15.988 1.713 15.988H5.139C6.0851 15.988 6.852 15.221 6.852 14.275V7.423C6.852 6.4769 6.0851 5.71 5.139 5.71H1.713ZM1.713 6.852H5.139C5.4544 6.852 5.71 7.1076 5.71 7.423V14.275C5.71 14.5903 5.4544 14.846 5.139 14.846H1.713C1.3976 14.846 1.142 14.5903 1.142 14.275V7.423C1.142 7.1076 1.3976 6.852 1.713 6.852Z"
-    ) !important;
+  d: path(
+    "M5.71 1.142H13.704C14.3347 1.142 14.846 1.6533 14.846 2.284V9.136C14.846 9.7667 14.3347 10.278 13.704 10.278H7.994V11.42H10.278V12.562H7.994V13.704H11.991C12.3063 13.704 12.562 13.4483 12.562 13.133 12.562 12.8177 12.3063 12.562 11.991 12.562H11.42V11.42H13.704C14.9655 11.42 15.988 10.3975 15.988 9.136V2.284C15.988 1.0226 14.9655 0 13.704 0H5.71C4.4486 0 3.426 1.0226 3.426 2.284V4.568H4.568V2.284C4.568 1.6533 5.0793 1.142 5.71 1.142ZM2.855 12.562C2.5396 12.562 2.284 12.8177 2.284 13.133 2.284 13.4483 2.5396 13.704 2.855 13.704H3.997C4.3124 13.704 4.568 13.4483 4.568 13.133 4.568 12.8177 4.3124 12.562 3.997 12.562H2.855ZM1.713 5.71C.7669 5.71 0 6.4769 0 7.423V14.275C0 15.221.7669 15.988 1.713 15.988H5.139C6.0851 15.988 6.852 15.221 6.852 14.275V7.423C6.852 6.4769 6.0851 5.71 5.139 5.71H1.713ZM1.713 6.852H5.139C5.4544 6.852 5.71 7.1076 5.71 7.423V14.275C5.71 14.5903 5.4544 14.846 5.139 14.846H1.713C1.3976 14.846 1.142 14.5903 1.142 14.275V7.423C1.142 7.1076 1.3976 6.852 1.713 6.852Z"
+  ) !important;
 }
 
 [aria-label="Collapse Your Library"] .Svg-sc-ytk21e-0.Svg-img-icon-medium path {
-  d: path("M4.95 1.1C5.8608 1.1 6.6 1.8392 6.6 2.75V19.25C6.6 20.1608 5.8608 20.9 4.95 20.9H2.75C1.8392 20.9 1.1 20.1608 1.1 19.25V2.75C1.1 1.8392 1.8392 1.1 2.75 1.1H4.95ZM11.55 1.1C12.4608 1.1 13.2 1.8392 13.2 2.75V19.25C13.2 20.1608 12.4608 20.9 11.55 20.9H9.35C8.4392 20.9 7.7 20.1608 7.7 19.25V2.75C7.7 1.8392 8.4392 1.1 9.35 1.1H11.55ZM19.5591 4.5362 23.0945 18.3071C23.3211 19.1893 22.7898 20.0891 21.9065 20.3157L19.8429 20.8448C18.9596 21.0714 18.0609 20.5401 17.8343 19.6568L14.2989 5.8881C14.0723 5.0048 14.6036 4.1061 15.4869 3.8795L17.5505 3.3482C18.4338 3.1227 19.3325 3.6551 19.5591 4.5362Z"
-    ) !important;
+  d: path(
+    "M4.95 1.1C5.8608 1.1 6.6 1.8392 6.6 2.75V19.25C6.6 20.1608 5.8608 20.9 4.95 20.9H2.75C1.8392 20.9 1.1 20.1608 1.1 19.25V2.75C1.1 1.8392 1.8392 1.1 2.75 1.1H4.95ZM11.55 1.1C12.4608 1.1 13.2 1.8392 13.2 2.75V19.25C13.2 20.1608 12.4608 20.9 11.55 20.9H9.35C8.4392 20.9 7.7 20.1608 7.7 19.25V2.75C7.7 1.8392 8.4392 1.1 9.35 1.1H11.55ZM19.5591 4.5362 23.0945 18.3071C23.3211 19.1893 22.7898 20.0891 21.9065 20.3157L19.8429 20.8448C18.9596 21.0714 18.0609 20.5401 17.8343 19.6568L14.2989 5.8881C14.0723 5.0048 14.6036 4.1061 15.4869 3.8795L17.5505 3.3482C18.4338 3.1227 19.3325 3.6551 19.5591 4.5362Z"
+  ) !important;
 }
 
 [aria-label="Expand Your Library"] .Svg-sc-ytk21e-0.Svg-img-icon-medium path {
-  d: path("M3.3 1.1H4.4C5.5592 1.1 6.5099 1.998 6.594 3.1359L6.6 3.3V18.7C6.6 19.8592 5.702 20.8099 4.5641 20.894L4.4 20.9H3.3C2.1408 20.9 1.1901 20.002 1.106 18.8641L1.1 18.7V3.3C1.1 2.1408 1.998 1.1901 3.1359 1.106L3.3 1.1H4.4 3.3ZM9.9 1.1H11C12.1592 1.1 13.1099 1.998 13.194 3.1359L13.2 3.3V18.7C13.2 19.8592 12.302 20.8099 11.1641 20.894L11 20.9H9.9C8.7408 20.9 7.7901 20.002 7.706 18.8641L7.7 18.7V3.3C7.7 2.1408 8.598 1.1901 9.7359 1.106L9.9 1.1H11 9.9ZM17.5717 3.3005C18.4952 3.3005 19.3407 3.8842 19.6507 4.781L19.7024 4.9528 23.0189 17.8734C23.3077 18.9958 22.6743 20.1403 21.5925 20.5042L21.4349 20.5508 20.369 20.8247C20.1864 20.8709 20.0016 20.894 19.8212 20.894 18.8988 20.894 18.0523 20.3093 17.7432 19.4124L17.6916 19.2406 14.374 6.3212C14.0864 5.1977 14.7188 4.0541 15.8014 3.6903L15.9591 3.6438 17.0239 3.3699C17.2065 3.3226 17.3913 3.3005 17.5717 3.3005ZM4.4 2.75H3.3C3.0301 2.75 2.8055 2.9456 2.7589 3.2015L2.75 3.3V18.7C2.75 18.9688 2.9447 19.1943 3.2012 19.2411L3.3 19.25H4.4C4.6699 19.25 4.8945 19.0544 4.9411 18.7986L4.95 18.7V3.3C4.95 3.0311 4.7553 2.8057 4.4988 2.7589L4.4 2.75ZM11 2.75H9.9C9.6301 2.75 9.4055 2.9456 9.3589 3.2015L9.35 3.3V18.7C9.35 18.9688 9.5447 19.1943 9.8012 19.2411L9.9 19.25H11C11.2698 19.25 11.4946 19.0544 11.5411 18.7986L11.55 18.7V3.3C11.55 3.0311 11.3553 2.8057 11.0988 2.7589L11 2.75ZM17.5728 4.9505 17.5031 4.9548 17.4342 4.9682 16.3694 5.241C16.1769 5.2904 16.0757 5.4203 16.0317 5.495 15.9974 5.5531 15.9484 5.6619 15.9554 5.8016L15.9723 5.912 19.2899 18.8304C19.3625 19.1142 19.6166 19.244 19.8212 19.244L19.89 19.2397 19.9587 19.2264 21.0246 18.9525C21.2867 18.886 21.4557 18.6404 21.4367 18.3812L21.4206 18.2837 18.1041 5.3631C18.0304 5.0804 17.7774 4.9505 17.5728 4.9505Z"
-    ) !important;
+  d: path(
+    "M3.3 1.1H4.4C5.5592 1.1 6.5099 1.998 6.594 3.1359L6.6 3.3V18.7C6.6 19.8592 5.702 20.8099 4.5641 20.894L4.4 20.9H3.3C2.1408 20.9 1.1901 20.002 1.106 18.8641L1.1 18.7V3.3C1.1 2.1408 1.998 1.1901 3.1359 1.106L3.3 1.1H4.4 3.3ZM9.9 1.1H11C12.1592 1.1 13.1099 1.998 13.194 3.1359L13.2 3.3V18.7C13.2 19.8592 12.302 20.8099 11.1641 20.894L11 20.9H9.9C8.7408 20.9 7.7901 20.002 7.706 18.8641L7.7 18.7V3.3C7.7 2.1408 8.598 1.1901 9.7359 1.106L9.9 1.1H11 9.9ZM17.5717 3.3005C18.4952 3.3005 19.3407 3.8842 19.6507 4.781L19.7024 4.9528 23.0189 17.8734C23.3077 18.9958 22.6743 20.1403 21.5925 20.5042L21.4349 20.5508 20.369 20.8247C20.1864 20.8709 20.0016 20.894 19.8212 20.894 18.8988 20.894 18.0523 20.3093 17.7432 19.4124L17.6916 19.2406 14.374 6.3212C14.0864 5.1977 14.7188 4.0541 15.8014 3.6903L15.9591 3.6438 17.0239 3.3699C17.2065 3.3226 17.3913 3.3005 17.5717 3.3005ZM4.4 2.75H3.3C3.0301 2.75 2.8055 2.9456 2.7589 3.2015L2.75 3.3V18.7C2.75 18.9688 2.9447 19.1943 3.2012 19.2411L3.3 19.25H4.4C4.6699 19.25 4.8945 19.0544 4.9411 18.7986L4.95 18.7V3.3C4.95 3.0311 4.7553 2.8057 4.4988 2.7589L4.4 2.75ZM11 2.75H9.9C9.6301 2.75 9.4055 2.9456 9.3589 3.2015L9.35 3.3V18.7C9.35 18.9688 9.5447 19.1943 9.8012 19.2411L9.9 19.25H11C11.2698 19.25 11.4946 19.0544 11.5411 18.7986L11.55 18.7V3.3C11.55 3.0311 11.3553 2.8057 11.0988 2.7589L11 2.75ZM17.5728 4.9505 17.5031 4.9548 17.4342 4.9682 16.3694 5.241C16.1769 5.2904 16.0757 5.4203 16.0317 5.495 15.9974 5.5531 15.9484 5.6619 15.9554 5.8016L15.9723 5.912 19.2899 18.8304C19.3625 19.1142 19.6166 19.244 19.8212 19.244L19.89 19.2397 19.9587 19.2264 21.0246 18.9525C21.2867 18.886 21.4557 18.6404 21.4367 18.3812L21.4206 18.2837 18.1041 5.3631C18.0304 5.0804 17.7774 4.9505 17.5728 4.9505Z"
+  ) !important;
 }
 
 /*
@@ -537,12 +584,12 @@ span.toggle.enabled {
   background-color: var(--spice-tab-active);
   border: 0;
   border-radius: 4px;
-  color: rgba(var(--spice-rgb-selected-row), .7);
+  color: rgba(var(--spice-rgb-selected-row), 0.7);
   font-size: 14px;
   font-weight: 400;
   height: 32px;
   width: 110px;
-  letter-spacing: .24px;
+  letter-spacing: 0.24px;
   line-height: 20px;
   padding: 0px 18px 0 4px;
 }
@@ -593,7 +640,7 @@ MARK: THEME OPTION ROW
   padding-bottom: 5px;
 }
 
-.options-tippy>div {
+.options-tippy > div {
   font-size: 16px !important;
 }
 
@@ -750,7 +797,9 @@ MARK: THEME OPTIONS
   background-color: var(--spice-accent);
 }
 
-.navlinkaccent .main-yourLibraryX-navLinkActive>.main-yourLibraryX-navLink-accent {
+.navlinkaccent
+  .main-yourLibraryX-navLinkActive
+  > .main-yourLibraryX-navLink-accent {
   display: block !important;
 }
 
@@ -833,7 +882,7 @@ MARK: THEME OPTIONS
 }
 
 .PreLibX .main-topBar-topbarContent,
-.PreLibX .main-topBar-container>* {
+.PreLibX .main-topBar-container > * {
   -webkit-app-region: drag !important;
 }
 
@@ -893,8 +942,14 @@ MARK: THEME OPTIONS
   transition: left 1s linear;
 }
 
-.TestLayout .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .x-progressBar-fillColor,
-.TestLayout .playback-progressbar-isInteractive .DuvrswZugGajIFNXObAr .progress-bar__slider {
+.TestLayout
+  .playback-progressbar-isInteractive
+  .DuvrswZugGajIFNXObAr
+  .x-progressBar-fillColor,
+.TestLayout
+  .playback-progressbar-isInteractive
+  .DuvrswZugGajIFNXObAr
+  .progress-bar__slider {
   transition: none;
 }
 
@@ -902,57 +957,192 @@ MARK: THEME OPTIONS
   border-radius: 0;
 }
 
-
 /* Remove tracklist index (from comfy) */
 
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListHeader .main-trackList-rowSectionIndex,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
-  opacity: 0
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListHeader
+  .main-trackList-rowSectionIndex,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListHeader
+  .main-trackList-rowSectionIndex {
+  opacity: 0;
 }
 
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowSectionIndex,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowSectionIndex,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowSectionIndex,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowSectionIndex,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowSectionIndex,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowSectionIndex {
-  background: rgba(var(--spice-rgb-play-button), 0.5)
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow:hover
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow:hover
+  .main-trackList-rowSectionIndex,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow:focus-within
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow:focus-within
+  .main-trackList-rowSectionIndex,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow.main-trackList-active
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow.main-trackList-active
+  .main-trackList-rowSectionIndex,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow:hover
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow:hover
+  .main-trackList-rowSectionIndex,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow:focus-within
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow:focus-within
+  .main-trackList-rowSectionIndex,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow.main-trackList-active
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow.main-trackList-active
+  .main-trackList-rowSectionIndex {
+  background: rgba(var(--spice-rgb-play-button), 0.5);
 }
 
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:hover .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow:focus-within .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow.main-trackList-active .main-trackList-rowImagePlayPauseButton {
-  opacity: 1
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow:hover
+  .main-trackList-rowImagePlayButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow:hover
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow:focus-within
+  .main-trackList-rowImagePlayButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow:focus-within
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow.main-trackList-active
+  .main-trackList-rowImagePlayButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow.main-trackList-active
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow:hover
+  .main-trackList-rowImagePlayButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow:hover
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow:focus-within
+  .main-trackList-rowImagePlayButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow:focus-within
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow.main-trackList-active
+  .main-trackList-rowImagePlayButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow.main-trackList-active
+  .main-trackList-rowImagePlayPauseButton {
+  opacity: 1;
 }
 
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowImagePlayButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow .main-trackList-rowSectionIndex,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowImagePlayPauseButton,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow .main-trackList-rowSectionIndex {
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow
+  .main-trackList-rowImagePlayButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow
+  .main-trackList-rowSectionIndex,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow
+  .main-trackList-rowImagePlayButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow
+  .main-trackList-rowImagePlayPauseButton,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow
+  .main-trackList-rowSectionIndex {
   color: var(--spice-sidebar);
   border-radius: var(--border-radius);
-  transition: 200ms opacity, 200ms background
+  transition: 200ms opacity, 200ms background;
 }
 
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart img) .main-trackList-trackListRow>.main-trackList-rowSectionIndex,
-.hidetracklistnum .main-trackList-trackList:has(.main-trackList-rowSectionStart .main-trackList-rowImageFallback) .main-trackList-trackListRow>.main-trackList-rowSectionIndex {
+.hidetracklistnum
+  .main-trackList-trackList:has(.main-trackList-rowSectionStart img)
+  .main-trackList-trackListRow
+  > .main-trackList-rowSectionIndex,
+.hidetracklistnum
+  .main-trackList-trackList:has(
+    .main-trackList-rowSectionStart .main-trackList-rowImageFallback
+  )
+  .main-trackList-trackListRow
+  > .main-trackList-rowSectionIndex {
   position: relative;
   z-index: 1000;
   top: 8px;
@@ -960,27 +1150,65 @@ MARK: THEME OPTIONS
   width: 40px;
   height: 40px;
   justify-content: center;
-  text-indent: -1000px
+  text-indent: -1000px;
 }
 
-.hidetracklistnum .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="3"] .main-trackList-trackListRowGrid {
+.hidetracklistnum
+  .main-trackList-indexable:has(
+    .main-trackList-rowSectionStart img
+  )[aria-colcount="3"]
+  .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns: [index] 0px [first] var(--col1, 4fr) [last] minmax(120px, var(--col2, 1fr)) !important
+  grid-template-columns: [index] 0px [first] var(--col1, 4fr) [last] minmax(
+      120px,
+      var(--col2, 1fr)
+    ) !important;
 }
 
-.hidetracklistnum .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="4"] .main-trackList-trackListRowGrid {
+.hidetracklistnum
+  .main-trackList-indexable:has(
+    .main-trackList-rowSectionStart img
+  )[aria-colcount="4"]
+  .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr)) !important
+  grid-template-columns:
+    [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(
+      120px,
+      var(--col2, 2fr)
+    )
+    [last] minmax(120px, var(--col3, 1fr)) !important;
 }
 
-.hidetracklistnum .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="5"] .main-trackList-trackListRowGrid {
+.hidetracklistnum
+  .main-trackList-indexable:has(
+    .main-trackList-rowSectionStart img
+  )[aria-colcount="5"]
+  .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important
+  grid-template-columns:
+    [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
+      120px,
+      var(--col2, 4fr)
+    )
+    [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important;
 }
 
-.hidetracklistnum .main-trackList-indexable:has(.main-trackList-rowSectionStart img)[aria-colcount="6"] .main-trackList-trackListRowGrid {
+.hidetracklistnum
+  .main-trackList-indexable:has(
+    .main-trackList-rowSectionStart img
+  )[aria-colcount="6"]
+  .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [last] minmax(120px, var(--col5, 1fr)) !important
+  grid-template-columns:
+    [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
+      120px,
+      var(--col2, 4fr)
+    )
+    [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(
+      120px,
+      var(--col4, 2fr)
+    )
+    [last] minmax(120px, var(--col5, 1fr)) !important;
 }
 
 /*switch layout*/
@@ -1078,7 +1306,9 @@ MARK: THEME OPTIONS
   padding-right: 12px;
 }
 
-.npvlargerlyrics .main-buddyFeed-content.Jg9Sdg82oTVV58xFeM2i.main-nowPlayingView-content.main-nowPlayingView-gradient .main-buddyFeed-header {
+.npvlargerlyrics
+  .main-buddyFeed-content.Jg9Sdg82oTVV58xFeM2i.main-nowPlayingView-content.main-nowPlayingView-gradient
+  .main-buddyFeed-header {
   display: none;
 }
 
@@ -1112,7 +1342,9 @@ MARK: THEME OPTIONS
   gap: 5px;
 }
 
-.npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing .main-nowPlayingView-lyricsTitle {
+.npvlargerlyrics
+  .main-nowPlayingView-sectionHeaderSpacing
+  .main-nowPlayingView-lyricsTitle {
   font-size: 20px;
   font-weight: 600 !important;
 }
