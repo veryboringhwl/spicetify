@@ -405,6 +405,11 @@ MARK: PLAYLIST PAGE
 MARK: MISCELLANEOUS
 */
 
+/*marketplace buttons font*/
+.marketplace-tabBar-header {
+  font-weight: 500;
+}
+
 /*marketplace rounded images*/
 .main-cardImage-image {
   border-radius: 6px;
@@ -1185,12 +1190,13 @@ MARK: THEME OPTIONS
   )[aria-colcount="5"]
   .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns:
-    [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
       120px,
       var(--col2, 4fr)
-    )
-    [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important;
+    ) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(
+      120px,
+      var(--col4, 1fr)
+    ) !important;
 }
 
 .hidetracklistnum
@@ -1199,16 +1205,13 @@ MARK: THEME OPTIONS
   )[aria-colcount="6"]
   .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns:
-    [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
       120px,
       var(--col2, 4fr)
-    )
-    [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(
+    ) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(
       120px,
       var(--col4, 2fr)
-    )
-    [last] minmax(120px, var(--col5, 1fr)) !important;
+    ) [last] minmax(120px, var(--col5, 1fr)) !important;
 }
 
 /*switch layout*/
@@ -1376,14 +1379,15 @@ MARK: THEME OPTIONS
   max-height: 66cqh !important;
 }
 
-.transplayicon [aria-label="Play"] svg {
+.transplayicon .main-nowPlayingBar-center [aria-label="Pause"] svg,
+.transplayicon .main-nowPlayingBar-center [aria-label="Play"] svg {
   height: 22px;
   width: 22px;
   transform: scale(1.5);
 }
 
-.transplayicon [aria-label="Play"] > span,
-.transplayicon .main-playPauseButton-button {
+.transplayicon .main-nowPlayingBar-center [aria-label="Pause"] > span,
+.transplayicon .main-nowPlayingBar-center [aria-label="Play"] > span {
   background-color: transparent !important;
   color: var(--spice-text);
 }
