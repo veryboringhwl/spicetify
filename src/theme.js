@@ -5,19 +5,6 @@
 	}
 	console.log("Theme: Initialised Spicetify Theme");
 
-	/*
-	MARK: THEME COMPONENTS
-	*/
-
-	const waitForElements = (elements, func, timeout = 100) => {
-		const queries = elements.map((element) => document.querySelector(element));
-		if (queries.every((a) => a)) {
-			func(queries);
-		} else if (timeout > 0) {
-			setTimeout(waitForElements, 300, elements, func, timeout - 1);
-		}
-	};
-
 	const createElement = (tag, className, textContent = "") => {
 		const element = document.createElement(tag);
 		if (className) element.className = className;
@@ -30,6 +17,114 @@
 		button.addEventListener("click", onClick);
 		return button;
 	};
+
+	/*
+	MARK: DYNAMIC LYRICS BACKGROUND
+	*/
+
+	const updateSong = () => {
+		const img = Spicetify.Player.data.item.metadata.image_xlarge_url.replace(
+			"spotify:image:",
+			"https://i.scdn.co/image/"
+		);
+		document.documentElement.style.setProperty("--image", `url("${img}")`);
+	};
+	Spicetify.Player.addEventListener("songchange", updateSong);
+	updateSong();
+
+	function observeDOMChanges(selector, callback) {
+		const targetNode = document.body;
+		const config = { childList: true, subtree: true };
+		const observer = new MutationObserver((mutationsList) => {
+			for (let mutation of mutationsList) {
+				if (mutation.type === 'childList') {
+					document.querySelectorAll(selector).forEach((element) => {
+						callback(element);
+					});
+				}
+			}
+		});
+		observer.observe(targetNode, config);
+		document.querySelectorAll(selector).forEach((element) => {
+			callback(element);
+		});
+		return observer;
+	}
+
+	// observeDOMChanges(".playlist-playlist-playlistContent", (playlistbackground) => {
+	// 	if (!playlistbackground.querySelector(".playlist-playlist-background")) {
+	// 		playlistbackground.appendChild(createElement("div", "playlist-playlist-background"));
+	// 	}
+	// });
+
+	observeDOMChanges(".lyrics-lyricsContainer-LyricsBackground", (lyricsBackground) => {
+		if (!lyricsBackground.querySelector(".lyrics-lyricsContainer-BackgroundBlur")) {
+			lyricsBackground.appendChild(createElement("div", "lyrics-lyricsContainer-BackgroundBlur"));
+		}
+	});
+
+	// green fluent navbar thing
+
+	const waitForElements = (selectors, callback, timeout = 100) => {
+		const elements = selectors.map((selector) =>
+			document.querySelector(selector)
+		);
+		if (elements.every(Boolean)) {
+			callback(elements);
+		} else if (timeout > 0) {
+			setTimeout(waitForElements, 300, selectors, callback, timeout - 1);
+		}
+	};
+
+	waitForElements([".main-yourLibraryX-navItem"], () => {
+		document
+			.querySelectorAll(".main-yourLibraryX-navItem .main-yourLibraryX-navLink")
+			.forEach((navItem) => {
+				if (!navItem.querySelector(".main-yourLibraryX-navLink-accent")) {
+					navItem.appendChild(
+						createElement("div", "main-yourLibraryX-navLink-accent")
+					);
+				}
+			});
+	});
+
+	/*
+	MARK: TRANSPARENT WINDOWS CONTROL
+	stolen from comfy
+	*/
+
+	function updateZoomVariable() {
+		let prevOuterWidth = window.outerWidth;
+		let prevInnerWidth = window.innerWidth;
+		let prevRatio = window.devicePixelRatio;
+
+		function checkChanges() {
+			const { outerWidth, innerWidth, devicePixelRatio } = window;
+			if (
+				prevOuterWidth !== outerWidth ||
+				prevInnerWidth !== innerWidth ||
+				prevRatio !== devicePixelRatio
+			) {
+				const modified = outerWidth / innerWidth || 1;
+				document.documentElement.style.setProperty("--zoom", modified);
+				console.log(
+					`Theme: Zoom updated: ${outerWidth} / ${innerWidth} = ${modified}`
+				);
+				[prevOuterWidth, prevInnerWidth, prevRatio] = [
+					outerWidth,
+					innerWidth,
+					devicePixelRatio,
+				];
+			}
+			requestAnimationFrame(checkChanges);
+		}
+		checkChanges();
+	}
+	updateZoomVariable();
+
+	/*
+	MARK: THEME SETTINGS FUNCTIONS
+	*/
 
 	const createTippy = (element, content) => {
 		if (content) {
@@ -60,20 +155,16 @@
 	};
 
 	const createDropdown = (optionRow, prefixedName, defaultValue, options) => {
-		const controlContainer = optionRow.querySelector(".themeOptionControl");
 		const select = createElement("select", "themeOptionDropdown");
-		options.forEach(({ value, label }) => {
-			const option = createElement("option");
-			option.value = value;
-			option.textContent = label;
-			select.appendChild(option);
-		});
-		controlContainer.appendChild(select);
+		select.innerHTML = options
+			.map(({ value, label }) => `<option value="${value}">${label}</option>`)
+			.join("");
 		select.value =
 			JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
 		select.addEventListener("change", () => {
 			settingsCache[prefixedName] = select.value;
 		});
+		optionRow.querySelector(".themeOptionControl").appendChild(select);
 		return select;
 	};
 
@@ -83,33 +174,27 @@
 		toggleButton.innerHTML =
 			'<span class="toggleWrapper"><span class="toggle"></span></span>';
 		controlContainer.appendChild(toggleButton);
-
 		const toggle = toggleButton.querySelector(".toggle");
 		const isEnabled =
 			JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
 		toggle.classList.toggle("enabled", isEnabled);
-
 		toggleButton.addEventListener("click", () => {
 			const newState = !toggle.classList.contains("enabled");
 			toggle.classList.toggle("enabled", newState);
 			settingsCache[prefixedName] = newState;
 		});
-
 		return toggle;
 	};
 
 	const createInput = (optionRow, prefixedName, defaultValue) => {
-		const controlContainer = optionRow.querySelector(".themeOptionControl");
 		const input = createElement("input", "themeOptionInput");
 		input.type = "text";
 		input.value =
 			JSON.parse(localStorage.getItem(prefixedName)) ?? defaultValue;
-		controlContainer.appendChild(input);
-
 		input.addEventListener("change", () => {
 			settingsCache[prefixedName] = input.value;
 		});
-
+		optionRow.querySelector(".themeOptionControl").appendChild(input);
 		return input;
 	};
 
@@ -143,25 +228,25 @@
 		const carouselContainer = createElement("div", "carouselContainer");
 		const carousel = createElement("div", "carousel");
 
-		items.forEach((itemText) => {
-			const item = createElement("div", "carouselItem", itemText);
-			item.addEventListener("click", () => {
+		carousel.innerHTML = items
+			.map((itemText) => `<div class="carouselItem">${itemText}</div>`)
+			.join("");
+
+		carousel.addEventListener("click", (event) => {
+			if (event.target.classList.contains("carouselItem")) {
 				document
-					.getElementById(`${itemText.toLowerCase()}Header`)
+					.getElementById(`${event.target.textContent.toLowerCase()}Header`)
 					?.scrollIntoView({ behavior: "smooth" });
-			});
-			carousel.appendChild(item);
+			}
 		});
 
-		const createControlButton = (direction, text) => {
-			const button = createButton(`carouselControl ${direction}`, text, () => {
+		const createControlButton = (direction, text) =>
+			createButton(`carouselControl ${direction}`, text, () => {
 				carousel.scrollBy({
 					left: (carousel.clientWidth / 2) * (direction === "prev" ? -1 : 1),
 					behavior: "smooth",
 				});
 			});
-			return button;
-		};
 
 		carouselContainer.append(
 			createControlButton("prev", "<"),
@@ -248,9 +333,9 @@
 	};
 
 	const saveOptions = async () => {
-		for (const [prefixedName, value] of Object.entries(settingsCache)) {
+		Object.entries(settingsCache).forEach(([prefixedName, value]) => {
 			localStorage.setItem(prefixedName, JSON.stringify(value));
-		}
+		});
 
 		for (const option of options) {
 			const prefixedName = `theme:${option.name}`;
@@ -260,7 +345,6 @@
 				await option.run(value);
 			}
 		}
-
 		await updateCSS();
 	};
 
@@ -401,7 +485,7 @@
 			],
 			run: (value) => {
 				changeSpotifyMode(value);
-				console.log("changed to", value)
+				console.log("changed to", value);
 			},
 		},
 	];
