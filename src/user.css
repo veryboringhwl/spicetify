@@ -337,8 +337,25 @@ MARK: HOME PAGE
   color: var(--spice-text) !important;
 }
 
-.main-nowPlayingWidget-coverExpanded > .main-coverSlotCollapsed-container {
-  transform: translateX(-8px) scale(1) !important;
+.ix_8kg3iUb9VS5SmTnBY > button > span {
+  color: var(--spice-text);
+  background: none;
+  scale: 1.2;
+}
+
+.ix_8kg3iUb9VS5SmTnBY > button > span:hover {
+  color: var(--spice-text);
+  background: none;
+  scale: 1.3;
+}
+
+.view-homeShortcutsGrid-shortcut:hover,
+.main-card-draggable:hover .main-card-imageContainer {
+  scale: 1.02;
+}
+/*make artist square */
+.MxmW8QkHqHWtuhO589PV {
+  border-radius: 6px;
 }
 
 /*
@@ -523,15 +540,27 @@ MARK: ICONS
   ) !important;
 }
 
+.view-homeShortcutsGrid-playButton .Wrapper-medium-only-medium path {
+  d: path(
+    "M5 5.27368C5 3.56682 6.82609 2.48151 8.32538 3.2973L20.687 10.0235C22.2531 10.8756 22.2531 13.124 20.687 13.9762L8.32538 20.7024C6.82609 21.5181 5 20.4328 5 18.726V5.27368Z"
+  ) !important;
+}
+
+.view-homeShortcutsGrid-playButton .Wrapper-small-only-small path {
+  d: path(
+    "M6.235 2.192A1.5 1.5 0 0 0 4 3.499v9a1.5 1.5 0 0 0 2.235 1.308l8-4.5a1.5 1.5 0 0 0 0-2.615z"
+  ) !important;
+}
+
 /*
-MARK: POPUP MODAL
+*--------------------------
+MARK: TEST FEATURES
+----------------------------
 */
 
-.GenericModal,
-.main-embedWidgetGenerator-container {
-  background-color: rgba(var(--spice-rgb-sidebar), 0.4) !important;
-  backdrop-filter: blur(20px) saturate(1.6) brightness(0.9);
-  max-height: 800px;
+/*rounded filters turn square*/
+.x-filterBox-filterInput,
+.search-searchCategory-catergoryGrid > div > button > span {
   border-radius: 7px;
 }
 
@@ -1176,12 +1205,10 @@ MARK: THEME OPTIONS
   )[aria-colcount="4"]
   .main-trackList-trackListRowGrid {
   padding-left: 2px;
-  grid-template-columns:
-    [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(
       120px,
       var(--col2, 2fr)
-    )
-    [last] minmax(120px, var(--col3, 1fr)) !important;
+    ) [last] minmax(120px, var(--col3, 1fr)) !important;
 }
 
 .hidetracklistnum
