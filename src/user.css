@@ -14,12 +14,6 @@ maybe put topbar in header(cant move windows/doesnt look amazing)
 MARK: WHOLE PAGE
 */
 
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
 * {
   font-family: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI" !important;
 }
@@ -27,6 +21,7 @@ body {
 /*
 MARK: TRANSPARENT WINDOWS CONTROLS
 */
+
 body::after {
   content: "";
   position: absolute;
@@ -44,11 +39,11 @@ body::after {
 /*
 MARK: SEARCH BAR
 */
+
 .x-searchInput-searchInputInput {
   background-color: var(--spice-sidebar) !important;
   color: var(--spice-text) !important;
-  box-shadow: none !important;
-}
+	box-shadow: 0 0px 4px rgba(var(--spice-rgb-shadow), 0.2) !important;}
 
 .x-searchInput-searchInputInput,
 .x-searchInput-searchInputInput:hover {
@@ -60,8 +55,6 @@ MARK: SEARCH BAR
   border-bottom: var(--spice-accent) solid 2px;
   outline: none;
 }
-
-s
 
 /*make marketplace search bar match fluent*/
 .searchbar--bar__wrapper,
@@ -147,10 +140,35 @@ MARK: BUTTONS
 .main-topBar-whatsNewFeed {
   background-color: var(--spice-sidebar) !important;
   border-radius: 7px !important;
+	color: rgba(var(--spice-rgb-selected-row), 0.8) !important;
+}
+
+:is(
+	.main-userWidget-boxCondensed,
+  .main-topBar-buddyFeed,
+  .main-topBar-button:not(:disabled),
+  .main-topBar-buddyFeed,
+  .main-userWidget-boxCondensed,
+  .main-userWidget-boxCondensed:focus-visible,
+  .main-userWidget-boxCondensed[data-context-menu-open="true"],
+  .main-topBar-whatsNewFeed
+):hover {
+  color: var(--spice-text) !important;
 }
 
 .main-avatar-image {
   border-radius: 5px;
+}
+.main-topBar-button:hover:not(:disabled) {
+	scale: 1.1;
+}
+
+.main-userWidget-boxCondensed:hover {
+	scale: 1.06;
+}
+
+.main-topBar-historyButtons .main-topBar-responsiveForward {
+	display: inline !important;
 }
 
 /*
@@ -189,20 +207,6 @@ MARK: SCROLL BAR
 MARK: LIBX NAV BAR
 */
 
-@keyframes bounce {
-  0% {
-    transform: translate(0, -25%);
-  }
-
-  50% {
-    transform: translate(0, 25%);
-  }
-
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
 .main-yourLibraryX-navLinkActive svg {
   color: var(--spice-accent) !important;
   animation: bounce 175ms ease-out forwards;
@@ -215,6 +219,10 @@ MARK: LIBX NAV BAR
   border-radius: 7px;
   left: 12px;
   display: none;
+}
+
+.Wrapper-medium-leading {
+	margin-inline-end: 20px !important;
 }
 
 /* CONTEXT MENU */
@@ -243,8 +251,7 @@ MARK: POPUP MODAL
 
 .GenericModal,
 .main-embedWidgetGenerator-container {
-  background-color: rgba(var(--spice-rgb-sidebar), 0.4) !important;
-  backdrop-filter: blur(20px) saturate(1.6) brightness(0.9);
+  background-color: rgba(var(--spice-rgb-sidebar), 0.8) !important;
   max-height: 800px;
   border-radius: 7px;
 }
@@ -354,7 +361,7 @@ MARK: HOME PAGE
   scale: 1.02;
 }
 /*make artist square */
-.MxmW8QkHqHWtuhO589PV {
+.main-cardImage-circular {
   border-radius: 6px;
 }
 
@@ -367,7 +374,6 @@ MARK: LYRICS PAGE
   background-size: cover;
   box-shadow: inset 0 0 200px #000000;
   filter: blur(10px) brightness(0.8);
-  transition: background-image 0.5s ease-in-out;
 }
 
 .lyrics-lyricsContainer-Provider {
@@ -403,8 +409,9 @@ MARK: PLAYLIST PAGE
 
 .main-trackList-trackList {
   padding: 8px;
-  background-color: var(--spice-card);
+	background-color: rgba(var(--spice-rgb-card), 0.85);
   border-radius: 7px;
+	box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
 }
 
 .main-entityHeader-shadow {
@@ -814,11 +821,13 @@ MARK: THEME OPTIONS
 
 .highlightnav .main-yourLibraryX-navLinkActive.active {
   background-color: var(--spice-highlight-elevated);
+	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
   padding-left: 12px;
 }
 
 .highlightnav .main-yourLibraryX-navLink:hover {
   background-color: var(--spice-highlight);
+	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
 }
 
 .highlightnav .main-yourLibraryX-navLink {
