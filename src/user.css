@@ -625,11 +625,11 @@ span.toggle.enabled {
   background-color: var(--spice-tab-active);
   border: 0;
   border-radius: 4px;
-  color: rgba(var(--spice-rgb-selected-row), 0.7);
+  color: var(--spice-text);
   font-size: 14px;
   font-weight: 400;
   height: 32px;
-  width: 110px;
+  width: 120px;
   letter-spacing: 0.24px;
   line-height: 20px;
   padding: 0px 18px 0 4px;
@@ -639,7 +639,7 @@ span.toggle.enabled {
   background-color: var(--spice-tab-active);
   border: 0;
   border-radius: 4px;
-  color: var(--spice-rgb-selected-row);
+  color: var(--spice-text);
   height: 32px;
   width: 75px;
   text-overflow: ellipsis;
@@ -678,23 +678,47 @@ MARK: THEME OPTION ROW
 }
 
 .themeHeader {
-  padding-bottom: 5px;
+	padding-bottom: 14px;
+	padding-top: 12px;
 }
 
 .options-tippy > div {
   font-size: 16px !important;
 }
 
+.categoryHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+
+.expandIcon {
+	background-color: var(--spice-highlight);
+	padding: 7px 10px 7px 10px;
+	border-radius: 7px;
+}
 /*
 MARK: THEME SETTINGS BUTTONS
 */
 
-.main-trackCreditsModal-closeBtn {
+.main-trackCreditsModal-BtnContainer > * {
   background-color: rgba(var(--spice-rgb-highlight), 0.8);
   border-radius: 8px;
   height: 34px;
   cursor: pointer;
   margin-right: 8px;
+  padding: 8px;
+  border: 0;
+}
+
+
+.main-trackCreditsModal-BtnContainer > *:hover {
+  transform: scale(1.1);
+}
+
+.main-trackCreditsModal-BtnContainer > *:active {
+  transform: scale(0.9);
 }
 
 .resetButton {
@@ -736,63 +760,25 @@ MARK: THEME SETTINGS BUTTONS
 MARK: THEME SETTINGS CAROUSEL
 */
 
-.carouselContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 0;
-  overflow: hidden;
-  border-radius: 8px;
-  padding: 10px;
-}
-
-.carousel {
-  display: flex;
-  overflow: hidden;
-  scroll-behavior: smooth;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.carouselItem {
-  flex: 0 0 auto;
-  width: 110px;
-  margin: 0 2px;
-  background-color: rgba(var(--spice-rgb-highlight), 0.8);
-  text-align: center;
-  padding: 8px;
-  border-radius: 8px;
-}
-
-.carouselItem:active {
-  scale: 1.05;
-  filter: brightness(1.2);
-}
-
-.carouselControl {
+.category-carousel-container {
   background-color: rgba(var(--spice-rgb-highlight), 0.6);
+  padding: 10px;
+  border-radius: 7px;
+}
+
+.category-button {
+  padding: 8px 16px;
+  background-color: var(--spice-tab-active);
+  color: #ffffff;
   border: none;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 18px;
-  height: 37px;
-  display: flex;
-  align-items: center;
+  border-radius: 5px;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 14px;
+  font-weight: 400;
 }
 
-.carouselControl:active {
-  scale: 1.05;
-  filter: brightness(1.2);
-}
-
-.carouselControl.prev {
-  margin-right: 3px;
-}
-
-.carouselControl.next {
-  margin-left: 3px;
+.category-button:hover {
+  background-color: #4c4c4c;
 }
 
 /*
@@ -846,11 +832,10 @@ MARK: THEME OPTIONS
   display: block !important;
 }
 
-.PreLibX .main-yourLibraryX-libraryRootlist,
-.PreLibX .main-yourLibraryX-header,
-.PreLibX .main-yourLibraryX-filterArea,
-.PreLibX .main-yourLibraryX-navItems {
-  background-color: var(--spice-sidebar);
+/*PRELIBX*/
+
+.PreLibX .main-yourLibraryX-entryPoints {
+	background-color: var(--spice-sidebar) !important;
 }
 
 .PreLibX .main-yourLibraryX-navItems {
