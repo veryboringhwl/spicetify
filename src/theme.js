@@ -121,10 +121,23 @@
 		}
 	};
 
-	const updateCSS = () => {
-		options.forEach(({ name, type }) => {
-			if (type === 'toggle') {
-				document.body.classList.toggle(name, JSON.parse(localStorage.getItem(`theme:${name}`)));
+	const initialiseSettings = () => {
+		const loadedSettings = Object.fromEntries(
+			options.map(({ name, defaultValue }) => [
+				`theme:${name}`,
+				JSON.parse(localStorage.getItem(`theme:${name}`)) ?? defaultValue
+			])
+		);
+		applySettings(loadedSettings);
+		return loadedSettings;
+	};
+
+	const applySettings = (settings) => {
+		options.forEach(option => {
+			const key = `theme:${option.name}`;
+			const value = settings[key];
+			if (option.type === 'toggle') {
+				document.body.classList.toggle(option.name, value);
 			}
 		});
 	};
@@ -132,11 +145,15 @@
 	const saveOptions = async (settings) => {
 		for (const option of options) {
 			const key = `theme:${option.name}`;
-			await option.run?.(settings[key]);
-			localStorage.setItem(key, JSON.stringify(settings[key]));
+			const value = settings[key];
+			if (option.run) {
+				await option.run(value);
+			}
+			localStorage.setItem(key, JSON.stringify(value));
 		}
-		updateCSS(options);
+		applySettings(settings);
 	};
+
 
 	const resetOptions = (setSettings) => {
 		console.log('Theme: Restored to default');
@@ -148,7 +165,7 @@
 			option.run?.(option.defaultValue);
 		});
 		setSettings(defaultSettings);
-		updateCSS(options);
+		applySettings(defaultSettings);
 	};
 
 	const CategoryCarousel = Spicetify.React.memo(({ categories, onCategoryClick }) => {
@@ -169,7 +186,9 @@
 			}
 		}, []);
 
-		const buttonWidth = `calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`;
+		const buttonWidth = Spicetify.React.useMemo(() =>
+			`calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`,
+			[categories.length]);
 
 		return Spicetify.React.createElement(
 			"div",
@@ -305,8 +324,8 @@
 	MARK: CONTENT
 	*/
 
-	const Content = () => {
-		const [settings, setSettings] = Spicetify.React.useState({});
+	const Content = Spicetify.React.memo(() => {
+		const [settings, setSettings] = Spicetify.React.useState(initialiseSettings());
 		const categoryRefs = Spicetify.React.useRef({});
 
 		Spicetify.React.useEffect(() => {
@@ -317,7 +336,7 @@
 				])
 			);
 			setSettings(loadedSettings);
-			updateCSS();
+			applySettings(loadedSettings);
 		}, []);
 
 		const categorizedOptions = Spicetify.React.useMemo(() => {
@@ -327,13 +346,13 @@
 			}, {});
 		}, []);
 
-		const handleSettingChange = (key, value) => {
+		const handleSettingChange = Spicetify.React.useCallback((key, value) => {
 			setSettings(prev => ({ ...prev, [key]: value }));
-		};
+		}, []);
 
-		const scrollToCategory = (category) => {
+		const scrollToCategory = Spicetify.React.useCallback((category) => {
 			categoryRefs.current[category]?.scrollIntoView({ behavior: 'smooth' });
-		};
+		}, []);
 
 		return Spicetify.React.createElement(
 			"div",
@@ -369,7 +388,11 @@
 				Spicetify.React.createElement("button", { className: "saveButton", onClick: () => saveOptions(settings) }, "Save")
 			)
 		);
-	};
+	});
+
+	/*
+	MARK: OPTIONS
+	*/
 
 	const options = [
 		{
@@ -578,6 +601,7 @@
 		true
 	);
 
+	initialiseSettings();
 	console.log("Theme: Spicetify theme initialised")
 })();
 
