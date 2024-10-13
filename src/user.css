@@ -557,7 +557,7 @@ MARK: TEST FEATURES
 
 /*rounded filters turn square*/
 .x-filterBox-filterInput,
-.search-searchCategory-catergoryGrid > div > button > span {
+.search-searchCategory-categoryGrid > div > button > span {
   border-radius: 7px;
 }
 
@@ -775,6 +775,154 @@ MARK: THEME SETTINGS CAROUSEL
 MARK: THEME OPTIONS
 */
 
+.LibX .Root__top-container {
+	padding-top: 50px;
+  grid-template-areas:
+    "global-nav main-view right-sidebar"
+    "left-sidebar main-view right-sidebar"
+    "left-sidebar now-playing-bar now-playing-bar" !important;
+		
+  grid-template-rows: auto 1fr auto;
+}
+
+.LibX .Root__globalNav{
+	height: unset;
+	background-color: var(--spice-main);
+  border-radius: 7px;
+	padding-inline: unset !important;
+	align-items: unset;
+}
+
+.LibX .Root__globalNav .main-globalNav-link-icon {
+	background-color: unset;
+	transform: unset;
+	justify-content: unset;
+}
+
+.LibX .main-actionButtons {
+	display: inline-flex !important;
+	animation: unset !important;
+}
+
+.LibX .main-globalNav-historyButtons {
+	display:none;
+}
+
+.LibX .main-globalNav-historyButtonsContainer {
+	display: unset;
+	order: 0;
+}
+
+.LibX .main-globalNav-searchSection {
+	order: -1;
+}
+.LibX .main-globalNav-searchInputSection {
+	margin-inline: unset;
+}
+
+.LibX .Root__globalNav .Dp3xccI7c2f_JSJ8OHYu {
+	margin-inline-start: unset;
+}
+
+.LibX .Root__globalNav,
+.LibX .main-globalNav-searchContainer,
+.LibX .aKOZdeebnsaeeMTiugmO {
+	flex-direction: column !important;
+}
+
+.LibX .SFAoASy0S_LZJmYZ3Fh9 {
+	background: unset;
+	background-color: unset !important;
+}
+
+/*PRELIBX*/
+
+.PreLibX .Root__nav-bar {
+  border-style: solid !important;
+  border-right-width: 1px;
+  border-color: var(--spice-card);
+}
+
+.PreLibX .main-yourLibraryX-entryPoints {
+	background-color: var(--spice-sidebar) !important;
+}
+
+.PreLibX .main-yourLibraryX-navItems {
+  padding: 8px 12px 0px 12px;
+}
+
+.PreLibX .main-navBar-mainNav {
+  padding-top: 30px;
+}
+
+.PreLibX .Root__top-container[data-right-sidebar-hidden="true"] .main-topBar-container {
+  padding-right: 120px;
+}
+
+.PreLibX .Root__top-container {
+  padding: 0;
+  gap: 0 !important;
+}
+
+.PreLibX .Root__main-view-overlay {
+	margin: 0 !important;
+}
+
+.PreLibX .main-nowPlayingBar-nowPlayingBar {
+  border-style: solid !important;
+  background-color: var(--spice-player);
+  border-top-width: 1px;
+  border-color: var(--spice-card);
+  height: 88px !important;
+}
+
+.PreLibX .Root__right-sidebar {
+	border-style: solid !important;
+	border-left-width: 2px;
+	border-color: var(--spice-card);
+}
+
+.PreLibX .main-nowPlayingBar-right {
+  padding-right: 12px;
+}
+
+.PreLibX .Root__main-view,
+.PreLibX .main-yourLibraryX-entryPoints,
+.PreLibX .Root__main-view,
+.PreLibX .Root__now-playing-bar,
+.PreLibX .main-buddyFeed-container {
+  border-radius: 0px !important;
+}
+
+.PreLibX .main-buddyFeed-actions {
+  top: 40px;
+  position: absolute;
+  right: 8px;
+}
+
+.PreLibX .main-yourLibraryX-header {
+  padding: 0px;
+  padding-left: 16px;
+}
+.PreLibX .YyUcY0HTiYikUOwhh29d,
+.PreLibX .main-topBar-historyButtons,
+.PreLibX .main-avatar-avatar {
+  -webkit-app-region: no-drag;
+}
+
+.PreLibX .main-topBar-topbarContent,
+.PreLibX .main-topBar-container > * {
+  -webkit-app-region: drag !important;
+}
+
+.PreLibX .LayoutResizer__inline-end {
+  inset-inline-end: -4px !important;
+}
+
+.PreLibX .main-buddyFeed-header {
+	height: 80px;
+}
+
 .homeheader .main-home-homeHeader {
   display: none;
 }
@@ -789,123 +937,6 @@ MARK: THEME OPTIONS
 
 .homeheader .main-home-filterChipsSection.fIvMht6B9HdROywMNJZ4:after {
   background-color: var(--spice-main) !important;
-}
-
-.highlightnav .main-yourLibraryX-navItem {
-  padding: 2px 0px !important;
-}
-
-.highlightnav .main-yourLibraryX-navLinkActive.active {
-  background-color: var(--spice-highlight-elevated);
-	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
-  padding-left: 12px;
-}
-
-.highlightnav .main-yourLibraryX-navLink:hover {
-  background-color: var(--spice-highlight);
-	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
-}
-
-.highlightnav .main-yourLibraryX-navLink {
-  border-radius: 7px;
-  min-height: 42px;
-  padding-left: 10px;
-}
-
-.navlinkaccent .main-yourLibraryX-navLink-accent {
-  background-color: var(--spice-accent);
-}
-
-.navlinkaccent
-  .main-yourLibraryX-navLinkActive
-  > .main-yourLibraryX-navLink-accent {
-  display: block !important;
-}
-
-/*PRELIBX*/
-
-.PreLibX .main-yourLibraryX-entryPoints {
-	background-color: var(--spice-sidebar) !important;
-}
-
-.PreLibX .main-yourLibraryX-navItems {
-  padding: 8px 12px 0px 12px;
-}
-
-.PreLibX .main-navBar-mainNav {
-  padding-top: 30px;
-  gap: 0;
-}
-
-.PreLibX .main-topBar-container {
-  padding-right: 120px;
-}
-
-.PreLibX .Root__top-container {
-  padding: 0;
-  gap: 0 !important;
-}
-
-.PreLibX .main-nowPlayingBar-nowPlayingBar {
-  border-style: solid !important;
-  background-color: var(--spice-player);
-  border-top-width: 1px;
-  border-color: var(--spice-card);
-  margin-right: 0px !important;
-  height: 88px !important;
-}
-
-.PreLibX .main-nowPlayingBar-right {
-  padding-right: 12px;
-}
-
-.PreLibX #spicetify-show-list {
-  background-color: var(--spice-sidebar);
-}
-
-.PreLibX .Root__main-view,
-.PreLibX .main-yourLibraryX-entryPoints,
-.PreLibX .Root__main-view,
-.PreLibX .Root__now-playing-bar,
-.PreLibX .ffFwfKcPDbmAPLXzxzKq {
-  border-radius: 0px !important;
-}
-
-/*shift x icon in npv*/
-.PreLibX .cZCuJDjrGA2QMXja_Sua {
-  height: 100%;
-  position: relative;
-}
-
-/*shift npv down to find close button*/
-.PreLibX .icNf66tgG3uxDMbCCIaN {
-  top: 50px;
-  position: absolute;
-  right: 8px;
-}
-
-.PreLibX .main-yourLibraryX-header {
-  padding: 0px;
-  padding-left: 14px;
-  padding-top: 4px;
-}
-
-.PreLibX .Wrapper-medium-leading {
-  margin-inline-end: 22px;
-}
-
-.PreLibX .main-topBar-historyButtons,
-.PreLibX .main-avatar-avatar {
-  -webkit-app-region: no-drag;
-}
-
-.PreLibX .main-topBar-topbarContent,
-.PreLibX .main-topBar-container > * {
-  -webkit-app-region: drag !important;
-}
-
-.PreLibX .LayoutResizer__inline-end {
-  inset-inline-end: -4px !important;
 }
 
 /*TestLayout*/

@@ -405,9 +405,19 @@
 		{
 			type: "toggle",
 			category: "Layouts",
+			name: "LibX",
+			desc: "Brings back old ui",
+			defaultValue: true,
+			run: () => {
+				LibXUI();
+			},
+		},
+		{
+			type: "toggle",
+			category: "Layouts",
 			name: "PreLibX",
-			desc: "Switches to old layout ~2023 (Pre LibX)",
-			defaultValue: false,
+			desc: "Brings back old ui ()",
+			defaultValue: true,
 		},
 		{
 			type: "toggle",
@@ -448,15 +458,7 @@
 		},
 		{
 			type: "toggle",
-			category: "Snippets",
-			name: "horizontalnav",
-			desc: "Makes navlinks horizontal (Home, Search, Marketplace)",
-			defaultValue: false,
-			tippy: 'Not compatible with "highlightnav and navlinkaccent"',
-		},
-		{
-			type: "toggle",
-			category: "Snippets",
+			category: "ea",
 			name: "transplayicon",
 			desc: "Transparent play/pause button in now playing bar",
 			defaultValue: true,
@@ -470,23 +472,7 @@
 		},
 		{
 			type: "toggle",
-			category: "Snippets",
-			name: "navlinkaccent",
-			desc: "Coloured fluent selector in navlink",
-			defaultValue: true,
-			tippy: 'Not compatible with "Not compatible with horizontalnav"',
-		},
-		{
-			type: "toggle",
-			category: "Snippets",
-			name: "highlightnav",
-			desc: "Highlights navlink background on hover/active",
-			defaultValue: true,
-			tippy: 'Not compatible with "Not compatible with horizontalnav"',
-		},
-		{
-			type: "toggle",
-			category: "Snippets",
+			category: "Misc",
 			name: "homeheader",
 			desc: "Removes coloured gradient from the home page header",
 			defaultValue: true,
@@ -527,6 +513,29 @@
 	/*
 	MARK: FUNCTIONS
 	*/
+
+	const LibXUI = () => {
+		const isEnabled = JSON.parse(localStorage.getItem('theme:LibX')) ?? true;
+		const buttonsConfig = [
+			{ ariaLabel: "Home", text: " Home" },
+			{ ariaLabel: "Lyrics", text: " Lyrics" },
+			{ ariaLabel: "Marketplace", text: " Marketplace" }
+		];
+
+		buttonsConfig.forEach(({ ariaLabel, text }) => {
+			waitForElements([`button[aria-label="${ariaLabel}"]`], (elements) => {
+				const button = elements[0];
+				if (isEnabled) {
+					if (!button.textContent.includes(text.trim())) {
+						const textNode = document.createTextNode(text);
+						button.appendChild(textNode);
+					}
+				} else {
+					button.textContent = button.textContent.replace(text, '').trim();
+				}
+			});
+		});
+	};
 
 	async function changeSpotifyMode(mode) {
 		const modePairs = {
