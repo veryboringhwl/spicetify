@@ -14,6 +14,12 @@ maybe put topbar in header(cant move windows/doesnt look amazing)
 MARK: WHOLE PAGE
 */
 
+.Root__now-playing-bar,
+.main-yourLibraryX-library,
+.Root__main-view {
+  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
+}
+
 * {
   font-family: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI" !important;
 }
@@ -702,7 +708,6 @@ MARK: THEME SETTINGS BUTTONS
   border: 0;
 }
 
-
 .main-trackCreditsModal-BtnContainer > *:hover {
   transform: scale(1.1);
 }
@@ -713,7 +718,7 @@ MARK: THEME SETTINGS BUTTONS
 
 .resetButton {
   background-color: #ff0033;
-  color: #fff;
+  color: var(--spice-text);
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
@@ -730,7 +735,7 @@ MARK: THEME SETTINGS BUTTONS
 
 .saveButton {
   background-color: var(--spice-button);
-  color: #fff;
+  color: var(--spice-text);
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
@@ -759,7 +764,7 @@ MARK: THEME SETTINGS CAROUSEL
 .category-button {
   padding: 8px 16px;
   background-color: var(--spice-tab-active);
-  color: #ffffff;
+  color: var(--spice-text);
   border: none;
   border-radius: 5px;
   transition: background-color 0.2s, color 0.2s;
@@ -768,7 +773,7 @@ MARK: THEME SETTINGS CAROUSEL
 }
 
 .category-button:hover {
-  background-color: #4c4c4c;
+  background-color: var(--spice-highlight);
 }
 
 /*
