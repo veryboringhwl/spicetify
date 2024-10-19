@@ -139,6 +139,9 @@
 			if (option.type === 'toggle') {
 				document.body.classList.toggle(option.name, value);
 			}
+			if (option.run) {
+				option.run(value);
+			}
 		});
 	};
 
@@ -396,20 +399,13 @@
 
 	const options = [
 		{
-			type: "input",
-			category: "test",
-			name: "test-input",
-			desc: "Does something",
-			defaultValue: 1,
-		},
-		{
 			type: "toggle",
 			category: "Layouts",
 			name: "LibX",
 			desc: "Brings back old ui",
-			defaultValue: true,
-			run: () => {
-				LibXUI();
+			defaultValue: false,
+			run: (value) => {
+				toggleLibXUI(value);
 			},
 		},
 		{
@@ -417,7 +413,7 @@
 			category: "Layouts",
 			name: "PreLibX",
 			desc: "Brings back old ui ()",
-			defaultValue: true,
+			defaultValue: false,
 		},
 		{
 			type: "toggle",
@@ -452,13 +448,20 @@
 		{
 			type: "toggle",
 			category: "Snippets",
+			name: "greenicon",
+			desc: "Makes active tab icon green",
+			defaultValue: true,
+		},
+		{
+			type: "toggle",
+			category: "Snippets",
 			name: "hidenowplayview",
 			desc: "Hide cover art in now playing bar",
 			defaultValue: false,
 		},
 		{
 			type: "toggle",
-			category: "ea",
+			category: "Snippets",
 			name: "transplayicon",
 			desc: "Transparent play/pause button in now playing bar",
 			defaultValue: true,
@@ -472,14 +475,28 @@
 		},
 		{
 			type: "toggle",
-			category: "Misc",
+			category: "Snippets",
 			name: "homeheader",
 			desc: "Removes coloured gradient from the home page header",
 			defaultValue: true,
 		},
 		{
+			type: "toggle",
+			category: "Snippets",
+			name: "highlightnav",
+			desc: "Removes coloured gradient from the home page header",
+			defaultValue: true,
+		},
+		{
+			type: "input",
+			category: "Test",
+			name: "test-input",
+			desc: "Does something",
+			defaultValue: 1,
+		},
+		{
 			type: "dropdown",
-			category: "test",
+			category: "Test",
 			name: "ea",
 			desc: "Description",
 			defaultValue: "test1",
@@ -492,16 +509,16 @@
 		},
 		{
 			type: "dropdown",
-			category: "test",
+			category: "Features",
 			name: "change-Spotify-mode",
 			desc: "Changes Spotify Mode to either Normal, Developer or Employee",
-			defaultValue: "Both",
+			defaultValue: "Developer",
 			tippy: "Only takes effect after a restart",
 			options: [
 				{ value: "Normal", label: "Normal" },
 				{ value: "Developer", label: "Developer" },
 				{ value: "Employee", label: "Employee" },
-				{ value: "Both", label: "Both (Dev + Empl)" },
+				{ value: "Both", label: "Dev + Empl" },
 			],
 			run: (value) => {
 				changeSpotifyMode(value);
@@ -514,28 +531,78 @@
 	MARK: FUNCTIONS
 	*/
 
-	const LibXUI = () => {
-		const isEnabled = JSON.parse(localStorage.getItem('theme:LibX')) ?? true;
-		const buttonsConfig = [
-			{ ariaLabel: "Home", text: " Home" },
-			{ ariaLabel: "Lyrics", text: " Lyrics" },
-			{ ariaLabel: "Marketplace", text: " Marketplace" }
-		];
 
-		buttonsConfig.forEach(({ ariaLabel, text }) => {
-			waitForElements([`button[aria-label="${ariaLabel}"]`], (elements) => {
-				const button = elements[0];
-				if (isEnabled) {
-					if (!button.textContent.includes(text.trim())) {
-						const textNode = document.createTextNode(text);
-						button.appendChild(textNode);
-					}
+	function toggleLibXUI(isEnabled) {
+		addLibXText(isEnabled);
+		adjustLibXWidth(isEnabled);
+	}
+
+	function adjustLibXWidth(isEnabled) {
+		let globalNavObserver;
+		const globalNavElement = document.querySelector('.Root__globalNav');
+
+		if (!globalNavElement) return;
+
+		function updateWidth() {
+			const sikBfynLExists = !!document.querySelector(".sikBfynL1Y6I25nVpbAg");
+			globalNavElement.style.width = isEnabled && sikBfynLExists ? '72px' : '';
+		}
+		function startObserving() {
+			const sikBfynL = document.querySelector(".sikBfynL1Y6I25nVpbAg");
+			const targetNode = sikBfynL?.parentNode || globalNavElement;
+			if (!globalNavObserver) {
+				globalNavObserver = new MutationObserver(updateWidth);
 				} else {
-					button.textContent = button.textContent.replace(text, '').trim();
+				globalNavObserver.disconnect();
+			}
+			globalNavObserver.observe(targetNode, { childList: true, subtree: true });
+			updateWidth();
+		}
+		startObserving();
+		const rootNavObserver = new MutationObserver(startObserving);
+		rootNavObserver.observe(globalNavElement, { childList: true, subtree: true });
+	}
+
+	let textObserver;
+	function addLibXText(isEnabled) {
+		const globalNav = document.querySelector('.Root__globalNav');
+		if (!globalNav) return;
+
+		function addTextToButtons() {
+			const elements = document.querySelectorAll('.Root__globalNav .search-searchCategory-categoryGrid > div > button, .Root__globalNav .main-globalNav-searchContainer > .main-globalNav-link-icon, .Root__globalNav .main-globalNav-searchInputSection');
+			elements.forEach(el => {
+				if (!el.querySelector('.main-globalNav-textWrapper')) {
+					const text = el.getAttribute('aria-label') || (el.querySelector('input') ? 'Search' : '');
+					const wrapper = document.createElement('span');
+					wrapper.className = 'main-globalNav-textWrapper';
+					wrapper.innerHTML = `<div class="main-globalNav-iconText encore-text encore-text-body-medium-bold">${text}</div>`;
+					el.appendChild(wrapper);
 				}
 			});
-		});
-	};
+		}
+
+		function removeAddedText() {
+			const wrappers = document.querySelectorAll('.main-globalNav-textWrapper');
+			wrappers.forEach(el => el.remove());
+		}
+
+		if (isEnabled) {
+			addTextToButtons();
+			globalNav.classList.add('global-libraryX');
+			if (textObserver) {
+				textObserver.disconnect();
+			}
+			textObserver = new MutationObserver(addTextToButtons);
+			textObserver.observe(globalNav, { childList: true, subtree: true });
+		} else {
+			removeAddedText();
+			globalNav.classList.remove('global-libraryX');
+			if (textObserver) {
+				textObserver.disconnect();
+				textObserver = null;
+			}
+		}
+	}
 
 	async function changeSpotifyMode(mode) {
 		const modePairs = {
