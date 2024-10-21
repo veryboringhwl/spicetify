@@ -218,72 +218,61 @@
 		);
 	});
 
-	const OptionRow = Spicetify.React.memo(({ option, settings, onSettingChange }) => {
-		const { type, name, desc, defaultValue, options: dropdownOptions, revealOptions, tippy } = option;
-		const prefixedName = `theme:${name}`;
+	const OptionRow = ({ name, desc, tippy, children }) => {
 		const controlRef = Spicetify.React.useRef(null);
 
 		Spicetify.React.useEffect(() => {
 			if (controlRef.current && tippy) createTippy(controlRef.current, tippy);
 		}, [tippy]);
 
-		const handleChange = Spicetify.React.useCallback((value) => {
-			onSettingChange(prefixedName, value);
-			if (revealOptions) {
-				revealOptions.forEach(revealOption => {
-					const revealPrefixedName = `theme:${revealOption.name}`;
-					if (!value) {
-						onSettingChange(revealPrefixedName, false);
-					} else {
-						const storedValue = localStorage.getItem(revealPrefixedName);
-						const restoredValue = storedValue ? JSON.parse(storedValue) : revealOption.defaultValue;
-						onSettingChange(revealPrefixedName, restoredValue);
-					}
-				});
-			}
-		}, [onSettingChange, prefixedName, revealOptions]);
-
-		const renderControl = () => {
-			switch (type) {
-				case "toggle":
-					return Spicetify.React.createElement("button", {
-							className: "themeOptionToggle",
-							onClick: () => handleChange(!settings[prefixedName])
-					}, Spicetify.React.createElement("span", { className: "toggleWrapper" },
-						Spicetify.React.createElement("span", { className: `toggle ${settings[prefixedName] ? "enabled" : ""}` })
-					));
-				case "dropdown":
-					return Spicetify.React.createElement("select", {
-							className: "themeOptionDropdown",
-							value: settings[prefixedName],
-							onChange: (e) => handleChange(e.target.value)
-					}, dropdownOptions.map(({ value, label }) =>
-							Spicetify.React.createElement("option", { key: value, value }, label)
-					));
-				case "input":
-					return Spicetify.React.createElement("input", {
-						className: "themeOptionInput",
-						type: "text",
-						value: settings[prefixedName],
-						placeholder: name === "ZoomLevel" ? "%" : "",
-						onChange: (e) => handleChange(e.target.value)
-					});
-			}
-		};
-
 		return Spicetify.React.createElement("div", {
-				className: "themeOptionRow",
-				"data-name": prefixedName,
-				"data-default": JSON.stringify(defaultValue),
-				ref: controlRef
-			},
+			className: "themeOptionRow",
+			"data-name": `theme:${name}`,
+			ref: controlRef
+		},
 			Spicetify.React.createElement("div", { className: "themeOptionContent" },
 				Spicetify.React.createElement("div", { className: "themeOptionName" }, name),
 				Spicetify.React.createElement("div", { className: "themeOptionDesc" }, desc)
 			),
-			Spicetify.React.createElement("div", { className: "themeOptionControl" }, renderControl())
+			Spicetify.React.createElement("div", { className: "themeOptionControl" }, children)
 		);
-	});
+	};
+
+	const Toggle = ({ name, desc, tippy, value, onChange }) => {
+		return Spicetify.React.createElement(optionRow, { name, desc, tippy },
+			Spicetify.React.createElement("button", {
+				className: "themeOptionToggle",
+				onClick: () => onChange(`theme:${name}`, !value)
+			},
+				Spicetify.React.createElement("span", { className: "toggleWrapper" },
+					Spicetify.React.createElement("span", { className: `toggle ${value ? "enabled" : ""}` })
+				)
+			)
+		);
+	};
+
+	const Dropdown = ({ name, desc, tippy, value, options, onChange }) => {
+		return Spicetify.React.createElement(optionRow, { name, desc, tippy },
+			Spicetify.React.createElement("select", {
+				className: "themeOptionDropdown",
+				value: value,
+				onChange: (e) => onChange(`theme:${name}`, e.target.value)
+			}, options.map(({ value, label }) =>
+				Spicetify.React.createElement("option", { key: value, value }, label)
+			))
+		);
+	};
+
+	const Input = ({ name, desc, tippy, value, onChange }) => {
+		return Spicetify.React.createElement(optionRow, { name, desc, tippy },
+			Spicetify.React.createElement("input", {
+				className: "themeOptionInput",
+				type: "text",
+				value: value,
+				onChange: (e) => onChange(`theme:${name}`, e.target.value)
+			})
+		);
+	};
 
 	const CategorySection = Spicetify.React.memo(({ category, options, settings, onSettingChange }) => {
 		const [isExpanded, setIsExpanded] = Spicetify.React.useState(true);
@@ -318,18 +307,43 @@
 		);
 	});
 
+	const RevealableOptions = ({ option, settings, onSettingChange }) => {
+		const Component = option.type === 'toggle' ? Toggle : option.type === 'dropdown' ? Dropdown : Input;
+
+		return Spicetify.React.createElement(
+			'div',
+			{ className: 'themeOptionWrapper' },
+			Spicetify.React.createElement(Component, {
+				...option,
+				value: settings[`theme:${option.name}`],
+				onChange: onSettingChange,
+			}),
+			Array.isArray(option.revealOptions) && settings[`theme:${option.name}`] === true
+				? Spicetify.React.createElement(
+					'div',
+					{ className: 'themeOptionRevealedWrapper' },
+					option.revealOptions.map((revealOption) =>
+						Spicetify.React.createElement(Component, {
+							key: revealOption.name,
+							...revealOption,
+							value: settings[`theme:${revealOption.name}`],
+							onChange: onSettingChange,
+						})
+					)
+				)
+				: null
+		);
+	};
+
+
 	/*
 	MARK: CONTENT
 	*/
 
-	const Content = Spicetify.React.memo(() => {
-		const [settings, setSettings] = Spicetify.React.useState(initialiseSettings);
+	const ThemeSettings = () => {
+		const [settings, setSettings] = Spicetify.React.useState(initialiseSettings)
+
 		const categoryRefs = Spicetify.React.useRef({});
-
-		const handleSettingChange = Spicetify.React.useCallback((key, value) => {
-			setSettings(prev => ({ ...prev, [key]: value }));
-		}, []);
-
 		const categorizedOptions = Spicetify.React.useMemo(() => {
 			return options.reduce((acc, option) => {
 				(acc[option.category] ??= []).push(option);
@@ -337,29 +351,41 @@
 			}, {});
 		}, []);
 
-		const scrollToCategory = Spicetify.React.useCallback((category) => {
-			categoryRefs.current[category]?.scrollIntoView({ behavior: 'smooth' });
-		}, []);
-
 		return Spicetify.React.createElement("div", { className: "themeContainer" },
-			Spicetify.React.createElement(CategoryCarousel, { categories: Object.keys(categorizedOptions), onCategoryClick: scrollToCategory }),
+			Spicetify.React.createElement(CategoryCarousel, {
+				categories: Object.keys(categorizedOptions),
+				onCategoryClick: (category) => {
+					categoryRefs.current[category]?.scrollIntoView({ behavior: 'smooth' });
+				}
+			}),
 			Spicetify.React.createElement("div", { className: "optionContainer" },
 				Object.entries(categorizedOptions).map(([category, categoryOptions]) =>
 					Spicetify.React.createElement("div", {
-							key: category,
-							className: `${category.toLowerCase()}Container`,
-							ref: el => categoryRefs.current[category] = el
-						},
-						Spicetify.React.createElement(CategorySection, { category, options: categoryOptions, settings, onSettingChange: handleSettingChange })
+						key: category,
+						className: `${category.toLowerCase()}Container`,
+						ref: el => categoryRefs.current[category] = el
+					},
+						Spicetify.React.createElement(CollapsibleSection, { title: category },
+							categoryOptions.map((option) =>
+								Spicetify.React.createElement(RevealableOptions, {
+									key: option.name,
+									option: option,
+									settings: settings,
+									onSettingChange: (key, value) => {
+										setSettings(prev => ({ ...prev, [key]: value }));
+									},
+								})
+							)
+						)
 					)
 				)
 			),
 			Spicetify.React.createElement("div", { className: "buttonContainer" },
 				Spicetify.React.createElement("button", { className: "resetButton", onClick: () => resetOptions(setSettings) }, "Reset"),
-				Spicetify.React.createElement("button", { className: "saveButton", onClick: () => saveOptions(settings) }, "Save")
+				Spicetify.React.createElement("button", { className: "saveButton", onClick: () => saveOptions(settings) }, "Save"),
 			)
 		);
-	});
+	};
 
 	/*
 	MARK: OPTIONS
@@ -636,7 +662,7 @@
 		() => {
 			Spicetify.PopupModal.display({
 				title: "Theme Settings",
-				content: Spicetify.React.createElement(Content),
+				content: Spicetify.React.createElement(ThemeSettings),
 				isLarge: true,
 			});
 
