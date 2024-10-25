@@ -114,33 +114,15 @@
 		}
 	};
 
-	const initialiseSettings = () => {
-		const loadedSettings = Object.fromEntries(
-			options.flatMap(({ name, defaultValue, revealOptions }) => [
-				[`theme:${name}`, JSON.parse(localStorage.getItem(`theme:${name}`)) ?? defaultValue],
-				...(revealOptions?.map(option => [
-					`theme:${option.name}`,
-					JSON.parse(localStorage.getItem(`theme:${name}`))
-						? (JSON.parse(localStorage.getItem(`theme:${option.name}`)) ?? option.defaultValue)
-						: false
-				]) || [])
-			])
-		);
-		applySettings(loadedSettings);
-		saveOptions(loadedSettings);
-		return loadedSettings;
-	};
-
 	const applySettings = (settings) => {
-		options.forEach(({ name, type, run, revealOptions }) => {
+		options.forEach(({ name, type, revealOptions, run }) => {
 			const key = `theme:${name}`;
 			const value = settings[key];
 			if (type === 'toggle') {
 				document.body.classList.toggle(name, value);
 			}
-			run?.(value);
 
-			revealOptions?.forEach(({ name: revealName, type: revealType, run: revealRun }) => {
+			revealOptions?.forEach(({ name: revealName, type: revealType }) => {
 				const revealKey = `theme:${revealName}`;
 				const revealValue = settings[revealKey];
 				if (revealType === 'toggle') {
@@ -148,29 +130,38 @@
 			}
 				revealRun?.(revealValue);
 			});
+
+			if (run) run(value);
 		});
 	};
 
 	const saveOptions = (settings) => {
-		console.log("%c[Theme]", "color:#b3ebf2;", "Saving settings");
+		let changedSettings = [];
 		Object.entries(settings).forEach(([key, value]) => {
-			localStorage.setItem(key, JSON.stringify(value));
+			const currentValue = getLocalStorageItem(key, null);
+			if (JSON.stringify(currentValue) !== JSON.stringify(value)) {
+				setLocalStorageItem(key, value);
+				changedSettings.push({ key, value });
+			}
 		});
+
+		if (changedSettings.length > 0) {
+			console.log("%c[Theme]", "color:#b3ebf2;", "Saving settings:", changedSettings);
 		applySettings(settings);
+		}
 	};
 
 	const resetOptions = (setSettings) => {
 		console.log("%c[Theme]", "color:#b3ebf2;", "Resetting to default settings");
 		const defaultSettings = Object.fromEntries(
-			options.flatMap(option => [
-				[`theme:${option.name}`, option.defaultValue],
-				...(option.revealOptions?.map(revealOption =>
-					[`theme:${revealOption.name}`, false]
-				) || [])
+							options.flatMap(({ name, defaultValue, revealOptions }) => [
+								[`theme:${name}`, defaultValue],
+								...(revealOptions?.map(option => [`theme:${option.name}`, false]) || [])
 			])
 		);
+
 		setSettings(defaultSettings);
-		saveOptions(defaultSettings);	
+		applySettings(defaultSettings);
 	};
 
 	const CategoryCarousel = Spicetify.React.memo(({ categories, onCategoryClick }) => {
@@ -274,38 +265,76 @@
 		);
 	};
 
-	const CategorySection = Spicetify.React.memo(({ category, options, settings, onSettingChange }) => {
-		const [isExpanded, setIsExpanded] = Spicetify.React.useState(true);
+	const CategoryCarousel = ({ categories, onCategoryClick }) => {
+		const carouselRef = Spicetify.React.useRef(null);
 
-		const toggleExpanded = () => setIsExpanded(!isExpanded);
+		Spicetify.React.useEffect(() => {
+			const handleWheel = (e) => {
+				if (carouselRef.current) {
+					carouselRef.current.scrollLeft += e.deltaY;
+					e.preventDefault();
+				}
+			};
+
+			const carousel = carouselRef.current;
+			if (carousel) {
+				carousel.addEventListener('wheel', handleWheel, { passive: false });
+				return () => carousel.removeEventListener('wheel', handleWheel);
+			}
+		}, []);
 
 		return Spicetify.React.createElement(
 			"div",
-			{ className: `categorySection ${isExpanded ? 'expanded' : 'collapsed'}` },
+			{ className: "category-carousel-container" },
 			Spicetify.React.createElement(
 				"div",
-				{ className: "categoryHeader", onClick: toggleExpanded },
-				Spicetify.React.createElement("h2", { className: "themeHeader" }, category),
-				Spicetify.React.createElement(
-					"span",
-					{ className: "expandIcon" },
-					isExpanded ? "▼" : "▶"
-				)
-			),
-			isExpanded && Spicetify.React.createElement(
-				"div",
-				{ className: "categoryContent" },
-				options.map((option) =>
-					Spicetify.React.createElement(OptionRow, {
-						key: option.name,
-						option: option,
-						settings: settings,
-						onSettingChange: onSettingChange
-					})
+				{ className: "category-carousel", ref: carouselRef },
+				categories.map((category, index) =>
+					Spicetify.React.createElement(
+						"button",
+						{
+							key: category,
+							className: "category-button",
+							onClick: () => onCategoryClick(category),
+							style: {
+								width: `calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`,
+								marginRight: index < categories.length - 1 ? '8px' : '0'
+							}
+						},
+						category
+					)
 				)
 			)
 		);
-	});
+	};
+
+	const CollapsibleSection = ({ title, children }) => {
+		const [isExpanded, setIsExpanded] = Spicetify.React.useState(true);
+
+		const iconPath = isExpanded
+			? 'M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'
+			: 'M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708';
+
+		return Spicetify.React.createElement(
+			'div',
+			{ className: `collapsibleSection ${isExpanded ? 'expanded' : 'collapsed'}` },
+			Spicetify.React.createElement(
+				'div',
+				{ className: 'sectionHeader', onClick: () => setIsExpanded(!isExpanded) },
+				Spicetify.React.createElement('h2', { className: 'sectionTitle' }, title),
+				Spicetify.React.createElement(
+					'span',
+					{ className: 'expandIcon' },
+					Spicetify.React.createElement(
+						'svg',
+						{ width: '16', height: '16', viewBox: '0 0 16 16', fill: 'none', xmlns: 'http://www.w3.org/2000/svg' },
+						Spicetify.React.createElement('path', { d: iconPath, fill: 'currentColor' })
+					)
+				)
+			),
+			isExpanded ? Spicetify.React.createElement('div', { className: 'sectionContent' }, children) : null
+		);
+	};
 
 	const RevealableOptions = ({ option, settings, onSettingChange }) => {
 		const Component = option.type === 'toggle' ? Toggle : option.type === 'dropdown' ? Dropdown : Input;
@@ -339,6 +368,22 @@
 	/*
 	MARK: CONTENT
 	*/
+
+	const initialiseSettings = () => {
+		const loadedSettings = Object.fromEntries(
+			options.flatMap(({ name, defaultValue, revealOptions }) => [
+				[`theme:${name}`, JSON.parse(localStorage.getItem(`theme:${name}`)) ?? defaultValue],
+				...(revealOptions?.map(option => [
+					`theme:${option.name}`,
+					JSON.parse(localStorage.getItem(`theme:${name}`))
+						? (JSON.parse(localStorage.getItem(`theme:${option.name}`)) ?? option.defaultValue)
+						: false
+				]) || [])
+			])
+		);
+		applySettings(loadedSettings);
+		return loadedSettings;
+	};
 
 	const ThemeSettings = () => {
 		const [settings, setSettings] = Spicetify.React.useState(initialiseSettings)
@@ -422,17 +467,17 @@
 			type: "toggle",
 			category: "Layouts",
 			name: "TestLayout",
-			desc: "New test layout in now playing bar",
+			desc: "Switches Playbar and Cover art in now playing bar",
 			defaultValue: false,
 			tippy: 'This is not compatible with "newlayout"',
 		},
 		{
 			type: "toggle",
 			category: "Layouts",
-			name: "newlayout",
-			desc: "Switches Playbar and Cover art in now playing bar",
-			defaultValue: true,
-			tippy: 'This is not compatible with "Testlayout"',
+			name: "CombinedLibX",
+			desc: "Combines the nowplaying view and library menu",
+			defaultValue: false,
+			tippy: 'This is not compatible with "newlayout"',
 		},
 		{
 			type: "toggle",
