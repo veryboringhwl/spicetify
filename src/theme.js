@@ -499,111 +499,144 @@
 	MARK: FUNCTIONS
 	*/
 
+	/*
+	MARK: COVER ART BANNER
+	*/
 
-	function toggleLibXUI(isEnabled) {
-		addLibXText(isEnabled);
-		adjustLibXWidth(isEnabled);
+	function coverArtBanner() {
+		if (!Spicetify.Player.data) {
+			setTimeout(coverArtBanner, 100);
+			return;
+		}
+		const channels = {
+			Lyrics: { regex: /^\/lyrics$/, enabled: true },
+			Playlist: { regex: /^\/playlist\//, enabled: true },
+			Station: { regex: /^\/station\/playlist\//, enabled: false },
+			Artist: { regex: /^\/artist\/(?!artists\b)\w+$/, enabled: false },
+			Album: { regex: /^\/album\//, enabled: true },
+			"Lyrics-Plus": { regex: /^\/lyrics-plus$/, enabled: true },
+		};
+
+		const banner = document.createElement("div");
+		banner.className = "banner-image";
+
+		function updateBanner() {
+			const pathname = Spicetify.Platform.History.location.pathname;
+			const source = Spicetify.Player.data.item.metadata.image_xlarge_url;
+			const validChannel = pathname && Object.values(channels).some((channel) =>
+				channel.enabled && channel.regex.test(pathname)
+			);
+
+			if (validChannel && source) {
+				banner.style.display = "";
+				const preloadImage = new Image();
+				preloadImage.src = source;
+				preloadImage.onload = () => {
+					document.documentElement.style.setProperty("--image", `url(${source})`);
+				};
+			} else {
+				banner.style.display = "none";
+			}
+		}
+
+		const underMainView = document.querySelector(".under-main-view");
+		if (underMainView && !document.querySelector('.banner-image')) {
+			underMainView.appendChild(banner);
+		}
+		Spicetify.Platform.History.listen(updateBanner);
+		Spicetify.Player.addEventListener("songchange", updateBanner);
+		updateBanner();
 	}
 
-	function adjustLibXWidth(isEnabled) {
-		let globalNavObserver;
-		const globalNavElement = document.querySelector('.Root__globalNav');
+	/*
+	MARK: SELECT COLOUR SCHEMES
+	*/
 
-		if (!globalNavElement) return;
+	function toggleLibXUI(isEnabled) {
+		const globalNav = document.querySelector(".Root__globalNav");
+		if (!globalNav) return;
 
-		function updateWidth() {
-			const sikBfynLExists = !!document.querySelector(".sikBfynL1Y6I25nVpbAg");
-			globalNavElement.style.width = isEnabled && sikBfynLExists ? '72px' : '';
-		}
-		function startObserving() {
-			const sikBfynL = document.querySelector(".sikBfynL1Y6I25nVpbAg");
-			const targetNode = sikBfynL?.parentNode || globalNavElement;
-			if (!globalNavObserver) {
-				globalNavObserver = new MutationObserver(updateWidth);
-			} else {
-				globalNavObserver.disconnect();
-			}
-			globalNavObserver.observe(targetNode, { childList: true, subtree: true });
-			updateWidth();
-		}
-		startObserving();
-		const rootNavObserver = new MutationObserver(startObserving);
-		rootNavObserver.observe(globalNavElement, { childList: true, subtree: true });
+		showLibXUI(isEnabled, globalNav);
 	}
 
 	let textObserver;
-	function addLibXText(isEnabled) {
-		const globalNav = document.querySelector('.Root__globalNav');
-		if (!globalNav) return;
+	function showLibXUI(isEnabled, globalNav) {
+		function addContainerClass(isEnabled, globalNav) {
+			const updateCollapsedState = () => {
+				const elementToWatch = document.querySelector(".sikBfynL1Y6I25nVpbAg");
+				globalNav.classList.toggle("collapsed", isEnabled && elementToWatch);
+			};
 
-		function addTextToButtons() {
-			const elements = document.querySelectorAll('.Root__globalNav .search-searchCategory-categoryGrid > div > button, .Root__globalNav .main-globalNav-searchContainer > .main-globalNav-link-icon, .Root__globalNav .main-globalNav-searchInputSection');
-			elements.forEach(el => {
+			const observer = new MutationObserver(updateCollapsedState);
+			observer.observe(document.body, { childList: true, subtree: true });
+			updateCollapsedState();
+		}
+
+		const addLibXText = (isEnabled, globalNav) => {
+			const addTextToButtons = () => {
+				globalNav.querySelectorAll('.search-searchCategory-categoryGrid > div > button, .main-globalNav-searchContainer > .main-globalNav-link-icon, .main-globalNav-searchInputSection').forEach(el => {
 				if (!el.querySelector('.main-globalNav-textWrapper')) {
 					const text = el.getAttribute('aria-label') || (el.querySelector('input') ? 'Search' : '');
-					const wrapper = document.createElement('span');
-					wrapper.className = 'main-globalNav-textWrapper';
-					wrapper.innerHTML = `<div class="main-globalNav-iconText encore-text encore-text-body-medium-bold">${text}</div>`;
-					el.appendChild(wrapper);
+						el.insertAdjacentHTML('beforeend', `
+							<span class="main-globalNav-textWrapper">
+								<div class="main-globalNav-iconText encore-text encore-text-body-medium-bold">${text}</div>
+							</span>
+						`);
 				}
 			});
-		}
-
-		function removeAddedText() {
-			const wrappers = document.querySelectorAll('.main-globalNav-textWrapper');
-			wrappers.forEach(el => el.remove());
-		}
+			};
 
 		if (isEnabled) {
 			addTextToButtons();
-			globalNav.classList.add('global-libraryX');
-			if (textObserver) {
-				textObserver.disconnect();
-			}
+				globalNav.classList.add("global-libraryX");
+				textObserver?.disconnect();
 			textObserver = new MutationObserver(addTextToButtons);
 			textObserver.observe(globalNav, { childList: true, subtree: true });
 		} else {
-			removeAddedText();
-			globalNav.classList.remove('global-libraryX');
-			if (textObserver) {
-				textObserver.disconnect();
+				globalNav.querySelectorAll('.main-globalNav-textWrapper').forEach(el => el.remove());
+				globalNav.classList.remove("global-libraryX");
+				textObserver?.disconnect();
 				textObserver = null;
 			}
-		}
+		};
+
+		addLibXText(isEnabled, globalNav);
+		addContainerClass(isEnabled, globalNav);
 	}
 
-	async function changeSpotifyMode(mode) {
+	/*
+	MARK: CHANGE SPOTIFY MODE
+	*/
+
+	const changeSpotifyMode = async (mode) => {
 		if (!Spicetify.Platform.UserAPI._product_state_service) {
-			console.error("Spicetify API not fully loaded. Unable to change Spotify mode.");
-			setTimeout(() => changeSpotifyMode(mode), 500);
+			setTimeout(() => changeSpotifyMode(mode), 100);
 			return;
 		}
 
 		const modePairs = {
-			Normal: { "app-developer": "0", employee: "0" },
-			Developer: { "app-developer": "2", employee: "0" },
-			Employee: { "app-developer": "0", employee: "1" },
-			Both: { "app-developer": "2", employee: "1" },
+			default: { "app-developer": "0", employee: "0" },
+			developer: { "app-developer": "2", employee: "0" },
+			employee: { "app-developer": "0", employee: "1" },
+			both: { "app-developer": "2", employee: "1" },
 		};
-		const pairs = modePairs[mode] || modePairs.Normal;
+
+		const pairs = modePairs[mode] || modePairs.default;
+
 		const setMode = async (key, value) => {
 			await Spicetify.Platform.UserAPI._product_state_service.putValues({ pairs: { [key]: value } });
-
 			return Spicetify.Platform.UserAPI._product_state_service.subValues({ keys: [key] }, async (newValues) => {
 				if (newValues[key] !== value) {
 					await Spicetify.Platform.UserAPI._product_state_service.putValues({ pairs: { [key]: value } });
 				}
 			});
 		};
-		if (window.appDevListener) {
-			await window.appDevListener.cancel();
-		}
-		if (window.employeeListener) {
-			await window.employeeListener.cancel();
-		}
+
+		window.appDevListener?.cancel();
+		window.employeeListener?.cancel();
 		window.appDevListener = await setMode("app-developer", pairs["app-developer"]);
 		window.employeeListener = await setMode("employee", pairs["employee"]);
-	}
+	};
 
 	/*
 	MARK: TOPBAR BUTTON
