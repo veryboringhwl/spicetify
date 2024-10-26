@@ -9,57 +9,7 @@
 		setTimeout(theme, 100);
 		return;
 	}
-	console.log("%c[Theme]", "color:#b3ebf2;", "Initialising Spicetify theme")
-
-
-	/*
-	MARK: DYNAMIC LYRICS BACKGROUND
-	*/
-
-	const updateSong = () => {
-		if (!Spicetify.Player.data) {
-			setTimeout(updateSong, 100);
-			return;
-		}
-		const img = Spicetify.Player.data.item.metadata.image_xlarge_url.replace(
-			"spotify:image:",
-			"https://i.scdn.co/image/"
-		);
-		document.documentElement.style.setProperty("--image", `url("${img}")`);
-	};
-	Spicetify.Player.addEventListener("songchange", updateSong);
-	updateSong();
-
-	function observeDOMChanges(selector, callback) {
-		const targetNode = document.body;
-		const config = { childList: true, subtree: true };
-		const observer = new MutationObserver((mutationsList) => {
-			for (let mutation of mutationsList) {
-				if (mutation.type === 'childList') {
-					document.querySelectorAll(selector).forEach((element) => {
-						callback(element);
-					});
-				}
-			}
-		});
-		observer.observe(targetNode, config);
-		document.querySelectorAll(selector).forEach((element) => {
-			callback(element);
-		});
-		return observer;
-	}
-
-	// observeDOMChanges(".playlist-playlist-playlistContent", (playlistbackground) => {
-	// 	if (!playlistbackground.querySelector(".playlist-playlist-background")) {
-	// 		playlistbackground.appendChild(createElement("div", "playlist-playlist-background"));
-	// 	}
-	// });
-
-	observeDOMChanges(".lyrics-lyricsContainer-LyricsBackground", (lyricsBackground) => {
-		if (!lyricsBackground.querySelector(".lyrics-lyricsContainer-BackgroundBlur")) {
-			lyricsBackground.appendChild(createElement("div", "lyrics-lyricsContainer-BackgroundBlur"));
-		}
-	});
+	console.log("%c[Theme]", "color:#b3ebf2;", "Initialising Spicetify theme");
 
 	/*
 	MARK: TRANSPARENT WINDOWS CONTROL
@@ -96,8 +46,17 @@
 	updateZoomVariable();
 
 	/*
-	MARK: THEME SETTINGS
+	MARK: THEME FUNCTIONS
 	*/
+
+	const getLocalStorageItem = (key, defaultValue) => {
+		const item = localStorage.getItem(key);
+		return item !== null ? JSON.parse(item) : defaultValue;
+	};
+
+	const setLocalStorageItem = (key, value) => {
+		localStorage.setItem(key, JSON.stringify(value));
+	};
 
 	const createTippy = (element, content) => {
 		if (content) {
@@ -127,8 +86,7 @@
 				const revealValue = settings[revealKey];
 				if (revealType === 'toggle') {
 					document.body.classList.toggle(revealName, revealValue);
-			}
-				revealRun?.(revealValue);
+				}
 			});
 
 			if (run) run(value);
@@ -147,67 +105,22 @@
 
 		if (changedSettings.length > 0) {
 			console.log("%c[Theme]", "color:#b3ebf2;", "Saving settings:", changedSettings);
-		applySettings(settings);
+			applySettings(settings);
 		}
 	};
 
 	const resetOptions = (setSettings) => {
 		console.log("%c[Theme]", "color:#b3ebf2;", "Resetting to default settings");
 		const defaultSettings = Object.fromEntries(
-							options.flatMap(({ name, defaultValue, revealOptions }) => [
-								[`theme:${name}`, defaultValue],
-								...(revealOptions?.map(option => [`theme:${option.name}`, false]) || [])
+			options.flatMap(({ name, defaultValue, revealOptions }) => [
+				[`theme:${name}`, defaultValue],
+				...(revealOptions?.map(option => [`theme:${option.name}`, false]) || [])
 			])
 		);
 
 		setSettings(defaultSettings);
 		applySettings(defaultSettings);
 	};
-
-	const CategoryCarousel = Spicetify.React.memo(({ categories, onCategoryClick }) => {
-		const carouselRef = Spicetify.React.useRef(null);
-
-		Spicetify.React.useEffect(() => {
-			const handleWheel = (e) => {
-				if (carouselRef.current) {
-					carouselRef.current.scrollLeft += e.deltaY;
-					e.preventDefault();
-				}
-			};
-
-			const carousel = carouselRef.current;
-			if (carousel) {
-				carousel.addEventListener('wheel', handleWheel, { passive: false });
-				return () => carousel.removeEventListener('wheel', handleWheel);
-			}
-		}, []);
-
-		const buttonWidth = `calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`;
-
-		return Spicetify.React.createElement(
-			"div",
-			{ className: "category-carousel-container" },
-			Spicetify.React.createElement(
-				"div",
-				{ className: "category-carousel", ref: carouselRef },
-				categories.map((category, index) =>
-					Spicetify.React.createElement(
-						"button",
-						{
-							key: category,
-							className: "category-button",
-							onClick: () => onCategoryClick(category),
-							style: {
-								width: buttonWidth,
-								marginRight: index < categories.length - 1 ? '8px' : '0'
-							}
-						},
-						category
-					)
-				)
-			)
-		);
-	});
 
 	const OptionRow = ({ name, desc, tippy, children }) => {
 		const controlRef = Spicetify.React.useRef(null);
@@ -364,9 +277,8 @@
 		);
 	};
 
-
 	/*
-	MARK: CONTENT
+	MARK: THEME SETTINGS
 	*/
 
 	const initialiseSettings = () => {
@@ -443,25 +355,23 @@
 			name: "LibX",
 			desc: "Brings back old ui",
 			defaultValue: false,
-			revealOptions: ["HighlightNav"],
 			run: (value) => {
 				toggleLibXUI(value);
 			},
-
-		},
-		{
-			type: "toggle",
-			category: "Layouts",
-			name: "highlightnav",
-			desc: "Removes coloured gradient from the home page header",
-			defaultValue: true,
-		},
-		{
-			type: "toggle",
-			category: "Layouts",
-			name: "PreLibX",
-			desc: "Brings back old ui ()",
-			defaultValue: false,
+			revealOptions: [
+				{
+					type: "toggle",
+					name: "highlightnav",
+					desc: "Removes coloured gradient from the home page header",
+					defaultValue: true,
+				},
+				{
+					type: "toggle",
+					name: "PreLibX",
+					desc: "Brings back old ui ()",
+					defaultValue: false,
+				},
+			]
 		},
 		{
 			type: "toggle",
@@ -610,7 +520,7 @@
 			const targetNode = sikBfynL?.parentNode || globalNavElement;
 			if (!globalNavObserver) {
 				globalNavObserver = new MutationObserver(updateWidth);
-				} else {
+			} else {
 				globalNavObserver.disconnect();
 			}
 			globalNavObserver.observe(targetNode, { childList: true, subtree: true });
