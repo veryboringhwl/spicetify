@@ -350,6 +350,70 @@
 
 	const options = [
 		{
+			type: "dropdown",
+			category: "Features",
+			name: "change-Spotify-mode",
+			desc: "Changes Spotify Mode to either Normal, Developer or Employee",
+			defaultValue: "Developer",
+			tippy: "Only takes effect after a restart",
+			options: [
+				{ value: "default", label: "Default" },
+				{ value: "developer", label: "Developer" },
+				{ value: "employee", label: "Employee" },
+				{ value: "both", label: "Dev + Empl" },
+			],
+			run: (value) => {
+				changeSpotifyMode(value);
+			},
+		},
+		{
+			type: "input",
+			category: "Features",
+			name: "ZoomLevel",
+			desc: "Changes zoom level (%)",
+			defaultValue: 100,
+			run: (value) => {
+				value /= 100;
+				document.documentElement.style.setProperty("--test", value);
+			},
+		},
+		{
+			type: "toggle",
+			category: "Layouts",
+			name: "AlbumBannerinPage",
+			desc: "Puts album art in places",
+			defaultValue: true,
+			run: (value) => {
+				coverArtBanner(value);
+			},
+			revealOptions: [
+				{
+					type: "toggle",
+					name: "LyricsPage",
+					desc: "Adds Dynamic backgrounds to Lyrics Plus",
+					defaultValue: true,
+				},
+				{
+					type: "toggle",
+					name: "PlaylistPage",
+					desc: "Adds Dynamic backgrounds to your Playlist Pages",
+					defaultValue: false,
+				},
+				{
+					type: "toggle",
+					name: "ArtistPage",
+					desc: "Adds Dynamic backgrounds to Artist Pages",
+					defaultValue: false,
+				},
+				{
+					type: "toggle",
+					name: "AlbumPage",
+					desc: "Adds Dynamic backgrounds to Album Pages",
+					defaultValue: false,
+				},
+			]
+		},
+		{
 			type: "toggle",
 			category: "Layouts",
 			name: "LibX",
@@ -457,41 +521,6 @@
 				{ value: "test3", label: "test3" },
 				{ value: "test4", label: "test4" },
 			],
-		},
-		{
-			type: "dropdown",
-			category: "Features",
-			name: "change-Spotify-mode",
-			desc: "Changes Spotify Mode to either Normal, Developer or Employee",
-			defaultValue: "Developer",
-			tippy: "Only takes effect after a restart",
-			options: [
-				{ value: "Normal", label: "Normal" },
-				{ value: "Developer", label: "Developer" },
-				{ value: "Employee", label: "Employee" },
-				{ value: "Both", label: "Dev + Empl" },
-			],
-			run: (value) => {
-				changeSpotifyMode(value);
-			},
-		},
-		{
-			type: "input",
-			category: "Features",
-			name: "ZoomLevel",
-			desc: "Changes zoom level (%)",
-			defaultValue: 100,
-			run: (value) => {
-				value = value / 100
-				document.documentElement.style.setProperty("--test", value);
-			},
-		},
-		{
-			type: "toggle",
-			category: "Features",
-			name: "DynamicLyrics",
-			desc: "Adds Dynamic Lyrics to Lyrics Plus",
-			defaultValue: true,
 		},
 	];
 
