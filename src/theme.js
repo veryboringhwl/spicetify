@@ -73,6 +73,25 @@
 		}
 	};
 
+	const initialiseSettings = () => {
+		const loadedSettings = Object.fromEntries(
+			options.flatMap(({ name, defaultValue, revealOptions }) => {
+				const mainValue = JSON.parse(localStorage.getItem(`theme:${name}`)) ?? defaultValue;
+				return [
+					[`theme:${name}`, mainValue],
+					...(revealOptions?.map(option => {
+						const revealKey = `theme:${option.name}`;
+						const revealStoredValue = JSON.parse(localStorage.getItem(revealKey));
+						const revealValue = mainValue ? (revealStoredValue ?? option.defaultValue) : false;
+						return [revealKey, revealValue];
+					}) || [])
+				];
+			})
+		);
+		applySettings(loadedSettings);
+		return loadedSettings;
+	};
+
 	const applySettings = (settings) => {
 		options.forEach(({ name, type, revealOptions, run }) => {
 			const key = `theme:${name}`;
@@ -114,7 +133,7 @@
 		const defaultSettings = Object.fromEntries(
 			options.flatMap(({ name, defaultValue, revealOptions }) => [
 				[`theme:${name}`, defaultValue],
-				...(revealOptions?.map(option => [`theme:${option.name}`, false]) || [])
+								...(revealOptions?.map(option => [`theme:${option.name}`, option.defaultValue]) || [])
 			])
 		);
 
@@ -167,13 +186,14 @@
 		);
 	};
 
-	const Input = ({ name, desc, tippy, value, onChange }) => {
+	const Input = ({ name, desc, tippy, value, onChange, placeholder }) => {
 		return Spicetify.React.createElement(optionRow, { name, desc, tippy },
 			Spicetify.React.createElement("input", {
 				className: "themeOptionInput",
 				type: "text",
 				value: value,
-				onChange: (e) => onChange(`theme:${name}`, e.target.value)
+				onChange: (e) => onChange(`theme:${name}`, e.target.value),
+				placeholder: placeholder
 			})
 		);
 	};
@@ -220,6 +240,10 @@
 			)
 		);
 	};
+
+	/*
+	MARK: THEME SETTINGS
+	*/
 
 	const CollapsibleSection = ({ title, children }) => {
 		const [isExpanded, setIsExpanded] = Spicetify.React.useState(true);
@@ -275,26 +299,6 @@
 				)
 				: null
 		);
-	};
-
-	/*
-	MARK: THEME SETTINGS
-	*/
-
-	const initialiseSettings = () => {
-		const loadedSettings = Object.fromEntries(
-			options.flatMap(({ name, defaultValue, revealOptions }) => [
-				[`theme:${name}`, JSON.parse(localStorage.getItem(`theme:${name}`)) ?? defaultValue],
-				...(revealOptions?.map(option => [
-					`theme:${option.name}`,
-					JSON.parse(localStorage.getItem(`theme:${name}`))
-						? (JSON.parse(localStorage.getItem(`theme:${option.name}`)) ?? option.defaultValue)
-						: false
-				]) || [])
-			])
-		);
-		applySettings(loadedSettings);
-		return loadedSettings;
 	};
 
 	const ThemeSettings = () => {
@@ -354,7 +358,7 @@
 			category: "Features",
 			name: "change-Spotify-mode",
 			desc: "Changes Spotify Mode to either Normal, Developer or Employee",
-			defaultValue: "Developer",
+			defaultValue: "developer",
 			tippy: "Only takes effect after a restart",
 			options: [
 				{ value: "default", label: "Default" },
@@ -372,6 +376,7 @@
 			name: "ZoomLevel",
 			desc: "Changes zoom level (%)",
 			defaultValue: 100,
+			placeholder: "%",
 			run: (value) => {
 				value /= 100;
 				document.documentElement.style.setProperty("--test", value);
@@ -390,26 +395,34 @@
 				{
 					type: "toggle",
 					name: "LyricsPage",
-					desc: "Adds Dynamic backgrounds to Lyrics Plus",
+					desc: "Adds Dynamic backgrounds to Lyrics Page",
 					defaultValue: true,
+					tippy: "Includes Spotify Lyrics page and Spicetify's Lyrics Plus"
 				},
 				{
 					type: "toggle",
 					name: "PlaylistPage",
 					desc: "Adds Dynamic backgrounds to your Playlist Pages",
-					defaultValue: false,
+					defaultValue: true,
 				},
 				{
 					type: "toggle",
 					name: "ArtistPage",
 					desc: "Adds Dynamic backgrounds to Artist Pages",
-					defaultValue: false,
+					defaultValue: true,
 				},
 				{
 					type: "toggle",
 					name: "AlbumPage",
 					desc: "Adds Dynamic backgrounds to Album Pages",
-					defaultValue: false,
+					defaultValue: true,
+				},
+				{
+					type: "toggle",
+					name: "MiscPage",
+					desc: "Adds Dynamic backgrounds to Misc Pages",
+					defaultValue: true,
+					tippy: "Enables album art for Station, Collection, Show, Episode, Genre, User"
 				},
 			]
 		},
@@ -508,6 +521,7 @@
 			name: "test-input",
 			desc: "Does something",
 			defaultValue: 1,
+			placeholder: "does something"
 		},
 		{
 			type: "dropdown",
@@ -533,40 +547,53 @@
 	*/
 
 	function coverArtBanner() {
-		if (!Spicetify.Player.data) {
-			setTimeout(coverArtBanner, 100);
+		if (!Spicetify.Player.data?.item) {
+			requestAnimationFrame(coverArtBanner);
 			return;
 		}
+
 		const channels = {
-			Lyrics: { regex: /^\/lyrics$/, enabled: true },
-			Playlist: { regex: /^\/playlist\//, enabled: true },
-			Station: { regex: /^\/station\/playlist\//, enabled: false },
-			Artist: { regex: /^\/artist\/(?!artists\b)\w+$/, enabled: false },
-			Album: { regex: /^\/album\//, enabled: true },
-			"Lyrics-Plus": { regex: /^\/lyrics-plus$/, enabled: true },
+			Album: { regex: /^\/album\//, key: 'theme:AlbumPage', fallback: false },
+			Artist: { regex: /^\/artist\/(?!artists\b)\w+$/, key: 'theme:ArtistPage', fallback: false },
+			Lyrics: { regex: /^\/lyrics$/, key: 'theme:LyricsPage', fallback: true },
+			"Lyrics-Plus": { regex: /^\/lyrics-plus$/, key: 'theme:LyricsPage', fallback: true },
+			Playlist: { regex: /^\/playlist\//, key: 'theme:PlaylistPage', fallback: true },
+			Station: { regex: /^\/station\/playlist\//, key: 'theme:MiscPage', fallback: false },
+			Collection: { regex: /^\/collection\/tracks$/, key: 'theme:MiscPage', fallback: false },
+			Show: { regex: /^\/show\//, key: 'theme:MiscPage', fallback: false },
+			Episode: { regex: /^\/episode\//, key: 'theme:MiscPage', fallback: false },
+			User: { regex: /^\/user\/(?!users\b)\w+$/, key: 'theme:MiscPage', fallback: false },
+			Genre: { regex: /^\/genre\//, key: 'theme:MiscPage', fallback: false }
 		};
 
+		Object.values(channels).forEach(channel => {
+			channel.enabled = getLocalStorageItem(channel.key, channel.fallback);
+		});
+
+		let banner = document.querySelector(".banner-image") ||
+			(() => {
 		const banner = document.createElement("div");
 		banner.className = "banner-image";
+				document.querySelector(".under-main-view")?.appendChild(banner);
+				return banner;
+			})();
 
-		function updateBanner() {
+		const updateBanner = () => {
 			const pathname = Spicetify.Platform.History.location.pathname;
 			const source = Spicetify.Player.data.item.metadata.image_xlarge_url;
-			const validChannel = pathname && Object.values(channels).some((channel) =>
-				channel.enabled && channel.regex.test(pathname)
+			const showBanner = Object.values(channels).some(
+				(channel) => channel.enabled && channel.regex.test(pathname)
 			);
 
-			if (validChannel && source) {
+			if (showBanner && source) {
 				banner.style.display = "";
-				const preloadImage = new Image();
-				preloadImage.src = source;
-				preloadImage.onload = () => {
-					document.documentElement.style.setProperty("--image", `url(${source})`);
-				};
+				const img = new Image();
+				img.src = source;
+				img.onload = () => document.documentElement.style.setProperty("--image", `url(${source})`);
 			} else {
 				banner.style.display = "none";
 			}
-		}
+		};
 
 		const underMainView = document.querySelector(".under-main-view");
 		if (underMainView && !document.querySelector('.banner-image')) {
