@@ -631,7 +631,7 @@ span.toggle {
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--spice-text);
   margin-left: 2px;
   transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
@@ -1104,6 +1104,39 @@ MARK: THEME OPTIONS
   border-radius: 0;
 }
 
+/*HIGHLIGHTNAV*/
+
+.highlightnav .search-searchCategory-categoryGrid {
+  display: unset;
+}
+
+.highlightnav .custom-navlinks-scrollable_container {
+  max-width: unset;
+}
+
+.highlightnav .main-globalNav-navLinkActive[aria-label="Home"],
+.highlightnav .forceExpandSearchInput .SFAoASy0S_LZJmYZ3Fh9:focus,
+.highlightnav .main-globalNav-navLinkActive[aria-label="Marketplace"],
+.highlightnav .main-globalNav-navLinkActive[aria-label="Lyrics"] {
+  background-color: var(--spice-highlight-elevated) !important;
+  border-radius: 7px !important;
+}
+
+.highlightnav .collpased [aria-label="Home"],
+.highlightnav .collpased [aria-label="Marketplace"],
+.highlightnav .collpased [aria-label="Lyrics"],
+.highlightnav .collapsed .jl5Sca1FSi1bSBIyQ72h {
+	width: 56px;
+}
+
+.highlightnav .main-globalNav-searchInputSection:hover,
+.highlightnav [aria-label="Home"]:hover,
+.highlightnav [aria-label="Marketplace"]:hover,
+.highlightnav [aria-label="Lyrics"]:hover {
+  background-color: var(--spice-highlight);
+	border-radius: 7px;
+}
+
 /* Remove tracklist index (from comfy) */
 
 .hidetracklistnum
@@ -1351,23 +1384,8 @@ MARK: THEME OPTIONS
     ) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(
       120px,
       var(--col4, 2fr)
-    ) [last] minmax(120px, var(--col5, 1fr)) !important;
-}
-
-/*switch layout*/
-
-.switchlayout .Root__top-container {
-  grid-template-areas:
-    "left-sidebar main-view right-sidebar"
-    "left-sidebar now-playing-bar now-playing-bar" !important;
-}
-
-.switchlayout .global-nav .Root__top-container {
-  grid-template-areas:
-    "global-nav global-nav global-nav"
-    "left-sidebar main-view right-sidebar"
-    "left-sidebar now-playing-bar now-playing-bar" !important;
-  grid-template-rows: auto 1fr auto;
+    )
+    [last] minmax(120px, var(--col5, 1fr)) !important;
 }
 
 /*new layout*/
@@ -1433,25 +1451,7 @@ MARK: THEME OPTIONS
   min-width: unset;
 }
 
-.horizontalnav ul#spicetify-sticky-list {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-
-  span {
-    display: none;
-  }
-}
-
-.horizontalnav:has(.hightlightnav) .main-yourLibraryX-navLinkActive.active {
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-.npvlargerlyrics
-  .main-buddyFeed-content.Jg9Sdg82oTVV58xFeM2i.main-nowPlayingView-content.main-nowPlayingView-gradient
-  .main-buddyFeed-header {
+.npvlargerlyrics .main-buddyFeed-header {
   display: none;
 }
 
@@ -1479,10 +1479,6 @@ MARK: THEME OPTIONS
 
 .npvlargerlyrics .main-nowPlayingView-contextItemInfo .main-trackInfo-artists {
   font-size: 0.9rem;
-}
-
-.npvlargerlyrics .main-nowPlayingView-panelOpenDiv {
-  gap: 5px;
 }
 
 .npvlargerlyrics
