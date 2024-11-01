@@ -595,10 +595,6 @@
 			}
 		};
 
-		const underMainView = document.querySelector(".under-main-view");
-		if (underMainView && !document.querySelector('.banner-image')) {
-			underMainView.appendChild(banner);
-		}
 		Spicetify.Platform.History.listen(updateBanner);
 		Spicetify.Player.addEventListener("songchange", updateBanner);
 		updateBanner();
