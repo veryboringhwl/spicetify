@@ -28,14 +28,15 @@ MARK: WHOLE PAGE
 MARK: TRANSPARENT WINDOWS CONTROLS
 */
 
-body::after {
+.spotify__os--is-windows:not(.fullscreen) body::after {
   content: "";
   position: absolute;
-  right: 0;
-  z-index: 999;
   backdrop-filter: brightness(2.12);
+  z-index: 999;
+  right: 0;
+  top: calc(16px / var(--zoom, 1));
   width: calc(135px / var(--zoom, 1));
-  height: calc(64px / var(--zoom, 1));
+  height: calc(32px / var(--zoom, 1));
 }
 
 /*
@@ -56,7 +57,7 @@ MARK: SEARCH BAR
 }
 
 .SFAoASy0S_LZJmYZ3Fh9:focus {
-  border-bottom: var(--spice-accent) solid 2px;
+  border-bottom: 2px solid var(--spice-accent);
   outline: none;
 }
 
@@ -67,7 +68,7 @@ MARK: SEARCH BAR
 }
 
 .searchbar-bar:focus {
-  border-bottom: var(--spice-accent) solid 2px !important;
+  border-bottom: 2px solid var(--spice-accent) !important;
 }
 
 /*
@@ -80,7 +81,7 @@ MARK: PROGRESS BAR
 }
 
 .progress-bar {
-  --bg-color: rgba(255, 255, 255, 0.2);
+  --bg-color: rgba(var(--spice-rgb-selected-row), 0.3);
   --fg-color: var(--spice-accent);
   --is-active-fg-color: var(--spice-accent);
   transition: --progress-bar-transform 1s linear !important;
@@ -169,7 +170,7 @@ MARK: BUTTONS
   display: block;
 }
 
-.main-topBar-buddyFeed > svg{
+.main-topBar-buddyFeed > svg {
 	width: 20px !important;
 	height: 20px !important;
 }
@@ -213,10 +214,16 @@ MARK: LIBX NAV BAR
 }
 
 .x-entityImage-imageContainer {
-	box-shadow: 0 0px 10px rgba(var(--spice-rgb-shadow),.3);
+  box-shadow: 0 0px 10px rgba(var(--spice-rgb-shadow), 0.3);
 }
 
-/* CONTEXT MENU */
+/*
+MARK: CONTEXT MENU
+*/
+
+.KROerAKSuwZBbse9iJT_ {
+  background-color: unset;
+}
 
 .main-contextMenu-menu {
   border-radius: 7px;
@@ -243,13 +250,13 @@ MARK: POPUP MODAL
 
 .GenericModal {
 	background-color: unset;
+  box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
 }
 
-.GenericModal > .main-embedWidgetGenerator-container {
-  background-color: rgba(var(--spice-rgb-main), 0.85) !important;
+.main-embedWidgetGenerator-container {
+  background-color: var(--spice-main) !important;
   max-height: 800px;
   border-radius: 7px;
-	backdrop-filter: blur(12px);
 }
 
 .GenericModal__overlay {
@@ -261,29 +268,18 @@ MARK: POPUP MODAL
   scrollbar-width: thin;
 }
 
+.main-trackCreditsModal-originalCredits {
+	padding-bottom: unset;
+}
+
 /*
 MARK: EQUALISER GIF
 from bloom
 */
 
-.main-devicePicker-header
-  > .main-devicePicker-nowPlayingActiveIcon[src*="equaliser"] {
-  mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
-  background: var(--spice-accent);
-  content-visibility: hidden;
-  mask-repeat: no-repeat;
-  scale: 0.8;
-}
-
-.view-homeShortcutsGrid-shortcut .view-homeShortcutsGrid-equaliser {
-  mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
-  background: var(--spice-accent);
-  content-visibility: hidden;
-  width: 14px;
-  height: 13px;
-}
-
-.main-trackList-playingIcon {
+.main-trackList-playingIcon,
+.main-devicePicker-nowPlayingActiveIcon[src*="equaliser"],
+.view-homeShortcutsGrid-equaliser {
   mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
   background: var(--spice-accent);
   content-visibility: hidden;
@@ -312,6 +308,14 @@ MARK: NOW PLAYING BAR
   font-weight: 500;
 }
 
+[data-testid="control-button-playpause"] .Wrapper-small-only-small {
+	position: unset;
+}
+
+.main-nowPlayingBar-right {
+	max-width: 400px;
+}
+
 /*make album art centered*/
 .HD9s7U5E1RLSWKpXmrqx {
   display: grid;
@@ -321,16 +325,11 @@ MARK: NOW PLAYING BAR
   margin-bottom: 0px !important;
 }
 
-.Wrapper-small-only-small {
-  top: 5px !important;
-}
-
 /*
 MARK: HOME PAGE
 */
 
-.view-homeShortcutsGrid-shortcut
-  .view-homeShortcutsGrid-PlayButtonContainer
+.main-card-PlayButtonContainer,
   .view-homeShortcutsGrid-playButton {
   box-shadow: none !important;
 }
@@ -366,13 +365,10 @@ MARK: HOME PAGE
 .main-card-draggable:hover .main-card-imageContainer {
   scale: 1.02;
 }
+
 /*make artist square */
 .main-cardImage-circular {
   border-radius: 6px;
-}
-
-.main-card-PlayButtonContainer {
-  box-shadow: none !important;
 }
 
 /*
@@ -428,23 +424,40 @@ MARK: PLAYLIST PAGE
 }
 
 .main-entityHeader-overlay {
-  background: linear-gradient(
-      transparent 0,
-      rgba(var(--spice-rgb-main), 0.5) 100%
-    ),
-    var(--background-noise);
+  background: linear-gradient(transparent, rgba(var(--spice-rgb-main), 0.5));
 }
 
 .main-actionBarBackground-background {
-  background-image: linear-gradient(
-    rgba(var(--spice-rgb-main), 0.49999) 0,
-    var(--background-base) 100%
-  ) !important;
+  background-image: linear-gradient(rgba(var(--spice-rgb-main), 0.5), var(--spice-main)) !important;
+}
+
+.marketplace-tabBar-header {
+	display: flex;
+	justify-content: center;
+}
+
+.main-entityHeader-imageContainer {
+	display: none;
+}
+
+.main-entityHeader-headerText * {
+	justify-content: center;
+	display:flex;
+	text-align: center;
 }
 
 /*
 MARK: MISCELLANEOUS
 */
+
+.T0fKO6B7LQSCE_VaSM1P {
+	padding-top: 64px;
+}
+
+/*add padding to top of marketplace*/
+.marketplace-grid {
+  padding-top: 10px;
+}
 
 /*marketplace buttons font*/
 .marketplace-tabBar-header {
@@ -479,18 +492,18 @@ MARK: MISCELLANEOUS
 /*
 MARK: ICONS
 */
-/* 
+
 [aria-label="Go back"] path {
   d: path(
-    "M7.2949 15.7152C7.6883 16.1028 8.3215 16.0981 8.7091 15.7047 9.0967 15.3113 9.092 14.6782 8.6986 14.2906L3.3283 8.9992H15C15.5 9.005 16 8.639 16 8.012 16 7.417 15.5 7.014 15 7.025H3.3349L8.6986 1.7143C9.092 1.3267 9.0967.6935 8.7091.3001 8.3215-.0933 7.6883-.098 7.2949.2896L.3707 7.112C-.1262 7.6016-.1262 8.4032.3707 8.8928L7.2949 15.7152Z"
+    "M10.295 19.715a1 1 0 0 0 1.404-1.424l-5.37-5.292h13.67a1 1 0 0 0 0-2H6.336L11.7 5.714a1 1 0 0 0-1.404-1.424L3.37 11.112a1.25 1.25 0 0 0 0 1.78z"
   ) !important;
 }
 
 [aria-label="Go forward"] path {
   d: path(
-    "M8.7045.2838C8.3111-.1038 7.678-.0992 7.2904.2942 6.9027.6876 6.9074 1.3208 7.3008 1.7084L12.6712 6.9998H1C.5 6.9998 0 7.4475 0 8 0 8.5521.5 8.9998 1 8.9998H12.6646L7.3008 14.2847C6.9074 14.6723 6.9027 15.3055 7.2904 15.6989 7.678 16.0923 8.3111 16.097 8.7045 15.7094L15.6287 8.887C16.1256 8.3974 16.1256 7.5958 15.6287 7.1062L8.7045.2838Z"
+    "M13.705 4.284A1 1 0 1 0 12.3 5.708L17.67 11H4a1 1 0 1 0 0 2h13.665L12.3 18.285a1 1 0 0 0 1.403 1.424l6.925-6.822a1.25 1.25 0 0 0 0-1.78z"
   ) !important;
-} */
+}
 
 .main-nowPlayingBar-nowPlayingBar [aria-label="Play"] path {
   d: path(
@@ -558,27 +571,37 @@ MARK: ICONS
   ) !important;
 }
 
-.view-homeShortcutsGrid-playButton .Wrapper-small-only-small path {
+/*pause*/
+.main-yourLibraryX-listItem .ix_8kg3iUb9VS5SmTnBY button:has(path[d='M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z']) path,
+.main-actionBar-ActionBarRow div button:has(path[d='M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z']) path,
+[aria-label="Pause"] .view-homeShortcutsGrid-playButton .Wrapper-medium-only-medium path,
+[aria-label="Pause"] .main-trackList-rowPlayPauseIcon path,
+.main-card-PlayButtonContainer.main-card-PlayButtonContainerVisible .Wrapper-medium-only-medium path {
   d: path(
-    "M6.235 2.192A1.5 1.5 0 0 0 4 3.499v9a1.5 1.5 0 0 0 2.235 1.308l8-4.5a1.5 1.5 0 0 0 0-2.615z"
+    "M5.746 3a1.75 1.75 0 0 0-1.75 1.75v14.5c0 .966.784 1.75 1.75 1.75h3.5a1.75 1.75 0 0 0 1.75-1.75V4.75A1.75 1.75 0 0 0 9.246 3zm9 0a1.75 1.75 0 0 0-1.75 1.75v14.5c0 .966.784 1.75 1.75 1.75h3.5a1.75 1.75 0 0 0 1.75-1.75V4.75A1.75 1.75 0 0 0 18.246 3z"
   ) !important;
 }
 
-.view-homeShortcutsGrid-playButton .Wrapper-medium-only-medium path {
+[aria-label="Pause"] .view-homeShortcutsGrid-playButton .Wrapper-small-only-small path {
   d: path(
-    "M5 5.27368C5 3.56682 6.82609 2.48151 8.32538 3.2973L20.687 10.0235C22.2531 10.8756 22.2531 13.124 20.687 13.9762L8.32538 20.7024C6.82609 21.5181 5 20.4328 5 18.726V5.27368Z"
+    "M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z"
   ) !important;
 }
 
-.main-card-PlayButtonContainer .Wrapper-small-only-small path {
-  d: path(
-    "M6.235 2.192A1.5 1.5 0 0 0 4 3.499v9a1.5 1.5 0 0 0 2.235 1.308l8-4.5a1.5 1.5 0 0 0 0-2.615z"
-  ) !important;
-}
-
+/*play*/
+.main-yourLibraryX-listItem .ix_8kg3iUb9VS5SmTnBY button:has(path[d='m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z']) path,
+.main-actionBar-ActionBarRow div button:has(path[d='m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z']) path,
+.main-trackList-rowPlayPauseIcon path,
+[aria-label="Play"] .view-homeShortcutsGrid-playButton .Wrapper-medium-only-medium path,
 .main-card-PlayButtonContainer .Wrapper-medium-only-medium path {
   d: path(
-    "M5 5.27368C5 3.56682 6.82609 2.48151 8.32538 3.2973L20.687 10.0235C22.2531 10.8756 22.2531 13.124 20.687 13.9762L8.32538 20.7024C6.82609 21.5181 5 20.4328 5 18.726V5.27368Z"
+    "M5 5.274c0-1.707 1.826-2.792 3.325-1.977l12.362 6.727c1.566.852 1.566 3.1 0 3.952L8.325 20.702C6.826 21.518 5 20.432 5 18.726z"
+  ) !important;
+}
+
+[aria-label="Play"] .view-homeShortcutsGrid-playButton .Wrapper-small-only-small path {
+  d: path(
+    "M6.235 2.192A1.5 1.5 0 0 0 4 3.499v9a1.5 1.5 0 0 0 2.235 1.308l8-4.5a1.5 1.5 0 0 0 0-2.615z"
   ) !important;
 }
 
