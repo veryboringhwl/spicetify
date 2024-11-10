@@ -1492,56 +1492,11 @@ MARK: PRELIBX
     [last] minmax(120px, var(--col5, 1fr)) !important;
 }
 
-/*new layout*/
 
-.newlayout .player-controls__buttons--new-icons {
-  margin-bottom: 0px;
-}
 
-.newlayout .playback-bar {
-  position: absolute;
-  left: 155px;
-  width: 20%;
-}
-
-.newlayout .main-nowPlayingBar-nowPlayingBar {
-  position: relative;
-}
-
-.newlayout .main-nowPlayingBar-left {
-  order: 1;
-  flex: 0.5;
-}
-
-.newlayout .main-nowPlayingBar-center {
-  order: 0;
-  flex: 1;
-}
-
-.newlayout .main-nowPlayingBar-right {
-  flex: 1;
-  order: 2;
-}
-
-.newlayout .player-controls__left {
-  flex: 0;
-  order: 2;
-  gap: 0;
-  left: 45px;
-  position: absolute;
-}
-
-.newlayout .player-controls__right {
-  flex: 0;
-  order: 3;
-  gap: 0;
-  position: absolute;
-  left: 105px;
-}
-
-.newlayout .main-playPauseButton-button {
-  margin-left: 10px;
-}
+/*
+MARK: HIDENOWPLAYVIEW
+*/
 
 .hidenowplayview [aria-label="Now playing view"] {
   display: none;
@@ -1554,6 +1509,10 @@ MARK: PRELIBX
 .hidenowplayview .main-playbackBarRemainingTime-container {
   min-width: unset;
 }
+
+/*
+MARK: NPVLARGERLYRICS
+*/
 
 .npvlargerlyrics .main-buddyFeed-header {
   display: none;
@@ -1585,9 +1544,7 @@ MARK: PRELIBX
   font-size: 0.9rem;
 }
 
-.npvlargerlyrics
-  .main-nowPlayingView-sectionHeaderSpacing
-  .main-nowPlayingView-lyricsTitle {
+.npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing .main-nowPlayingView-lyricsTitle {
   font-size: 20px;
   font-weight: 600 !important;
 }
@@ -1596,28 +1553,25 @@ MARK: PRELIBX
   font-size: 0.9rem;
 }
 
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-aboutArtistV2,
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-credits,
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-artistOnTour,
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-merch,
-.npvlargerlyrics .main-nowPlayingView-section.main-nowPlayingView-queue {
+.npvlargerlyrics .main-nowPlayingView-aboutArtistV2,
+.npvlargerlyrics .main-nowPlayingView-credits,
+.npvlargerlyrics .main-nowPlayingView-artistOnTour,
+.npvlargerlyrics .main-nowPlayingView-merch,
+.npvlargerlyrics .main-nowPlayingView-queue {
   display: none;
 }
 
+.npvlargerlyrics #BeautifulLyrics-CardView,
+.npvlargerlyrics #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
+.npvlargerlyrics .main-nowPlayingView-lyricsContent .RootContainer,
 .npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing {
   height: 66cqh;
   max-height: 66.5cqh;
 }
 
-.npvlargerlyrics .main-nowPlayingView-lyricsContent .RootContainer {
-  height: 66cqh !important;
-}
-
-.npvlargerlyrics #BeautifulLyrics-CardView,
-.npvlargerlyrics #BeautifulLyrics-CardView .LyricsContent .ContentContainer {
-  height: 66cqh !important;
-  max-height: 66cqh !important;
-}
+/*
+MARK: TRANSPARENT PLAYICON
+*/
 
 .transplayicon .main-nowPlayingBar-center [aria-label="Pause"] svg,
 .transplayicon .main-nowPlayingBar-center [aria-label="Play"] svg {
