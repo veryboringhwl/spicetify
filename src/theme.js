@@ -49,9 +49,9 @@
 	MARK: THEME FUNCTIONS
 	*/
 
-	const getLocalStorageItem = (key, defaultValue) => {
+	const getLocalStorageItem = (key, defaultVal) => {
 		const item = localStorage.getItem(key);
-		return item !== null ? JSON.parse(item) : defaultValue;
+		return item !== null ? JSON.parse(item) : defaultVal;
 	};
 
 	const setLocalStorageItem = (key, value) => {
@@ -75,14 +75,14 @@
 
 	const initialiseSettings = () => {
 		const loadedSettings = Object.fromEntries(
-			options.flatMap(({ name, defaultValue, revealOptions }) => {
-				const mainValue = JSON.parse(localStorage.getItem(`theme:${name}`)) ?? defaultValue;
+			options.flatMap(({ name, defaultVal, revealOptions }) => {
+				const mainValue = JSON.parse(localStorage.getItem(`theme:${name}`)) ?? defaultVal;
 				return [
 					[`theme:${name}`, mainValue],
 					...(revealOptions?.map(option => {
 						const revealKey = `theme:${option.name}`;
 						const revealStoredValue = JSON.parse(localStorage.getItem(revealKey));
-						const revealValue = mainValue ? (revealStoredValue ?? option.defaultValue) : false;
+						const revealValue = mainValue ? (revealStoredValue ?? option.defaultVal) : false;
 						return [revealKey, revealValue];
 					}) || [])
 				];
@@ -131,9 +131,9 @@
 	const resetOptions = (setSettings) => {
 		console.log("%c[Theme]", "color:#b3ebf2;", "Resetting to default settings");
 		const defaultSettings = Object.fromEntries(
-			options.flatMap(({ name, defaultValue, revealOptions }) => [
-				[`theme:${name}`, defaultValue],
-								...(revealOptions?.map(option => [`theme:${option.name}`, option.defaultValue]) || [])
+			options.flatMap(({ name, defaultVal, revealOptions }) => [
+				[`theme:${name}`, defaultVal],
+				...(revealOptions?.map(option => [`theme:${option.name}`, option.defaultVal]) || [])
 			])
 		);
 
@@ -358,7 +358,7 @@
 			category: "Features",
 			name: "change-Spotify-mode",
 			desc: "Changes Spotify Mode to either Normal, Developer or Employee",
-			defaultValue: "developer",
+			defaultVal: "developer",
 			tippy: "Only takes effect after a restart",
 			options: [
 				{ value: "default", label: "Default" },
@@ -375,7 +375,7 @@
 			category: "Features",
 			name: "ZoomLevel",
 			desc: "Changes zoom level (%)",
-			defaultValue: 100,
+			defaultVal: 100,
 			placeholder: "%",
 			run: (value) => {
 				value /= 100;
@@ -387,7 +387,7 @@
 			category: "Layouts",
 			name: "AlbumBannerinPage",
 			desc: "Puts album art in places",
-			defaultValue: true,
+			defaultVal: true,
 			run: (value) => {
 				coverArtBanner(value);
 			},
@@ -396,32 +396,32 @@
 					type: "toggle",
 					name: "LyricsPage",
 					desc: "Adds Dynamic backgrounds to Lyrics Page",
-					defaultValue: true,
+					defaultVal: true,
 					tippy: "Includes Spotify Lyrics page and Spicetify's Lyrics Plus"
 				},
 				{
 					type: "toggle",
 					name: "PlaylistPage",
 					desc: "Adds Dynamic backgrounds to your Playlist Pages",
-					defaultValue: true,
+					defaultVal: true,
 				},
 				{
 					type: "toggle",
 					name: "ArtistPage",
 					desc: "Adds Dynamic backgrounds to Artist Pages",
-					defaultValue: true,
+					defaultVal: true,
 				},
 				{
 					type: "toggle",
 					name: "AlbumPage",
 					desc: "Adds Dynamic backgrounds to Album Pages",
-					defaultValue: true,
+					defaultVal: true,
 				},
 				{
 					type: "toggle",
 					name: "MiscPage",
 					desc: "Adds Dynamic backgrounds to Misc Pages",
-					defaultValue: true,
+					defaultVal: true,
 					tippy: "Enables album art for Station, Collection, Show, Episode, Genre, User"
 				},
 			]
@@ -431,7 +431,7 @@
 			category: "Layouts",
 			name: "LibX",
 			desc: "Brings back old ui",
-			defaultValue: false,
+			defaultVal: false,
 			run: (value) => {
 				toggleLibXUI(value);
 			},
@@ -440,13 +440,13 @@
 					type: "toggle",
 					name: "highlightnav",
 					desc: "Removes coloured gradient from the home page header",
-					defaultValue: true,
+					defaultVal: true,
 				},
 				{
 					type: "toggle",
 					name: "PreLibX",
 					desc: "Brings back old ui ()",
-					defaultValue: false,
+					defaultVal: false,
 				},
 			]
 		},
@@ -455,7 +455,7 @@
 			category: "Layouts",
 			name: "TestLayout",
 			desc: "Switches Playbar and Cover art in now playing bar",
-			defaultValue: false,
+			defaultVal: false,
 			tippy: 'This is not compatible with "newlayout"',
 		},
 		{
@@ -463,7 +463,7 @@
 			category: "Layouts",
 			name: "CombinedLibX",
 			desc: "Combines the nowplaying view and library menu",
-			defaultValue: false,
+			defaultVal: false,
 			tippy: 'This is not compatible with "newlayout"',
 		},
 		{
@@ -471,56 +471,56 @@
 			category: "Layouts",
 			name: "switchlayout",
 			desc: "Makes left sidebar go in front of the now playing bar",
-			defaultValue: true,
+			defaultVal: true,
 		},
 		{
 			type: "toggle",
 			category: "Snippets",
 			name: "hidetracklistnum",
 			desc: "Hide tracklist numbers in playlist page",
-			defaultValue: true,
+			defaultVal: true,
 		},
 		{
 			type: "toggle",
 			category: "Snippets",
 			name: "greenicon",
 			desc: "Makes active tab icon green",
-			defaultValue: true,
+			defaultVal: true,
 		},
 		{
 			type: "toggle",
 			category: "Snippets",
 			name: "hidenowplayview",
 			desc: "Hide cover art in now playing bar",
-			defaultValue: false,
+			defaultVal: false,
 		},
 		{
 			type: "toggle",
 			category: "Snippets",
 			name: "transplayicon",
 			desc: "Transparent play/pause button in now playing bar",
-			defaultValue: true,
+			defaultVal: true,
 		},
 		{
 			type: "toggle",
 			category: "Snippets",
 			name: "npvlargerlyrics",
 			desc: "Now playing view (Right sidebar) has lyrics only",
-			defaultValue: false,
+			defaultVal: false,
 		},
 		{
 			type: "toggle",
 			category: "Snippets",
 			name: "homeheader",
 			desc: "Removes coloured gradient from the home page header",
-			defaultValue: true,
+			defaultVal: true,
 		},
 		{
 			type: "input",
 			category: "Test",
 			name: "test-input",
 			desc: "Does something",
-			defaultValue: 1,
+			defaultVal: 1,
 			placeholder: "does something"
 		},
 		{
@@ -528,7 +528,7 @@
 			category: "Test",
 			name: "ea",
 			desc: "Description",
-			defaultValue: "test1",
+			defaultVal: "test1",
 			options: [
 				{ value: "test1", label: "test1" },
 				{ value: "test2", label: "test2" },
@@ -548,7 +548,7 @@
 
 	function coverArtBanner() {
 		if (!Spicetify.Player.data?.item) {
-			requestAnimationFrame(coverArtBanner);
+			setTimeout(coverArtBanner, 100);
 			return;
 		}
 
@@ -572,8 +572,8 @@
 
 		let banner = document.querySelector(".banner-image") ||
 			(() => {
-		const banner = document.createElement("div");
-		banner.className = "banner-image";
+				const banner = document.createElement("div");
+				banner.className = "banner-image";
 				document.querySelector(".under-main-view")?.appendChild(banner);
 				return banner;
 			})();
@@ -626,25 +626,25 @@
 
 		const addLibXText = (isEnabled, globalNav) => {
 			const addTextToButtons = () => {
-				globalNav.querySelectorAll('.search-searchCategory-categoryGrid > div > button, .main-globalNav-searchContainer > .main-globalNav-link-icon, .main-globalNav-searchInputSection').forEach(el => {
-				if (!el.querySelector('.main-globalNav-textWrapper')) {
-					const text = el.getAttribute('aria-label') || (el.querySelector('input') ? 'Search' : '');
+				globalNav.querySelectorAll('.search-searchCategory-categoryGrid > div > button,.main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H').forEach(el => {
+					if (!el.querySelector('.main-globalNav-textWrapper')) {
+						const text = el.getAttribute('aria-label') || (el.querySelector('input') ? 'Search' : '');
 						el.insertAdjacentHTML('beforeend', `
 							<span class="main-globalNav-textWrapper">
-								<div class="main-globalNav-iconText encore-text encore-text-body-medium-bold">${text}</div>
+								<div class="main-globalNav-iconText encore-text-body-medium-bold">${text}</div>
 							</span>
 						`);
-				}
-			});
+					}
+				});
 			};
 
-		if (isEnabled) {
-			addTextToButtons();
+			if (isEnabled) {
+				addTextToButtons();
 				globalNav.classList.add("global-libraryX");
 				textObserver?.disconnect();
-			textObserver = new MutationObserver(addTextToButtons);
-			textObserver.observe(globalNav, { childList: true, subtree: true });
-		} else {
+				textObserver = new MutationObserver(addTextToButtons);
+				textObserver.observe(globalNav, { childList: true, subtree: true });
+			} else {
 				globalNav.querySelectorAll('.main-globalNav-textWrapper').forEach(el => el.remove());
 				globalNav.classList.remove("global-libraryX");
 				textObserver?.disconnect();
