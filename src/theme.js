@@ -1,7 +1,8 @@
+console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 (async function theme() {
 	if (
 		!(
-			Spicetify.Platform &&
+			Spicetify.Platform.UserAPI &&
 			Spicetify.React &&
 			Spicetify.ReactDOM
 		)
@@ -59,8 +60,8 @@
 	};
 
 	const createTippy = (element, content) => {
-		if (content) {
-			Spicetify.Tippy(element, {
+		if (content !== undefined) {
+			const tippyInstance = Spicetify.Tippy(element, {
 				...Spicetify.TippyProps,
 				content,
 				placement: "top-start",
@@ -75,53 +76,50 @@
 
 	const initialiseSettings = () => {
 		const loadedSettings = Object.fromEntries(
-			options.flatMap(({ name, defaultVal, revealOptions }) => {
-				const mainValue = JSON.parse(localStorage.getItem(`theme:${name}`)) ?? defaultVal;
-				return [
-					[`theme:${name}`, mainValue],
-					...(revealOptions?.map(option => {
+			Object.values(options).flatMap(categoryOptions =>
+				categoryOptions.flatMap(({ name, defaultVal, revealOptions }) => {
+					const mainKey = `theme:${name}`;
+					const mainValue = getLocalStorageItem(mainKey, defaultVal);
+					const revealSettings = revealOptions?.map(option => {
 						const revealKey = `theme:${option.name}`;
-						const revealStoredValue = JSON.parse(localStorage.getItem(revealKey));
-						const revealValue = mainValue ? (revealStoredValue ?? option.defaultVal) : false;
+						const revealValue = mainValue ? getLocalStorageItem(revealKey, option.defaultVal) : false;
 						return [revealKey, revealValue];
-					}) || [])
-				];
+					}) || [];
+					return [[mainKey, mainValue], ...revealSettings];
 			})
+			)
 		);
 		applySettings(loadedSettings);
 		return loadedSettings;
 	};
 
 	const applySettings = (settings) => {
-		options.forEach(({ name, type, revealOptions, run }) => {
+		Object.values(options).forEach(categoryOptions =>
+			categoryOptions.forEach(({ name, type, revealOptions, run }) => {
 			const key = `theme:${name}`;
 			const value = settings[key];
-			if (type === 'toggle') {
-				document.body.classList.toggle(name, value);
-			}
-
+				if (type === 'toggle') document.body.classList.toggle(name, value);
 			revealOptions?.forEach(({ name: revealName, type: revealType }) => {
 				const revealKey = `theme:${revealName}`;
 				const revealValue = settings[revealKey];
 				if (revealType === 'toggle') {
-					document.body.classList.toggle(revealName, revealValue);
+						document.body.classList.toggle(revealName, value && revealValue);
 				}
 			});
-
 			if (run) run(value);
-		});
+			})
+		);
 	};
 
 	const saveOptions = (settings) => {
-		let changedSettings = [];
-		Object.entries(settings).forEach(([key, value]) => {
+		const changedSettings = Object.entries(settings).reduce((changes, [key, value]) => {
 			const currentValue = getLocalStorageItem(key, null);
 			if (JSON.stringify(currentValue) !== JSON.stringify(value)) {
 				setLocalStorageItem(key, value);
-				changedSettings.push({ key, value });
+				changes.push({ key, value });
 			}
-		});
-
+			return changes;
+		}, []);
 		if (changedSettings.length > 0) {
 			console.log("%c[Theme]", "color:#b3ebf2;", "Saving settings:", changedSettings);
 			applySettings(settings);
@@ -131,12 +129,13 @@
 	const resetOptions = (setSettings) => {
 		console.log("%c[Theme]", "color:#b3ebf2;", "Resetting to default settings");
 		const defaultSettings = Object.fromEntries(
-			options.flatMap(({ name, defaultVal, revealOptions }) => [
+							Object.values(options).flatMap(categoryOptions =>
+								categoryOptions.flatMap(({ name, defaultVal, revealOptions }) => [
 				[`theme:${name}`, defaultVal],
 				...(revealOptions?.map(option => [`theme:${option.name}`, option.defaultVal]) || [])
 			])
+							)
 		);
-
 		setSettings(defaultSettings);
 		applySettings(defaultSettings);
 	};
