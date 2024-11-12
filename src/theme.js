@@ -141,7 +141,7 @@
 		applySettings(defaultSettings);
 	};
 
-	const OptionRow = ({ name, desc, tippy, children }) => {
+	const optionRow = ({ name, desc, tippy, children }) => {
 		const controlRef = Spicetify.React.useRef(null);
 
 		Spicetify.React.useEffect(() => {
@@ -200,7 +200,6 @@
 
 	const CategoryCarousel = ({ categories, onCategoryClick }) => {
 		const carouselRef = Spicetify.React.useRef(null);
-
 		Spicetify.React.useEffect(() => {
 			const handleWheel = (e) => {
 				if (carouselRef.current) {
@@ -208,14 +207,12 @@
 					e.preventDefault();
 				}
 			};
-
 			const carousel = carouselRef.current;
 			if (carousel) {
 				carousel.addEventListener('wheel', handleWheel, { passive: false });
 				return () => carousel.removeEventListener('wheel', handleWheel);
 			}
 		}, []);
-
 		return Spicetify.React.createElement(
 			"div",
 			{ className: "category-carousel-container" },
@@ -273,27 +270,44 @@
 		);
 	};
 
+	const RenderOption = ({ option, settings, onSettingChange }) => {
+		const Component = option.type === 'toggle' ? Toggle : option.type === 'dropdown' ? Dropdown : option.type === 'input' ? Input : Slider;
+		return Spicetify.React.createElement(Component, {
+			...option,
+			value: settings[`theme:${option.name}`],
+			onChange: onSettingChange,
+		});
+	};
+
 	const RevealableOptions = ({ option, settings, onSettingChange }) => {
-		const Component = option.type === 'toggle' ? Toggle : option.type === 'dropdown' ? Dropdown : Input;
+		const isMainOptionEnabled = settings[`theme:${option.name}`];
 
 		return Spicetify.React.createElement(
 			'div',
 			{ className: 'themeOptionWrapper' },
-			Spicetify.React.createElement(Component, {
-				...option,
-				value: settings[`theme:${option.name}`],
-				onChange: onSettingChange,
+			Spicetify.React.createElement(RenderOption, {
+				option,
+				settings,
+				onSettingChange: (key, value) => {
+					onSettingChange(key, value);
+					if (Array.isArray(option.revealOptions)) {
+						option.revealOptions.forEach(revealOption => {
+							const revealKey = `theme:${revealOption.name}`;
+							onSettingChange(revealKey, value ? settings[revealKey] : false);
+						});
+					}
+				}
 			}),
-			Array.isArray(option.revealOptions) && settings[`theme:${option.name}`] === true
+			Array.isArray(option.revealOptions) && isMainOptionEnabled
 				? Spicetify.React.createElement(
 					'div',
 					{ className: 'themeOptionRevealedWrapper' },
-					option.revealOptions.map((revealOption) =>
-						Spicetify.React.createElement(Component, {
+					option.revealOptions.map(revealOption =>
+						Spicetify.React.createElement(RenderOption, {
 							key: revealOption.name,
-							...revealOption,
-							value: settings[`theme:${revealOption.name}`],
-							onChange: onSettingChange,
+							option: revealOption,
+							settings: settings,
+							onSettingChange: onSettingChange,
 						})
 					)
 				)
@@ -302,41 +316,52 @@
 	};
 
 	const ThemeSettings = () => {
-		const [settings, setSettings] = Spicetify.React.useState(initialiseSettings)
-
+		const [settings, setSettings] = Spicetify.React.useState(initialiseSettings);
 		const categoryRefs = Spicetify.React.useRef({});
-		const categorizedOptions = Spicetify.React.useMemo(() => {
-			return options.reduce((acc, option) => {
-				(acc[option.category] ??= []).push(option);
-				return acc;
-			}, {});
-		}, []);
+
+	  const handleSettingChange = (key, value) => {
+			setSettings(prev => {
+				const newSettings = { ...prev, [key]: value };
+				if (key.startsWith('theme:')) {
+					const optionName = key.replace('theme:', '');
+					const categoryOption = Object.values(options).flat().find(opt => opt.name === optionName);
+					if (categoryOption && Array.isArray(categoryOption.revealOptions)) {
+						categoryOption.revealOptions.forEach(revealOption => {
+							const revealKey = `theme:${revealOption.name}`;
+							if (value) {
+								newSettings[revealKey] = revealOption.defaultVal;
+							} else {
+								newSettings[revealKey] = false;
+							}
+						});
+					}
+				}
+				return newSettings;
+			});
+		};
 
 		return Spicetify.React.createElement("div", { className: "themeContainer" },
 			Spicetify.React.createElement(CategoryCarousel, {
-				categories: Object.keys(categorizedOptions),
+				categories: Object.keys(options),
 				onCategoryClick: (category) => {
 					categoryRefs.current[category]?.scrollIntoView({ behavior: 'smooth' });
 				}
 			}),
 			Spicetify.React.createElement("div", { className: "optionContainer" },
-				Object.entries(categorizedOptions).map(([category, categoryOptions]) =>
+				Object.entries(options).map(([category, categoryOptions]) =>
 					Spicetify.React.createElement("div", {
 						key: category,
 						className: `${category.toLowerCase()}Container`,
 						ref: el => categoryRefs.current[category] = el
 					},
-						Spicetify.React.createElement(CollapsibleSection, { title: category },
+						Spicetify.React.createElement("h2", { className: "categoryTitle" }, category),
 							categoryOptions.map((option) =>
 								Spicetify.React.createElement(RevealableOptions, {
 									key: option.name,
 									option: option,
 									settings: settings,
-									onSettingChange: (key, value) => {
-										setSettings(prev => ({ ...prev, [key]: value }));
-									},
+								onSettingChange: handleSettingChange,
 								})
-							)
 						)
 					)
 				)
@@ -352,10 +377,10 @@
 	MARK: OPTIONS
 	*/
 
-	const options = [
-		{
-			type: "dropdown",
-			category: "Features",
+	const options = {
+		"Features": [
+			{
+				type: "dropdown",
 			name: "change-Spotify-mode",
 			desc: "Changes Spotify Mode to either Normal, Developer or Employee",
 			defaultVal: "developer",
@@ -372,7 +397,6 @@
 		},
 		{
 			type: "input",
-			category: "Features",
 			name: "ZoomLevel",
 			desc: "Changes zoom level (%)",
 			defaultVal: 100,
@@ -384,7 +408,6 @@
 		},
 		{
 			type: "toggle",
-			category: "Layouts",
 			name: "AlbumBannerinPage",
 			desc: "Puts album art in places",
 			defaultVal: true,
@@ -426,9 +449,10 @@
 				},
 			]
 		},
+		],
+		"Layouts": [
 		{
 			type: "toggle",
-			category: "Layouts",
 			name: "LibX",
 			desc: "Brings back old ui",
 			defaultVal: false,
@@ -452,15 +476,13 @@
 		},
 		{
 			type: "toggle",
-			category: "Layouts",
 			name: "TestLayout",
 			desc: "Switches Playbar and Cover art in now playing bar",
-			defaultVal: false,
+			defaultVal: true,
 			tippy: 'This is not compatible with "newlayout"',
 		},
 		{
 			type: "toggle",
-			category: "Layouts",
 			name: "CombinedLibX",
 			desc: "Combines the nowplaying view and library menu",
 			defaultVal: false,
@@ -468,65 +490,66 @@
 		},
 		{
 			type: "toggle",
-			category: "Layouts",
 			name: "switchlayout",
 			desc: "Makes left sidebar go in front of the now playing bar",
 			defaultVal: true,
 		},
+		],
+		"Snippets": [
 		{
 			type: "toggle",
-			category: "Snippets",
 			name: "hidetracklistnum",
 			desc: "Hide tracklist numbers in playlist page",
 			defaultVal: true,
 		},
 		{
 			type: "toggle",
-			category: "Snippets",
 			name: "greenicon",
 			desc: "Makes active tab icon green",
 			defaultVal: true,
 		},
 		{
 			type: "toggle",
-			category: "Snippets",
 			name: "hidenowplayview",
 			desc: "Hide cover art in now playing bar",
 			defaultVal: false,
 		},
 		{
 			type: "toggle",
-			category: "Snippets",
 			name: "transplayicon",
 			desc: "Transparent play/pause button in now playing bar",
 			defaultVal: true,
 		},
 		{
 			type: "toggle",
-			category: "Snippets",
 			name: "npvlargerlyrics",
 			desc: "Now playing view (Right sidebar) has lyrics only",
 			defaultVal: false,
 		},
 		{
 			type: "toggle",
-			category: "Snippets",
 			name: "homeheader",
 			desc: "Removes coloured gradient from the home page header",
 			defaultVal: true,
 		},
+		],
+		"Test": [
+			{
+				type: "toggle",
+				name: "test-toggle",
+				desc: "Description",
+				defaultVal: true,
+			},
 		{
 			type: "input",
-			category: "Test",
 			name: "test-input",
-			desc: "Does something",
+				desc: "Description",
 			defaultVal: 1,
 			placeholder: "does something"
 		},
 		{
 			type: "dropdown",
-			category: "Test",
-			name: "ea",
+				name: "test-dropdown",
 			desc: "Description",
 			defaultVal: "test1",
 			options: [
@@ -534,9 +557,11 @@
 				{ value: "test2", label: "test2" },
 				{ value: "test3", label: "test3" },
 				{ value: "test4", label: "test4" },
-			],
-		},
-	];
+				]
+			},
+		]
+	};
+
 
 	/*
 	MARK: FUNCTIONS
@@ -690,6 +715,7 @@
 		window.employeeListener = await setMode("employee", pairs["employee"]);
 	};
 
+
 	/*
 	MARK: TOPBAR BUTTON
 	*/
@@ -736,8 +762,8 @@
 		true
 	);
 
-	initialiseSettings();
-	console.log("%c[Theme]", "color:#b3ebf2;", "Spicetify theme initialised")
+	const initialSettings = initialiseSettings();
+	console.log("%c[Theme]", "color:#b3ebf2;", "Spicetify theme initialised", initialSettings)
 })();
 
 // <path d="M8.262 5.72A2.542 2.542 90 108.262 10.804 2.542 2.542 90 108.262 5.72ZM6.991 8.262A1.271 1.271 90 119.533 8.262 1.271 1.271 90 116.991 8.262ZM11.59 3.684A.902.902 90 0110.543 2.962L10.212 1.162A.45.45 0 009.863.804 7.715 7.715 90 006.661.804.45.45 0 006.312 1.162L5.983 2.962A.89.89 0 015.945 3.103.902.902 90 014.793 3.646L3.064 3.03A.45.45 0 002.578 3.152 7.61 7.61 0 00.975 5.914C.919 6.087.972 6.276 1.112 6.394L2.513 7.579C2.55 7.611 2.585 7.645 2.616 7.682 2.938 8.06 2.892 8.625 2.512 8.947L1.111 10.132A.45.45 0 00.974 10.611C1.307 11.635 1.855 12.576 2.578 13.373A.45.45 0 003.064 13.495L4.793 12.88A.915.915 90 014.934 12.842.902.902 90 015.981 13.564L6.31 15.363A.45.45 0 006.66 15.721 7.73 7.73 0 008.261 15.888 7.715 7.715 90 009.861 15.721.45.45 0 0010.21 15.363L10.541 13.563A.89.89 0 0110.579 13.422.902.902 90 0111.731 12.879L13.458 13.494A.45.45 0 0013.944 13.372 7.61 7.61 0 0015.548 10.61C15.604 10.437 15.55 10.248 15.411 10.131L14.01 8.946A.89.89 90 0113.906 8.843C13.584 8.466 13.63 7.9 14.01 7.578L15.411 6.393A.45.45 0 0015.548 5.913C15.215 4.889 14.667 3.948 13.944 3.151A.45.45 0 0013.458 3.029L11.729 3.644A.902.902 90 0111.588 3.682ZM3.177 4.42 4.368 4.843A2.173 2.173 90 007.141 3.533C7.18 3.422 7.212 3.308 7.232 3.191L7.457 1.958A6.49 6.49 0 018.262 1.908 6.47 6.47 0 019.065 1.958L9.291 3.191A2.173 2.173 90 0011.816 4.934C11.932 4.912 12.046 4.883 12.157 4.842L13.348 4.419A6.342 6.342 90 0114.149 5.796L13.189 6.607C12.273 7.381 12.16 8.752 12.939 9.666A2.161 2.161 90 0013.189 9.915L14.147 10.726A6.342 6.342 90 0113.346 12.103L12.155 11.678A2.173 2.173 90 009.382 12.988 2.08 2.08 0 009.291 13.33L9.065 14.563A6.482 6.482 90 018.262 14.613 6.5 6.5 0 017.458 14.563L7.233 13.33A2.173 2.173 90 004.708 11.587C4.592 11.609 4.478 11.638 4.367 11.678L3.176 12.101A6.32 6.32 0 012.375 10.725L3.333 9.914C4.249 9.14 4.363 7.769 3.583 6.855 3.507 6.765 3.423 6.682 3.333 6.606L2.375 5.795A6.29 6.29 0 013.176 4.419Z"/>
