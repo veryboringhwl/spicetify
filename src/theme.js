@@ -47,6 +47,158 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	updateZoomVariable();
 
 	/*
+	MARK: FUNCTIONS
+	*/
+
+	/*
+	MARK: COVER ART BANNER
+	*/
+
+	function coverArtBanner() {
+		if (!Spicetify.Player.data?.item) {
+			setTimeout(coverArtBanner, 100);
+			return;
+		}
+
+		const channels = {
+			Album: { regex: /^\/album\//, key: 'theme:AlbumPage', fallback: false },
+			Artist: { regex: /^\/artist\/(?!artists\b)\w+$/, key: 'theme:ArtistPage', fallback: false },
+			Lyrics: { regex: /^\/lyrics$/, key: 'theme:LyricsPage', fallback: true },
+			"Lyrics-Plus": { regex: /^\/lyrics-plus$/, key: 'theme:LyricsPage', fallback: true },
+			Playlist: { regex: /^\/playlist\//, key: 'theme:PlaylistPage', fallback: true },
+			Station: { regex: /^\/station\/playlist\//, key: 'theme:MiscPage', fallback: false },
+			Collection: { regex: /^\/collection\/tracks$/, key: 'theme:MiscPage', fallback: false },
+			Show: { regex: /^\/show\//, key: 'theme:MiscPage', fallback: false },
+			Episode: { regex: /^\/episode\//, key: 'theme:MiscPage', fallback: false },
+			User: { regex: /^\/user\/(?!users\b)\w+$/, key: 'theme:MiscPage', fallback: false },
+			Genre: { regex: /^\/genre\//, key: 'theme:MiscPage', fallback: false }
+		};
+
+		Object.values(channels).forEach(channel => {
+			channel.enabled = getLocalStorageItem(channel.key, channel.fallback);
+		});
+
+		let banner = document.querySelector(".banner-image") ||
+			(() => {
+				const banner = document.createElement("div");
+				banner.className = "banner-image";
+				document.querySelector(".under-main-view")?.appendChild(banner);
+				return banner;
+			})();
+
+		const updateBanner = () => {
+			const pathname = Spicetify.Platform.History.location.pathname;
+			const source = Spicetify.Player.data.item.metadata.image_xlarge_url;
+			const showBanner = Object.values(channels).some(
+				(channel) => channel.enabled && channel.regex.test(pathname)
+			);
+
+			if (showBanner && source) {
+				banner.style.display = "";
+				const img = new Image();
+				img.src = source;
+				img.onload = () => document.documentElement.style.setProperty("--image", `url(${source})`);
+			} else {
+				banner.style.display = "none";
+			}
+		};
+
+		Spicetify.Platform.History.listen(updateBanner);
+		Spicetify.Player.addEventListener("songchange", updateBanner);
+		updateBanner();
+	}
+
+	/*
+	MARK: SELECT COLOUR SCHEMES
+	*/
+
+	function toggleLibXUI(isEnabled) {
+		const globalNav = document.querySelector(".Root__globalNav");
+		if (!globalNav) return;
+
+		showLibXUI(isEnabled, globalNav);
+	}
+
+	let textObserver;
+	function showLibXUI(isEnabled, globalNav) {
+		function addContainerClass(isEnabled, globalNav) {
+			const updateCollapsedState = () => {
+				const elementToWatch = document.querySelector(".sikBfynL1Y6I25nVpbAg");
+				globalNav.classList.toggle("collapsed", isEnabled && elementToWatch);
+			};
+
+			const observer = new MutationObserver(updateCollapsedState);
+			observer.observe(document.body, { childList: true, subtree: true });
+			updateCollapsedState();
+		}
+
+		const addLibXText = (isEnabled, globalNav) => {
+			const addTextToButtons = () => {
+				globalNav.querySelectorAll('.search-searchCategory-categoryGrid > div > button,.main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H').forEach(el => {
+					if (!el.querySelector('.main-globalNav-textWrapper')) {
+						const text = el.getAttribute('aria-label') || (el.querySelector('input') ? 'Search' : '');
+						el.insertAdjacentHTML('beforeend', `
+							<span class="main-globalNav-textWrapper">
+								<div class="main-globalNav-iconText encore-text-body-medium-bold">${text}</div>
+							</span>
+						`);
+					}
+				});
+			};
+
+			if (isEnabled) {
+				addTextToButtons();
+				globalNav.classList.add("global-libraryX");
+				textObserver?.disconnect();
+				textObserver = new MutationObserver(addTextToButtons);
+				textObserver.observe(globalNav, { childList: true, subtree: true });
+			} else {
+				globalNav.querySelectorAll('.main-globalNav-textWrapper').forEach(el => el.remove());
+				globalNav.classList.remove("global-libraryX");
+				textObserver?.disconnect();
+				textObserver = null;
+			}
+		};
+
+		addLibXText(isEnabled, globalNav);
+		addContainerClass(isEnabled, globalNav);
+	}
+
+	/*
+	MARK: CHANGE SPOTIFY MODE
+	*/
+
+	const changeSpotifyMode = async (mode) => {
+		if (!Spicetify.Platform.UserAPI._product_state_service) {
+			setTimeout(() => changeSpotifyMode(mode), 100);
+			return;
+		}
+
+		const modePairs = {
+			default: { "app-developer": "0", employee: "0" },
+			developer: { "app-developer": "2", employee: "0" },
+			employee: { "app-developer": "0", employee: "1" },
+			both: { "app-developer": "2", employee: "1" },
+		};
+
+		const pairs = modePairs[mode] || modePairs.default;
+
+		const setMode = async (key, value) => {
+			await Spicetify.Platform.UserAPI._product_state_service.putValues({ pairs: { [key]: value } });
+			return Spicetify.Platform.UserAPI._product_state_service.subValues({ keys: [key] }, async (newValues) => {
+				if (newValues[key] !== value) {
+					await Spicetify.Platform.UserAPI._product_state_service.putValues({ pairs: { [key]: value } });
+				}
+			});
+		};
+
+		window.appDevListener?.cancel();
+		window.employeeListener?.cancel();
+		window.appDevListener = await setMode("app-developer", pairs["app-developer"]);
+		window.employeeListener = await setMode("employee", pairs["employee"]);
+	};
+
+	/*
 	MARK: THEME FUNCTIONS
 	*/
 
@@ -560,160 +712,6 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			},
 		]
 	};
-
-
-	/*
-	MARK: FUNCTIONS
-	*/
-
-	/*
-	MARK: COVER ART BANNER
-	*/
-
-	function coverArtBanner() {
-		if (!Spicetify.Player.data?.item) {
-			setTimeout(coverArtBanner, 100);
-			return;
-		}
-
-		const channels = {
-			Album: { regex: /^\/album\//, key: 'theme:AlbumPage', fallback: false },
-			Artist: { regex: /^\/artist\/(?!artists\b)\w+$/, key: 'theme:ArtistPage', fallback: false },
-			Lyrics: { regex: /^\/lyrics$/, key: 'theme:LyricsPage', fallback: true },
-			"Lyrics-Plus": { regex: /^\/lyrics-plus$/, key: 'theme:LyricsPage', fallback: true },
-			Playlist: { regex: /^\/playlist\//, key: 'theme:PlaylistPage', fallback: true },
-			Station: { regex: /^\/station\/playlist\//, key: 'theme:MiscPage', fallback: false },
-			Collection: { regex: /^\/collection\/tracks$/, key: 'theme:MiscPage', fallback: false },
-			Show: { regex: /^\/show\//, key: 'theme:MiscPage', fallback: false },
-			Episode: { regex: /^\/episode\//, key: 'theme:MiscPage', fallback: false },
-			User: { regex: /^\/user\/(?!users\b)\w+$/, key: 'theme:MiscPage', fallback: false },
-			Genre: { regex: /^\/genre\//, key: 'theme:MiscPage', fallback: false }
-		};
-
-		Object.values(channels).forEach(channel => {
-			channel.enabled = getLocalStorageItem(channel.key, channel.fallback);
-		});
-
-		let banner = document.querySelector(".banner-image") ||
-			(() => {
-				const banner = document.createElement("div");
-				banner.className = "banner-image";
-				document.querySelector(".under-main-view")?.appendChild(banner);
-				return banner;
-			})();
-
-		const updateBanner = () => {
-			const pathname = Spicetify.Platform.History.location.pathname;
-			const source = Spicetify.Player.data.item.metadata.image_xlarge_url;
-			const showBanner = Object.values(channels).some(
-				(channel) => channel.enabled && channel.regex.test(pathname)
-			);
-
-			if (showBanner && source) {
-				banner.style.display = "";
-				const img = new Image();
-				img.src = source;
-				img.onload = () => document.documentElement.style.setProperty("--image", `url(${source})`);
-			} else {
-				banner.style.display = "none";
-			}
-		};
-
-		Spicetify.Platform.History.listen(updateBanner);
-		Spicetify.Player.addEventListener("songchange", updateBanner);
-		updateBanner();
-	}
-
-	/*
-	MARK: SELECT COLOUR SCHEMES
-	*/
-
-	function toggleLibXUI(isEnabled) {
-		const globalNav = document.querySelector(".Root__globalNav");
-		if (!globalNav) return;
-
-		showLibXUI(isEnabled, globalNav);
-	}
-
-	let textObserver;
-	function showLibXUI(isEnabled, globalNav) {
-		function addContainerClass(isEnabled, globalNav) {
-			const updateCollapsedState = () => {
-				const elementToWatch = document.querySelector(".sikBfynL1Y6I25nVpbAg");
-				globalNav.classList.toggle("collapsed", isEnabled && elementToWatch);
-			};
-
-			const observer = new MutationObserver(updateCollapsedState);
-			observer.observe(document.body, { childList: true, subtree: true });
-			updateCollapsedState();
-		}
-
-		const addLibXText = (isEnabled, globalNav) => {
-			const addTextToButtons = () => {
-				globalNav.querySelectorAll('.search-searchCategory-categoryGrid > div > button,.main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H').forEach(el => {
-					if (!el.querySelector('.main-globalNav-textWrapper')) {
-						const text = el.getAttribute('aria-label') || (el.querySelector('input') ? 'Search' : '');
-						el.insertAdjacentHTML('beforeend', `
-							<span class="main-globalNav-textWrapper">
-								<div class="main-globalNav-iconText encore-text-body-medium-bold">${text}</div>
-							</span>
-						`);
-					}
-				});
-			};
-
-			if (isEnabled) {
-				addTextToButtons();
-				globalNav.classList.add("global-libraryX");
-				textObserver?.disconnect();
-				textObserver = new MutationObserver(addTextToButtons);
-				textObserver.observe(globalNav, { childList: true, subtree: true });
-			} else {
-				globalNav.querySelectorAll('.main-globalNav-textWrapper').forEach(el => el.remove());
-				globalNav.classList.remove("global-libraryX");
-				textObserver?.disconnect();
-				textObserver = null;
-			}
-		};
-
-		addLibXText(isEnabled, globalNav);
-		addContainerClass(isEnabled, globalNav);
-	}
-
-	/*
-	MARK: CHANGE SPOTIFY MODE
-	*/
-
-	const changeSpotifyMode = async (mode) => {
-		if (!Spicetify.Platform.UserAPI._product_state_service) {
-			setTimeout(() => changeSpotifyMode(mode), 100);
-			return;
-		}
-
-		const modePairs = {
-			default: { "app-developer": "0", employee: "0" },
-			developer: { "app-developer": "2", employee: "0" },
-			employee: { "app-developer": "0", employee: "1" },
-			both: { "app-developer": "2", employee: "1" },
-		};
-
-		const pairs = modePairs[mode] || modePairs.default;
-
-		const setMode = async (key, value) => {
-			await Spicetify.Platform.UserAPI._product_state_service.putValues({ pairs: { [key]: value } });
-			return Spicetify.Platform.UserAPI._product_state_service.subValues({ keys: [key] }, async (newValues) => {
-				if (newValues[key] !== value) {
-					await Spicetify.Platform.UserAPI._product_state_service.putValues({ pairs: { [key]: value } });
-				}
-			});
-		};
-
-		window.appDevListener?.cancel();
-		window.employeeListener?.cancel();
-		window.appDevListener = await setMode("app-developer", pairs["app-developer"]);
-		window.employeeListener = await setMode("employee", pairs["employee"]);
-	};
-
 
 	/*
 	MARK: TOPBAR BUTTON
