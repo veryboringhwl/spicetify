@@ -1,12 +1,6 @@
 console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 (async function theme() {
-	if (
-		!(
-			Spicetify.Platform.UserAPI &&
-			Spicetify.React &&
-			Spicetify.ReactDOM
-		)
-	) {
+	if (!(Spicetify.Platform && Spicetify.React && Spicetify.ReactDOM)) {
 		setTimeout(theme, 100);
 		return;
 	}
@@ -74,23 +68,18 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			Genre: { regex: /^\/genre\//, key: 'theme:MiscPage', fallback: false }
 		};
 
-		Object.values(channels).forEach(channel => {
-			channel.enabled = getLocalStorageItem(channel.key, channel.fallback);
-		});
-
-		let banner = document.querySelector(".banner-image") ||
-			(() => {
+		const banner = document.querySelector(".banner-image") || (() => {
 				const banner = document.createElement("div");
 				banner.className = "banner-image";
 				document.querySelector(".under-main-view")?.appendChild(banner);
 				return banner;
 			})();
 
-		const updateBanner = () => {
-			const pathname = Spicetify.Platform.History.location.pathname;
+		function updateBanner() {
+			const path = Spicetify.Platform.History.location.pathname;
 			const source = Spicetify.Player.data.item.metadata.image_xlarge_url;
 			const showBanner = Object.values(channels).some(
-				(channel) => channel.enabled && channel.regex.test(pathname)
+				({ regex, key }) => getLocalStorage(key, false) && regex.test(path)
 			);
 
 			if (showBanner && source) {
@@ -101,7 +90,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			} else {
 				banner.style.display = "none";
 			}
-		};
+		}
 
 		Spicetify.Platform.History.listen(updateBanner);
 		Spicetify.Player.addEventListener("songchange", updateBanner);
@@ -120,30 +109,38 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	}
 
 	let textObserver;
+
 	function showLibXUI(isEnabled, globalNav) {
 		function addContainerClass(isEnabled, globalNav) {
-			const updateCollapsedState = () => {
+			const addCollapsed = () => {
 				const elementToWatch = document.querySelector(".sikBfynL1Y6I25nVpbAg");
 				globalNav.classList.toggle("collapsed", isEnabled && elementToWatch);
 			};
-
-			const observer = new MutationObserver(updateCollapsedState);
+			const observer = new MutationObserver(addCollapsed);
 			observer.observe(document.body, { childList: true, subtree: true });
-			updateCollapsedState();
+			addCollapsed();
 		}
 
 		const addLibXText = (isEnabled, globalNav) => {
 			const addTextToButtons = () => {
-				globalNav.querySelectorAll('.search-searchCategory-categoryGrid > div > button,.main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H').forEach(el => {
-					if (!el.querySelector('.main-globalNav-textWrapper')) {
-						const text = el.getAttribute('aria-label') || (el.querySelector('input') ? 'Search' : '');
-						el.insertAdjacentHTML('beforeend', `
+				const elements = globalNav.querySelectorAll(
+					".search-searchCategory-categoryGrid > div > button,.main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H",
+				);
+				for (const el of elements) {
+					if (!el.querySelector(".main-globalNav-textWrapper")) {
+						const text =
+							el.getAttribute("aria-label") ||
+							(el.querySelector("input") ? "Search" : "");
+						el.insertAdjacentHTML(
+							"beforeend",
+							`
 							<span class="main-globalNav-textWrapper">
 								<div class="main-globalNav-iconText encore-text-body-medium-bold">${text}</div>
 							</span>
-						`);
+						`,
+						);
 					}
-				});
+				}
 			};
 
 			if (isEnabled) {
@@ -153,7 +150,12 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 				textObserver = new MutationObserver(addTextToButtons);
 				textObserver.observe(globalNav, { childList: true, subtree: true });
 			} else {
-				globalNav.querySelectorAll('.main-globalNav-textWrapper').forEach(el => el.remove());
+				const textWrappers = globalNav.querySelectorAll(
+					".main-globalNav-textWrapper",
+				);
+				for (const el of textWrappers) {
+					el.remove();
+				}
 				globalNav.classList.remove("global-libraryX");
 				textObserver?.disconnect();
 				textObserver = null;
@@ -184,17 +186,27 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 		const pairs = modePairs[mode] || modePairs.default;
 
 		const setMode = async (key, value) => {
-			await Spicetify.Platform.UserAPI._product_state_service.putValues({ pairs: { [key]: value } });
-			return Spicetify.Platform.UserAPI._product_state_service.subValues({ keys: [key] }, async (newValues) => {
-				if (newValues[key] !== value) {
-					await Spicetify.Platform.UserAPI._product_state_service.putValues({ pairs: { [key]: value } });
-				}
+			await Spicetify.Platform.UserAPI._product_state_service.putValues({
+				pairs: { [key]: value },
 			});
+			return Spicetify.Platform.UserAPI._product_state_service.subValues(
+				{ keys: [key] },
+				async (newValues) => {
+				if (newValues[key] !== value) {
+						await Spicetify.Platform.UserAPI._product_state_service.putValues({
+							pairs: { [key]: value },
+						});
+				}
+				},
+			);
 		};
 
 		window.appDevListener?.cancel();
 		window.employeeListener?.cancel();
-		window.appDevListener = await setMode("app-developer", pairs["app-developer"]);
+		window.appDevListener = await setMode(
+			"app-developer",
+			pairs["app-developer"],
+		);
 		window.employeeListener = await setMode("employee", pairs["employee"]);
 	};
 
@@ -292,7 +304,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 		applySettings(defaultSettings);
 	};
 
-	const optionRow = ({ name, desc, tippy, children }) => {
+	const OptionRow = ({ name, desc, tippy, children }) => {
 		const controlRef = Spicetify.React.useRef(null);
 
 		Spicetify.React.useEffect(() => {
@@ -759,8 +771,8 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 		true
 	);
 
-	const initialSettings = initialiseSettings();
-	console.log("%c[Theme]", "color:#b3ebf2;", "Spicetify theme initialised", initialSettings)
+	initialiseSettings();
+	console.log("%c[Theme]", "color:#b3ebf2;", "Spicetify theme initialised");
 })();
 
 // <path d="M8.262 5.72A2.542 2.542 90 108.262 10.804 2.542 2.542 90 108.262 5.72ZM6.991 8.262A1.271 1.271 90 119.533 8.262 1.271 1.271 90 116.991 8.262ZM11.59 3.684A.902.902 90 0110.543 2.962L10.212 1.162A.45.45 0 009.863.804 7.715 7.715 90 006.661.804.45.45 0 006.312 1.162L5.983 2.962A.89.89 0 015.945 3.103.902.902 90 014.793 3.646L3.064 3.03A.45.45 0 002.578 3.152 7.61 7.61 0 00.975 5.914C.919 6.087.972 6.276 1.112 6.394L2.513 7.579C2.55 7.611 2.585 7.645 2.616 7.682 2.938 8.06 2.892 8.625 2.512 8.947L1.111 10.132A.45.45 0 00.974 10.611C1.307 11.635 1.855 12.576 2.578 13.373A.45.45 0 003.064 13.495L4.793 12.88A.915.915 90 014.934 12.842.902.902 90 015.981 13.564L6.31 15.363A.45.45 0 006.66 15.721 7.73 7.73 0 008.261 15.888 7.715 7.715 90 009.861 15.721.45.45 0 0010.21 15.363L10.541 13.563A.89.89 0 0110.579 13.422.902.902 90 0111.731 12.879L13.458 13.494A.45.45 0 0013.944 13.372 7.61 7.61 0 0015.548 10.61C15.604 10.437 15.55 10.248 15.411 10.131L14.01 8.946A.89.89 90 0113.906 8.843C13.584 8.466 13.63 7.9 14.01 7.578L15.411 6.393A.45.45 0 0015.548 5.913C15.215 4.889 14.667 3.948 13.944 3.151A.45.45 0 0013.458 3.029L11.729 3.644A.902.902 90 0111.588 3.682ZM3.177 4.42 4.368 4.843A2.173 2.173 90 007.141 3.533C7.18 3.422 7.212 3.308 7.232 3.191L7.457 1.958A6.49 6.49 0 018.262 1.908 6.47 6.47 0 019.065 1.958L9.291 3.191A2.173 2.173 90 0011.816 4.934C11.932 4.912 12.046 4.883 12.157 4.842L13.348 4.419A6.342 6.342 90 0114.149 5.796L13.189 6.607C12.273 7.381 12.16 8.752 12.939 9.666A2.161 2.161 90 0013.189 9.915L14.147 10.726A6.342 6.342 90 0113.346 12.103L12.155 11.678A2.173 2.173 90 009.382 12.988 2.08 2.08 0 009.291 13.33L9.065 14.563A6.482 6.482 90 018.262 14.613 6.5 6.5 0 017.458 14.563L7.233 13.33A2.173 2.173 90 004.708 11.587C4.592 11.609 4.478 11.638 4.367 11.678L3.176 12.101A6.32 6.32 0 012.375 10.725L3.333 9.914C4.249 9.14 4.363 7.769 3.583 6.855 3.507 6.765 3.423 6.682 3.333 6.606L2.375 5.795A6.29 6.29 0 013.176 4.419Z"/>
