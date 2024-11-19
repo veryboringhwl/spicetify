@@ -214,18 +214,18 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	MARK: THEME FUNCTIONS
 	*/
 
-	const getLocalStorageItem = (key, defaultVal) => {
+	const getLocalStorage = (key, defaultVal) => {
 		const item = localStorage.getItem(key);
 		return item !== null ? JSON.parse(item) : defaultVal;
 	};
 
-	const setLocalStorageItem = (key, value) => {
+	const setLocalStorage = (key, value) => {
 		localStorage.setItem(key, JSON.stringify(value));
 	};
 
 	const createTippy = (element, content) => {
-		if (content !== undefined) {
-			const tippyInstance = Spicetify.Tippy(element, {
+		if (content) {
+			Spicetify.Tippy(element, {
 				...Spicetify.TippyProps,
 				content,
 				placement: "top-start",
@@ -238,70 +238,74 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 		}
 	};
 
-	const initialiseSettings = () => {
+	const initialiseSettings = (options) => {
 		const loadedSettings = Object.fromEntries(
-			Object.values(options).flatMap(categoryOptions =>
+			Object.entries(options).flatMap(([category, categoryOptions]) =>
 				categoryOptions.flatMap(({ name, defaultVal, revealOptions }) => {
 					const mainKey = `theme:${name}`;
-					const mainValue = getLocalStorageItem(mainKey, defaultVal);
-					const revealSettings = revealOptions?.map(option => {
-						const revealKey = `theme:${option.name}`;
-						const revealValue = mainValue ? getLocalStorageItem(revealKey, option.defaultVal) : false;
-						return [revealKey, revealValue];
-					}) || [];
+					const mainValue = getLocalStorage(mainKey, defaultVal);
+					const revealSettings = revealOptions?.map(option => [
+						`theme:${option.name}`,
+						mainValue ? getLocalStorage(`theme:${option.name}`, option.defaultVal) : false
+					]) || [];
 					return [[mainKey, mainValue], ...revealSettings];
 			})
 			)
 		);
-		applySettings(loadedSettings);
+		applySettings(loadedSettings, options);
 		return loadedSettings;
 	};
 
-	const applySettings = (settings) => {
-		Object.values(options).forEach(categoryOptions =>
-			categoryOptions.forEach(({ name, type, revealOptions, run }) => {
+	const applySettings = (settings, options) => {
+		Object.values(options).flat().forEach(({ name, type, revealOptions, run }) => {
 			const key = `theme:${name}`;
 			const value = settings[key];
-				if (type === 'toggle') document.body.classList.toggle(name, value);
-			revealOptions?.forEach(({ name: revealName, type: revealType }) => {
-				const revealKey = `theme:${revealName}`;
-				const revealValue = settings[revealKey];
-				if (revealType === 'toggle') {
-						document.body.classList.toggle(revealName, value && revealValue);
+			if (type === "toggle") document.body.classList.toggle(name, value);
+			if (revealOptions) {
+				revealOptions.forEach(({ name: revealName, type: revealType }) => {
+					if (revealType === "toggle") {
+						document.body.classList.toggle(revealName, value && settings[`theme:${revealName}`]);
 				}
 			});
+			}
 			if (run) run(value);
-			})
-		);
+		});
 	};
 
-	const saveOptions = (settings) => {
-		const changedSettings = Object.entries(settings).reduce((changes, [key, value]) => {
-			const currentValue = getLocalStorageItem(key, null);
+	const saveOptions = (settings, options) => {
+		const changedSettings = Object.entries(settings).filter(([key, value]) => {
+			const currentValue = getLocalStorage(key, null);
 			if (JSON.stringify(currentValue) !== JSON.stringify(value)) {
-				setLocalStorageItem(key, value);
-				changes.push({ key, value });
+				setLocalStorage(key, value);
+				return true;
 			}
-			return changes;
-		}, []);
+			return false;
+		});
+
 		if (changedSettings.length > 0) {
 			console.log("%c[Theme]", "color:#b3ebf2;", "Saving settings:", changedSettings);
-			applySettings(settings);
+			applySettings(settings, options);
 		}
 	};
 
 	const resetOptions = (setSettings) => {
 		console.log("%c[Theme]", "color:#b3ebf2;", "Resetting to default settings");
 		const defaultSettings = Object.fromEntries(
-							Object.values(options).flatMap(categoryOptions =>
-								categoryOptions.flatMap(({ name, defaultVal, revealOptions }) => [
+							Object.values(options)
+								.flat()
+								.flatMap(({ name, defaultVal, revealOptions }) => [
 				[`theme:${name}`, defaultVal],
-				...(revealOptions?.map(option => [`theme:${option.name}`, option.defaultVal]) || [])
-			])
-							)
+									...(revealOptions?.map((option) => [
+										`theme:${option.name}`,
+										option.defaultVal,
+									]) || []),
+								]),
 		);
 		setSettings(defaultSettings);
 		applySettings(defaultSettings);
+    Object.entries(defaultSettings).forEach(([key, value]) => {
+      setLocalStorage(key, value);
+    });
 	};
 
 	const OptionRow = ({ name, desc, tippy, children }) => {
@@ -372,8 +376,8 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			};
 			const carousel = carouselRef.current;
 			if (carousel) {
-				carousel.addEventListener('wheel', handleWheel, { passive: false });
-				return () => carousel.removeEventListener('wheel', handleWheel);
+				carousel.addEventListener("wheel", handleWheel, { passive: false });
+				return () => carousel.removeEventListener("wheel", handleWheel);
 			}
 		}, []);
 		return Spicetify.React.createElement(
@@ -391,13 +395,13 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 							onClick: () => onCategoryClick(category),
 							style: {
 								width: `calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`,
-								marginRight: index < categories.length - 1 ? '8px' : '0'
-							}
+								marginRight: index < categories.length - 1 ? "8px" : "0",
+							},
 						},
-						category
-					)
-				)
-			)
+						category,
+					),
+				),
+			),
 		);
 	};
 
@@ -405,125 +409,65 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	MARK: THEME SETTINGS
 	*/
 
-	const CollapsibleSection = ({ title, children }) => {
-		const [isExpanded, setIsExpanded] = Spicetify.React.useState(true);
-
-		const iconPath = isExpanded
-			? 'M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'
-			: 'M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708';
-
-		return Spicetify.React.createElement(
-			'div',
-			{ className: `collapsibleSection ${isExpanded ? 'expanded' : 'collapsed'}` },
-			Spicetify.React.createElement(
-				'div',
-				{ className: 'sectionHeader', onClick: () => setIsExpanded(!isExpanded) },
-				Spicetify.React.createElement('h2', { className: 'sectionTitle' }, title),
-				Spicetify.React.createElement(
-					'span',
-					{ className: 'expandIcon' },
-					Spicetify.React.createElement(
-						'svg',
-						{ width: '16', height: '16', viewBox: '0 0 16 16', fill: 'none', xmlns: 'http://www.w3.org/2000/svg' },
-						Spicetify.React.createElement('path', { d: iconPath, fill: 'currentColor' })
-					)
-				)
-			),
-			isExpanded ? Spicetify.React.createElement('div', { className: 'sectionContent' }, children) : null
-		);
-	};
-
-	const RenderOption = ({ option, settings, onSettingChange }) => {
-		const Component = option.type === 'toggle' ? Toggle : option.type === 'dropdown' ? Dropdown : option.type === 'input' ? Input : Slider;
-		return Spicetify.React.createElement(Component, {
-			...option,
-			value: settings[`theme:${option.name}`],
-			onChange: onSettingChange,
-		});
-	};
-
-	const RevealableOptions = ({ option, settings, onSettingChange }) => {
-		const isMainOptionEnabled = settings[`theme:${option.name}`];
-
-		return Spicetify.React.createElement(
-			'div',
-			{ className: 'themeOptionWrapper' },
-			Spicetify.React.createElement(RenderOption, {
-				option,
-				settings,
-				onSettingChange: (key, value) => {
-					onSettingChange(key, value);
-					if (Array.isArray(option.revealOptions)) {
-						option.revealOptions.forEach(revealOption => {
-							const revealKey = `theme:${revealOption.name}`;
-							onSettingChange(revealKey, value ? settings[revealKey] : false);
-						});
-					}
-				}
-			}),
-			Array.isArray(option.revealOptions) && isMainOptionEnabled
-				? Spicetify.React.createElement(
-					'div',
-					{ className: 'themeOptionRevealedWrapper' },
-					option.revealOptions.map(revealOption =>
-						Spicetify.React.createElement(RenderOption, {
-							key: revealOption.name,
-							option: revealOption,
-							settings: settings,
-							onSettingChange: onSettingChange,
-						})
-					)
-				)
-				: null
-		);
-	};
-
-	const ThemeSettings = () => {
-		const [settings, setSettings] = Spicetify.React.useState(initialiseSettings);
+	const ThemeSettings = ({ options }) => {
+		const [settings, setSettings] = Spicetify.React.useState(() => initialiseSettings(options));
 		const categoryRefs = Spicetify.React.useRef({});
 
-	  const handleSettingChange = (key, value) => {
+		const SettingsChange = Spicetify.React.useCallback((key, value) => {
 			setSettings(prev => {
 				const newSettings = { ...prev, [key]: value };
-				if (key.startsWith('theme:')) {
-					const optionName = key.replace('theme:', '');
-					const categoryOption = Object.values(options).flat().find(opt => opt.name === optionName);
-					if (categoryOption && Array.isArray(categoryOption.revealOptions)) {
-						categoryOption.revealOptions.forEach(revealOption => {
-							const revealKey = `theme:${revealOption.name}`;
-							if (value) {
-								newSettings[revealKey] = revealOption.defaultVal;
-							} else {
-								newSettings[revealKey] = false;
-							}
-						});
-					}
+				const optionName = key.replace("theme:", "");
+				const categoryOption = Object.values(options).flat().find(opt => opt.name === optionName);
+				if (categoryOption?.revealOptions) {
+					categoryOption.revealOptions.forEach(revealOption => {
+						newSettings[`theme:${revealOption.name}`] = value ? revealOption.defaultVal : false;
+					});
 				}
 				return newSettings;
 			});
-		};
+		}, [options]);
+
+		const renderOption = Spicetify.React.useCallback(({ option, value, onChange }) => {
+			const Component = { toggle: Toggle, dropdown: Dropdown, input: Input, slider: Slider }[option.type];
+			return Spicetify.React.createElement(Component, { ...option, value, onChange });
+		}, []);
+
+		const RevealableOptions = Spicetify.React.useCallback(({ option, settings, onSettingChange }) => {
+			const isEnabled = settings[`theme:${option.name}`];
+			return Spicetify.React.createElement("div", { className: "themeOptionWrapper" },
+				renderOption({ option, value: settings[`theme:${option.name}`], onChange: onSettingChange }),
+				isEnabled && option.revealOptions && Spicetify.React.createElement("div", { className: "themeOptionRevealedWrapper" },
+					option.revealOptions.map(revealOption =>
+						renderOption({
+							key: revealOption.name,
+							option: revealOption,
+							value: settings[`theme:${revealOption.name}`],
+							onChange: onSettingChange
+						})
+					)
+				)
+			);
+		}, [renderOption]);
 
 		return Spicetify.React.createElement("div", { className: "themeContainer" },
 			Spicetify.React.createElement(CategoryCarousel, {
 				categories: Object.keys(options),
-				onCategoryClick: (category) => {
-					categoryRefs.current[category]?.scrollIntoView({ behavior: 'smooth' });
-				}
+				onCategoryClick: category => categoryRefs.current[category]?.scrollIntoView({ behavior: "smooth" })
 			}),
 			Spicetify.React.createElement("div", { className: "optionContainer" },
 				Object.entries(options).map(([category, categoryOptions]) =>
 					Spicetify.React.createElement("div", {
 						key: category,
 						className: `${category.toLowerCase()}Container`,
-						ref: el => categoryRefs.current[category] = el
+						ref: el => { categoryRefs.current[category] = el; }
 					},
 						Spicetify.React.createElement("h2", { className: "categoryTitle" }, category),
-							categoryOptions.map((option) =>
-								Spicetify.React.createElement(RevealableOptions, {
+						categoryOptions.map(option =>
+							RevealableOptions({
 									key: option.name,
-									option: option,
-									settings: settings,
-								onSettingChange: handleSettingChange,
+								option,
+								settings,
+								onSettingChange: SettingsChange
 								})
 						)
 					)
