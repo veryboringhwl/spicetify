@@ -14,8 +14,13 @@ maybe put topbar in header(cant move windows/doesnt look amazing)
 MARK: WHOLE PAGE
 */
 
-.Root__now-playing-bar,
+body {
+  zoom: var(--Zoomlevel);
+}
+
 .main-yourLibraryX-library,
+.Root__now-playing-bar,
+.Root__right-sidebar,
 .Root__main-view {
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
 }
@@ -43,37 +48,28 @@ MARK: TRANSPARENT WINDOWS CONTROLS
 MARK: SEARCH BAR
 */
 
-.SFAoASy0S_LZJmYZ3Fh9 {
+.main-topBar-searchBar {
   background-color: var(--spice-highlight) !important;
   color: var(--spice-text) !important;
   box-shadow: 0 0px 4px rgba(var(--spice-rgb-shadow), 0.2) !important;
   transition: none !important;
 }
 
-.SFAoASy0S_LZJmYZ3Fh9,
-.SFAoASy0S_LZJmYZ3Fh9:hover {
+.main-topBar-searchBar,
+.main-topBar-searchBar:hover {
   border-radius: 7px !important;
   height: 32px;
 }
 
-.SFAoASy0S_LZJmYZ3Fh9:focus {
+.main-topBar-searchBar:focus {
   border-bottom: 2px solid var(--spice-accent);
   outline: none;
-}
-
-/*make marketplace search bar match fluent*/
-.searchbar--bar__wrapper,
-.searchbar-bar {
-  height: 37px !important;
-}
-
-.searchbar-bar:focus {
-  border-bottom: 2px solid var(--spice-accent) !important;
 }
 
 /*
 MARK: PROGRESS BAR
 */
+
 @property --progress-bar-transform {
   inherits: true;
   initial-value: 0%;
@@ -136,8 +132,8 @@ MARK: BUTTONS
   border-radius: 7px !important;
 }
 
-.main-actionButtons {
-  padding-inline: unset !important;
+.main-topBar-topbarContentRight {
+	gap: 0;
 }
 
 .main-userWidget-box,
@@ -314,6 +310,7 @@ MARK: NOW PLAYING BAR
 
 .main-nowPlayingBar-right {
 	max-width: 400px;
+	padding-right: 5px;
 }
 
 /*make album art centered*/
@@ -375,10 +372,17 @@ MARK: HOME PAGE
 MARK: LYRICS PAGE
 */
 
+.lyrics-tabBar-headerItemLink {
+	background-color: var(--spice-highlight);
+  border-radius: 8px;
+}
+
+.lyrics-tabBar-active {
+	background-color: var(--spice-tab-active);
+}
+
 .lyrics-lyricsContainer-LyricsBackground {
-  background-image: var(--image);
-  background-size: cover;
-  filter: blur(10px);
+  box-shadow: inset 0 0 200px var(--spice-sidebar);
 }
 
 .lyrics-lyricsContainer-Provider {
@@ -428,45 +432,93 @@ MARK: PLAYLIST PAGE
 }
 
 .main-actionBarBackground-background {
-  background-image: linear-gradient(rgba(var(--spice-rgb-main), 0.5), var(--spice-main)) !important;
+  background-image: linear-gradient(
+    rgba(var(--spice-rgb-main), 0.5),
+    var(--spice-main)
+  ) !important;
 }
 
-.marketplace-tabBar-header {
-	display: flex;
-	justify-content: center;
-}
-
+/*
 .main-entityHeader-imageContainer {
 	display: none;
 }
 
 .main-entityHeader-headerText * {
 	justify-content: center;
-	display:flex;
+  display: flex;
 	text-align: center;
+}
+*/
+
+/*
+MARK: MARKETPLACE
+*/
+
+.marketplace-tabBar-header {
+  display: flex;
+  justify-content: center;
+}
+
+.marketplace-tabBar-headerItemLink {
+  background-color: var(--spice-highlight);
+  border-radius: 8px;
+}
+
+.marketplace-tabBar-active {
+  background-color: var(--spice-tab-active);
+}
+
+.marketplace-grid {
+  padding-top: 10px;
+}
+
+.main-cardImage-image {
+  border-radius: 6px;
+}
+
+.marketplace-tabBar-header {
+  font-weight: 500;
+}
+
+.searchbar--bar__wrapper,
+.searchbar-bar {
+  height: 37px !important;
+}
+
+.searchbar-bar:focus {
+  border-bottom: 2px solid var(--spice-accent) !important;
 }
 
 /*
 MARK: MISCELLANEOUS
 */
 
-.T0fKO6B7LQSCE_VaSM1P {
-	padding-top: 64px;
+/*adds space to drag small window*/
+@media (max-width: 1100px) {
+	body:not(.LibX) .Root__globalNav::after {
+		content: " |    ";
+		color: rgba(var(--spice-rgb-text), 0.2);
+		font-weight: 1;
+		font-size: 30px;
+		white-space: pre-wrap;
+		height: 48px;
+		position: relative;
+	}
 }
 
-/*add padding to top of marketplace*/
-.marketplace-grid {
-  padding-top: 10px;
+/*compact connect bar*/
+.main-connectBar-connectBar {
+	position: absolute;
+	overflow: visible;
+	right: 175px;
+	height: 22px;
+	bottom: 7%;
+	padding: 5px;
 }
 
-/*marketplace buttons font*/
-.marketplace-tabBar-header {
-  font-weight: 500;
-}
-
-/*marketplace rounded images*/
-.main-cardImage-image {
-  border-radius: 6px;
+/*able to drag windows*/
+.Root__globalNav {
+	-webkit-app-region: drag;
 }
 
 /*shift the browse all in search up a bit*/
