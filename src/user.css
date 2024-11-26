@@ -624,43 +624,77 @@ MARK: ICONS
 }
 
 /*pause*/
-.main-yourLibraryX-listItem .ix_8kg3iUb9VS5SmTnBY button:has(path[d='M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z']) path,
-.main-actionBar-ActionBarRow div button:has(path[d='M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z']) path,
-[aria-label="Pause"] .view-homeShortcutsGrid-playButton .Wrapper-medium-only-medium path,
+.main-yourLibraryX-listItem
+  .ix_8kg3iUb9VS5SmTnBY
+  button:has(
+    path[d="M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z"]
+  )
+  path,
+.main-actionBar-ActionBarRow
+  div
+  button:has(
+    path[d="M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z"]
+  )
+  path,
+[aria-label="Pause"]
+  .view-homeShortcutsGrid-playButton
+  .Wrapper-medium-only-medium
+  path,
 [aria-label="Pause"] .main-trackList-rowPlayPauseIcon path,
-.main-card-PlayButtonContainer.main-card-PlayButtonContainerVisible .Wrapper-medium-only-medium path {
+.main-card-PlayButtonContainer.main-card-PlayButtonContainerVisible
+  .Wrapper-medium-only-medium
+  path {
   d: path(
     "M5.746 3a1.75 1.75 0 0 0-1.75 1.75v14.5c0 .966.784 1.75 1.75 1.75h3.5a1.75 1.75 0 0 0 1.75-1.75V4.75A1.75 1.75 0 0 0 9.246 3zm9 0a1.75 1.75 0 0 0-1.75 1.75v14.5c0 .966.784 1.75 1.75 1.75h3.5a1.75 1.75 0 0 0 1.75-1.75V4.75A1.75 1.75 0 0 0 18.246 3z"
   ) !important;
 }
 
-[aria-label="Pause"] .view-homeShortcutsGrid-playButton .Wrapper-small-only-small path {
+[aria-label="Pause"]
+  .view-homeShortcutsGrid-playButton
+  .Wrapper-small-only-small
+  path {
   d: path(
     "M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z"
   ) !important;
 }
 
 /*play*/
-.main-yourLibraryX-listItem .ix_8kg3iUb9VS5SmTnBY button:has(path[d='m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z']) path,
-.main-actionBar-ActionBarRow div button:has(path[d='m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z']) path,
+.main-yourLibraryX-listItem
+  .ix_8kg3iUb9VS5SmTnBY
+  button:has(
+    path[d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"]
+  )
+  path,
+.main-actionBar-ActionBarRow
+  div
+  button:has(
+    path[d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"]
+  )
+  path,
 .main-trackList-rowPlayPauseIcon path,
-[aria-label="Play"] .view-homeShortcutsGrid-playButton .Wrapper-medium-only-medium path,
+[aria-label="Play"]
+  .view-homeShortcutsGrid-playButton
+  .Wrapper-medium-only-medium
+  path,
 .main-card-PlayButtonContainer .Wrapper-medium-only-medium path {
   d: path(
     "M5 5.274c0-1.707 1.826-2.792 3.325-1.977l12.362 6.727c1.566.852 1.566 3.1 0 3.952L8.325 20.702C6.826 21.518 5 20.432 5 18.726z"
   ) !important;
 }
 
-[aria-label="Play"] .view-homeShortcutsGrid-playButton .Wrapper-small-only-small path {
+[aria-label="Play"]
+.view-homeShortcutsGrid-playButton
+  .Wrapper-small-only-small
+  path {
   d: path(
     "M6.235 2.192A1.5 1.5 0 0 0 4 3.499v9a1.5 1.5 0 0 0 2.235 1.308l8-4.5a1.5 1.5 0 0 0 0-2.615z"
   ) !important;
 }
 
 /*
-*--------------------------
+--------------------------
 MARK: TEST FEATURES
-----------------------------
+--------------------------
 */
 
 /*rounded filters turn square*/
@@ -697,137 +731,8 @@ MARK: THEME SETTINGS UI
 */
 
 /*
-MARK: THEME SETTINGS TOGGLE / DROPDOWN
+MARK: THEME SETTINGS MENU
 */
-
-button.themeOptionToggle {
-  display: flex;
-  background-color: transparent !important;
-  border: none;
-}
-
-span.toggleWrapper {
-  width: 42px;
-  height: 25px;
-  background-color: var(--spice-button-disabled);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-span.toggle {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background-color: var(--spice-text);
-  margin-left: 2px;
-  transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-}
-
-span.toggleWrapper:has(span.toggle.enabled) {
-  background-color: var(--spice-button-active);
-}
-
-span.toggle.enabled {
-  margin-left: 20px;
-}
-
-.themeOptionDropdown {
-  background-color: var(--spice-tab-active);
-  border: 0;
-  border-radius: 4px;
-  color: var(--spice-text);
-  font-size: 14px;
-  font-weight: 400;
-  height: 32px;
-  width: 120px;
-  letter-spacing: 0.24px;
-  line-height: 20px;
-  padding: 0px 18px 0 4px;
-}
-
-.themeOptionInput {
-  background-color: var(--spice-tab-active);
-  border: 0;
-  border-radius: 4px;
-  color: var(--spice-text);
-  height: 32px;
-  width: 75px;
-  text-overflow: ellipsis;
-  padding-left: 10px;
-}
-
-.themeOptionControl {
-  padding-right: 4px;
-}
-
-/*
-MARK: THEME OPTION ROW
-*/
-
-.themeOptionWrapper {
-  align-items: center;
-  margin-bottom: 7px;
-  background-color: var(--spice-highlight);
-  border-radius: 7px;
-}
-
-.themeOptionRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 22px 16px;
-}
-
-.themeOptionRevealedWrapper .themeOptionRow {
-  padding-left: 40px;
-}
-
-.themeOptionRevealedWrapper .themeOptionName {
-  font-size: 15px;
-}
-
-.themeOptionName {
-  font-weight: 500;
-  font-size: 18px;
-}
-
-.themeOptionDesc {
-  font-size: 15px;
-  margin-top: 5px;
-  color: var(--spice-subtext);
-}
-
-.themeHeader {
-	padding-bottom: 14px;
-	padding-top: 12px;
-}
-
-.options-tippy > div {
-  font-size: 16px !important;
-}
-
-.categoryHeader {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	cursor: pointer;
-}
-
-/*
-MARK: THEME SETTINGS BUTTONS
-*/
-
-.main-trackCreditsModal-BtnContainer > * {
-  background-color: var(--spice-highlight);
-  border-radius: 8px;
-  height: 34px;
-  cursor: pointer;
-  margin-right: 8px;
-  padding: 8px;
-  border: 0;
-}
 
 .main-trackCreditsModal-BtnContainer > *:hover {
   transform: scale(1.1);
@@ -881,10 +786,6 @@ MARK: THEME SETTINGS BUTTONS
   scale: 1.05;
 }
 
-/*
-MARK: THEME SETTINGS CAROUSEL
-*/
-
 .category-carousel-container {
   background-color: rgba(var(--spice-rgb-highlight), 0.6);
   padding: 10px;
@@ -906,9 +807,161 @@ MARK: THEME SETTINGS CAROUSEL
   background-color: var(--spice-highlight);
 }
 
+.main-trackCreditsModal-BtnContainer > * {
+  background-color: var(--spice-highlight);
+  border-radius: 8px;
+  height: 34px;
+  cursor: pointer;
+  margin-right: 8px;
+  padding: 8px;
+  border: 0;
+}
+
+.options-tippy > div {
+  font-size: 16px !important;
+}
+
+/*
+MARK: THEME SETTINGS ROW
+*/
+
+.themeOptionRow {
+	display: flex;
+	justify-content: space-between;
+	background-color: var(--spice-highlight);
+  padding: 22px 16px;
+	border-radius: 7px;
+}
+
+.themeOptionWrapper {
+  margin-bottom: 7px;
+  background-color: var(--spice-highlight);
+  border-radius: 7px;
+}
+
+
+.themeOptionRevealedWrapper .themeOptionRow {
+  padding-left: 40px;
+}
+
+.themeOptionRevealedWrapper .themeOptionContent * {
+  font-size: 15px;
+}
+
+.themeOptionControl {
+	align-content: center;
+}
+
+.themeOptionName {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.themeOptionDesc {
+  font-size: 15px;
+  margin-top: 5px;
+  color: var(--spice-subtext);
+}
+
+/*
+MARK: THEME SETTINGS TYPES
+*/
+
+.themeOptionDropdown {
+  background-color: var(--spice-tab-active);
+  border: 0;
+  border-radius: 4px;
+  color: var(--spice-text);
+  font-size: 14px;
+  font-weight: 400;
+  height: 32px;
+  width: 120px;
+  letter-spacing: 0.24px;
+  line-height: 20px;
+  padding: 0px 18px 0 4px;
+}
+
+.themeOptionToggle {
+  display: flex;
+  background-color: transparent !important;
+  border: none;
+}
+
+.toggleWrapper {
+  width: 42px;
+  height: 25px;
+  background-color: var(--spice-button-disabled);
+  border-radius: 12px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.toggle {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: var(--spice-text);
+  margin-left: 2px;
+  transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+.toggleWrapper:has(.enabled) {
+  background-color: var(--spice-button-active);
+}
+
+.toggle.enabled {
+  margin-left: 20px;
+}
+
+.themeOptionInput {
+  background-color: var(--spice-tab-active);
+  border: 0;
+  border-radius: 4px;
+  color: var(--spice-text);
+  height: 32px;
+  width: 75px;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+}
+
 /*
 MARK: THEME OPTIONS
 */
+
+/*
+MARK: COMPACT LIBRARY
+*/
+
+.CompactLib .fYWNdY4zhj4OX_T2Xtg6 {
+  grid-template-rows: none !important;
+}
+
+.CompactLib .main-yourLibraryX-listItem [role="group"] {
+  min-block-size: 0 !important;
+}
+
+.CompactLib .main-yourLibraryX-listItem .Column-lg {
+  flex-direction: row;
+	gap: 0.5em;
+	align-items: center;
+}
+
+.CompactLib .main-yourLibraryX-listItem .HeaderArea * {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.CompactLib .main-yourLibraryX-listItem .x-entityImage-imageContainer,
+.CompactLib .BfALkuQy0UjTI70U9QlQ *:not(svg) {
+  width: 24px !important;
+  height: 24px !important;
+	min-block-size: unset;
+}
+
+.CompactLib .main-yourLibraryX-listItem {
+	max-height: 40px;
+}
 
 /*
 MARK: SONG ART IN PAGE
