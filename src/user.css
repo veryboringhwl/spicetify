@@ -1036,19 +1036,13 @@ MARK: LIBX
   border-radius: 8px;
 	padding-inline: unset !important;
 	align-items: unset;
-  padding: 8px;
 	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
 }
 
 .LibX .main-topBar-topbarContentRight,
-.LibX .Root__globalNav [aria-label="Lyrics"],
-.LibX .Root__globalNav [aria-label="Marketplace"],
-.LibX .main-globalNav-searchInputSection {
+.LibX .main-globalNav-searchContainer > *,
+.LibX .search-searchCategory-categoryGrid > div > * {
 	margin-top: 8px !important;
-}
-
-.LibX .main-yourLibraryX-library:has(.sikBfynL1Y6I25nVpbAg) .Root__globalNav {
-  width: 72px;
 }
 
 .LibX .Root__globalNav .main-globalNav-link-icon {
@@ -1058,10 +1052,12 @@ MARK: LIBX
 }
 
 .LibX .main-actionButtons {
-	display: inline-flex !important;
 	animation: unset !important;
+  display: flex !important;
+	padding-inline: unset;
 }
 
+.LibX .search-searchCategory-categoryGrid,
 .LibX .main-globalNav-historyButtonsContainer,
 .LibX .main-globalNav-historyButtons > * {
   display: unset !important;
@@ -1077,76 +1073,76 @@ MARK: LIBX
 	order: -1;
 }
 
+.LibX [aria-label="Marketplace"],
+.LibX ._b3hhmbWtOY8_1M1mM1H,
 .LibX .Root__globalNav .Dp3xccI7c2f_JSJ8OHYu,
 .LibX .main-globalNav-searchInputSection {
   margin-inline: unset !important;
-	-webkit-app-region: no-drag;
 }
 
 .LibX .Root__globalNav,
-.LibX .main-globalNav-searchContainer,
-.LibX .aKOZdeebnsaeeMTiugmO {
+.LibX .search-searchCategory-categoryGrid > div,
+.LibX .main-globalNav-searchContainer {
 	flex-direction: column !important;
+	max-width: unset;
 }
 
-.LibX .SFAoASy0S_LZJmYZ3Fh9 {
+.LibX .main-topBar-topbarContentRight {
+  justify-content: unset;
+  padding-bottom: 8px;
+}
+
+.LibX .main-topBar-searchBar {
 	background: unset;
 	background-color: unset !important;
   border-bottom: unset;
 	box-shadow: none !important;
 }
 
-.LibX .main-topBar-topbarContentRight {
-  padding-right: 90px;
-  justify-content: unset;
-}
-
-.LibX .main-globalNav-searchInputSection .main-globalNav-textWrapper {
+.LibX .zugTpa7GhjPIQmTCgBzw .main-globalNav-textWrapper {
   position: absolute;
-  margin-left: 3.25rem;
+  margin-left: 52px;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.LibX .main-globalNav-searchInputContainer {
-	width: unset !important;
-}
-
 .LibX .main-globalNav-textWrapper {
-  margin-left: 1rem;
-}
-
-.LibX .forceExpandSearchInput .main-globalNav-searchInputSection .main-globalNav-iconText {
-  display: none !important;
-}
-
-.LibX .collapsed.Root__globalNav {
-  width: 72px;
-}
-
-.LibX .collapsed .main-globalNav-textWrapper,
-.LibX .collapsed .hj_4wHxgXXHm6aI1zN9D,
-.LibX .collapsed .main-actionButtons,
-.LibX .collapsed .main-globalNav-historyButtons,
-.LibX .collapsed .main-actionButtons {
-  display: none !important;
-}
-
-.LibX .collapsed .main-globalNav-link-icon {
-	justify-content: center !important;
+  margin-left: 16px;
 }
 
 .LibX .Root__nav-bar:not(:has(.sikBfynL1Y6I25nVpbAg)) {
   min-width: 319px;
 }
 
-.LibX [aria-label="Marketplace"] {
-	margin-inline-end: unset !important;
+.LibX ._b3hhmbWtOY8_1M1mM1H {
+  padding-inline: unset;
 }
 
-.LibX .collapsed .main-globalNav-searchInputContainer .IconContainer-leading {
-	width: 56px;
-	justify-content: center;
+/* .LibX .main-yourLibraryX-library:has(.sikBfynL1Y6I25nVpbAg) .Root__globalNav { */
+.LibX .collapsed.Root__globalNav {
+  width: 72px;
+}
+
+.LibX .b7r2WRiu5f9Q99qmyreh {
+  width: unset !important;
+}
+
+.LibX .collapsed .b7r2WRiu5f9Q99qmyreh *:not(svg) {
+  width: 56px !important;
+  display: flex;
+  justify-content: center;
+}
+
+.LibX .collapsed .BV0jjn_h5TtMMl8YKuZ0,
+.LibX .collapsed .main-globalNav-textWrapper,
+.LibX .forceExpandSearchInput .zugTpa7GhjPIQmTCgBzw .main-globalNav-textWrapper,
+.LibX .collapsed .main-actionButtons,
+.LibX .collapsed .main-globalNav-historyButtons {
+  display: none !important;
+}
+
+.LibX .collapsed .main-globalNav-link-icon {
+	justify-content: center !important;
 }
 
 .LibX .collapsed .main-userWidget-box {
@@ -1216,8 +1212,7 @@ MARK: PRELIBX
 }
 
 .PreLibX .main-yourLibraryX-header {
-  padding: 0px;
-  padding-left: 16px;
+  padding: 0 0 0 16px;
 }
 
 .PreLibX .LayoutResizer__inline-end {
@@ -1228,7 +1223,19 @@ MARK: PRELIBX
 	height: 80px;
 }
 
-/*homeheader*/
+.PreLibX .J4qD2RoZgGLbOdpfs63w > div > * ,
+.PreLibX .main-globalNav-searchContainer > *,
+.PreLibX .main-topBar-searchBar,
+.PreLibX .EJttP30F1zYHeAw7ISHb{
+	min-block-size: unset !important;
+	padding-block: 0px !important;
+	height: 36px !important;
+}
+
+
+/*
+MARK: HOME HEADER
+*/
 
 .homeheader .main-home-homeHeader {
   display: none;
