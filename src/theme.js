@@ -48,7 +48,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	MARK: COVER ART BANNER
 	*/
 
-	function coverArtBanner() {
+	const coverArtBanner = () => {
 		if (!Spicetify.Player.data?.item) {
 			setTimeout(coverArtBanner, 100);
 			return;
@@ -69,33 +69,34 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 		};
 
 		const banner = document.querySelector(".banner-image") || (() => {
-				const banner = document.createElement("div");
-				banner.className = "banner-image";
-				document.querySelector(".under-main-view")?.appendChild(banner);
-				return banner;
+			const newBanner = document.createElement("div");
+			newBanner.className = "banner-image";
+			document.querySelector(".under-main-view")?.appendChild(newBanner);
+			return newBanner;
 			})();
 
-		function updateBanner() {
-			const path = Spicetify.Platform.History.location.pathname;
-			const source = Spicetify.Player.data.item.metadata.image_xlarge_url;
+		const updateBanner = () => {
+			const { pathname } = Spicetify.Platform.History.location;
+			const { image_xlarge_url: imageUrl } = Spicetify.Player.data.item.metadata;
+
 			const showBanner = Object.values(channels).some(
-				({ regex, key }) => getLocalStorage(key, false) && regex.test(path)
+				({ regex, key }) => getLocalStorage(key, false) && regex.test(pathname)
 			);
 
-			if (showBanner && source) {
+			if (showBanner && imageUrl) {
 				banner.style.display = "";
 				const img = new Image();
-				img.src = source;
-				img.onload = () => document.documentElement.style.setProperty("--image", `url(${source})`);
+				img.src = imageUrl;
+				img.onload = () => document.documentElement.style.setProperty("--image", `url(${imageUrl})`);
 			} else {
 				banner.style.display = "none";
 			}
-		}
+		};
 
 		Spicetify.Platform.History.listen(updateBanner);
 		Spicetify.Player.addEventListener("songchange", updateBanner);
 		updateBanner();
-	}
+	};
 
 	/*
 	MARK: SELECT COLOUR SCHEMES
@@ -715,6 +716,38 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 				desc: "Description",
 				defaultVal: true,
 			},
+			{
+				type: "toggle",
+				name: "test-reveal",
+				desc: "Description",
+				defaultVal: true,
+				revealOptions: [
+					{
+						type: "toggle",
+						name: "revealedtoggle",
+				desc: "Description",
+				defaultVal: true,
+					},
+					{
+						type: "input",
+						name: "revealedinput",
+						desc: "Description",
+						defaultVal: true,
+					},
+					{
+						type: "dropdown",
+						name: "revealeddropdown",
+						desc: "Description",
+						defaultVal: "test1",
+						options: [
+							{ value: "test1", label: "test1" },
+							{ value: "test2", label: "test2" },
+							{ value: "test3", label: "test3" },
+							{ value: "test4", label: "test4" },
+						],
+					},
+				],
+			},
 		{
 			type: "input",
 			name: "test-input",
@@ -732,7 +765,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 				{ value: "test2", label: "test2" },
 				{ value: "test3", label: "test3" },
 				{ value: "test4", label: "test4" },
-				]
+				],
 			},
 		],
 	};
@@ -754,7 +787,9 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			});
 
 			const header = document.querySelector(".main-trackCreditsModal-header");
-			const closeButton = document.querySelector(".main-trackCreditsModal-closeBtn");
+			const closeButton = document.querySelector(
+				".main-trackCreditsModal-closeBtn",
+			);
 			const buttonContainer = document.createElement("div");
 			buttonContainer.className = "main-trackCreditsModal-BtnContainer";
 
@@ -762,7 +797,8 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 				"button",
 				{
 					className: "main-trackCreditsModal-githubBtn",
-					onClick: () => window.open("https://github.com/veryboringhwl/spicetify"),
+					onClick: () =>
+						window.open("https://github.com/veryboringhwl/spicetify"),
 				},
 				Spicetify.React.createElement("svg", {
 					width: "18",
@@ -772,7 +808,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 					dangerouslySetInnerHTML: {
 						__html: `<path d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"></path>`,
 					},
-				})
+				}),
 			);
 
 			Spicetify.ReactDOM.render(githubButton, buttonContainer);
@@ -786,5 +822,3 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	initialiseSettings();
 	console.log("%c[Theme]", "color:#b3ebf2;", "Spicetify theme initialised");
 })();
-
-// <path d="M8.262 5.72A2.542 2.542 90 108.262 10.804 2.542 2.542 90 108.262 5.72ZM6.991 8.262A1.271 1.271 90 119.533 8.262 1.271 1.271 90 116.991 8.262ZM11.59 3.684A.902.902 90 0110.543 2.962L10.212 1.162A.45.45 0 009.863.804 7.715 7.715 90 006.661.804.45.45 0 006.312 1.162L5.983 2.962A.89.89 0 015.945 3.103.902.902 90 014.793 3.646L3.064 3.03A.45.45 0 002.578 3.152 7.61 7.61 0 00.975 5.914C.919 6.087.972 6.276 1.112 6.394L2.513 7.579C2.55 7.611 2.585 7.645 2.616 7.682 2.938 8.06 2.892 8.625 2.512 8.947L1.111 10.132A.45.45 0 00.974 10.611C1.307 11.635 1.855 12.576 2.578 13.373A.45.45 0 003.064 13.495L4.793 12.88A.915.915 90 014.934 12.842.902.902 90 015.981 13.564L6.31 15.363A.45.45 0 006.66 15.721 7.73 7.73 0 008.261 15.888 7.715 7.715 90 009.861 15.721.45.45 0 0010.21 15.363L10.541 13.563A.89.89 0 0110.579 13.422.902.902 90 0111.731 12.879L13.458 13.494A.45.45 0 0013.944 13.372 7.61 7.61 0 0015.548 10.61C15.604 10.437 15.55 10.248 15.411 10.131L14.01 8.946A.89.89 90 0113.906 8.843C13.584 8.466 13.63 7.9 14.01 7.578L15.411 6.393A.45.45 0 0015.548 5.913C15.215 4.889 14.667 3.948 13.944 3.151A.45.45 0 0013.458 3.029L11.729 3.644A.902.902 90 0111.588 3.682ZM3.177 4.42 4.368 4.843A2.173 2.173 90 007.141 3.533C7.18 3.422 7.212 3.308 7.232 3.191L7.457 1.958A6.49 6.49 0 018.262 1.908 6.47 6.47 0 019.065 1.958L9.291 3.191A2.173 2.173 90 0011.816 4.934C11.932 4.912 12.046 4.883 12.157 4.842L13.348 4.419A6.342 6.342 90 0114.149 5.796L13.189 6.607C12.273 7.381 12.16 8.752 12.939 9.666A2.161 2.161 90 0013.189 9.915L14.147 10.726A6.342 6.342 90 0113.346 12.103L12.155 11.678A2.173 2.173 90 009.382 12.988 2.08 2.08 0 009.291 13.33L9.065 14.563A6.482 6.482 90 018.262 14.613 6.5 6.5 0 017.458 14.563L7.233 13.33A2.173 2.173 90 004.708 11.587C4.592 11.609 4.478 11.638 4.367 11.678L3.176 12.101A6.32 6.32 0 012.375 10.725L3.333 9.914C4.249 9.14 4.363 7.769 3.583 6.855 3.507 6.765 3.423 6.682 3.333 6.606L2.375 5.795A6.29 6.29 0 013.176 4.419Z"/>
