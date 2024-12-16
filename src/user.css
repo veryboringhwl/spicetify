@@ -359,11 +359,10 @@ MARK: HOME PAGE
 }
 
 .view-homeShortcutsGrid-shortcut:hover,
-.main-card-draggable:hover .main-card-imageContainer {
+.main-card-cardContainer:hover {
   scale: 1.02;
 }
 
-/*make artist square */
 .main-cardImage-circular {
   border-radius: 6px;
 }
@@ -539,6 +538,11 @@ MARK: MISCELLANEOUS
 /*what is this*/
 .Vn9yz8P5MjIvDT8c0U6w {
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
+}
+
+/*Fix Playlist name overflow*/
+.main-yourLibraryX-listItem .LineClamp {
+	white-space: nowrap;
 }
 
 /*
@@ -1184,7 +1188,7 @@ MARK: PRELIBX
 
 .PreLibX .Root__globalNav,
 .PreLibX .Root__nav-bar {
-	border-right: 1px solid var(--spice-card)!important;
+  border-right: 1px solid var(--spice-card) !important;
 }
 
 .PreLibX .Root__top-container {
@@ -1241,90 +1245,82 @@ MARK: HOME HEADER
   display: none;
 }
 
+.homeheader .main-home-filterChipsSection.fIvMht6B9HdROywMNJZ4:after,
+.homeheader .main-topBar-overlay,
 .homeheader .main-topBar-background {
-  background-color: var(--spice-main) !important;
+  background-color: var(--spice-main);
 }
 
-.homeheader .main-topBar-overlay {
-  background-color: rgba(0, 0, 0, 0) !important;
-}
-
-.homeheader .main-home-filterChipsSection.fIvMht6B9HdROywMNJZ4:after {
-  background-color: var(--spice-main) !important;
-}
-
-/*TestLayout*/
-.TestLayout footer.main-nowPlayingBar-container {
-  border: none;
-}
-
-.TestLayout .player-controls__buttons.player-controls__buttons--new-icons {
-  margin: 0 20px 0 30px;
-  width: fit-content;
-}
+/*
+MARK:TEST LAYOUT 
+*/
 
 .TestLayout .player-controls {
   flex-direction: row;
-}
-
-.TestLayout .main-trackInfo-container {
-  flex-grow: 1;
-  flex-basis: 0;
+  justify-content: flex-start;
 }
 
 .TestLayout .main-nowPlayingBar-center {
-  max-width: none;
-  flex-grow: 1;
+  order: -1;
 }
 
 .TestLayout .main-nowPlayingBar-right {
-  width: 280px;
-  margin-left: 20px;
+  order: 1;
 }
 
 .TestLayout .main-nowPlayingBar-left {
-  width: 20%;
+  padding-inline-start: 0px;
+  max-width: 275px;
 }
 
-.TestLayout button.main-playPauseButton-button {
-  background: none;
-  color: var(--spice-text);
-  --button-size: unset !important;
+.TestLayout .player-controls__left {
+  order: 1;
 }
 
-.TestLayout .main-playPauseButton-button svg {
-  height: 20px;
-  width: 21px;
+.TestLayout .player-controls__right {
+  order: 2;
 }
 
-.TestLayout .x-progressBar-fillColor {
-  transition: transform 1s linear;
+.TestLayout .player-controls__buttons,
+.TestLayout .player-controls__left,
+.TestLayout .player-controls__right {
+  gap: 0;
+  flex: unset;
+  width: unset;
 }
 
-.TestLayout .progress-bar__slider {
-  transition: left 1s linear;
+.TestLayout .main-playbackBarRemainingTime-container,
+.TestLayout .playback-bar__progress-time-elapsed {
+  min-width: 30px;
 }
 
-.TestLayout
-  .playback-progressbar-isInteractive
-  .DuvrswZugGajIFNXObAr
-  .x-progressBar-fillColor,
-.TestLayout
-  .playback-progressbar-isInteractive
-  .DuvrswZugGajIFNXObAr
-  .progress-bar__slider {
-  transition: none;
+.TestLayout .playback-bar {
+  max-width: 375px;
 }
 
-.TestLayout .main-connectBar-connectBar {
-  border-radius: 0;
+.TestLayout [data-testid="control-button-playpause"],
+.TestLayout [data-testid="control-button-skip-forward"],
+.TestLayout [data-testid="control-button-repeat"],
+.TestLayout [data-testid="control-button-shuffle"],
+.TestLayout [data-testid="control-button-skip-back"] {
+  padding: 7px;
 }
 
-/*HIGHLIGHTNAV*/
+/*
+MARK: GREEN ICON
+*/
 
-.highlightnav .search-searchCategory-categoryGrid {
-  display: unset;
+.greenicon .main-globalNav-navLinkActive[aria-label="Home"] > span:has(svg),
+.greenicon .main-globalNav-navLinkActive[aria-label="Marketplace"] > span:has(svg),
+.greenicon .main-globalNav-navLinkActive[aria-label="Lyrics"] > span:has(svg),
+.greenicon ._b3hhmbWtOY8_1M1mM1H:has(.j4xi27AJ3oy5qZ8CGhhQ) .EJttP30F1zYHeAw7ISHb > span,
+	.greenicon ._b3hhmbWtOY8_1M1mM1H:has(.j4xi27AJ3oy5qZ8CGhhQ) .M9l40ptEBXPm03dU3X1k {
+  color: var(--spice-accent);
 }
+
+/*
+MARK: HIGHLIGHT NAV
+*/
 
 .highlightnav .custom-navlinks-scrollable_container {
   max-width: unset;
