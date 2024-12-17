@@ -77,7 +77,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 
 		const updateBanner = () => {
 			const { pathname } = Spicetify.Platform.History.location;
-			const { image_xlarge_url: imageUrl } = Spicetify.Player.data.item.metadata;
+			const imageUrl = Spicetify.Player.data?.item?.metadata?.image_xlarge_url;
 
 			const showBanner = Object.values(channels).some(
 				({ regex, key }) => getLocalStorage(key, false) && regex.test(pathname)
@@ -171,9 +171,9 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	MARK: CHANGE SPOTIFY MODE
 	*/
 
-	const changeSpotifyMode = async (mode) => {
+	const SpotifyMode = async (mode) => {
 		if (!Spicetify.Platform.UserAPI._product_state_service) {
-			setTimeout(() => changeSpotifyMode(mode), 100);
+			setTimeout(() => SpotifyMode(mode), 100);
 			return;
 		}
 
@@ -204,11 +204,8 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 
 		window.appDevListener?.cancel();
 		window.employeeListener?.cancel();
-		window.appDevListener = await setMode(
-			"app-developer",
-			pairs["app-developer"],
-		);
-		window.employeeListener = await setMode("employee", pairs["employee"]);
+		window.appDevListener = await setMode("app-developer", pairs["app-developer"]);
+		window.employeeListener = await setMode("employee", pairs.employee);
 	};
 
 	/*
@@ -240,6 +237,10 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	});
 
 	const Toggle = Spicetify.React.memo(({ name, desc, tippy, value, onChange }) => {
+		const handleChange = Spicetify.React.useCallback(() => {
+			onChange(`theme:${name}`, !value);
+		}, [name, value, onChange]);
+
 		return Spicetify.React.createElement(
 			OptionRow,
 			{ name, desc, tippy },
@@ -247,7 +248,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 				"button",
 				{
 				className: "themeOptionToggle",
-					onClick: () => onChange(`theme:${name}`, !value),
+					onClick: handleChange,
 			},
 				Spicetify.React.createElement(
 					"span",
@@ -261,6 +262,16 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	});
 
 	const Dropdown = Spicetify.React.memo(({ name, desc, tippy, value, options, onChange }) => {
+		const handleChange = Spicetify.React.useCallback((e) => {
+			onChange(`theme:${name}`, e.target.value);
+		}, [name, onChange]);
+
+		const optionElements = Spicetify.React.useMemo(() =>
+			options.map(({ value, label }) =>
+				Spicetify.React.createElement("option", { key: value, value }, label)
+			),
+			[options]);
+
 		return Spicetify.React.createElement(
 			OptionRow,
 			{ name, desc, tippy },
@@ -269,16 +280,18 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 				{
 				className: "themeOptionDropdown",
 				value: value,
-					onChange: (e) => onChange(`theme:${name}`, e.target.value),
+					onChange: handleChange,
 				},
-				options.map(({ value, label }) =>
-					Spicetify.React.createElement("option", { key: value, value }, label),
-				),
+				optionElements
 			),
 		);
 	});
 
 	const Input = Spicetify.React.memo(({ name, desc, tippy, value, onChange, placeholder }) => {
+		const handleChange = Spicetify.React.useCallback((e) => {
+			onChange(`theme:${name}`, e.target.value);
+		}, [name, onChange]);
+
 		return Spicetify.React.createElement(
 			OptionRow,
 			{ name, desc, tippy },
@@ -286,7 +299,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 				className: "themeOptionInput",
 				type: "text",
 				value: value,
-				onChange: (e) => onChange(`theme:${name}`, e.target.value),
+				onChange: handleChange,
 				placeholder: placeholder,
 			}),
 		);
@@ -310,21 +323,24 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			}
 		}, []);
 
-		const buttonWidth = `calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`;
+		const scrollToCategory = Spicetify.React.useCallback((category) => {
+			const element = document.querySelector(`.${category.toLowerCase()}Container`);
+			if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}, []);
 
-		return Spicetify.React.createElement(
-			"div",
-			{ className: "category-carousel-container" },
-			Spicetify.React.createElement(
-				"div",
-				{ className: "category-carousel", ref: carouselRef },
+		const buttonWidth = Spicetify.React.useMemo(() =>
+			`calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`,
+			[categories.length]
+		);
+
+		const categoryButtons = Spicetify.React.useMemo(() =>
 				categories.map((category, index) =>
 					Spicetify.React.createElement(
 						"button",
 						{
 							key: category,
 							className: "category-button",
-							onClick: () => onCategoryClick(category),
+						onClick: () => scrollToCategory(category),
 							style: {
 								width: buttonWidth,
 								marginRight: index < categories.length - 1 ? '8px' : '0'
@@ -332,7 +348,16 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 						},
 						category
 					)
-				)
+			),
+			[categories, buttonWidth, onCategoryClick]);
+
+		return Spicetify.React.createElement(
+			"div",
+			{ className: "category-carousel-container" },
+			Spicetify.React.createElement(
+				"div",
+				{ className: "category-carousel", ref: carouselRef },
+				categoryButtons
 			)
 		);
 	});
@@ -466,7 +491,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 									...(revealOptions?.map((option) => [
 										`theme:${option.name}`,
 										option.defaultVal,
-									]) || []),
+									]) ?? []),
 								]),
 		);
 		setSettings(defaultSettings);
@@ -492,7 +517,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 				if (categoryOption?.revealOptions) {
 					categoryOption.revealOptions.forEach(revealOption => {
 							const revealKey = `theme:${revealOption.name}`;
-						newSettings[revealKey] = value ? (prev[revealKey] ?? revealOption.defaultVal) : undefined;
+						newSettings[revealKey] = value ? revealOption.defaultVal : false;
 					});
 				}
 
@@ -507,17 +532,11 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 		const [settings, handleSettingChange, setSettings] = useSettings();
 		const categories = Object.keys(options);
 
-		const scrollToCategory = (category) => {
-			const element = document.querySelector(`.${category.toLowerCase()}Container`);
-			if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-		};
-
 		return Spicetify.React.createElement(
 			"div",
 			{ className: "themeContainer" },
 			Spicetify.React.createElement(CategoryCarousel, {
-				categories: categories,
-				onCategoryClick: scrollToCategory
+				categories: categories
 			}),
 				Object.entries(options).map(([category, categoryOptions]) =>
 					Spicetify.React.createElement(
@@ -566,8 +585,8 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 				{ value: "employee", label: "Employee" },
 				{ value: "both", label: "Dev + Empl" },
 			],
-			run: (value) => {
-				changeSpotifyMode(value);
+				run(value) {
+					SpotifyMode(value);
 			},
 		},
 		{
@@ -576,7 +595,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			desc: "Changes zoom level (%)",
 			defaultVal: 100,
 			placeholder: "%",
-			run: (value) => {
+				run(value) {
 					Zoomlevel = value / 100;
 					document.documentElement.style.setProperty("--Zoomlevel", Zoomlevel);
 			},
@@ -586,7 +605,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			name: "AlbumBannerinPage",
 			desc: "Puts album art in places",
 			defaultVal: true,
-			run: (value) => {
+				run(value) {
 				coverArtBanner(value);
 			},
 			revealOptions: [
@@ -632,7 +651,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			name: "LibX",
 			desc: "Brings back old ui",
 			defaultVal: false,
-			run: (value) => {
+				run(value) {
 				toggleLibXUI(value);
 			},
 			revealOptions: [
@@ -774,7 +793,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 	MARK: TOPBAR BUTTON
 	*/
 
-	const settingsIcon = `<svg viewBox="0 0 16 16" width="16px" height="16px" fill="var(--spice-subtext)"><path d="M8.04 5.36a2.68 2.68 90 100 5.36 2.68 2.68 90 000-5.36zM6.7 8.04a1.34 1.34 90 112.68 0 1.34 1.34 90 01-2.68 0zM11.5481 3.2133a.9487.9487 90 01-1.1042-.7598l-.3484-1.8974a.4744.4744 90 00-.3685-.3779 8.1365 8.1365 90 00-3.3755 0 .4744.4744 90 00-.3685.3779l-.3471 1.8974a.9514.9514 90 01-1.2542.7209l-1.8211-.6486a.4757.4757 90 00-.5119.1273c-.7625.8402-1.34 1.8318-1.6911 2.9118a.4717.4717 90 00.1447.5065l1.4767 1.2475a.9434.9434 90 010 1.4418l-1.4767 1.2475a.4717.4717 90 00-.1447.5065A8.0212 8.0212 90 002.0502 13.4268a.4757.4757 90 00.5119.1273l1.8224-.6486a.9487.9487 90 011.2542.7209l.3457 1.8974c.0348.1876.1809.3377.3685.3765a8.1405 8.1405 90 003.3768 0 .473.473 90 00.3672-.3765l.3484-1.8974a.9514.9514 90 011.2542-.7209l1.8211.6486c.1809.0643.3832.0134.5119-.1273.7625-.8402 1.34-1.8318 1.6911-2.9118a.4717.4717 90 00-.1447-.5065l-1.4767-1.2475a.942.942 90 010-1.4418l1.4767-1.2475a.4717.4717 90 00.1447-.5065A8.0199 8.0199 90 0014.0298 2.6532a.4757.4757 90 00-.5119-.1273l-1.8224.6486a.9514.9514 90 01-.1487.0402zm-8.8708.7772 1.2556.4462a2.2914 2.2914 90 003.0217-1.742l.2372-1.2998a6.8407 6.8407 90 011.6951 0l.2385 1.2998a2.2887 2.2887 90 003.0217 1.742L13.4 3.9892c.3417.4476.6258.9353.8442 1.4526l-1.0104.8536a2.2834 2.2834 90 000 3.4894l1.0117.8536a6.6866 6.6866 90 01-.8442 1.4526l-1.2556-.4476a2.2914 2.2914 90 00-3.0217 1.742l-.2385 1.2998a6.8327 6.8327 90 01-1.6951 0l-.2372-1.2998a2.2887 2.2887 90 00-3.0217-1.742L2.68 12.0908a6.6826 6.6826 90 01-.8442-1.4526l1.0104-.8549a2.2834 2.2834 90 000-3.488l-1.0117-.8536c.2198-.5172.5038-1.005.8442-1.4526z"/></svg>`;
+	const settingsIcon = `<svg viewBox="0 0 16 16" width="16px" height="16px" fill="currentcolor"><path d="M8.04 5.36a2.68 2.68 90 100 5.36 2.68 2.68 90 000-5.36zM6.7 8.04a1.34 1.34 90 112.68 0 1.34 1.34 90 01-2.68 0zM11.5481 3.2133a.9487.9487 90 01-1.1042-.7598l-.3484-1.8974a.4744.4744 90 00-.3685-.3779 8.1365 8.1365 90 00-3.3755 0 .4744.4744 90 00-.3685.3779l-.3471 1.8974a.9514.9514 90 01-1.2542.7209l-1.8211-.6486a.4757.4757 90 00-.5119.1273c-.7625.8402-1.34 1.8318-1.6911 2.9118a.4717.4717 90 00.1447.5065l1.4767 1.2475a.9434.9434 90 010 1.4418l-1.4767 1.2475a.4717.4717 90 00-.1447.5065A8.0212 8.0212 90 002.0502 13.4268a.4757.4757 90 00.5119.1273l1.8224-.6486a.9487.9487 90 011.2542.7209l.3457 1.8974c.0348.1876.1809.3377.3685.3765a8.1405 8.1405 90 003.3768 0 .473.473 90 00.3672-.3765l.3484-1.8974a.9514.9514 90 011.2542-.7209l1.8211.6486c.1809.0643.3832.0134.5119-.1273.7625-.8402 1.34-1.8318 1.6911-2.9118a.4717.4717 90 00-.1447-.5065l-1.4767-1.2475a.942.942 90 010-1.4418l1.4767-1.2475a.4717.4717 90 00.1447-.5065A8.0199 8.0199 90 0014.0298 2.6532a.4757.4757 90 00-.5119-.1273l-1.8224.6486a.9514.9514 90 01-.1487.0402zm-8.8708.7772 1.2556.4462a2.2914 2.2914 90 003.0217-1.742l.2372-1.2998a6.8407 6.8407 90 011.6951 0l.2385 1.2998a2.2887 2.2887 90 003.0217 1.742L13.4 3.9892c.3417.4476.6258.9353.8442 1.4526l-1.0104.8536a2.2834 2.2834 90 000 3.4894l1.0117.8536a6.6866 6.6866 90 01-.8442 1.4526l-1.2556-.4476a2.2914 2.2914 90 00-3.0217 1.742l-.2385 1.2998a6.8327 6.8327 90 01-1.6951 0l-.2372-1.2998a2.2887 2.2887 90 00-3.0217-1.742L2.68 12.0908a6.6826 6.6826 90 01-.8442-1.4526l1.0104-.8549a2.2834 2.2834 90 000-3.488l-1.0117-.8536c.2198-.5172.5038-1.005.8442-1.4526z"/></svg>`;
 
 	new Spicetify.Topbar.Button(
 		"Theme Settings",
