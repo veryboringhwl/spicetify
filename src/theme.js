@@ -68,7 +68,7 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 			Genre: { regex: /^\/genre\//, key: 'theme:MiscPage', fallback: false }
 		};
 
-		const banner = document.querySelector(".banner-image") || (() => {
+		const banner = document.querySelector(".banner-image") ?? (() => {
 			const newBanner = document.createElement("div");
 			newBanner.className = "banner-image";
 			document.querySelector(".under-main-view")?.appendChild(newBanner);
@@ -100,6 +100,51 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 
 	/*
 	MARK: SELECT COLOUR SCHEMES
+	*/
+
+	const selectColourScheme = async (scheme) => {
+		if (scheme === "default") {
+			document.querySelector("style.customColorScheme")?.remove();
+			return;
+		}
+
+		const response = await fetch("https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/color.ini");
+		const iniContent = await response.text();
+		const colourSchemes = iniContent.split(/[\r\n]+/).reduce((acc, line) => {
+			line = line.trim();
+			if (line.startsWith(';')) return acc;
+			const sectionMatch = line.match(/^\[([^\]]+)\]$/);
+			if (sectionMatch) {
+				acc[sectionMatch[1]] = {};
+				return acc;
+			}
+			const paramMatch = line.match(/^([^=]+?)\s*=\s*(.+)$/);
+			if (paramMatch) {
+				const [, key, value] = paramMatch;
+				const section = Object.keys(acc).pop();
+				if (section) acc[section][key] = value.split(';')[0].trim();
+			}
+			return acc;
+		}, {});
+
+		const injectStr = Object.entries(colourSchemes[scheme]).reduce((acc, [key, value]) => {
+			const rgb = value.length === 3
+				? value.split('').map(char => parseInt(char + char, 16)).join(', ')
+				: value.match(/\w\w/g).map(x => parseInt(x, 16)).join(', ');
+			return `${acc}--spice-${key}:#${value};--spice-rgb-${key}:${rgb};`;
+		}, ":root{") + "}";
+
+		let schemeTag = document.querySelector("style.customColourScheme");
+		if (!schemeTag) {
+			schemeTag = document.createElement("style");
+			schemeTag.classList.add("customColourScheme");
+			document.body.appendChild(schemeTag);
+		}
+		schemeTag.textContent = injectStr;
+	};
+
+	/*
+	MARK: TOGGLE LIBRARYX
 	*/
 
 	function toggleLibXUI(isEnabled) {
@@ -573,6 +618,22 @@ console.log("%c[Theme]", "color:#b3ebf2;", "Running Spicetify theme");
 
 	const options = {
 		Features: [
+			{
+				type: "dropdown",
+				name: "colourschemeselector",
+				desc: "Changes colour scheme of spotify",
+				defaultVal: "default",
+				options: [
+					{ value: "default", label: "Default" },
+					{ value: "dark", label: "Dark" },
+					{ value: "light", label: "Light" },
+					{ value: "bloom", label: "Bloom" },
+					{ value: "spotify", label: "Spotify" },
+				],
+				run(value) {
+					selectColourScheme(value);
+				},
+			},
 			{
 				type: "dropdown",
 			name: "change-Spotify-mode",
