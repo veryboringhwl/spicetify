@@ -977,21 +977,21 @@ MARK: SONG ART IN PAGE
 	height: 100%;
 	background-size: cover;
 	background-image: var(--image);
-	filter: blur(5px);
+  filter: blur(5px) brightness(0.75);
 	transition: background 0.5s ease;
 }
 
 .AlbumBannerinPage.PlaylistPage .main-actionBarBackground-background {
-	background-image: linear-gradient(rgba(0, 0, 0, ) var(--spice-main))!important;
+  background-image: linear-gradient(rgba(0, 0, 0) var(--spice-main)) !important;
 	background-color: rgba(0, 0, 0, 0) !important;
 }
 
 .AlbumBannerinPage.PlaylistPage .main-entityHeader-backgroundColor,
 .AlbumBannerinPage.PlaylistPage .playlist-playlist-playlistContent {
-	background: none;
+  background: none !important;
 }
 
-.AlbumBannerinPage.LyricsPage .lyrics-lyrics-background{
+.AlbumBannerinPage.LyricsPage .lyrics-lyrics-background {
 	background-color: none;
 }
 
@@ -1159,17 +1159,6 @@ MARK: LIBX
 }
 
 /*
-MARK: GREEN ICON
-*/
-
-.greenicon .main-globalNav-navLinkActive[aria-label="Home"] > span:has(svg),
-.greenicon .main-globalNav-navLinkActive[aria-label="Marketplace"] > span:has(svg),
-.greenicon .main-globalNav-navLinkActive[aria-label="Lyrics"] > span:has(svg),
-.greenicon .forceExpandSearchInput [aria-label="Search"] > span:has(svg) {
-  color: var(--spice-accent);
-}
-
-/*
 MARK: PRELIBX
 */
 /*(-webkit-app-region: no-drag;)*/
@@ -1327,21 +1316,14 @@ MARK: HIGHLIGHT NAV
 }
 
 .highlightnav .main-globalNav-navLinkActive[aria-label="Home"],
-.highlightnav .forceExpandSearchInput .SFAoASy0S_LZJmYZ3Fh9:focus,
 .highlightnav .main-globalNav-navLinkActive[aria-label="Marketplace"],
-.highlightnav .main-globalNav-navLinkActive[aria-label="Lyrics"] {
+.highlightnav .main-globalNav-navLinkActive[aria-label="Lyrics"],
+.highlightnav ._b3hhmbWtOY8_1M1mM1H:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
   background-color: var(--spice-highlight-elevated) !important;
   border-radius: 7px !important;
 }
 
-.highlightnav .collpased [aria-label="Home"],
-.highlightnav .collpased [aria-label="Marketplace"],
-.highlightnav .collpased [aria-label="Lyrics"],
-.highlightnav .collapsed .jl5Sca1FSi1bSBIyQ72h {
-	width: 56px;
-}
-
-.highlightnav .main-globalNav-searchInputSection:hover,
+.highlightnav ._b3hhmbWtOY8_1M1mM1H:hover,
 .highlightnav [aria-label="Home"]:hover,
 .highlightnav [aria-label="Marketplace"]:hover,
 .highlightnav [aria-label="Lyrics"]:hover {
@@ -1475,7 +1457,9 @@ MARK: NPVLARGERLYRICS
   font-size: 0.9rem;
 }
 
-.npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing .main-nowPlayingView-lyricsTitle {
+.npvlargerlyrics
+  .main-nowPlayingView-sectionHeaderSpacing
+  .main-nowPlayingView-lyricsTitle {
   font-size: 20px;
   font-weight: 600 !important;
 }
