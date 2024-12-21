@@ -37,17 +37,17 @@ if ($PSVersionTable.PSVersion.Major -gt $PSMinVersion) {
 
   # Check ~\.spicetify\Themes directory already exists
   $spicePath = spicetify -c | Split-Path
-  $sp_dot_dir = "$spicePath\Themes"
-  Write-Part "MAKING FOLDER  "; Write-Emphasized "$sp_dot_dir\boring"
-  Remove-Item -Recurse -Force "$sp_dot_dir\boring" -ErrorAction Ignore
-  New-Item -Path "$sp_dot_dir\boring" -ItemType Directory | Out-Null
+  $spiceThemes = "$spicePath\Themes"
+  Write-Part "MAKING FOLDER  "; Write-Emphasized "$spiceThemes\boring"
+  Remove-Item -Recurse -Force "$spiceThemes\boring" -ErrorAction Ignore
+  New-Item -Path "$spiceThemes\boring" -ItemType Directory | Out-Null
   Write-Done
 
   # Clone to .spicetify.
-  Write-Part "DOWNLOADING    "; Write-Emphasized $sp_dot_dir
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/color.ini" -UseBasicParsing -OutFile "$sp_dot_dir\boring\color.ini"
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/user.css" -UseBasicParsing -OutFile "$sp_dot_dir\boring\user.css"
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/theme.js" -UseBasicParsing -OutFile "$sp_dot_dir\boring\theme.js"
+  Write-Part "DOWNLOADING    "; Write-Emphasized $spiceThemes
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/dist/color.ini" -UseBasicParsing -OutFile "$spiceThemes\boring\color.ini"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/dist/user.css" -UseBasicParsing -OutFile "$spiceThemes\boring\user.css"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/dist/theme.js" -UseBasicParsing -OutFile "$spiceThemes\boring\theme.js"
   Write-Done
 
   # Installing.

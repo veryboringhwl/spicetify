@@ -3,20 +3,20 @@
 set -e
 
 # Download URL
-theme_url="https://raw.githubusercontent.com/veryboringhwl/spicetify/main"
+themeURL="https://raw.githubusercontent.com/veryboringhwl/spicetify/main"
 
 # Setup directories to download to
-spice_dir="$(dirname "$(spicetify -c)")"
-theme_dir="${spice_dir}/Themes"
+spicePath="$(dirname "$(spicetify -c)")"
+spiceThemes="${spicePath}/Themes"
 
 # Make directories if needed
-mkdir -p "${theme_dir}/boring"
+mkdir -p "${spiceThemes}/boring"
 
 # Download latest tagged files into correct director
 echo "Downloading Theme..."
-curl --silent --output "${theme_dir}/boring/color.ini" "${theme_url}/src/color.ini"
-curl --silent --output "${theme_dir}/boring/user.css" "${theme_url}/src/user.css"
-curl --silent --output "${theme_dir}/boring/theme.js" "${theme_url}/src/theme.js"
+curl --silent --output "${spiceThemes}/boring/color.ini" "${themeURL}/dist/color.ini"
+curl --silent --output "${spiceThemes}/boring/user.css" "${themeURL}/dist/user.css"
+curl --silent --output "${spiceThemes}/boring/theme.js" "${themeURL}/dist/theme.js"
 echo "Done"
 
 # Apply theme
