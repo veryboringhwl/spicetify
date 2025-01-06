@@ -75,16 +75,16 @@ spicetify config color_scheme <colour scheme>
 
 ## Features
 
-| Feature                | Description                                | Screenshot                             |
-| ---------------------- | ------------------------------------------ | -------------------------------------- |
-| **Settings Menu**      | Easily customise theme settings            | N/A                                    |
-| **Dynamic Background** | Background adapts to current track artwork | N/A                                    |
-| **Colour Schemes**     | Four distinct themes                       | N/A                                    |
-| **Custom Snippets**    | Modify layouts with built-in CSS snippets  | N/A                                    |
-| **LibX Layout**        | Restores UI to ~2023/24 layout             | ![(libx)](assets/libx.png)             |
-| **PreLibX Layout**     | Restores UI to ~2022 layout                | ![(prelibx)](assets/prelibx.png)       |
-| **Apple Music Layout** | Interface styled similar to Apple Music    | ![(applemusic)](assets/applemusic.png) |
-| **Lyrics Background**  | Dynamic background effects for lyrics page | N/A                                    |
+| Feature                                                                | Screenshot                             |
+| ---------------------------------------------------------------------- | -------------------------------------- |
+| **Settings Menu** <br> Easily customise theme settings                 | N/A                                    |
+| **Dynamic Background** <br> Background adapts to current track artwork | N/A                                    |
+| **Colour Schemes** <br> Four distinct themes                           | N/A                                    |
+| **Custom Snippets** <br> Modify layouts with built-in CSS snippets     | N/A                                    |
+| **LibX Layout** <br> Restores UI to ~2023/24 layout                    | ![(libx)](assets/libx.png)             |
+| **PreLibX Layout** <br> Restores UI to ~2022 layout                    | ![(prelibx)](assets/prelibx.png)       |
+| **Apple Music Layout** <br> Interface styled similar to Apple Music    | ![(applemusic)](assets/applemusic.png) |
+| **Lyrics Background** <br> Dynamic background effects for lyrics page  | N/A                                    |
 
 ## Credits
 
