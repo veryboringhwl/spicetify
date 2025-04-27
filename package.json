@@ -1,15 +1,22 @@
 {
-  "name": "theme",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "build": "spicetify-creator --out=../ --minify",
-    "watch": "spicetify-creator --watch --out=../ --minify"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
-    "spicetify-creator": "^1.0.17"
-  }
+	"name": "theme",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"build": "npm run build-ext && npm run build-css",
+		"watch": "concurrently \"npm run watch-ext\" \"npm run watch-css\"",
+		"build-ext": "spicetify-creator --out=../",
+		"watch-ext": "spicetify-creator --watch --out=../",
+		"build-css": "sass css/app.scss ../user.css --no-source-map",
+		"watch-css": "sass css/app.scss ../user.css --watch --no-source-map"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/react": "^18.3.11",
+		"@types/react-dom": "^18.3.1",
+		"concurrently": "^9.0.1",
+		"sass": "^1.80.6",
+		"spicetify-creator": "^1.0.17"
+	}
 }

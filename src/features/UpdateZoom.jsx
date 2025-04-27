@@ -1,30 +1,29 @@
-function UpdateZoom() {
-  let prevOuterWidth = window.outerWidth;
-  let prevInnerWidth = window.innerWidth;
-  let prevRatio = window.devicePixelRatio;
-  let startup = true;
+import Console from "../utils/Console";
 
-  function checkChanges() {
-    const newOuterWidth = window.outerWidth;
-    const newInnerWidth = window.innerWidth;
-    const newRatio = window.devicePixelRatio;
-    if (
-      startup ||
-      ((prevOuterWidth <= 160 || prevRatio !== newRatio) &&
-        (prevOuterWidth !== newOuterWidth || prevInnerWidth !== newInnerWidth))
-    ) {
-      const modified = newOuterWidth / newInnerWidth || 1;
-      document.documentElement.style.setProperty("--zoom", modified);
-      ConsoleLog(`Zoom updated: ${zoom}`);
-      prevOuterWidth = newOuterWidth;
-      prevInnerWidth = newInnerWidth;
-      prevRatio = newRatio;
-    }
+const UpdateZoom = () => {
+	let prevOuter = window.outerWidth;
+	let prevInner = window.innerWidth;
+	let prevRatio = window.devicePixelRatio;
 
-    requestAnimationFrame(checkChanges);
-  }
-  checkChanges();
-}
-UpdateZoom();
+	const checkZoom = () => {
+		const newOuter = window.outerWidth;
+		const newInner = window.innerWidth;
+		const newRatio = window.devicePixelRatio;
+
+		if (
+			(prevOuter <= 160 || prevRatio !== newRatio) &&
+			(prevOuter !== newOuter || prevInner !== newInner)
+		) {
+			const zoom = newOuter / newInner || 1;
+			document.documentElement.style.setProperty("--zoom", zoom);
+			Console.Log(`Zoom: ${zoom}`);
+			prevOuter = newOuter;
+			prevInner = newInner;
+			prevRatio = newRatio;
+		}
+		requestAnimationFrame(checkZoom);
+	};
+	checkZoom();
+};
 
 export default UpdateZoom;

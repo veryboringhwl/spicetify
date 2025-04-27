@@ -1,39 +1,18 @@
-import createTippy from "@/utils/createTippy";
+import React from "react";
+import InfoButton from "./InfoButton";
 
-const OptionRow = Spicetify.React.memo(({ name, desc, tippy, children }) => {
-  const controlRef = Spicetify.React.useRef(null);
-
-  Spicetify.React.useEffect(() => {
-    if (controlRef.current && tippy) createTippy(controlRef.current, tippy);
-  }, [tippy]);
-
-  return Spicetify.React.createElement(
-    "div",
-    {
-      className: "themeOptionRow",
-      "data-name": `theme:${name}`,
-      ref: controlRef,
-    },
-    Spicetify.React.createElement(
-      "div",
-      { className: "themeOptionContent" },
-      Spicetify.React.createElement(
-        "div",
-        { className: "themeOptionName" },
-        name
-      ),
-      Spicetify.React.createElement(
-        "div",
-        { className: "themeOptionDesc" },
-        desc
-      )
-    ),
-    Spicetify.React.createElement(
-      "div",
-      { className: "themeOptionControl" },
-      children
-    )
-  );
+const OptionRow = React.memo(({ name, desc, children, popupModal }) => {
+	return (
+		<div className="themeOptionRow" data-name={`theme:${name}`}>
+			<div className="themeOptionContent">
+				<div className="themeOptionDesc">{desc}</div>
+			</div>
+			<div className="themeOptionControl">
+				<InfoButton name={name} popupModal={popupModal} />
+				{children}
+			</div>
+		</div>
+	);
 });
 
 export default OptionRow;

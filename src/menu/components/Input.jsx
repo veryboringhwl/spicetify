@@ -1,26 +1,37 @@
-import OptionRow from "@/menu/components/OptionRow";
+import React from "react";
+import Tippy from "../../components/Tippy";
+import OptionRow from "./OptionRow";
 
-const Input = Spicetify.React.memo(
-  ({ name, desc, tippy, value, onChange, placeholder }) => {
-    const handleChange = Spicetify.React.useCallback(
-      (e) => {
-        onChange(`theme:${name}`, e.target.value);
-      },
-      [name, onChange]
-    );
+const Input = React.memo(
+	({ name, desc, tippy, value, onChange, placeholder, popupModal }) => {
+		const inputRef = React.useRef(null);
 
-    return Spicetify.React.createElement(
-      OptionRow,
-      { name, desc, tippy },
-      Spicetify.React.createElement("input", {
-        className: "themeOptionInput",
-        type: "text",
-        value: value,
-        onChange: handleChange,
-        placeholder: placeholder,
-      })
-    );
-  }
+		React.useEffect(() => {
+			if (inputRef.current && tippy) {
+				Tippy(inputRef.current, tippy);
+			}
+		}, [tippy]);
+
+		const handleChange = React.useCallback(
+			(e) => {
+				onChange(`theme:${name}`, e.target.value);
+			},
+			[name, onChange],
+		);
+
+		return (
+			<OptionRow name={name} desc={desc} popupModal={popupModal}>
+				<input
+					className="themeOptionInput"
+					type="text"
+					value={value}
+					onChange={handleChange}
+					placeholder={placeholder}
+					ref={inputRef}
+				/>
+			</OptionRow>
+		);
+	},
 );
 
 export default Input;

@@ -1,64 +1,65 @@
-function toggleLibXUI(isEnabled) {
+function ToggleLibXUI(isEnabled) {
 	const globalNav = document.querySelector(".Root__globalNav");
 	if (!globalNav) return;
 
-	showLibXUI(isEnabled, globalNav);
+	if (isEnabled) {
+		enableLibXUI(globalNav);
+	} else {
+		disableLibXUI(globalNav);
+	}
 }
 
-let textObserver;
+let libXObserver = null;
 
-function showLibXUI(isEnabled, globalNav) {
-	function addContainerClass(isEnabled, globalNav) {
-		const addCollapsed = () => {
-			const elementToWatch = document.querySelector(".sikBfynL1Y6I25nVpbAg");
-			globalNav.classList.toggle("collapsed", isEnabled && elementToWatch);
-		};
-		const observer = new MutationObserver(addCollapsed);
-		observer.observe(document.body, { childList: true, subtree: true });
-		addCollapsed();
-	}
+function enableLibXUI(globalNav) {
+	globalNav.classList.add("global-libraryX");
 
-	const addLibXText = (isEnabled, globalNav) => {
-		const addTextToButtons = () => {
-			const elements = globalNav.querySelectorAll(
-				".search-searchCategory-categoryGrid > div > button,.main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H",
-			);
-			for (const el of elements) {
-				if (!el.querySelector(".main-globalNav-textWrapper")) {
-					const text =
-						el.getAttribute("aria-label") ||
-						(el.querySelector("input") ? "Search" : "");
-					el.insertAdjacentHTML(
-						"beforeend",
-						`
-							<span class="main-globalNav-textWrapper">
-								<div class="main-globalNav-iconText encore-text-body-medium-bold">${text}</div>
-							</span>
-						`,
-					);
-				}
+	const addTextToButtons = () => {
+		const elements = globalNav.querySelectorAll(
+			".search-searchCategory-categoryGrid > div > button, .main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H",
+		);
+		elements.forEach((el) => {
+			if (!el.querySelector(".main-globalNav-textWrapper")) {
+				const text =
+					el.getAttribute("aria-label") ||
+					(el.querySelector("input") ? "Search" : "");
+				const wrapper = document.createElement("span");
+				wrapper.className = "main-globalNav-textWrapper";
+				wrapper.innerHTML = `<div class="main-globalNav-iconText encore-text-body-medium-bold">${text}</div>`;
+				el.appendChild(wrapper);
 			}
-		};
-
-		if (isEnabled) {
-			addTextToButtons();
-			globalNav.classList.add("global-libraryX");
-			textObserver = new MutationObserver(addTextToButtons);
-			textObserver.observe(globalNav, { childList: true, subtree: true });
-		} else {
-			const textWrappers = globalNav.querySelectorAll(
-				".main-globalNav-textWrapper",
-			);
-			for (const el of textWrappers) {
-				el.remove();
-			}
-			globalNav.classList.remove("global-libraryX");
-			textObserver?.disconnect();
-		}
+		});
 	};
 
-	addLibXText(isEnabled, globalNav);
-	addContainerClass(isEnabled, globalNav);
+	addTextToButtons();
+
+	libXObserver = new MutationObserver(addTextToButtons);
+	libXObserver.observe(globalNav, { childList: true, subtree: true });
+
+	const addCollapsed = () => {
+		const elementToWatch = document.querySelector(".sikBfynL1Y6I25nVpbAg");
+		globalNav.classList.toggle("collapsed", elementToWatch != null);
+	};
+
+	addCollapsed();
+	new MutationObserver(addCollapsed).observe(document.body, {
+		childList: true,
+		subtree: true,
+	});
 }
 
-export default toggleLibXUI;
+function disableLibXUI(globalNav) {
+	globalNav.classList.remove("global-libraryX", "collapsed");
+
+	if (libXObserver) {
+		libXObserver.disconnect();
+		libXObserver = null;
+	}
+
+	const textWrappers = globalNav.querySelectorAll(
+		".main-globalNav-textWrapper",
+	);
+	textWrappers.forEach((el) => el.remove());
+}
+
+export default ToggleLibXUI;

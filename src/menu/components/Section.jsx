@@ -1,10 +1,12 @@
-const Section = Spicetify.React.memo(({ name, children }) => {
-  return Spicetify.React.createElement(
-    "div",
-    { className: `${name.toLowerCase()}Container` },
-    Spicetify.React.createElement("h2", { className: "categoryTitle" }, name),
-    children
-  );
+import React from "react";
+
+const Section = React.memo(({ name, children }) => {
+	return (
+		<div className={`themeSettingsCategory ${name.toLowerCase()}Container`}>
+			<h2 className="categoryTitle">{name}</h2>
+			{children}
+		</div>
+	);
 });
 
 export default Section;

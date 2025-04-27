@@ -1,250 +1,230 @@
+import ColourScheme from "../../features/ColourScheme";
+import CoverArtBanner from "../../features/CoverArtBanner";
+import SpotifyMode from "../../features/SpotifyMode";
+import ToggleLibXUI from "../../features/ToggleLibXUI";
+import VolPercent from "../../features/VolPercent";
+import AlbumBannerModal from "../../menu/modalmenu/AlbumBannerModal";
+import WindowsControlModal from "../../menu/modalmenu/WindowsControlModal";
+
 const options = {
-  Features: [
-    {
-      type: "dropdown",
-      name: "colourschemeselector",
-      desc: "Changes colour scheme of spotify",
-      defaultVal: "default",
-      options: [
-        { value: "default", label: "Default" },
-        { value: "dark", label: "Dark" },
-        { value: "light", label: "Light" },
-        { value: "bloom", label: "Bloom" },
-        { value: "spotify", label: "Spotify" },
-      ],
-      run(value) {
-        selectColourScheme(value);
-      },
-    },
-    {
-      type: "dropdown",
-      name: "change-Spotify-mode",
-      desc: "Changes Spotify Mode to either Normal, Developer or Employee",
-      defaultVal: "developer",
-      tippy: "Only takes effect after a restart",
-      options: [
-        { value: "default", label: "Default" },
-        { value: "developer", label: "Developer" },
-        { value: "employee", label: "Employee" },
-        { value: "both", label: "Dev + Empl" },
-      ],
-      run(value) {
-        SpotifyMode(value);
-      },
-    },
-    {
-      type: "input",
-      name: "ZoomLevel",
-      desc: "Changes zoom level (%)",
-      defaultVal: 100,
-      placeholder: "%",
-      run(value) {
-        Zoomlevel = value / 100;
-        document.documentElement.style.setProperty("--Zoomlevel", Zoomlevel);
-      },
-    },
-    {
-      type: "toggle",
-      name: "AlbumBannerinPage",
-      desc: "Puts album art in places",
-      defaultVal: true,
-      run(value) {
-        coverArtBanner(value);
-      },
-      reveal: [
-        {
-          type: "toggle",
-          name: "LyricsPage",
-          desc: "Adds Dynamic backgrounds to Lyrics Page",
-          defaultVal: true,
-          tippy: "Includes Spotify Lyrics page and Spicetify's Lyrics Plus",
-        },
-        {
-          type: "toggle",
-          name: "PlaylistPage",
-          desc: "Adds Dynamic backgrounds to your Playlist Pages",
-          defaultVal: true,
-        },
-        {
-          type: "toggle",
-          name: "ArtistPage",
-          desc: "Adds Dynamic backgrounds to Artist Pages",
-          defaultVal: true,
-        },
-        {
-          type: "toggle",
-          name: "AlbumPage",
-          desc: "Adds Dynamic backgrounds to Album Pages",
-          defaultVal: true,
-        },
-        {
-          type: "toggle",
-          name: "MiscPage",
-          desc: "Adds Dynamic backgrounds to Misc Pages",
-          defaultVal: true,
-          tippy:
-            "Enables album art for Station, Collection, Show, Episode, Genre, User",
-        },
-      ],
-    },
-    {
-      type: "toggle",
-      name: "VolumePercentage",
-      desc: "Show volume percentage next to volume slider",
-      defaultVal: true,
-      run(value) {
-        VolPercent(value);
-      },
-    },
-  ],
-  Layouts: [
-    {
-      type: "toggle",
-      name: "LibX",
-      desc: "Brings back old ui",
-      defaultVal: false,
-      run(value) {
-        toggleLibXUI(value);
-      },
-      reveal: [
-        {
-          type: "toggle",
-          name: "highlightnav",
-          desc: "Removes coloured gradient from the home page header",
-          defaultVal: true,
-        },
-        {
-          type: "toggle",
-          name: "PreLibX",
-          desc: "Brings back old ui ()",
-          defaultVal: false,
-        },
-        {
-          type: "toggle",
-          name: "CompactLib",
-          desc: "Makes library compact while keeping icons",
-          defaultVal: false,
-        },
-      ],
-    },
-    {
-      type: "toggle",
-      name: "TestLayout",
-      desc: "Switches Playbar and Cover art in now playing bar",
-      defaultVal: true,
-      tippy: "This is not compatible with newlayout",
-    },
-    {
-      type: "toggle",
-      name: "CombinedLibX",
-      desc: "Combines the nowplaying view and library menu",
-      defaultVal: false,
-      tippy: "This is not compatible with newlayout",
-    },
-    {
-      type: "toggle",
-      name: "switchlayout",
-      desc: "Makes left sidebar go in front of the now playing bar",
-      defaultVal: true,
-    },
-  ],
-  Snippets: [
-    {
-      type: "toggle",
-      name: "hidetracklistnum",
-      desc: "Hide tracklist numbers in playlist page",
-      defaultVal: true,
-    },
-    {
-      type: "toggle",
-      name: "greenicon",
-      desc: "Makes active tab icon green",
-      defaultVal: true,
-    },
-    {
-      type: "toggle",
-      name: "hidenowplayview",
-      desc: "Hide cover art in now playing bar",
-      defaultVal: false,
-    },
-    {
-      type: "toggle",
-      name: "transplayicon",
-      desc: "Transparent play/pause button in now playing bar",
-      defaultVal: true,
-    },
-    {
-      type: "toggle",
-      name: "npvlargerlyrics",
-      desc: "Now playing view (Right sidebar) has lyrics only",
-      defaultVal: false,
-    },
-    {
-      type: "toggle",
-      name: "homeheader",
-      desc: "Removes coloured gradient from the home page header",
-      defaultVal: true,
-    },
-  ],
-  Test: [
-    {
-      type: "toggle",
-      name: "test-toggle",
-      desc: "Description",
-      defaultVal: true,
-    },
-    {
-      type: "toggle",
-      name: "test-reveal",
-      desc: "Description",
-      defaultVal: true,
-      reveal: [
-        {
-          type: "toggle",
-          name: "revealedtoggle",
-          desc: "Description",
-          defaultVal: true,
-        },
-        {
-          type: "input",
-          name: "revealedinput",
-          desc: "Description",
-          defaultVal: true,
-        },
-        {
-          type: "dropdown",
-          name: "revealeddropdown",
-          desc: "Description",
-          defaultVal: "test1",
-          options: [
-            { value: "test1", label: "test1" },
-            { value: "test2", label: "test2" },
-            { value: "test3", label: "test3" },
-            { value: "test4", label: "test4" },
-          ],
-        },
-      ],
-    },
-    {
-      type: "input",
-      name: "test-input",
-      desc: "Description",
-      defaultVal: 1,
-      placeholder: "does something",
-    },
-    {
-      type: "dropdown",
-      name: "test-dropdown",
-      desc: "Description",
-      defaultVal: "test1",
-      options: [
-        { value: "test1", label: "test1" },
-        { value: "test2", label: "test2" },
-        { value: "test3", label: "test3" },
-        { value: "test4", label: "test4" },
-      ],
-    },
-  ],
+	Features: [
+		{
+			type: "dropdown",
+			name: "colourschemeselector",
+			desc: "Change the colour scheme of Spotify",
+			defaultVal: "default",
+			options: [
+				{ value: "default", label: "Default" },
+				{ value: "dark", label: "Dark" },
+				{ value: "light", label: "Light" },
+				{ value: "bloom", label: "Bloom" },
+				{ value: "spotify", label: "Spotify" },
+			],
+			run(value) {
+				ColourScheme(value);
+			},
+		},
+		{
+			type: "dropdown",
+			name: "change-Spotify-mode",
+			desc: "Change Spotify mode",
+			defaultVal: "developer",
+			tippy: "Only takes effect after a restart",
+			options: [
+				{ value: "default", label: "Default" },
+				{ value: "developer", label: "Developer" },
+				{ value: "employee", label: "Employee" },
+				{ value: "both", label: "Dev + Empl" },
+			],
+			run(value) {
+				SpotifyMode(value);
+			},
+		},
+		{
+			type: "input",
+			name: "ZoomLevel",
+			desc: "Change the zoom level of Spotify page",
+			defaultVal: 100,
+			placeholder: "100%",
+			run(value) {
+				Zoomlevel = value / 100;
+				document.documentElement.style.setProperty("--Zoomlevel", Zoomlevel);
+			},
+		},
+		{
+			type: "toggle",
+			name: "AlbumBannerPage",
+			desc: "Put album cover art in various pages",
+			defaultVal: true,
+			popupModal: AlbumBannerModal,
+			run(value) {
+				CoverArtBanner(value);
+			},
+		},
+		{
+			type: "toggle",
+			name: "VolumePercentage",
+			desc: "Show volume percentage next to volume slider",
+			defaultVal: true,
+			run(value) {
+				VolPercent(value);
+			},
+		},
+		{
+			type: "toggle",
+			name: "WindowsControl",
+			desc: "Adjust the position and brightness of the windows controls",
+			defaultVal: false,
+			popupModal: WindowsControlModal,
+		},
+	],
+	Layouts: [
+		{
+			type: "toggle",
+			name: "LibX",
+			desc: "Restore the old UI >2024 (Pre Global Nav Bar)",
+			defaultVal: false,
+			run(value) {
+				ToggleLibXUI(value);
+			},
+			reveal: [
+				{
+					type: "toggle",
+					name: "highlightnav",
+					desc: "Adds highlight to the selected page",
+					defaultVal: true,
+				},
+				{
+					type: "toggle",
+					name: "PreLibX",
+					desc: "Restore the old UI >2023 (Pre LibraryX)",
+					defaultVal: false,
+				},
+				{
+					type: "toggle",
+					name: "CompactLib",
+					desc: "Makes library compact while keeping icons",
+					defaultVal: false,
+					tippy: "Broken if library is collapsed",
+				},
+			],
+		},
+		{
+			type: "toggle",
+			name: "TestLayout",
+			desc: "Rearrange playbutton to start and cover art to middle",
+			defaultVal: true,
+		},
+		{
+			type: "toggle",
+			name: "CombinedLibX",
+			desc: "Combines the nowplaying view and library menu",
+			defaultVal: false,
+		},
+		{
+			type: "toggle",
+			name: "switchlayout",
+			desc: "Uses different grid layout for Now playing bar",
+			defaultVal: true,
+		},
+	],
+	Snippets: [
+		{
+			type: "toggle",
+			name: "hidetracklistnum",
+			desc: "Hide tracklist numbers in various pages",
+			defaultVal: true,
+		},
+		{
+			type: "toggle",
+			name: "greenicon",
+			desc: "Make the selected tab icon green",
+			defaultVal: true,
+		},
+		{
+			type: "toggle",
+			name: "hidenowplayview",
+			desc: "Hide cover art in now playing bar",
+			defaultVal: false,
+		},
+		{
+			type: "toggle",
+			name: "transplayicon",
+			desc: "Make the play/pause button transparent",
+			defaultVal: true,
+		},
+		{
+			type: "toggle",
+			name: "npvlargerlyrics",
+			desc: "Show lyrics only in Now playing view",
+			defaultVal: false,
+		},
+		{
+			type: "toggle",
+			name: "homeheader",
+			desc: "Remove the coloured gradient from the home page header",
+			defaultVal: true,
+		},
+	],
+	Test: [
+		{
+			type: "toggle",
+			name: "test-toggle",
+			desc: "Description",
+			defaultVal: true,
+		},
+		{
+			type: "toggle",
+			name: "test-reveal",
+			desc: "Description",
+			defaultVal: true,
+			reveal: [
+				{
+					type: "toggle",
+					name: "revealed-toggle",
+					desc: "Description",
+					defaultVal: true,
+				},
+				{
+					type: "input",
+					name: "revealed-input",
+					desc: "Description",
+					defaultVal: true,
+				},
+				{
+					type: "dropdown",
+					name: "revealed-dropdown",
+					desc: "Description",
+					defaultVal: "test1",
+					options: [
+						{ value: "test1", label: "test1" },
+						{ value: "test2", label: "test2" },
+						{ value: "test3", label: "test3" },
+						{ value: "test4", label: "test4" },
+					],
+				},
+			],
+		},
+		{
+			type: "input",
+			name: "test-input",
+			desc: "Description",
+			defaultVal: 1,
+			placeholder: "does something",
+		},
+		{
+			type: "dropdown",
+			name: "test-dropdown",
+			desc: "Description",
+			defaultVal: "test1",
+			options: [
+				{ value: "test1", label: "test1" },
+				{ value: "test2", label: "test2" },
+				{ value: "test3", label: "test3" },
+				{ value: "test4", label: "test4" },
+			],
+		},
+	],
 };
 
 export default options;

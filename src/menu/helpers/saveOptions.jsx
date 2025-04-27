@@ -1,24 +1,28 @@
-import ConsoleLog from "@/utils/ConsoleLog";
-import applyOptions from "@/menu/helpers/applyOptions";
-import { setLocalStorage } from "@/utils/LocalStorage";
+import Console from "../../utils/Console";
+import LocalStorage from "../../utils/LocalStorage";
+import applyOptions from "./applyOptions";
 
 const saveOptions = (options) => {
-  const changedOptions = Object.entries(options).filter(([key, value]) => {
-    const currentValue = getLocalStorage(key, null);
-    if (JSON.stringify(currentValue) !== JSON.stringify(value)) {
-      setLocalStorage(key, value);
-      return true;
-    }
-    return false;
-  });
+	try {
+		const changedOptions = Object.entries(options).filter(([key, value]) => {
+			const currentValue = LocalStorage.get(key, null);
+			if (JSON.stringify(currentValue) !== JSON.stringify(value)) {
+				LocalStorage.set(key, value);
+				return true;
+			}
+			return false;
+		});
 
-  if (changedOptions.length > 0) {
-    const formattedChanges = changedOptions
-      .map(([key, value]) => `${key} = ${value}`)
-      .join(", ");
-    ConsoleLog(`Saving settings: ${formattedChanges}`);
-    applyOptions(options);
-  }
+		if (changedOptions.length > 0) {
+			const formattedChanges = changedOptions
+				.map(([key, value]) => `${key} = ${value}`)
+				.join(", ");
+			Console.Log(`Saving settings: ${formattedChanges}`);
+			applyOptions(options);
+		}
+	} catch (error) {
+		Console.Error("Failed to save settings:", error);
+	}
 };
 
 export default saveOptions;
