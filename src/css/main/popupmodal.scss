@@ -1,0 +1,29 @@
+.GenericModal {
+  background-color: unset;
+  box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
+}
+
+.main-trackCreditsModal-container {
+  background-color: var(--spice-main) !important;
+  width: 450px;
+  border-radius: 7px;
+}
+
+.main-embedWidgetGenerator-container {
+  background-color: var(--spice-main) !important;
+  max-height: 800px;
+  border-radius: 7px;
+}
+
+.GenericModal__overlay {
+  background-color: rgba(var(--spice-rgb-shadow), 0.5);
+  border-radius: 7px;
+}
+
+.main-trackCreditsModal-mainSection {
+  scrollbar-width: thin;
+}
+
+.main-trackCreditsModal-originalCredits {
+  padding-bottom: unset;
+}

@@ -1,0 +1,28 @@
+import applyOptions from "./applyOptions";
+import Console from "../../utils/Console";
+import LocalStorage from "../../utils/LocalStorage";
+
+const saveOptions = (options) => {
+  try {
+    const changedOptions = Object.entries(options).filter(([key, value]) => {
+      const currentValue = LocalStorage.get(key, null);
+      if (JSON.stringify(currentValue) !== JSON.stringify(value)) {
+        LocalStorage.set(key, value);
+        return true;
+      }
+      return false;
+    });
+
+    if (changedOptions.length > 0) {
+      const formattedChanges = changedOptions
+        .map(([key, value]) => `${key} = ${value}`)
+        .join(", ");
+      Console.Log(`Saving settings: ${formattedChanges}`);
+      applyOptions(options);
+    }
+  } catch (error) {
+    Console.Error("Failed to save settings:", error);
+  }
+};
+
+export default saveOptions;

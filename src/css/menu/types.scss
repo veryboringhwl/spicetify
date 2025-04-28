@@ -1,0 +1,75 @@
+.themeOptionPopupButton {
+  height: 32px;
+  color: rgba(var(--spice-rgb-selected-row), 0.7);
+  background-color: var(--spice-tab-active);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  border: 0;
+}
+
+.themeOptionPopupButton:hover {
+  transform: scale(1.04);
+  color: var(--spice-text);
+}
+
+.themeOptionDropdown {
+  align-items: center;
+  background-color: var(--spice-tab-active);
+  border: 0;
+  border-radius: 4px;
+  color: rgba(var(--spice-rgb-selected-row), 0.7);
+  font-size: 14px;
+  font-weight: 400;
+  height: 32px;
+  width: 122px;
+  letter-spacing: 0.24px;
+  line-height: 20px;
+  padding: 0px 18px 0 4px;
+}
+
+.themeOptionInput {
+  align-items: center;
+  background-color: var(--spice-tab-active);
+  border: 0;
+  border-radius: 4px;
+  color: rgba(var(--spice-rgb-selected-row), 0.7);
+  height: 32px;
+  width: 82px;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+}
+
+.themeOptionToggle {
+  align-items: center;
+  display: flex;
+  background-color: transparent !important;
+  border: none;
+}
+
+.toggleWrapper {
+  width: 42px;
+  height: 24px;
+  background-color: var(--spice-button-disabled);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: var(--spice-text);
+  margin-left: 2px;
+  transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+.toggleWrapper:has(.enabled) {
+  background-color: var(--spice-button);
+}
+
+.toggle.enabled {
+  margin-left: 20px;
+}

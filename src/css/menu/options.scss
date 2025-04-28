@@ -1,0 +1,52 @@
+.options-tippy > div {
+  font-size: 16px !important;
+  max-width: 325px;
+}
+
+.main-trackCreditsModal-BtnContainer > *:hover {
+  transform: scale(1.1);
+}
+
+.main-trackCreditsModal-BtnContainer > *:active {
+  transform: scale(0.9);
+}
+
+.main-trackCreditsModal-BtnContainer > * {
+  background-color: var(--spice-highlight);
+  border-radius: 8px;
+  height: 34px;
+  cursor: pointer;
+  margin-right: 8px;
+  padding: 8px;
+  border: 0;
+}
+
+.themeOptionRow {
+  display: flex;
+	height: 32px;
+  justify-content: space-between;
+}
+
+.themeOptionControl {
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.themeModalOptions,
+.themeOptionWrapper,
+.themeOptionRevealed,
+.themeContainer > .themeSettingsCategory {
+  display: grid;
+  gap: 10px;
+}
+
+.themeOptionRevealed .themeOptionRow {
+  padding-left: 30px;
+}
+
+.themeOptionDesc {
+  font-size: 15px;
+  color: var(--spice-subtext);
+}

@@ -1,731 +1,312 @@
-/*
-MARK: WHOLE PAGE
-*/
-body {
-	zoom: var(--Zoomlevel);
-}
-
-.main-yourLibraryX-library,
-.Root__now-playing-bar,
-.Root__right-sidebar,
-.Root__main-view {
-	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
-}
-
-* {
-	font-family: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI" !important;
-}
-
-/*
-MARK: TRANSPARENT WINDOWS CONTROLS
-*/
-.spotify__os--is-windows:not(.fullscreen) #main::after {
-	content: "";
-	position: absolute;
-	pointer-events: none;
-	backdrop-filter: brightness(2.12);
-	z-index: 999;
-	right: 0;
-	top: calc(16px / var(--zoom, 1));
-	width: calc(135px / var(--zoom, 1));
-	height: calc(32px / var(--zoom, 1));
-}
-
-.spotify__os--is-windows:not(.fullscreen) .WindowsControl #main::after {
-	content: "";
-	position: absolute;
-	pointer-events: none;
-	backdrop-filter: brightness(var(--windowcontrol-brightness));
-	z-index: 999;
-	right: 0;
-	top: var(--windowcontrol-top);
-	width: var(--windowcontrol-width);
-	height: var(--windowcontrol-height);
-}
-
-/*
-MARK: SEARCH BAR
-*/
-.main-topBar-searchBar {
-	background-color: var(--spice-highlight) !important;
-	color: var(--spice-text) !important;
-	box-shadow: 0 0px 4px rgba(var(--spice-rgb-shadow), 0.2) !important;
-	transition: none !important;
-}
-
-.main-topBar-searchBar,
-.main-topBar-searchBar:hover {
-	border-radius: 7px !important;
-	height: 32px;
-}
-
-.main-topBar-searchBar:focus {
-	border-bottom: 2px solid var(--spice-accent);
-	outline: none;
-}
-
-/*
-MARK: PROGRESS BAR
-*/
-@property --progress-bar-transform {
-	inherits: true;
-	initial-value: 0%;
-	syntax: "<percentage>";
-}
-.progress-bar {
-	--bg-color: rgba(var(--spice-rgb-selected-row), 0.3);
-	--fg-color: var(--spice-accent);
-	--is-active-fg-color: var(--spice-accent);
-	transition: --progress-bar-transform 1s linear !important;
-}
-
-.progress-bar--isDragging {
-	transition-duration: 0ms !important;
-}
-
-.progress-bar__slider {
-	background-color: var(--spice-highlight) !important;
-	border: 6px solid var(--spice-highlight);
-	box-shadow: 0 0 3px 0 #080808 !important;
-	box-sizing: content-box !important;
-	width: 8px;
-	height: 8px;
-	opacity: 1 !important;
-	display: block;
-	margin-left: -10px;
-}
-
-.progress-bar__slider::after {
-	content: "";
-	position: absolute;
-	width: 10px;
-	height: 10px;
-	background-color: var(--spice-accent);
-	top: 50%;
-	left: 50%;
-	translate: -50% -50%;
-	border-radius: 50%;
-}
-
-.progress-bar__slider:hover::after {
-	transform: scale(1.25);
-}
-
-.progress-bar__slider:active::after {
-	transform: scale(0.8);
-}
-
-.x-progressBar-progressBarBg,
-.x-progressBar-sliderArea {
-	background-color: var(--spice-highlight);
-}
-
-/*
-MARK: BUTTONS
-*/
-.main-globalNav-link-icon {
-	border-radius: 7px !important;
-}
-
-.main-topBar-topbarContentRight {
-	gap: 0;
-}
-
-.main-userWidget-box,
-.main-topBar-buddyFeed,
-.main-actionButtons > * {
-	background-color: var(--spice-highlight) !important;
-	border-radius: 7px;
-}
-
-.main-globalNav-buddyFeed > svg {
-	width: 20px;
-	height: 20px;
-}
-
-.main-topBar-buddyFeed {
-	height: 48px !important;
-	width: 48px !important;
-	border: none;
-}
-
-.main-avatar-image {
-	border-radius: 4px;
-}
-
-.main-globalNav-historyButtons > *:disabled {
-	display: none !important;
-}
-
-.main-globalNav-historyButtons > * {
-	display: block;
-}
-
-.main-topBar-buddyFeed > svg {
-	width: 20px !important;
-	height: 20px !important;
-}
-
-/*
-MARK: SCROLL BAR
-*/
-.os-scrollbar {
-	cursor: pointer;
-	display: unset;
-}
-
-.os-scrollbar-handle {
-	border-radius: 99px !important;
-	background: var(--spice-subtext) !important;
-}
-
-.os-scrollbar-vertical {
-	width: 4px !important;
-	margin-right: 5px;
-}
-
-.os-scrollbar-vertical:hover,
-.os-scrollbar-vertical:active {
-	width: 6px !important;
-}
-
-/*
-MARK: LIBX NAV BAR
-*/
-.fYWNdY4zhj4OX_T2Xtg6:hover {
-	background-color: var(--spice-highlight) !important;
-	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
-}
-
-.BoxComponent-group-listRow-tinted-isInteractive-minBlockSize_56px-padding_8px {
-	background-color: var(--spice-highlight-elevated) !important;
-	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
-}
-
-.x-entityImage-imageContainer {
-	box-shadow: 0 0px 10px rgba(var(--spice-rgb-shadow), 0.3);
-}
-
-/*
-MARK: CONTEXT MENU
-*/
-.KROerAKSuwZBbse9iJT_ {
-	background-color: unset;
-}
-
-.main-contextMenu-menu {
-	border-radius: 7px;
-	background-color: rgba(var(--spice-rgb-main), 0.9) !important;
-	box-shadow: 0 0px 32px rgba(var(--spice-rgb-shadow), 0.5);
-}
-
-div#context-menu::before,
-.main-contextMenu-menu:before {
-	content: "";
-	border-radius: 7px;
-	backdrop-filter: blur(15px) saturate(1.4) brightness(1.2);
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: -1;
-}
-
-/*
-MARK: POPUP MODAL
-*/
-.GenericModal {
-	background-color: unset;
-	box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
-}
-
-.main-trackCreditsModal-container {
-	background-color: var(--spice-main) !important;
-	width: 450px;
-	border-radius: 7px;
-}
-
-.main-embedWidgetGenerator-container {
-	background-color: var(--spice-main) !important;
-	max-height: 800px;
-	border-radius: 7px;
-}
-
-.GenericModal__overlay {
-	background-color: rgba(var(--spice-rgb-shadow), 0.5);
-	border-radius: 7px;
-}
-
-.main-trackCreditsModal-mainSection {
-	scrollbar-width: thin;
-}
-
-.main-trackCreditsModal-originalCredits {
-	padding-bottom: unset;
-}
-
-/*
-MARK: EQUALISER GIF
-from bloom
-*/
-.main-trackList-playingIcon,
-.main-devicePicker-nowPlayingActiveIcon[src*="equaliser"],
-.view-homeShortcutsGrid-equaliser {
-	mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
-	background: var(--spice-accent);
-	content-visibility: hidden;
-}
-
-/*
-MARK: NOW PLAYING BAR
-*/
-.Root__now-playing-bar {
-	background-color: var(--spice-main) !important;
-	border-radius: 8px;
-}
-
-.main-nowPlayingBar-nowPlayingBar {
-	height: 78px !important;
-}
-
-.main-nowPlayingWidget-coverArt .cover-art {
-	height: 60px !important;
-	width: 60px !important;
-}
-
-.main-trackInfo-name {
-	font-size: 1rem;
-	font-weight: 500;
-}
-
-[data-testid="control-button-playpause"] .Wrapper-small-only-small {
-	position: unset;
-}
-
-.main-nowPlayingBar-right {
-	max-width: 400px;
-	padding-right: 5px;
-}
-
-/*make album art centered*/
-.HD9s7U5E1RLSWKpXmrqx {
-	display: grid;
-}
-
-.player-controls__buttons {
-	margin-bottom: 0px !important;
-}
-
-/*
-MARK: HOME PAGE
-*/
 .main-card-PlayButtonContainer,
 .view-homeShortcutsGrid-playButton {
-	box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .view-homeShortcutsGrid-name {
-	color: var(--spice-text);
+  color: var(--spice-text);
 }
 
 .ix_8kg3iUb9VS5SmTnBY span.ButtonInner-sc-14ud5tc-0.encore-bright-accent-set,
 .view-homeShortcutsGrid-playButton > span > svg {
-	background: none !important;
-	color: var(--spice-text) !important;
+  background: none !important;
+  color: var(--spice-text) !important;
 }
 
 .ix_8kg3iUb9VS5SmTnBY > button > span {
-	color: var(--spice-text);
-	background: none;
-	scale: 1.2;
+  color: var(--spice-text);
+  background: none;
+  scale: 1.2;
 }
 
 .ix_8kg3iUb9VS5SmTnBY > button > span:hover {
-	color: var(--spice-text);
-	background: none;
-	scale: 1.3;
+  color: var(--spice-text);
+  background: none;
+  scale: 1.3;
 }
 
 .view-homeShortcutsGrid-shortcut {
-	background-color: var(--spice-highlight-elevated);
-	box-shadow: 0 0px 15px rgba(var(--spice-rgb-shadow), 0.15) !important;
+  background-color: var(--spice-highlight-elevated);
+  box-shadow: 0 0px 15px rgba(var(--spice-rgb-shadow), 0.15) !important;
 }
 
 .view-homeShortcutsGrid-shortcut:hover,
 .main-card-cardContainer:hover {
-	scale: 1.02;
+  scale: 1.02;
 }
 
 .main-cardImage-circular {
-	border-radius: 6px;
+  border-radius: 6px;
 }
 
-/*
-MARK: LYRICS PAGE
-*/
+.a2NTH51fJWzWsds0OYv_:before {
+  background: linear-gradient(90deg, rgba(var(--spice-rgb-main), 0.5), transparent 100%);
+}
+
+.a2NTH51fJWzWsds0OYv_:after {
+  background: linear-gradient(-90deg, rgba(var(--spice-rgb-main), 0.5), transparent 100%);
+}
+
 .lyrics-tabBar-headerItemLink {
-	background-color: var(--spice-highlight);
-	border-radius: 8px;
+  background-color: var(--spice-highlight);
+  border-radius: 8px;
 }
 
 .lyrics-tabBar-active {
-	background-color: var(--spice-tab-active);
+  background-color: var(--spice-tab-active);
 }
 
 .lyrics-lyricsContainer-LyricsBackground {
-	box-shadow: inset 0 0 200px var(--spice-sidebar);
+  box-shadow: inset 0 0 200px var(--spice-sidebar);
 }
 
 .lyrics-lyricsContainer-Provider {
-	background: none !important;
+  background: none !important;
 }
 
 .lyrics-lyricsContainer-SyncedLyrics .lyrics-lyricsContainer-LyricsLine {
-	color: var(--spice-subtext);
-	font-weight: 700;
+  color: var(--spice-subtext);
+  font-weight: 700;
 }
 
 .lyrics-lyricsContainer-LyricsLine-active {
-	text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-	font-size: 38px !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  font-size: 38px !important;
 }
 
 .lyrics-lyricsContainer-SyncedLyrics {
-	top: -80px;
-	position: relative;
+  top: -80px;
+  position: relative;
 }
 
 .lyrics-lyricsContainer-Karaoke-Word {
-	color: rgba(var(--spice-rgb-subtext), 0.75);
+  color: rgba(var(--spice-rgb-subtext), 0.75);
 }
 
 .lyrics-lyricsContainer-UnsyncedLyricsPage {
-	z-index: 1;
+  z-index: 1;
 }
 
-/*
-MARK: PLAYLIST PAGE
-*/
-.main-trackList-trackList {
-	padding: 8px;
-	background-color: rgba(var(--spice-rgb-card), 0.85);
-	border-radius: 7px;
-	box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
-}
-
-.main-entityHeader-shadow {
-	box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.33);
-}
-
-.main-trackList-trackListHeader.main-trackList-trackListHeaderStuck {
-	border-radius: 0px 0px 8px 8px;
-}
-
-.main-entityHeader-overlay {
-	background: linear-gradient(transparent, rgba(var(--spice-rgb-main), 0.5));
-}
-
-.main-actionBarBackground-background {
-	background-image: linear-gradient(
-		rgba(var(--spice-rgb-main), 0.5),
-		var(--spice-main)
-	);
-}
-
-.main-entityHeader-container {
-	align-items: center;
-}
-
-.ecHWOS,
-.x-downloadButton-DownloadButton > div {
-	justify-content: center;
-	display: flex;
-}
-
-.main-actionBar-ActionBar {
-	padding-bottom: 7px;
-}
-
-.main-actionBar-ActionBarRow > *:not(:last-child) {
-	background-color: rgba(var(--spice-rgb-card), 0.85);
-	border-radius: 7px;
-	box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
-	margin-right: 8px !important;
-	min-width: 56px;
-}
-
-.playlist-playlist-searchBoxContainer {
-	background-color: rgba(var(--spice-rgb-card), 0.85);
-	border-radius: 7px;
-	box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
-	margin-right: 8px !important;
-	align-items: center;
-	padding: 8px;
-}
-
-.main-entityHeader-imageContainerNew {
-	height: clamp(
-		135px,
-		135px +
-		(
-			100vw -
-			var(--left-sidebar-width, 0) *
-			1px -
-			var(--panel-width, 0) *
-			1px -
-			600px
-		) /
-		424 *
-		104,
-		232px
-	);
-	width: clamp(
-		135px,
-		135px +
-		(
-			100vw -
-			var(--left-sidebar-width, 0) *
-			1px -
-			var(--panel-width, 0) *
-			1px -
-			600px
-		) /
-		424 *
-		104,
-		232px
-	);
-	position: relative;
-	left: clamp(
-		135px,
-		135px +
-		(
-			100vw -
-			var(--left-sidebar-width, 0) *
-			1px -
-			var(--panel-width, 0) *
-			1px -
-			600px
-		) /
-		424 *
-		104,
-		232px
-	);
-}
-
-.main-entityHeader-headerText {
-	flex: unset;
-	justify-content: center;
-	margin-left: calc(
-		clamp(
-			135px,
-			135px +
-			(
-				100vw -
-				var(--left-sidebar-width, 0) *
-				1px -
-				var(--panel-width, 0) *
-				1px -
-				600px
-			) /
-			424 *
-			104,
-			232px
-		) +
-		var(--content-spacing)
-	);
-}
-
-.main-entityHeader-image {
-	border-radius: 8px;
-}
-
-.main-entityHeader-titleInner h1 {
-	font-size: 3rem !important;
-}
-
-.main-entityHeader-withBackgroundImage {
-	height: min(30vh, var(--fluid-height)) !important;
-}
-
-/*
-MARK: MARKETPLACE
-*/
 .marketplace-tabBar-header {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .marketplace-tabBar-headerItemLink {
-	background-color: var(--spice-highlight);
-	border-radius: 8px;
+  background-color: var(--spice-highlight);
+  border-radius: 8px;
 }
 
 .marketplace-tabBar-active {
-	background-color: var(--spice-tab-active);
+  background-color: var(--spice-tab-active);
 }
 
 .marketplace-grid {
-	padding-top: 10px;
+  padding-top: 10px;
 }
 
 .main-cardImage-image {
-	border-radius: 6px;
+  border-radius: 6px;
 }
 
 .marketplace-tabBar-header {
-	font-weight: 500;
+  font-weight: 500;
 }
 
 .searchbar--bar__wrapper,
 .searchbar-bar {
-	height: 37px !important;
+  height: 37px !important;
 }
 
 .searchbar-bar:focus {
-	border-bottom: 2px solid var(--spice-accent) !important;
+  border-bottom: 2px solid var(--spice-accent) !important;
 }
 
-/*
-MARK: MISCELLANEOUS
-*/
-/*Scroll fix on playlist page*/
+.main-trackList-trackList {
+  padding: 8px;
+  background-color: rgba(var(--spice-rgb-card), 0.85);
+  border-radius: 7px;
+  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
+}
+
+.main-entityHeader-shadow {
+  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.33);
+}
+
+.main-trackList-trackListHeader.main-trackList-trackListHeaderStuck {
+  border-radius: 0px 0px 8px 8px;
+}
+
+.main-entityHeader-overlay {
+  background: linear-gradient(transparent, rgba(var(--spice-rgb-main), 0.5));
+}
+
+.main-actionBarBackground-background {
+  background-image: linear-gradient(rgba(var(--spice-rgb-main), 0.5), var(--spice-main));
+}
+
 .main-entityHeader-container {
-	margin-top: 64px;
-	padding-bottom: 0px;
+  align-items: center;
 }
 
-/*adds space to drag small window*/
-@media (max-width: 1100px) {
-	body:not(.LibX) .main-topBar-topbarContentRight::after {
-		content: " |    ";
-		color: rgba(var(--spice-rgb-text), 0.2);
-		font-weight: 1;
-		font-size: 30px;
-		white-space: pre-wrap;
-		height: 48px;
-		position: relative;
-	}
-}
-/*compact connect bar*/
-.main-connectBar-connectBar {
-	position: absolute;
-	overflow: visible;
-	right: 175px;
-	height: 22px;
-	bottom: 7%;
-	padding: 5px;
+.ecHWOS,
+.x-downloadButton-DownloadButton > div {
+  justify-content: center;
+  display: flex;
 }
 
-/*able to drag windows*/
-.Root__globalNav {
-	-webkit-app-region: drag;
+.main-actionBar-ActionBar {
+  padding-bottom: 7px;
 }
 
-/*shift the browse all in search up a bit*/
-.search-searchBrowse-SearchBrowse {
-	margin-top: 0px;
+.main-actionBar-ActionBarRow > *:not(:last-child) {
+  background-color: rgba(var(--spice-rgb-card), 0.85);
+  border-radius: 7px;
+  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
+  margin-right: 8px !important;
+  min-width: 56px;
 }
 
-/*employee update button*/
-.YyUcY0HTiYikUOwhh29d {
-	height: 48px;
-	background-color: var(--spice-button-active) !important;
-	color: var(--spice-sidebar) !important;
-	/* font-weight: 500;
-  font-size: 15px; */
-	border-radius: 7px !important;
+.playlist-playlist-searchBoxContainer {
+  background-color: rgba(var(--spice-rgb-card), 0.85);
+  border-radius: 7px;
+  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
+  margin-right: 8px !important;
+  align-items: center;
+  padding: 8px;
 }
 
-/*what is this*/
-.Vn9yz8P5MjIvDT8c0U6w {
-	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
+.main-entityHeader-imageContainerNew {
+  height: clamp(135px, 135px + (100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px - 600px) / 424 * 104, 232px);
+  width: clamp(135px, 135px + (100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px - 600px) / 424 * 104, 232px);
+  position: relative;
+  left: clamp(135px, 135px + (100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px - 600px) / 424 * 104, 232px);
 }
 
-/*Fix Playlist name overflow*/
-.main-yourLibraryX-listItem .LineClamp {
-	white-space: nowrap;
+.main-entityHeader-headerText {
+  flex: unset;
+  justify-content: center;
+  margin-left: calc(clamp(135px, 135px + (100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px - 600px) / 424 * 104, 232px) + var(--content-spacing));
+}
+
+.main-entityHeader-image {
+  border-radius: 8px;
+}
+
+.main-entityHeader-titleInner h1 {
+  font-size: 3rem !important;
+}
+
+.main-entityHeader-withBackgroundImage {
+  height: min(30vh, var(--fluid-height)) !important;
+}
+
+.KROerAKSuwZBbse9iJT_ {
+  background-color: unset;
+}
+
+.main-contextMenu-menu {
+  border-radius: 7px;
+  background-color: rgba(var(--spice-rgb-main), 0.9) !important;
+  box-shadow: 0 0px 32px rgba(var(--spice-rgb-shadow), 0.5);
+}
+
+div#context-menu::before,
+.main-contextMenu-menu:before {
+  content: "";
+  border-radius: 7px;
+  backdrop-filter: blur(15px) saturate(1.4) brightness(1.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
 }
 
 /*
-MARK: ICONS
+--------------------------
+	MARK: TEST FEATURES
+--------------------------
 */
+/*rounded filters turn square*/
+.x-filterBox-filterInput,
+.search-searchCategory-categoryGrid > div > button > span {
+  border-radius: 7px;
+}
+
+/* ctrl + k popup*/
+.search-modal-searchBar {
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 16px;
+  width: 658px;
+  justify-self: center;
+}
+
+.N9tnwm0XDrt_eGJd2D2A {
+  border-radius: 8px;
+}
+
+.zZMsUUWG29PYcwWPXhOV {
+  padding: 32px;
+}
+
+.search-modal-listbox,
+.zZMsUUWG29PYcwWPXhOV .kfmGT75UTPoF_D2afwa {
+  border-radius: 0px;
+}
+
 [aria-label="Go back"] path {
-	d: path(
-		"M10.295 19.715a1 1 0 0 0 1.404-1.424l-5.37-5.292h13.67a1 1 0 0 0 0-2H6.336L11.7 5.714a1 1 0 0 0-1.404-1.424L3.37 11.112a1.25 1.25 0 0 0 0 1.78z"
-	) !important;
+  d: path("M10.295 19.715a1 1 0 0 0 1.404-1.424l-5.37-5.292h13.67a1 1 0 0 0 0-2H6.336L11.7 5.714a1 1 0 0 0-1.404-1.424L3.37 11.112a1.25 1.25 0 0 0 0 1.78z") !important;
 }
 
 [aria-label="Go forward"] path {
-	d: path(
-		"M13.705 4.284A1 1 0 1 0 12.3 5.708L17.67 11H4a1 1 0 1 0 0 2h13.665L12.3 18.285a1 1 0 0 0 1.403 1.424l6.925-6.822a1.25 1.25 0 0 0 0-1.78z"
-	) !important;
+  d: path("M13.705 4.284A1 1 0 1 0 12.3 5.708L17.67 11H4a1 1 0 1 0 0 2h13.665L12.3 18.285a1 1 0 0 0 1.403 1.424l6.925-6.822a1.25 1.25 0 0 0 0-1.78z") !important;
 }
 
-.main-nowPlayingBar-nowPlayingBar [aria-label="Play"] path {
-	d: path(
-		"M3.3333 3.516c0-1.138 1.2173-1.8613 2.2167-1.318l8.2413 4.484c1.044.5687 1.044 2.0673 0 2.6353L5.55 13.8013C4.5507 14.3453 3.3333 13.6213 3.3333 12.484V3.516Z"
-	) !important;
+.main-nowPlayingBar-nowPlayingBar [aria-label=Play] path {
+  d: path("M3.3333 3.516c0-1.138 1.2173-1.8613 2.2167-1.318l8.2413 4.484c1.044.5687 1.044 2.0673 0 2.6353L5.55 13.8013C4.5507 14.3453 3.3333 13.6213 3.3333 12.484V3.516Z") !important;
 }
 
-.main-nowPlayingBar-nowPlayingBar [aria-label="Pause"] path {
-	d: path(
-		"M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z"
-	) !important;
+.main-nowPlayingBar-nowPlayingBar [aria-label=Pause] path {
+  d: path("M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z") !important;
 }
 
 [aria-label="Volume off"] path {
-	d: path(
-		"M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.591 5.3904C10.8449 5.1366 11.2564 5.1366 11.5102 5.3904L13.0007 6.8808 14.491 5.3904C14.7449 5.1366 15.1564 5.1366 15.4102 5.3904 15.6641 5.6442 15.6641 6.0558 15.4102 6.3096L13.9199 7.8 15.4102 9.2904C15.6641 9.5442 15.6641 9.9558 15.4102 10.2096 15.1564 10.4634 14.7449 10.4634 14.491 10.2096L13.0007 8.7193 11.5102 10.2096C11.2564 10.4634 10.8449 10.4634 10.591 10.2096 10.3372 9.9558 10.3372 9.5442 10.591 9.2904L12.0814 7.8 10.591 6.3096C10.3372 6.0558 10.3372 5.6442 10.591 5.3904Z"
-	) !important;
+  d: path("M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.591 5.3904C10.8449 5.1366 11.2564 5.1366 11.5102 5.3904L13.0007 6.8808 14.491 5.3904C14.7449 5.1366 15.1564 5.1366 15.4102 5.3904 15.6641 5.6442 15.6641 6.0558 15.4102 6.3096L13.9199 7.8 15.4102 9.2904C15.6641 9.5442 15.6641 9.9558 15.4102 10.2096 15.1564 10.4634 14.7449 10.4634 14.491 10.2096L13.0007 8.7193 11.5102 10.2096C11.2564 10.4634 10.8449 10.4634 10.591 10.2096 10.3372 9.9558 10.3372 9.5442 10.591 9.2904L12.0814 7.8 10.591 6.3096C10.3372 6.0558 10.3372 5.6442 10.591 5.3904Z") !important;
 }
 
 [aria-label="Volume low"] path {
-	d: path(
-		"M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906Z"
-	) !important;
+  d: path("M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906Z") !important;
 }
 
 [aria-label="Volume medium"] path {
-	d: path(
-		"M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.5447 4.1454C10.7682 3.8644 11.177 3.8179 11.4579 4.0413L11.4591 4.0422 11.4603 4.0432 11.463 4.0454 11.47 4.0512 11.4895 4.0675C11.5049 4.0805 11.5248 4.0979 11.5486 4.1198 11.5961 4.1634 11.6596 4.2249 11.7334 4.3045 11.881 4.4637 12.0714 4.6968 12.2598 5.0069 12.6389 5.6302 13.0056 6.5577 13.0056 7.7981 13.0056 9.0385 12.6389 9.9669 12.2602 10.5912 12.0718 10.9017 11.8816 11.1354 11.7342 11.2949 11.6604 11.3747 11.597 11.4365 11.5495 11.4802 11.5238 11.5037 11.4977 11.5266 11.4712 11.5489L11.4602 11.5579 11.4591 11.5588C11.4591 11.5588 10.8788 11.8738 10.5456 11.4568 10.3225 11.1778 10.3666 10.7715 10.6432 10.5466L10.6453 10.545 10.6443 10.5459 10.6465 10.544 10.6453 10.545C10.6491 10.5417 10.6573 10.5347 10.6691 10.5238 10.6928 10.5019 10.7311 10.465 10.7793 10.4127 10.8761 10.308 11.0114 10.1432 11.1487 9.917 11.421 9.4679 11.7056 8.7699 11.7056 7.7981 11.7056 6.8264 11.4212 6.1298 11.1491 5.6822 11.0119 5.4567 10.8767 5.2926 10.7801 5.1884 10.7319 5.1364 10.6935 5.0996 10.67 5.078 10.6582 5.0672 10.6501 5.0601 10.6464 5.0569L10.6477 5.0579C10.3672 4.8343 10.3213 4.4261 10.5447 4.1454ZM10.6464 5.0569 10.6445 5.0554Z"
-	) !important;
+  d: path("M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.5447 4.1454C10.7682 3.8644 11.177 3.8179 11.4579 4.0413L11.4591 4.0422 11.4603 4.0432 11.463 4.0454 11.47 4.0512 11.4895 4.0675C11.5049 4.0805 11.5248 4.0979 11.5486 4.1198 11.5961 4.1634 11.6596 4.2249 11.7334 4.3045 11.881 4.4637 12.0714 4.6968 12.2598 5.0069 12.6389 5.6302 13.0056 6.5577 13.0056 7.7981 13.0056 9.0385 12.6389 9.9669 12.2602 10.5912 12.0718 10.9017 11.8816 11.1354 11.7342 11.2949 11.6604 11.3747 11.597 11.4365 11.5495 11.4802 11.5238 11.5037 11.4977 11.5266 11.4712 11.5489L11.4602 11.5579 11.4591 11.5588C11.4591 11.5588 10.8788 11.8738 10.5456 11.4568 10.3225 11.1778 10.3666 10.7715 10.6432 10.5466L10.6453 10.545 10.6443 10.5459 10.6465 10.544 10.6453 10.545C10.6491 10.5417 10.6573 10.5347 10.6691 10.5238 10.6928 10.5019 10.7311 10.465 10.7793 10.4127 10.8761 10.308 11.0114 10.1432 11.1487 9.917 11.421 9.4679 11.7056 8.7699 11.7056 7.7981 11.7056 6.8264 11.4212 6.1298 11.1491 5.6822 11.0119 5.4567 10.8767 5.2926 10.7801 5.1884 10.7319 5.1364 10.6935 5.0996 10.67 5.078 10.6582 5.0672 10.6501 5.0601 10.6464 5.0569L10.6477 5.0579C10.3672 4.8343 10.3213 4.4261 10.5447 4.1454ZM10.6464 5.0569 10.6445 5.0554Z") !important;
 }
 
 [aria-label="Volume high"] path {
-	d: path(
-		"M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.5447 4.1454C10.7682 3.8644 11.177 3.8179 11.4579 4.0413L11.4591 4.0422 11.4603 4.0432 11.463 4.0454 11.47 4.0512 11.4895 4.0675C11.5049 4.0805 11.5248 4.0979 11.5486 4.1198 11.5961 4.1634 11.6596 4.2249 11.7334 4.3045 11.881 4.4637 12.0714 4.6968 12.2598 5.0069 12.6389 5.6302 13.0056 6.5577 13.0056 7.7981 13.0056 9.0385 12.6389 9.9669 12.2602 10.5912 12.0718 10.9017 11.8816 11.1354 11.7342 11.2949 11.6604 11.3747 11.597 11.4365 11.5495 11.4802 11.5238 11.5037 11.4977 11.5266 11.4712 11.5489L11.4602 11.5579 11.4591 11.5588C11.4591 11.5588 10.8788 11.8738 10.5456 11.4568 10.3225 11.1778 10.3666 10.7715 10.6432 10.5466L10.6453 10.545 10.6443 10.5459 10.6465 10.544 10.6453 10.545C10.6491 10.5417 10.6573 10.5347 10.6691 10.5238 10.6928 10.5019 10.7311 10.465 10.7793 10.4127 10.8761 10.308 11.0114 10.1432 11.1487 9.917 11.421 9.4679 11.7056 8.7699 11.7056 7.7981 11.7056 6.8264 11.4212 6.1298 11.1491 5.6822 11.0119 5.4567 10.8767 5.2926 10.7801 5.1884 10.7319 5.1364 10.6935 5.0996 10.67 5.078 10.6582 5.0672 10.6501 5.0601 10.6464 5.0569L10.6477 5.0579C10.3672 4.8343 10.3213 4.4261 10.5447 4.1454ZM12.7569 1.4415C12.4761 1.2179 12.0673 1.2643 11.8435 1.5452 11.62 1.8259 11.667 2.2351 11.9475 2.4588L11.9618 2.4708C11.976 2.4827 11.9987 2.5023 12.029 2.5296 12.0897 2.5842 12.1801 2.6691 12.2905 2.7837 12.5115 3.0133 12.8103 3.3593 13.1099 3.8156 13.7084 4.7274 14.3043 6.069 14.3043 7.8053 14.3043 9.5414 13.7085 10.8802 13.1102 11.7891 12.8109 12.2439 12.5122 12.5886 12.2914 12.8171 12.1811 12.9311 12.0908 13.0157 12.0302 13.0699 11.9999 13.0971 11.9772 13.1166 11.963 13.1284L11.948 13.1408 11.9469 13.1418C11.6669 13.365 11.62 13.7729 11.8426 14.0536 12.0654 14.335 12.4753 14.3816 12.7568 14.1587L12.7995 14.1235C12.8236 14.1033 12.8567 14.0748 12.8977 14.0382 12.9793 13.965 13.0923 13.8589 13.2261 13.7206 13.4931 13.4443 13.845 13.0372 14.1961 12.5038 14.899 11.4361 15.6043 9.8525 15.6043 7.8053 15.6043 5.7581 14.899 4.1722 14.1965 3.1022 13.8455 2.5675 13.4937 2.1592 13.2269 1.882 13.0933 1.7433 12.9804 1.6368 12.8987 1.5633 12.8579 1.5265 12.8248 1.498 12.8007 1.4776L12.7716 1.4534 12.7624 1.4459 12.7592 1.4433 12.7569 1.4415ZM10.6464 5.0569 10.6445 5.0554Z"
-	) !important;
+  d: path("M8.7027.0511C8.9434.1527 9.1.3887 9.1.65V14.95C9.1 15.2118 8.9428 15.4482 8.7014 15.5494 8.4599 15.6507 8.1812 15.5971 7.9944 15.4137L4.1901 11.6762H1.95C.873 11.6762 0 10.8031 0 9.7262V5.8405C0 4.7636.873 3.8905 1.95 3.8905H4.1917L7.9964.1844C8.1836.002 8.4619-.0505 8.7027.0511ZM7.8 2.1906 4.9095 5.0062C4.7881 5.1244 4.6254 5.1905 4.456 5.1905H1.95C1.591 5.1905 1.3 5.4816 1.3 5.8405V9.7262C1.3 10.0852 1.591 10.3762 1.95 10.3762H4.456C4.6263 10.3762 4.7899 10.4432 4.9115 10.5625L7.8 13.4003V2.1906ZM10.5447 4.1454C10.7682 3.8644 11.177 3.8179 11.4579 4.0413L11.4591 4.0422 11.4603 4.0432 11.463 4.0454 11.47 4.0512 11.4895 4.0675C11.5049 4.0805 11.5248 4.0979 11.5486 4.1198 11.5961 4.1634 11.6596 4.2249 11.7334 4.3045 11.881 4.4637 12.0714 4.6968 12.2598 5.0069 12.6389 5.6302 13.0056 6.5577 13.0056 7.7981 13.0056 9.0385 12.6389 9.9669 12.2602 10.5912 12.0718 10.9017 11.8816 11.1354 11.7342 11.2949 11.6604 11.3747 11.597 11.4365 11.5495 11.4802 11.5238 11.5037 11.4977 11.5266 11.4712 11.5489L11.4602 11.5579 11.4591 11.5588C11.4591 11.5588 10.8788 11.8738 10.5456 11.4568 10.3225 11.1778 10.3666 10.7715 10.6432 10.5466L10.6453 10.545 10.6443 10.5459 10.6465 10.544 10.6453 10.545C10.6491 10.5417 10.6573 10.5347 10.6691 10.5238 10.6928 10.5019 10.7311 10.465 10.7793 10.4127 10.8761 10.308 11.0114 10.1432 11.1487 9.917 11.421 9.4679 11.7056 8.7699 11.7056 7.7981 11.7056 6.8264 11.4212 6.1298 11.1491 5.6822 11.0119 5.4567 10.8767 5.2926 10.7801 5.1884 10.7319 5.1364 10.6935 5.0996 10.67 5.078 10.6582 5.0672 10.6501 5.0601 10.6464 5.0569L10.6477 5.0579C10.3672 4.8343 10.3213 4.4261 10.5447 4.1454ZM12.7569 1.4415C12.4761 1.2179 12.0673 1.2643 11.8435 1.5452 11.62 1.8259 11.667 2.2351 11.9475 2.4588L11.9618 2.4708C11.976 2.4827 11.9987 2.5023 12.029 2.5296 12.0897 2.5842 12.1801 2.6691 12.2905 2.7837 12.5115 3.0133 12.8103 3.3593 13.1099 3.8156 13.7084 4.7274 14.3043 6.069 14.3043 7.8053 14.3043 9.5414 13.7085 10.8802 13.1102 11.7891 12.8109 12.2439 12.5122 12.5886 12.2914 12.8171 12.1811 12.9311 12.0908 13.0157 12.0302 13.0699 11.9999 13.0971 11.9772 13.1166 11.963 13.1284L11.948 13.1408 11.9469 13.1418C11.6669 13.365 11.62 13.7729 11.8426 14.0536 12.0654 14.335 12.4753 14.3816 12.7568 14.1587L12.7995 14.1235C12.8236 14.1033 12.8567 14.0748 12.8977 14.0382 12.9793 13.965 13.0923 13.8589 13.2261 13.7206 13.4931 13.4443 13.845 13.0372 14.1961 12.5038 14.899 11.4361 15.6043 9.8525 15.6043 7.8053 15.6043 5.7581 14.899 4.1722 14.1965 3.1022 13.8455 2.5675 13.4937 2.1592 13.2269 1.882 13.0933 1.7433 12.9804 1.6368 12.8987 1.5633 12.8579 1.5265 12.8248 1.498 12.8007 1.4776L12.7716 1.4534 12.7624 1.4459 12.7592 1.4433 12.7569 1.4415ZM10.6464 5.0569 10.6445 5.0554Z") !important;
 }
 
-[aria-label="Next"] path {
-	d: path(
-		"M15.75 3a.75.75 90 10-1.5 0v12a.75.75 90 101.5 0V3ZM2.25 3.7103c0-1.068 1.209-1.689 2.0775-1.0665l7.8525 5.6303a1.3125 1.3125 90 01-.0562 2.1713l-7.8525 5.037C3.3975 16.0425 2.25 15.4155 2.25 14.3775V3.7103Z"
-	) !important;
+[aria-label=Next] path {
+  d: path("M15.75 3a.75.75 90 10-1.5 0v12a.75.75 90 101.5 0V3ZM2.25 3.7103c0-1.068 1.209-1.689 2.0775-1.0665l7.8525 5.6303a1.3125 1.3125 90 01-.0562 2.1713l-7.8525 5.037C3.3975 16.0425 2.25 15.4155 2.25 14.3775V3.7103Z") !important;
 }
 
-[aria-label="Previous"] path {
-	d: path(
-		"M2.0625 15a.75.75 90 101.5 0V3a.75.75 90 10-1.5 0v12ZM15.5625 14.2898c0 1.068-1.209 1.689-2.0775 1.0665L5.6325 9.726a1.3125 1.3125 90 01.0562-2.1713l7.8525-5.037c.8738-.561 2.0212.0668 2.0212 1.1048v10.6673Z"
-	) !important;
+[aria-label=Previous] path {
+  d: path("M2.0625 15a.75.75 90 101.5 0V3a.75.75 90 10-1.5 0v12ZM15.5625 14.2898c0 1.068-1.209 1.689-2.0775 1.0665L5.6325 9.726a1.3125 1.3125 90 01.0562-2.1713l7.8525-5.037c.8738-.561 2.0212.0668 2.0212 1.1048v10.6673Z") !important;
 }
 
 [aria-label="Connect to a device"] path {
-	d: path(
-		"M5.71 1.142H13.704C14.3347 1.142 14.846 1.6533 14.846 2.284V9.136C14.846 9.7667 14.3347 10.278 13.704 10.278H7.994V11.42H10.278V12.562H7.994V13.704H11.991C12.3063 13.704 12.562 13.4483 12.562 13.133 12.562 12.8177 12.3063 12.562 11.991 12.562H11.42V11.42H13.704C14.9655 11.42 15.988 10.3975 15.988 9.136V2.284C15.988 1.0226 14.9655 0 13.704 0H5.71C4.4486 0 3.426 1.0226 3.426 2.284V4.568H4.568V2.284C4.568 1.6533 5.0793 1.142 5.71 1.142ZM2.855 12.562C2.5396 12.562 2.284 12.8177 2.284 13.133 2.284 13.4483 2.5396 13.704 2.855 13.704H3.997C4.3124 13.704 4.568 13.4483 4.568 13.133 4.568 12.8177 4.3124 12.562 3.997 12.562H2.855ZM1.713 5.71C.7669 5.71 0 6.4769 0 7.423V14.275C0 15.221.7669 15.988 1.713 15.988H5.139C6.0851 15.988 6.852 15.221 6.852 14.275V7.423C6.852 6.4769 6.0851 5.71 5.139 5.71H1.713ZM1.713 6.852H5.139C5.4544 6.852 5.71 7.1076 5.71 7.423V14.275C5.71 14.5903 5.4544 14.846 5.139 14.846H1.713C1.3976 14.846 1.142 14.5903 1.142 14.275V7.423C1.142 7.1076 1.3976 6.852 1.713 6.852Z"
-	) !important;
+  d: path("M5.71 1.142H13.704C14.3347 1.142 14.846 1.6533 14.846 2.284V9.136C14.846 9.7667 14.3347 10.278 13.704 10.278H7.994V11.42H10.278V12.562H7.994V13.704H11.991C12.3063 13.704 12.562 13.4483 12.562 13.133 12.562 12.8177 12.3063 12.562 11.991 12.562H11.42V11.42H13.704C14.9655 11.42 15.988 10.3975 15.988 9.136V2.284C15.988 1.0226 14.9655 0 13.704 0H5.71C4.4486 0 3.426 1.0226 3.426 2.284V4.568H4.568V2.284C4.568 1.6533 5.0793 1.142 5.71 1.142ZM2.855 12.562C2.5396 12.562 2.284 12.8177 2.284 13.133 2.284 13.4483 2.5396 13.704 2.855 13.704H3.997C4.3124 13.704 4.568 13.4483 4.568 13.133 4.568 12.8177 4.3124 12.562 3.997 12.562H2.855ZM1.713 5.71C.7669 5.71 0 6.4769 0 7.423V14.275C0 15.221.7669 15.988 1.713 15.988H5.139C6.0851 15.988 6.852 15.221 6.852 14.275V7.423C6.852 6.4769 6.0851 5.71 5.139 5.71H1.713ZM1.713 6.852H5.139C5.4544 6.852 5.71 7.1076 5.71 7.423V14.275C5.71 14.5903 5.4544 14.846 5.139 14.846H1.713C1.3976 14.846 1.142 14.5903 1.142 14.275V7.423C1.142 7.1076 1.3976 6.852 1.713 6.852Z") !important;
 }
 
 [aria-label="Collapse Your Library"] .Svg-sc-ytk21e-0.Svg-img-icon-medium path {
-	d: path(
-		"M4.95 1.1C5.8608 1.1 6.6 1.8392 6.6 2.75V19.25C6.6 20.1608 5.8608 20.9 4.95 20.9H2.75C1.8392 20.9 1.1 20.1608 1.1 19.25V2.75C1.1 1.8392 1.8392 1.1 2.75 1.1H4.95ZM11.55 1.1C12.4608 1.1 13.2 1.8392 13.2 2.75V19.25C13.2 20.1608 12.4608 20.9 11.55 20.9H9.35C8.4392 20.9 7.7 20.1608 7.7 19.25V2.75C7.7 1.8392 8.4392 1.1 9.35 1.1H11.55ZM19.5591 4.5362 23.0945 18.3071C23.3211 19.1893 22.7898 20.0891 21.9065 20.3157L19.8429 20.8448C18.9596 21.0714 18.0609 20.5401 17.8343 19.6568L14.2989 5.8881C14.0723 5.0048 14.6036 4.1061 15.4869 3.8795L17.5505 3.3482C18.4338 3.1227 19.3325 3.6551 19.5591 4.5362Z"
-	) !important;
+  d: path("M4.95 1.1C5.8608 1.1 6.6 1.8392 6.6 2.75V19.25C6.6 20.1608 5.8608 20.9 4.95 20.9H2.75C1.8392 20.9 1.1 20.1608 1.1 19.25V2.75C1.1 1.8392 1.8392 1.1 2.75 1.1H4.95ZM11.55 1.1C12.4608 1.1 13.2 1.8392 13.2 2.75V19.25C13.2 20.1608 12.4608 20.9 11.55 20.9H9.35C8.4392 20.9 7.7 20.1608 7.7 19.25V2.75C7.7 1.8392 8.4392 1.1 9.35 1.1H11.55ZM19.5591 4.5362 23.0945 18.3071C23.3211 19.1893 22.7898 20.0891 21.9065 20.3157L19.8429 20.8448C18.9596 21.0714 18.0609 20.5401 17.8343 19.6568L14.2989 5.8881C14.0723 5.0048 14.6036 4.1061 15.4869 3.8795L17.5505 3.3482C18.4338 3.1227 19.3325 3.6551 19.5591 4.5362Z") !important;
 }
 
 [aria-label="Expand Your Library"] .Svg-sc-ytk21e-0.Svg-img-icon-medium path {
-	d: path(
-		"M3.3 1.1H4.4C5.5592 1.1 6.5099 1.998 6.594 3.1359L6.6 3.3V18.7C6.6 19.8592 5.702 20.8099 4.5641 20.894L4.4 20.9H3.3C2.1408 20.9 1.1901 20.002 1.106 18.8641L1.1 18.7V3.3C1.1 2.1408 1.998 1.1901 3.1359 1.106L3.3 1.1H4.4 3.3ZM9.9 1.1H11C12.1592 1.1 13.1099 1.998 13.194 3.1359L13.2 3.3V18.7C13.2 19.8592 12.302 20.8099 11.1641 20.894L11 20.9H9.9C8.7408 20.9 7.7901 20.002 7.706 18.8641L7.7 18.7V3.3C7.7 2.1408 8.598 1.1901 9.7359 1.106L9.9 1.1H11 9.9ZM17.5717 3.3005C18.4952 3.3005 19.3407 3.8842 19.6507 4.781L19.7024 4.9528 23.0189 17.8734C23.3077 18.9958 22.6743 20.1403 21.5925 20.5042L21.4349 20.5508 20.369 20.8247C20.1864 20.8709 20.0016 20.894 19.8212 20.894 18.8988 20.894 18.0523 20.3093 17.7432 19.4124L17.6916 19.2406 14.374 6.3212C14.0864 5.1977 14.7188 4.0541 15.8014 3.6903L15.9591 3.6438 17.0239 3.3699C17.2065 3.3226 17.3913 3.3005 17.5717 3.3005ZM4.4 2.75H3.3C3.0301 2.75 2.8055 2.9456 2.7589 3.2015L2.75 3.3V18.7C2.75 18.9688 2.9447 19.1943 3.2012 19.2411L3.3 19.25H4.4C4.6699 19.25 4.8945 19.0544 4.9411 18.7986L4.95 18.7V3.3C4.95 3.0311 4.7553 2.8057 4.4988 2.7589L4.4 2.75ZM11 2.75H9.9C9.6301 2.75 9.4055 2.9456 9.3589 3.2015L9.35 3.3V18.7C9.35 18.9688 9.5447 19.1943 9.8012 19.2411L9.9 19.25H11C11.2698 19.25 11.4946 19.0544 11.5411 18.7986L11.55 18.7V3.3C11.55 3.0311 11.3553 2.8057 11.0988 2.7589L11 2.75ZM17.5728 4.9505 17.5031 4.9548 17.4342 4.9682 16.3694 5.241C16.1769 5.2904 16.0757 5.4203 16.0317 5.495 15.9974 5.5531 15.9484 5.6619 15.9554 5.8016L15.9723 5.912 19.2899 18.8304C19.3625 19.1142 19.6166 19.244 19.8212 19.244L19.89 19.2397 19.9587 19.2264 21.0246 18.9525C21.2867 18.886 21.4557 18.6404 21.4367 18.3812L21.4206 18.2837 18.1041 5.3631C18.0304 5.0804 17.7774 4.9505 17.5728 4.9505Z"
-	) !important;
+  d: path("M3.3 1.1H4.4C5.5592 1.1 6.5099 1.998 6.594 3.1359L6.6 3.3V18.7C6.6 19.8592 5.702 20.8099 4.5641 20.894L4.4 20.9H3.3C2.1408 20.9 1.1901 20.002 1.106 18.8641L1.1 18.7V3.3C1.1 2.1408 1.998 1.1901 3.1359 1.106L3.3 1.1H4.4 3.3ZM9.9 1.1H11C12.1592 1.1 13.1099 1.998 13.194 3.1359L13.2 3.3V18.7C13.2 19.8592 12.302 20.8099 11.1641 20.894L11 20.9H9.9C8.7408 20.9 7.7901 20.002 7.706 18.8641L7.7 18.7V3.3C7.7 2.1408 8.598 1.1901 9.7359 1.106L9.9 1.1H11 9.9ZM17.5717 3.3005C18.4952 3.3005 19.3407 3.8842 19.6507 4.781L19.7024 4.9528 23.0189 17.8734C23.3077 18.9958 22.6743 20.1403 21.5925 20.5042L21.4349 20.5508 20.369 20.8247C20.1864 20.8709 20.0016 20.894 19.8212 20.894 18.8988 20.894 18.0523 20.3093 17.7432 19.4124L17.6916 19.2406 14.374 6.3212C14.0864 5.1977 14.7188 4.0541 15.8014 3.6903L15.9591 3.6438 17.0239 3.3699C17.2065 3.3226 17.3913 3.3005 17.5717 3.3005ZM4.4 2.75H3.3C3.0301 2.75 2.8055 2.9456 2.7589 3.2015L2.75 3.3V18.7C2.75 18.9688 2.9447 19.1943 3.2012 19.2411L3.3 19.25H4.4C4.6699 19.25 4.8945 19.0544 4.9411 18.7986L4.95 18.7V3.3C4.95 3.0311 4.7553 2.8057 4.4988 2.7589L4.4 2.75ZM11 2.75H9.9C9.6301 2.75 9.4055 2.9456 9.3589 3.2015L9.35 3.3V18.7C9.35 18.9688 9.5447 19.1943 9.8012 19.2411L9.9 19.25H11C11.2698 19.25 11.4946 19.0544 11.5411 18.7986L11.55 18.7V3.3C11.55 3.0311 11.3553 2.8057 11.0988 2.7589L11 2.75ZM17.5728 4.9505 17.5031 4.9548 17.4342 4.9682 16.3694 5.241C16.1769 5.2904 16.0757 5.4203 16.0317 5.495 15.9974 5.5531 15.9484 5.6619 15.9554 5.8016L15.9723 5.912 19.2899 18.8304C19.3625 19.1142 19.6166 19.244 19.8212 19.244L19.89 19.2397 19.9587 19.2264 21.0246 18.9525C21.2867 18.886 21.4557 18.6404 21.4367 18.3812L21.4206 18.2837 18.1041 5.3631C18.0304 5.0804 17.7774 4.9505 17.5728 4.9505Z") !important;
 }
 
 /*pause*/
@@ -737,13 +318,8 @@ MARK: ICONS
   d: path("M5.746 3a1.75 1.75 0 0 0-1.75 1.75v14.5c0 .966.784 1.75 1.75 1.75h3.5a1.75 1.75 0 0 0 1.75-1.75V4.75A1.75 1.75 0 0 0 9.246 3zm9 0a1.75 1.75 0 0 0-1.75 1.75v14.5c0 .966.784 1.75 1.75 1.75h3.5a1.75 1.75 0 0 0 1.75-1.75V4.75A1.75 1.75 0 0 0 18.246 3z") !important;
 }
 
-[aria-label="Pause"]
-	.view-homeShortcutsGrid-playButton
-	.Wrapper-small-only-small
-	path {
-	d: path(
-		"M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z"
-	) !important;
+[aria-label=Pause] .view-homeShortcutsGrid-playButton .Wrapper-small-only-small path {
+  d: path("M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z") !important;
 }
 
 /*play*/
@@ -755,534 +331,658 @@ MARK: ICONS
   d: path("M5 5.274c0-1.707 1.826-2.792 3.325-1.977l12.362 6.727c1.566.852 1.566 3.1 0 3.952L8.325 20.702C6.826 21.518 5 20.432 5 18.726z") !important;
 }
 
-[aria-label="Play"]
-	.view-homeShortcutsGrid-playButton
-	.Wrapper-small-only-small
-	path {
-	d: path(
-		"M6.235 2.192A1.5 1.5 0 0 0 4 3.499v9a1.5 1.5 0 0 0 2.235 1.308l8-4.5a1.5 1.5 0 0 0 0-2.615z"
-	) !important;
+[aria-label=Play] .view-homeShortcutsGrid-playButton .Wrapper-small-only-small path {
+  d: path("M6.235 2.192A1.5 1.5 0 0 0 4 3.499v9a1.5 1.5 0 0 0 2.235 1.308l8-4.5a1.5 1.5 0 0 0 0-2.615z") !important;
 }
 
-/*
---------------------------
-	MARK: TEST FEATURES
---------------------------
-*/
-/*rounded filters turn square*/
-.x-filterBox-filterInput,
-.search-searchCategory-categoryGrid > div > button > span {
-	border-radius: 7px;
+.fYWNdY4zhj4OX_T2Xtg6:hover {
+  background-color: var(--spice-highlight) !important;
+  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
 }
 
-/* ctrl + k popup*/
-.search-modal-searchBar {
-	border-radius: 8px;
-	height: 40px;
-	padding: 0 16px;
-	width: 658px;
-	justify-self: center;
+.BoxComponent-group-listRow-tinted-isInteractive-minBlockSize_56px-padding_8px {
+  background-color: var(--spice-highlight-elevated) !important;
+  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
 }
 
-.N9tnwm0XDrt_eGJd2D2A {
-	border-radius: 8px;
+.x-entityImage-imageContainer {
+  box-shadow: 0 0px 10px rgba(var(--spice-rgb-shadow), 0.3);
 }
 
-.zZMsUUWG29PYcwWPXhOV {
-	padding: 32px;
+.main-yourLibraryX-library,
+.Root__now-playing-bar,
+.Root__right-sidebar,
+.Root__main-view {
+  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
 }
 
-.search-modal-listbox,
-.zZMsUUWG29PYcwWPXhOV .kfmGT75UTPoF_D2afwa {
-	border-radius: 0px;
+* {
+  font-family: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI" !important;
 }
 
-/*
-MARK: THEME SETTINGS UI
-*/
-/*
-MARK: THEME SETTINGS MENU
-*/
-.main-trackCreditsModal-BtnContainer > *:hover {
-	transform: scale(1.1);
+.spotify__os--is-windows:not(.fullscreen) #main::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  backdrop-filter: brightness(2.12);
+  z-index: 999;
+  right: 0;
+  top: calc(16px / var(--zoom, 1));
+  width: calc(135px / var(--zoom, 1));
+  height: calc(32px / var(--zoom, 1));
 }
 
-.main-trackCreditsModal-BtnContainer > *:active {
-	transform: scale(0.9);
+.main-topBar-searchBar {
+  background-color: var(--spice-highlight) !important;
+  color: var(--spice-text) !important;
+  box-shadow: 0 0px 4px rgba(var(--spice-rgb-shadow), 0.2) !important;
+  transition: none !important;
+}
+
+.main-topBar-searchBar,
+.main-topBar-searchBar:hover {
+  border-radius: 7px !important;
+  height: 32px;
+}
+
+.main-topBar-searchBar:focus {
+  border-bottom: 2px solid var(--spice-accent);
+  outline: none;
+}
+
+@property --progress-bar-transform {
+  inherits: true;
+  initial-value: 0%;
+  syntax: "<percentage>";
+}
+.progress-bar {
+  --bg-color: rgba(var(--spice-rgb-selected-row), 0.3);
+  --fg-color: var(--spice-accent);
+  --is-active-fg-color: var(--spice-accent);
+  transition: --progress-bar-transform 1s linear !important;
+}
+
+.progress-bar--isDragging {
+  transition-duration: 0ms !important;
+}
+
+.progress-bar__slider {
+  background-color: var(--spice-highlight) !important;
+  border: 6px solid var(--spice-highlight);
+  box-shadow: 0 0 3px 0 #080808 !important;
+  box-sizing: content-box !important;
+  width: 8px;
+  height: 8px;
+  opacity: 1 !important;
+  display: block;
+  margin-left: -10px;
+}
+
+.progress-bar__slider::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--spice-accent);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border-radius: 50%;
+}
+
+.progress-bar__slider:hover::after {
+  transform: scale(1.25);
+}
+
+.progress-bar__slider:active::after {
+  transform: scale(0.8);
+}
+
+.x-progressBar-progressBarBg,
+.x-progressBar-sliderArea {
+  background-color: var(--spice-highlight);
+}
+
+.main-globalNav-link-icon {
+  border-radius: 7px !important;
+}
+
+.main-topBar-topbarContentRight {
+  gap: 0;
+}
+
+.main-userWidget-box,
+.main-topBar-buddyFeed,
+.main-actionButtons > * {
+  background-color: var(--spice-highlight) !important;
+  border-radius: 7px;
+}
+
+.main-globalNav-buddyFeed > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.main-topBar-buddyFeed {
+  height: 48px !important;
+  width: 48px !important;
+  border: none;
+}
+
+.main-avatar-image {
+  border-radius: 4px;
+}
+
+.main-globalNav-historyButtons > *:disabled {
+  display: none !important;
+}
+
+.main-globalNav-historyButtons > * {
+  display: block;
+}
+
+.main-topBar-buddyFeed > svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.os-scrollbar {
+  cursor: pointer;
+  display: unset;
+}
+
+.os-scrollbar-handle {
+  border-radius: 99px !important;
+  background: var(--spice-subtext) !important;
+}
+
+.os-scrollbar-vertical {
+  width: 4px !important;
+  margin-right: 5px;
+}
+
+.os-scrollbar-vertical:hover,
+.os-scrollbar-vertical:active {
+  width: 6px !important;
+}
+
+.main-trackList-playingIcon,
+.main-devicePicker-nowPlayingActiveIcon[src*=equaliser],
+.view-homeShortcutsGrid-equaliser {
+  mask-image: url("data:image/svg+xml,%3Csvg id='playing-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cdefs%3E%3Cstyle%3E %23playing-icon %7B fill: %2320BC54; %7D @keyframes play %7B 0%25 %7Btransform: scaleY(1);%7D 3.3%25 %7Btransform: scaleY(0.9583);%7D 6.6%25 %7Btransform: scaleY(0.9166);%7D 9.9%25 %7Btransform: scaleY(0.8333);%7D 13.3%25 %7Btransform: scaleY(0.7083);%7D 16.6%25 %7Btransform: scaleY(0.5416);%7D 19.9%25 %7Btransform: scaleY(0.4166);%7D 23.3%25 %7Btransform: scaleY(0.25);%7D 26.6%25 %7Btransform: scaleY(0.1666);%7D 29.9%25 %7Btransform: scaleY(0.125);%7D 33.3%25 %7Btransform: scaleY(0.125);%7D 36.6%25 %7Btransform: scaleY(0.1666);%7D 39.9%25 %7Btransform: scaleY(0.1666);%7D 43.3%25 %7Btransform: scaleY(0.2083);%7D 46.6%25 %7Btransform: scaleY(0.2916);%7D 49.9%25 %7Btransform: scaleY(0.375);%7D 53.3%25 %7Btransform: scaleY(0.5);%7D 56.6%25 %7Btransform: scaleY(0.5833);%7D 59.9%25 %7Btransform: scaleY(0.625);%7D 63.3%25 %7Btransform: scaleY(0.6666);%7D 66.6%25 %7Btransform: scaleY(0.6666);%7D 69.9%25 %7Btransform: scaleY(0.6666);%7D 73.3%25 %7Btransform: scaleY(0.6666);%7D 76.6%25 %7Btransform: scaleY(0.7083);%7D 79.9%25 %7Btransform: scaleY(0.75);%7D 83.3%25 %7Btransform: scaleY(0.8333);%7D 86.6%25 %7Btransform: scaleY(0.875);%7D 89.9%25 %7Btransform: scaleY(0.9166);%7D 93.3%25 %7Btransform: scaleY(0.9583);%7D 96.6%25 %7Btransform: scaleY(1);%7D %7D %23bar1 %7B transform-origin: bottom; animation: play 0.9s -0.51s infinite; %7D %23bar2 %7B transform-origin: bottom; animation: play 0.9s infinite; %7D %23bar3 %7B transform-origin: bottom; animation: play 0.9s -0.15s infinite; %7D %23bar4 %7B transform-origin: bottom; animation: play 0.9s -0.75s infinite; %7D %3C/style%3E%3C/defs%3E%3Ctitle%3Eplaying-icon%3C/title%3E%3Crect id='bar1' class='cls-1' width='4' height='24'/%3E%3Crect id='bar2' class='cls-1' x='6' width='4' height='24'/%3E%3Crect id='bar3' class='cls-1' x='12' width='4' height='24'/%3E%3Crect id='bar4' class='cls-1' x='18' width='4' height='24'/%3E%3C/svg%3E");
+  background: var(--spice-accent);
+  content-visibility: hidden;
+}
+
+/*Scroll fix on playlist page*/
+.main-entityHeader-container {
+  margin-top: 64px;
+  padding-bottom: 0px;
+}
+
+/*adds space to drag small window*/
+@media (max-width: 1100px) {
+  body:not(.LibX) .main-topBar-topbarContentRight::after {
+    content: " |    ";
+    -webkit-app-region: drag;
+    color: rgba(var(--spice-rgb-text), 0.2);
+    font-weight: 1;
+    font-size: 30px;
+    white-space: pre-wrap;
+    height: 48px;
+    position: relative;
+  }
+}
+/*compact connect bar*/
+.main-connectBar-connectBar {
+  position: absolute;
+  overflow: visible;
+  right: 175px;
+  height: 22px;
+  bottom: 7%;
+  padding: 5px;
+}
+
+/*able to drag windows*/
+.Root__globalNav {
+  -webkit-app-region: drag;
+}
+
+/*shift the browse all in search up a bit*/
+.search-searchBrowse-SearchBrowse {
+  margin-top: 0px;
+}
+
+/*employee update button*/
+.YyUcY0HTiYikUOwhh29d {
+  height: 48px;
+  background-color: var(--spice-button-active) !important;
+  color: var(--spice-sidebar) !important;
+  /* font-weight: 500;
+  font-size: 15px; */
+  border-radius: 7px !important;
+}
+
+/*what is this*/
+.Vn9yz8P5MjIvDT8c0U6w {
+  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
+}
+
+/*Fix Playlist name overflow*/
+.main-yourLibraryX-listItem .LineClamp {
+  white-space: nowrap;
+}
+
+.Root__now-playing-bar {
+  background-color: var(--spice-main) !important;
+  border-radius: 8px;
+}
+
+.main-nowPlayingBar-nowPlayingBar {
+  height: 78px !important;
+}
+
+.main-nowPlayingWidget-coverArt .cover-art {
+  height: 60px !important;
+  width: 60px !important;
+}
+
+.main-trackInfo-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+[data-testid=control-button-playpause] .Wrapper-small-only-small {
+  position: unset;
+}
+
+.main-nowPlayingBar-right {
+  max-width: 400px;
+  padding-right: 5px;
+}
+
+/*make album art centered*/
+.HD9s7U5E1RLSWKpXmrqx {
+  display: grid;
+}
+
+.player-controls__buttons {
+  margin-bottom: 0px !important;
+}
+
+.GenericModal {
+  background-color: unset;
+  box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
+}
+
+.main-trackCreditsModal-container {
+  background-color: var(--spice-main) !important;
+  width: 450px;
+  border-radius: 7px;
+}
+
+.main-embedWidgetGenerator-container {
+  background-color: var(--spice-main) !important;
+  max-height: 800px;
+  border-radius: 7px;
+}
+
+.GenericModal__overlay {
+  background-color: rgba(var(--spice-rgb-shadow), 0.5);
+  border-radius: 7px;
+}
+
+.main-trackCreditsModal-mainSection {
+  scrollbar-width: thin;
+}
+
+.main-trackCreditsModal-originalCredits {
+  padding-bottom: unset;
 }
 
 .buttonContainer {
-	position: sticky;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	background-color: var(--spice-main);
-	padding: 12px;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--spice-main);
+  padding: 12px;
 }
 
 .resetButton {
-	background-color: #ff0033;
-	color: var(--spice-text);
-	border: none;
-	padding: 8px 16px;
-	border-radius: 4px;
-	cursor: pointer;
-	font-weight: bold;
-	font-size: 15px;
-	width: 85px;
+  background-color: #ff0033;
+  color: var(--spice-text);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  width: 85px;
 }
 
 .resetButton:active {
-	background-color: #ff1435;
-	scale: 1.05;
+  background-color: #ff1435;
+  scale: 1.05;
 }
 
 .saveButton {
-	background-color: var(--spice-button);
-	color: var(--spice-text);
-	border: none;
-	padding: 8px 16px;
-	border-radius: 4px;
-	cursor: pointer;
-	font-weight: bold;
-	font-size: 15px;
-	margin-left: 12px;
-	width: 85px;
+  background-color: var(--spice-button);
+  color: var(--spice-text);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 12px;
+  width: 85px;
 }
 
 .saveButton:active {
-	background-color: var(--spice-button-active);
-	scale: 1.05;
+  background-color: var(--spice-button-active);
+  scale: 1.05;
 }
 
 .category-carousel-container {
-	background-color: rgba(var(--spice-rgb-highlight), 0.6);
-	padding: 10px;
-	border-radius: 7px;
+  background-color: rgba(var(--spice-rgb-highlight), 0.6);
+  padding: 10px;
+  border-radius: 7px;
 }
 
 .category-button {
-	padding: 8px 16px;
-	background-color: var(--spice-tab-active);
-	color: var(--spice-text);
-	border: none;
-	border-radius: 5px;
-	transition: background-color 0.2s, color 0.2s;
-	font-size: 14px;
-	font-weight: 400;
+  padding: 8px 16px;
+  background-color: var(--spice-tab-active);
+  color: var(--spice-text);
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .category-button:hover {
-	background-color: var(--spice-highlight);
-}
-
-.main-trackCreditsModal-BtnContainer > * {
-	background-color: var(--spice-highlight);
-	border-radius: 8px;
-	height: 34px;
-	cursor: pointer;
-	margin-right: 8px;
-	padding: 8px;
-	border: 0;
+  background-color: var(--spice-highlight);
 }
 
 .options-tippy > div {
-	font-size: 16px !important;
-	max-width: 325px;
+  font-size: 16px !important;
+  max-width: 325px;
 }
 
-/*
-MARK: THEME SETTINGS ROW
-*/
+.main-trackCreditsModal-BtnContainer > *:hover {
+  transform: scale(1.1);
+}
+
+.main-trackCreditsModal-BtnContainer > *:active {
+  transform: scale(0.9);
+}
+
+.main-trackCreditsModal-BtnContainer > * {
+  background-color: var(--spice-highlight);
+  border-radius: 8px;
+  height: 34px;
+  cursor: pointer;
+  margin-right: 8px;
+  padding: 8px;
+  border: 0;
+}
+
 .themeOptionRow {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  height: 32px;
+  justify-content: space-between;
+}
+
+.themeOptionControl {
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .themeModalOptions,
 .themeOptionWrapper,
 .themeOptionRevealed,
 .themeContainer > .themeSettingsCategory {
-	display: grid;
-	gap: 10px;
+  display: grid;
+  gap: 10px;
 }
 
 .themeOptionRevealed .themeOptionRow {
-	padding-left: 30px;
-}
-
-.themeOptionControl {
-	align-content: center;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px;
-}
-
-.themeOptionPopupButton {
-	height: 32px;
-	color: rgba(var(--spice-rgb-selected-row), 0.7);
-	background-color: var(--spice-tab-active);
-	border-radius: 8px;
-	cursor: pointer;
-	padding: 8px;
-	border: 0;
-}
-
-.themeOptionPopupButton:hover {
-	transform: scale(1.04);
-	color: var(--spice-text);
+  padding-left: 30px;
 }
 
 .themeOptionDesc {
-	font-size: 15px;
-	color: var(--spice-subtext);
+  font-size: 15px;
+  color: var(--spice-subtext);
 }
 
-/*
-MARK: THEME SETTINGS TYPES
-*/
+.themeOptionPopupButton {
+  height: 32px;
+  color: rgba(var(--spice-rgb-selected-row), 0.7);
+  background-color: var(--spice-tab-active);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  border: 0;
+}
+
+.themeOptionPopupButton:hover {
+  transform: scale(1.04);
+  color: var(--spice-text);
+}
+
 .themeOptionDropdown {
-	align-items: center;
-	background-color: var(--spice-tab-active);
-	border: 0;
-	border-radius: 4px;
-	color: rgba(var(--spice-rgb-selected-row), 0.7);
-	font-size: 14px;
-	font-weight: 400;
-	height: 32px;
-	width: 122px;
-	letter-spacing: 0.24px;
-	line-height: 20px;
-	padding: 0px 18px 0 4px;
-}
-
-.themeOptionToggle {
-	align-items: center;
-	display: flex;
-	background-color: transparent !important;
-	border: none;
-}
-
-.toggleWrapper {
-	width: 42px;
-	height: 24px;
-	background-color: var(--spice-button-disabled);
-	border-radius: 12px;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-}
-
-.toggle {
-	width: 20px;
-	height: 20px;
-	border-radius: 10px;
-	background-color: var(--spice-text);
-	margin-left: 2px;
-	transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-}
-
-.toggleWrapper:has(.enabled) {
-	background-color: var(--spice-button);
-}
-
-.toggle.enabled {
-	margin-left: 20px;
+  align-items: center;
+  background-color: var(--spice-tab-active);
+  border: 0;
+  border-radius: 4px;
+  color: rgba(var(--spice-rgb-selected-row), 0.7);
+  font-size: 14px;
+  font-weight: 400;
+  height: 32px;
+  width: 122px;
+  letter-spacing: 0.24px;
+  line-height: 20px;
+  padding: 0px 18px 0 4px;
 }
 
 .themeOptionInput {
-	align-items: center;
-	background-color: var(--spice-tab-active);
-	border: 0;
-	border-radius: 4px;
-	color: rgba(var(--spice-rgb-selected-row), 0.7);
-	height: 32px;
-	width: 82px;
-	text-overflow: ellipsis;
-	padding-left: 10px;
+  align-items: center;
+  background-color: var(--spice-tab-active);
+  border: 0;
+  border-radius: 4px;
+  color: rgba(var(--spice-rgb-selected-row), 0.7);
+  height: 32px;
+  width: 82px;
+  text-overflow: ellipsis;
+  padding-left: 10px;
 }
 
-/*
-MARK: THEME OPTIONS
-*/
-/* Disable Beautiful Lyrics Background*/
-/* .Root__right-sidebar .BeautifulLyricsBackground-Container .BackCenter,
-.Root__right-sidebar .BeautifulLyricsBackground-Container .Front,
-.BeautifulLyricsBackground-Container .Back,
-.BeautifulLyricsBackground.BeautifulLyricsPage:not(.Fullscreen) .BeautifulLyricsBackground-Container {
-  display: none;
+.themeOptionToggle {
+  align-items: center;
+  display: flex;
+  background-color: transparent !important;
+  border: none;
 }
 
-.BeautifulLyricsBackground-Container * {
-	transition: none !important;
-	transform: none !important;
-}
-.VocalsGroup * {
-	transition: none !important;
-	transform: none !important;
-} */
-/*
-MARK: COMPACT LIBRARY
-*/
-.CompactLib .fYWNdY4zhj4OX_T2Xtg6 {
-	grid-template-rows: none !important;
+.toggleWrapper {
+  width: 42px;
+  height: 24px;
+  background-color: var(--spice-button-disabled);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-.CompactLib .main-yourLibraryX-listItem [role="group"] {
-	min-block-size: 0 !important;
+.toggle {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: var(--spice-text);
+  margin-left: 2px;
+  transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
-.CompactLib .main-yourLibraryX-listItem .Column-lg {
-	flex-direction: row;
-	gap: 0.5em;
-	align-items: center;
+.toggleWrapper:has(.enabled) {
+  background-color: var(--spice-button);
 }
 
-.CompactLib .main-yourLibraryX-listItem .HeaderArea * {
-	padding-top: 0 !important;
-	padding-bottom: 0 !important;
+.toggle.enabled {
+  margin-left: 20px;
 }
 
-.CompactLib .main-yourLibraryX-listItem .x-entityImage-imageContainer,
-.CompactLib .BfALkuQy0UjTI70U9QlQ *:not(svg),
-.CompactLib .YsCa3XbOXEm79LH0B7do {
-	width: 24px !important;
-	height: 24px !important;
-	min-block-size: unset;
+body {
+  zoom: var(--Zoomlevel);
 }
 
-.CompactLib .YsCa3XbOXEm79LH0B7do svg {
-	width: 16px !important;
-	height: 16px !important;
+.spotify__os--is-windows:not(.fullscreen) .WindowsControl #main::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  backdrop-filter: brightness(var(--windowcontrol-brightness));
+  z-index: 999;
+  right: 0;
+  top: var(--windowcontrol-top);
+  width: var(--windowcontrol-width);
+  height: var(--windowcontrol-height);
 }
 
-.CompactLib .main-yourLibraryX-listItem {
-	max-height: 40px;
-}
-
-/*
-MARK: SONG ART IN PAGE
-*/
 .AlbumBannerPage .banner-image {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background-size: cover;
-	background-image: var(--image);
-	background-position: center;
-	filter: blur(5px) brightness(0.75);
-	transition: background 0.5s ease;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-image: var(--image);
+  background-position: center;
+  filter: blur(5px) brightness(0.75);
+  transition: background 0.5s ease;
 }
 
 .AlbumBannerPage.PlaylistPage .playlist-playlist-playlistContent,
 .AlbumBannerPage.PlaylistPage .PeLrpasyfBW8ql_bmoAi,
 .AlbumBannerPage.PlaylistPage .PkOz5g82CaoKk1J3GX0e {
-	background: none !important;
+  background: none !important;
 }
 
 .AlbumBannerPage.LyricsPage .lyrics-lyrics-background {
-	background-color: unset !important;
+  background-color: unset !important;
 }
 
 .AlbumBannerPage.LyricsPage .lyrics-lyricsContainer-LyricsBackground {
-	display: none;
+  display: none;
 }
 
-/*
-MARK: COMBINED LIBX
-*/
-.CombinedLibX .Root__nav-bar {
-	min-width: 424px;
-}
-
-.CombinedLibX .Root__top-container {
-	grid-template-areas: "global-nav global-nav global-nav" "left-sidebar main-view right-sidebar" "now-playing-bar main-view right-sidebar" !important;
-}
-
-.CombinedLibX .main-nowPlayingBar-nowPlayingBar {
-	min-height: 400px;
-	flex-direction: column;
-}
-
-.CombinedLibX .main-nowPlayingBar-container {
-	min-width: 280px;
-}
-
-.CombinedLibX .main-nowPlayingBar-center,
-.CombinedLibX .main-nowPlayingBar-right,
-.CombinedLibX .main-nowPlayingBar-left {
-	width: 100%;
-}
-
-.CombinedLibX .HD9s7U5E1RLSWKpXmrqx {
-	background-color: rgba(0, 0, 0, 0);
-	width: 100%;
-}
-
-.CombinedLibX .main-nowPlayingWidget-coverArt {
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-.CombinedLibX .main-nowPlayingWidget-coverArt .cover-art {
-	height: 200px !important;
-	width: 200px !important;
-	margin: auto;
-	background-color: var(--spice-main);
-	box-shadow: none;
-}
-
-.CombinedLibX .main-nowPlayingWidget-coverArt .cover-art img {
-	border-radius: 50%;
-}
-
-.CombinedLibX .main-coverSlotCollapsed-container > :first-child > :first-child,
-.CombinedLibX .main-coverSlotCollapsed-container > :first-child,
-.CombinedLibX .main-coverSlotCollapsed-container {
-	width: 100%;
-	height: 100%;
-}
-
-.CombinedLibX .main-nowPlayingWidget-nowPlaying {
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-.CombinedLibX .player-controls__buttons.player-controls__buttons--new-icons {
-	order: 2;
-}
-
-.CombinedLibX .playback-bar {
-	order: 1;
-}
-
-.CombinedLibX .main-nowPlayingBar-extraControls {
-	justify-content: space-evenly;
-}
-
-/*
-MARK: SWITCH LAYOUT
-*/
-.switchlayout .Root__top-container {
-	grid-template-areas: "global-nav global-nav global-nav" "left-sidebar main-view right-sidebar" "left-sidebar now-playing-bar now-playing-bar" !important;
-}
-
-.switchlayout.LibX .Root__top-container {
-	grid-template-areas: "global-nav main-view right-sidebar" "left-sidebar main-view right-sidebar" "left-sidebar now-playing-bar now-playing-bar" !important;
-}
-
-/*
-MARK: LIBX
-*/
 .LibX .Root__top-container {
-	padding-top: 48px;
-	grid-template-areas: "global-nav main-view right-sidebar" "left-sidebar main-view right-sidebar" "now-playing-bar now-playing-bar now-playing-bar" !important;
+  padding-top: 48px;
+  grid-template-areas: "global-nav main-view right-sidebar" "left-sidebar main-view right-sidebar" "now-playing-bar now-playing-bar now-playing-bar" !important;
 }
 
 .LibX .Root__globalNav > * {
-	padding-left: 8px;
-	padding-right: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .LibX .Root__globalNav {
-	height: unset;
-	background-color: var(--spice-main);
-	border-radius: 8px;
-	padding: unset !important;
-	margin: unset !important;
-	align-items: unset;
-	box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
+  height: unset;
+  background-color: var(--spice-main);
+  border-radius: 8px;
+  padding: unset !important;
+  margin: unset !important;
+  align-items: unset;
+  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
 }
 
 .LibX .main-topBar-topbarContentRight,
 .LibX .main-globalNav-searchContainer > *,
 .LibX .search-searchCategory-categoryGrid > div > * {
-	margin-top: 8px !important;
+  margin-top: 8px !important;
 }
 
 .LibX .Root__globalNav .main-globalNav-link-icon {
-	background-color: unset;
-	transform: unset;
-	justify-content: unset;
+  background-color: unset;
+  transform: unset;
+  justify-content: unset;
 }
 
 .LibX .main-actionButtons {
-	animation: unset !important;
-	display: flex !important;
-	padding-inline: unset;
+  animation: unset !important;
+  display: flex !important;
+  padding-inline: unset;
 }
 
 .LibX .search-searchCategory-categoryGrid,
 .LibX .main-globalNav-historyButtonsContainer,
 .LibX .main-globalNav-historyButtons > * {
-	display: unset !important;
+  display: unset !important;
 }
 
 .LibX .main-globalNav-historyButtons {
-	position: absolute;
-	bottom: 8px;
-	right: 8px;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
 }
 
 .LibX .main-globalNav-searchSection {
-	order: -1;
+  order: -1;
 }
 
-.LibX [aria-label="Marketplace"],
+.LibX [aria-label=Marketplace],
 .LibX ._b3hhmbWtOY8_1M1mM1H,
 .LibX .Root__globalNav .Dp3xccI7c2f_JSJ8OHYu,
 .LibX .main-globalNav-searchInputSection {
-	margin-inline: unset !important;
+  margin-inline: unset !important;
 }
 
 .LibX .Root__globalNav,
 .LibX .search-searchCategory-categoryGrid > div,
 .LibX .main-globalNav-searchContainer {
-	flex-direction: column !important;
-	max-width: unset;
+  flex-direction: column !important;
+  max-width: unset;
 }
 
 .LibX .main-topBar-topbarContentRight {
-	gap: 8px;
-	justify-content: unset;
-	padding-bottom: 8px;
+  gap: 8px;
+  justify-content: unset;
+  padding-bottom: 8px;
 }
 
 .LibX .main-topBar-searchBar {
-	background: unset;
-	background-color: unset !important;
-	border-bottom: unset;
-	box-shadow: none !important;
+  background: unset;
+  background-color: unset !important;
+  border-bottom: unset;
+  box-shadow: none !important;
 }
 
 .LibX .zugTpa7GhjPIQmTCgBzw .main-globalNav-textWrapper {
-	position: absolute;
-	margin-left: 52px;
-	top: 50%;
-	transform: translateY(-50%);
+  position: absolute;
+  margin-left: 52px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .LibX .main-globalNav-textWrapper {
-	margin-left: 16px;
+  margin-left: 16px;
 }
 
 .LibX ._b3hhmbWtOY8_1M1mM1H {
-	padding-inline: unset;
+  padding-inline: unset;
 }
 
-/* .LibX .main-yourLibraryX-library:has(.sikBfynL1Y6I25nVpbAg) .Root__globalNav { */
 .LibX .collapsed.Root__globalNav {
-	width: 72px;
+  width: 72px;
 }
 
 .LibX .b7r2WRiu5f9Q99qmyreh {
-	width: unset !important;
+  width: unset !important;
 }
 
 .LibX .collapsed .b7r2WRiu5f9Q99qmyreh *:not(svg) {
-	width: 56px !important;
-	display: flex;
-	justify-content: center;
+  width: 56px !important;
+  display: flex;
+  justify-content: center;
 }
 
 .LibX .collapsed .BV0jjn_h5TtMMl8YKuZ0,
@@ -1290,346 +990,313 @@ MARK: LIBX
 .LibX .forceExpandSearchInput .zugTpa7GhjPIQmTCgBzw .main-globalNav-textWrapper,
 .LibX .collapsed .main-actionButtons,
 .LibX .collapsed .main-globalNav-historyButtons {
-	display: none !important;
+  display: none !important;
 }
 
 .LibX .collapsed .main-globalNav-link-icon {
-	justify-content: center !important;
+  justify-content: center !important;
 }
 
 .LibX .collapsed .main-userWidget-box {
-	width: 56px;
+  width: 56px;
 }
 
 .LibX .collapsed .main-userWidget-hasAvatar > div,
 .LibX .collapsed .main-userWidget-hasAvatar {
-	width: 38px !important;
+  width: 38px !important;
 }
 
-/*
-MARK: PRELIBX
-*/
-/*(-webkit-app-region: no-drag;)*/
+.highlightnav .custom-navlinks-scrollable_container {
+  max-width: unset;
+}
+
+.highlightnav .main-globalNav-navLinkActive[aria-label=Home],
+.highlightnav .main-globalNav-navLinkActive[aria-label=Marketplace],
+.highlightnav .main-globalNav-navLinkActive[aria-label=Lyrics],
+.highlightnav ._b3hhmbWtOY8_1M1mM1H:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
+  background-color: var(--spice-highlight-elevated) !important;
+  border-radius: 7px !important;
+}
+
+.highlightnav ._b3hhmbWtOY8_1M1mM1H:hover,
+.highlightnav [aria-label=Home]:hover,
+.highlightnav [aria-label=Marketplace]:hover,
+.highlightnav [aria-label=Lyrics]:hover {
+  background-color: var(--spice-highlight);
+  border-radius: 7px;
+}
+
 .PreLibX .Root__globalNav,
 .PreLibX .main-view-container__scroll-node,
 .PreLibX .main-buddyFeed-container {
-	padding-top: 48px;
+  padding-top: 48px;
 }
 
 .PreLibX .main-yourLibraryX-library,
 .PreLibX .Root__globalNav {
-	background-color: var(--spice-sidebar);
-	border-radius: 0px;
+  background-color: var(--spice-sidebar);
+  border-radius: 0px;
 }
 
 .PreLibX .Root__globalNav,
 .PreLibX .Root__nav-bar {
-	border-right: 1px solid var(--spice-card) !important;
+  border-right: 1px solid var(--spice-card) !important;
 }
 
 .PreLibX .Root__top-container {
-	gap: 0 !important;
-	padding: 0px !important;
+  gap: 0 !important;
+  padding: 0px !important;
 }
 
 .PreLibX .Root__main-view-overlay {
-	margin: 0 !important;
+  margin: 0 !important;
 }
 
 .PreLibX .main-nowPlayingBar-nowPlayingBar {
-	background-color: var(--spice-player);
-	border-top: 1px solid var(--spice-card);
-	height: 88px !important;
+  background-color: var(--spice-player);
+  border-top: 1px solid var(--spice-card);
+  height: 88px !important;
 }
 
 .PreLibX .Root__right-sidebar {
-	border-left: 1px solid var(--spice-card);
+  border-left: 1px solid var(--spice-card);
 }
 
 .PreLibX .main-buddyFeed-container,
 .PreLibX .Root__main-view {
-	border-radius: 0px !important;
+  border-radius: 0px !important;
 }
 
 .PreLibX .main-yourLibraryX-header {
-	padding: 0 0 0 16px;
+  padding: 0 0 0 16px;
 }
 
 .PreLibX .LayoutResizer__inline-end {
-	inset-inline-end: -4px !important;
+  inset-inline-end: -4px !important;
 }
 
 .PreLibX .main-buddyFeed-header {
-	height: 80px;
+  height: 80px;
 }
 
 .PreLibX .J4qD2RoZgGLbOdpfs63w > div > *,
 .PreLibX .main-globalNav-searchContainer > *,
 .PreLibX .main-topBar-searchBar,
 .PreLibX .EJttP30F1zYHeAw7ISHb {
-	min-block-size: unset !important;
-	padding-block: 0px !important;
-	height: 36px !important;
+  min-block-size: unset !important;
+  padding-block: 0px !important;
+  height: 36px !important;
 }
 
-/*
-MARK: HOME HEADER
-*/
-.homeheader .main-home-homeHeader {
-	display: none;
+.CompactLib .fYWNdY4zhj4OX_T2Xtg6 {
+  grid-template-rows: none !important;
 }
 
-.homeheader .main-home-filterChipsSection.fIvMht6B9HdROywMNJZ4:after,
-.homeheader .main-topBar-overlay,
-.homeheader .main-topBar-background {
-	background-color: var(--spice-main);
+.CompactLib .main-yourLibraryX-listItem [role=group] {
+  min-block-size: 0 !important;
 }
 
-/*
-MARK:TEST LAYOUT 
-*/
+.CompactLib .main-yourLibraryX-listItem .Column-lg {
+  flex-direction: row;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.CompactLib .main-yourLibraryX-listItem .HeaderArea * {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.CompactLib .main-yourLibraryX-listItem .x-entityImage-imageContainer,
+.CompactLib .BfALkuQy0UjTI70U9QlQ *:not(svg),
+.CompactLib .YsCa3XbOXEm79LH0B7do {
+  width: 24px !important;
+  height: 24px !important;
+  min-block-size: unset;
+}
+
+.CompactLib .YsCa3XbOXEm79LH0B7do svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.CompactLib .main-yourLibraryX-listItem {
+  max-height: 40px;
+}
+
 .TestLayout .player-controls {
-	flex-direction: row;
-	justify-content: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .TestLayout .main-nowPlayingBar-center {
-	order: -1;
+  order: -1;
 }
 
 .TestLayout .main-nowPlayingBar-right {
-	order: 1;
+  order: 1;
 }
 
 .TestLayout .main-nowPlayingBar-left {
-	padding-inline-start: 0px;
-	max-width: 275px;
+  padding-inline-start: 0px;
+  max-width: 275px;
 }
 
 .TestLayout .player-controls__left {
-	order: 1;
+  order: 1;
 }
 
 .TestLayout .player-controls__right {
-	order: 2;
+  order: 2;
 }
 
 .TestLayout .player-controls__buttons,
 .TestLayout .player-controls__left,
 .TestLayout .player-controls__right {
-	gap: 0;
-	flex: unset;
-	width: unset;
+  gap: 0;
+  flex: unset;
+  width: unset;
 }
 
 .TestLayout .main-playbackBarRemainingTime-container,
 .TestLayout .playback-bar__progress-time-elapsed {
-	min-width: 30px;
+  min-width: 30px;
 }
 
 .TestLayout .playback-bar {
-	max-width: 375px;
+  max-width: 375px;
 }
 
-.TestLayout [data-testid="control-button-playpause"],
-.TestLayout [data-testid="control-button-skip-forward"],
-.TestLayout [data-testid="control-button-repeat"],
-.TestLayout [data-testid="control-button-shuffle"],
-.TestLayout [data-testid="control-button-skip-back"] {
-	padding: 7px;
+.TestLayout [data-testid=control-button-playpause],
+.TestLayout [data-testid=control-button-skip-forward],
+.TestLayout [data-testid=control-button-repeat],
+.TestLayout [data-testid=control-button-shuffle],
+.TestLayout [data-testid=control-button-skip-back] {
+  padding: 7px;
 }
 
-/*
-MARK: GREEN ICON
-*/
-.greenicon .main-globalNav-navLinkActive[aria-label="Home"] > span:has(svg),
-.greenicon
-	.main-globalNav-navLinkActive[aria-label="Marketplace"]
-	> span:has(svg),
-.greenicon .main-globalNav-navLinkActive[aria-label="Lyrics"] > span:has(svg),
-.greenicon
-	._b3hhmbWtOY8_1M1mM1H:has(.j4xi27AJ3oy5qZ8CGhhQ)
-	.EJttP30F1zYHeAw7ISHb
-	> span,
-.greenicon
-	._b3hhmbWtOY8_1M1mM1H:has(.j4xi27AJ3oy5qZ8CGhhQ)
-	.M9l40ptEBXPm03dU3X1k {
-	color: var(--spice-accent);
+.switchlayout .Root__top-container {
+  grid-template-areas: "global-nav global-nav global-nav" "left-sidebar main-view right-sidebar" "left-sidebar now-playing-bar now-playing-bar" !important;
 }
 
-/*
-MARK: HIGHLIGHT NAV
-*/
-.highlightnav .custom-navlinks-scrollable_container {
-	max-width: unset;
+.switchlayout.LibX .Root__top-container {
+  grid-template-areas: "global-nav main-view right-sidebar" "left-sidebar main-view right-sidebar" "left-sidebar now-playing-bar now-playing-bar" !important;
 }
 
-.highlightnav .main-globalNav-navLinkActive[aria-label="Home"],
-.highlightnav .main-globalNav-navLinkActive[aria-label="Marketplace"],
-.highlightnav .main-globalNav-navLinkActive[aria-label="Lyrics"],
-.highlightnav
-	._b3hhmbWtOY8_1M1mM1H:has(.j4xi27AJ3oy5qZ8CGhhQ)
-	.ODl7TwNawIfBwiZv1Czg {
-	background-color: var(--spice-highlight-elevated) !important;
-	border-radius: 7px !important;
-}
-
-.highlightnav ._b3hhmbWtOY8_1M1mM1H:hover,
-.highlightnav [aria-label="Home"]:hover,
-.highlightnav [aria-label="Marketplace"]:hover,
-.highlightnav [aria-label="Lyrics"]:hover {
-	background-color: var(--spice-highlight);
-	border-radius: 7px;
-}
-
-/*
-MARK: HIDETRACKLIST NUM
-*/
-/*(from comfy) */
-.hidetracklistnum
-	.main-trackList-trackListHeader
-	.main-trackList-rowSectionIndex {
-	opacity: 0;
+.hidetracklistnum .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
+  opacity: 0;
 }
 
 .hidetracklistnum .main-trackList-rowImagePlayButton:hover,
 .hidetracklistnum .main-trackList-rowImagePlayButton:focus-within,
-.hidetracklistnum
-	.main-trackList-active
-	.main-trackList-rowImagePlayButton:hover {
-	opacity: 1;
+.hidetracklistnum .main-trackList-active .main-trackList-rowImagePlayButton:hover {
+  opacity: 1;
 }
 
 .hidetracklistnum .main-trackList-trackListRow .main-trackList-rowSectionIndex {
-	position: relative;
-	z-index: 1000;
-	top: 7px;
-	left: 56px;
-	width: 40px;
-	height: 40px;
-	justify-content: center;
-	text-indent: -1000px;
+  position: relative;
+  z-index: 1000;
+  top: 7px;
+  left: 56px;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  text-indent: -1000px;
 }
 
-.hidetracklistnum
-	.main-trackList-indexable[aria-colcount="3"]
-	.main-trackList-trackListRowGrid {
-	padding-left: unset;
-	grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [last] minmax(
-			120px,
-			var(--col2, 1fr)
-		) !important;
+.hidetracklistnum .main-trackList-indexable[aria-colcount="3"] .main-trackList-trackListRowGrid {
+  padding-left: unset;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [last] minmax(120px, var(--col2, 1fr)) !important;
 }
 
-.hidetracklistnum
-	.main-trackList-indexable[aria-colcount="4"]
-	.main-trackList-trackListRowGrid {
-	padding-left: unset;
-	grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(
-			120px,
-			var(--col2, 2fr)
-		) [last] minmax(120px, var(--col3, 1fr)) !important;
+.hidetracklistnum .main-trackList-indexable[aria-colcount="4"] .main-trackList-trackListRowGrid {
+  padding-left: unset;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr)) !important;
 }
 
-.hidetracklistnum
-	.main-trackList-indexable[aria-colcount="5"]
-	.main-trackList-trackListRowGrid {
-	padding-left: unset;
-	grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
-			120px,
-			var(--col2, 4fr)
-		) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(
-			120px,
-			var(--col4, 1fr)
-		) !important;
+.hidetracklistnum .main-trackList-indexable[aria-colcount="5"] .main-trackList-trackListRowGrid {
+  padding-left: unset;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important;
 }
 
-.hidetracklistnum
-	.main-trackList-indexable[aria-colcount="6"]
-	.main-trackList-trackListRowGrid {
-	padding-left: unset;
-	grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
-			120px,
-			var(--col2, 4fr)
-		) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(
-			120px,
-			var(--col4, 2fr)
-		) [last] minmax(120px, var(--col5, 1fr));
+.hidetracklistnum .main-trackList-indexable[aria-colcount="6"] .main-trackList-trackListRowGrid {
+  padding-left: unset;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [last] minmax(120px, var(--col5, 1fr));
 }
 
-.hidetracklistnum
-	.main-trackList-indexable[aria-colcount="7"]
-	.main-trackList-trackListRowGrid {
-	padding-left: unset;
-	grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(
-			120px,
-			var(--col2, 4fr)
-		) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(
-			120px,
-			var(--col4, 2fr)
-		) [var4] minmax(120px, var(--col5, 2fr)) [last] minmax(
-			120px,
-			var(--col6, 1fr)
-		) !important;
+.hidetracklistnum .main-trackList-indexable[aria-colcount="7"] .main-trackList-trackListRowGrid {
+  padding-left: unset;
+  grid-template-columns: [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [var4] minmax(120px, var(--col5, 2fr)) [last] minmax(120px, var(--col6, 1fr)) !important;
 }
 
-/*
-MARK: HIDENOWPLAYVIEW
-*/
-.hidenowplayview [aria-label="Now playing view"] {
-	display: none;
+.greenicon .main-globalNav-navLinkActive[aria-label=Home] > span:has(svg),
+.greenicon .main-globalNav-navLinkActive[aria-label=Marketplace] > span:has(svg),
+.greenicon .main-globalNav-navLinkActive[aria-label=Lyrics] > span:has(svg),
+.greenicon ._b3hhmbWtOY8_1M1mM1H:has(.j4xi27AJ3oy5qZ8CGhhQ) .EJttP30F1zYHeAw7ISHb > span,
+.greenicon ._b3hhmbWtOY8_1M1mM1H:has(.j4xi27AJ3oy5qZ8CGhhQ) .M9l40ptEBXPm03dU3X1k {
+  color: var(--spice-accent);
 }
 
-.hidenowplayview .main-nowPlayingBar-left {
-	margin-left: 8rem !important;
+.greenicon .main-globalNav-navLinkActive.main-globalNav-link-icon::before {
+  position: absolute;
+  width: 4px;
+  height: 25px;
+  background-color: var(--spice-accent);
+  border-radius: 7px;
+  left: 12px;
+  display: none;
 }
 
-.hidenowplayview .main-playbackBarRemainingTime-container {
-	min-width: unset;
+.transplayicon .main-nowPlayingBar-center [aria-label=Pause] svg,
+.transplayicon .main-nowPlayingBar-center [aria-label=Play] svg {
+  height: 22px;
+  width: 22px;
+  transform: scale(1.5);
 }
 
-/*
-MARK: NPVLARGERLYRICS
-*/
+.transplayicon .main-nowPlayingBar-center [aria-label=Pause] > span,
+.transplayicon .main-nowPlayingBar-center [aria-label=Play] > span {
+  background-color: transparent !important;
+  color: var(--spice-text);
+}
+
 .npvlargerlyrics .main-buddyFeed-header {
-	display: none;
+  display: none;
 }
 
 .npvlargerlyrics .main-nowPlayingView-coverArt {
-	width: 85px;
+  width: 85px;
 }
 
 .npvlargerlyrics .main-nowPlayingView-coverArtContainer {
-	height: 85px !important;
-	width: 80px;
+  height: 85px !important;
+  width: 80px;
 }
 
 .npvlargerlyrics .main-nowPlayingView-nowPlayingGrid {
-	flex-direction: unset;
+  flex-direction: unset;
 }
 
 .npvlargerlyrics .main-nowPlayingView-contextItemInfo {
-	container-type: normal;
+  container-type: normal;
 }
 
 .npvlargerlyrics .main-nowPlayingView-contextItemInfo .main-trackInfo-name {
-	font-size: 1.2rem;
-	font-weight: 550 !important;
+  font-size: 1.2rem;
+  font-weight: 550 !important;
 }
 
 .npvlargerlyrics .main-nowPlayingView-contextItemInfo .main-trackInfo-artists {
-	font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
-.npvlargerlyrics
-	.main-nowPlayingView-sectionHeaderSpacing
-	.main-nowPlayingView-lyricsTitle {
-	font-size: 20px;
-	font-weight: 600 !important;
+.npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing .main-nowPlayingView-lyricsTitle {
+  font-size: 20px;
+  font-weight: 600 !important;
 }
 
 .npvlargerlyrics .TypeElement-finale-textSubdued-type {
-	font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 .npvlargerlyrics .main-nowPlayingView-aboutArtistV2,
@@ -1637,29 +1304,23 @@ MARK: NPVLARGERLYRICS
 .npvlargerlyrics .main-nowPlayingView-artistOnTour,
 .npvlargerlyrics .main-nowPlayingView-merch,
 .npvlargerlyrics .main-nowPlayingView-queue {
-	display: none;
+  display: none;
 }
 
 .npvlargerlyrics #BeautifulLyrics-CardView,
 .npvlargerlyrics #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
 .npvlargerlyrics .main-nowPlayingView-lyricsContent .RootContainer,
 .npvlargerlyrics .main-nowPlayingView-sectionHeaderSpacing {
-	height: 66cqh;
-	max-height: 66.5cqh;
+  height: 66cqh;
+  max-height: 66.5cqh;
 }
 
-/*
-MARK: TRANSPARENT PLAYICON
-*/
-.transplayicon .main-nowPlayingBar-center [aria-label="Pause"] svg,
-.transplayicon .main-nowPlayingBar-center [aria-label="Play"] svg {
-	height: 22px;
-	width: 22px;
-	transform: scale(1.5);
+.homeheader .main-home-homeHeader {
+  display: none;
 }
 
-.transplayicon .main-nowPlayingBar-center [aria-label="Pause"] > span,
-.transplayicon .main-nowPlayingBar-center [aria-label="Play"] > span {
-	background-color: transparent !important;
-	color: var(--spice-text);
+.homeheader .main-home-filterChipsSection.fIvMht6B9HdROywMNJZ4:after,
+.homeheader .main-topBar-overlay,
+.homeheader .main-topBar-background {
+  background-color: var(--spice-main);
 }

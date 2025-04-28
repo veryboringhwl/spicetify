@@ -1,0 +1,22 @@
+.KROerAKSuwZBbse9iJT_ {
+  background-color: unset;
+}
+
+.main-contextMenu-menu {
+  border-radius: 7px;
+  background-color: rgba(var(--spice-rgb-main), 0.9) !important;
+  box-shadow: 0 0px 32px rgba(var(--spice-rgb-shadow), 0.5);
+}
+
+div#context-menu::before,
+.main-contextMenu-menu:before {
+  content: "";
+  border-radius: 7px;
+  backdrop-filter: blur(15px) saturate(1.4) brightness(1.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}

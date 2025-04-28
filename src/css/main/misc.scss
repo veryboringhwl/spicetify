@@ -1,0 +1,59 @@
+/*Scroll fix on playlist page*/
+.main-entityHeader-container {
+  margin-top: 64px;
+  padding-bottom: 0px;
+}
+
+/*adds space to drag small window*/
+@media (max-width: 1100px) {
+  body:not(.LibX) .main-topBar-topbarContentRight::after {
+    content: " |    ";
+		-webkit-app-region: drag;
+    color: rgba(var(--spice-rgb-text), 0.2);
+    font-weight: 1;
+    font-size: 30px;
+    white-space: pre-wrap;
+    height: 48px;
+    position: relative;
+  }
+}
+
+/*compact connect bar*/
+.main-connectBar-connectBar {
+  position: absolute;
+  overflow: visible;
+  right: 175px;
+  height: 22px;
+  bottom: 7%;
+  padding: 5px;
+}
+
+/*able to drag windows*/
+.Root__globalNav {
+  -webkit-app-region: drag;
+}
+
+/*shift the browse all in search up a bit*/
+.search-searchBrowse-SearchBrowse {
+  margin-top: 0px;
+}
+
+/*employee update button*/
+.YyUcY0HTiYikUOwhh29d {
+  height: 48px;
+  background-color: var(--spice-button-active) !important;
+  color: var(--spice-sidebar) !important;
+  /* font-weight: 500;
+  font-size: 15px; */
+  border-radius: 7px !important;
+}
+
+/*what is this*/
+.Vn9yz8P5MjIvDT8c0U6w {
+  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
+}
+
+/*Fix Playlist name overflow*/
+.main-yourLibraryX-listItem .LineClamp {
+  white-space: nowrap;
+}

@@ -1,0 +1,115 @@
+.main-trackList-trackList {
+  padding: 8px;
+  background-color: rgba(var(--spice-rgb-card), 0.85);
+  border-radius: 7px;
+  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
+}
+
+.main-entityHeader-shadow {
+  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.33);
+}
+
+.main-trackList-trackListHeader.main-trackList-trackListHeaderStuck {
+  border-radius: 0px 0px 8px 8px;
+}
+
+.main-entityHeader-overlay {
+  background: linear-gradient(transparent, rgba(var(--spice-rgb-main), 0.5));
+}
+
+.main-actionBarBackground-background {
+  background-image: linear-gradient(
+    rgba(var(--spice-rgb-main), 0.5),
+    var(--spice-main)
+  );
+}
+
+.main-entityHeader-container {
+  align-items: center;
+}
+
+.ecHWOS,
+.x-downloadButton-DownloadButton > div {
+  justify-content: center;
+  display: flex;
+}
+
+.main-actionBar-ActionBar {
+  padding-bottom: 7px;
+}
+
+.main-actionBar-ActionBarRow > *:not(:last-child) {
+  background-color: rgba(var(--spice-rgb-card), 0.85);
+  border-radius: 7px;
+  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
+  margin-right: 8px !important;
+  min-width: 56px;
+}
+
+.playlist-playlist-searchBoxContainer {
+  background-color: rgba(var(--spice-rgb-card), 0.85);
+  border-radius: 7px;
+  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
+  margin-right: 8px !important;
+  align-items: center;
+  padding: 8px;
+}
+
+.main-entityHeader-imageContainerNew {
+  height: clamp(
+    135px,
+    135px +
+      (
+        100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px -
+          600px
+      )/424 * 104,
+    232px
+  );
+  width: clamp(
+    135px,
+    135px +
+      (
+        100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px -
+          600px
+      )/424 * 104,
+    232px
+  );
+  position: relative;
+  left: clamp(
+    135px,
+    135px +
+      (
+        100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px -
+          600px
+      )/424 * 104,
+    232px
+  );
+}
+
+.main-entityHeader-headerText {
+  flex: unset;
+  justify-content: center;
+  margin-left: calc(
+    clamp(
+        135px,
+        135px +
+          (
+            100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) *
+              1px - 600px
+          )/424 * 104,
+        232px
+      ) + var(--content-spacing)
+  );
+}
+
+.main-entityHeader-image {
+  border-radius: 8px;
+}
+
+.main-entityHeader-titleInner h1 {
+  font-size: 3rem !important;
+}
+
+.main-entityHeader-withBackgroundImage {
+  height: min(30vh, var(--fluid-height)) !important;
+}
