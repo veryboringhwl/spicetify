@@ -1,6 +1,6 @@
 import PopupModal from "../../components/PopupModal";
-import SettingsMenu from "./SettingsMenu";
 import Icons from "../../icons/icons";
+import SettingsMenu from "./SettingsMenu";
 
 const SettingsButton = () => {
   new Spicetify.Topbar.Button(
@@ -13,7 +13,7 @@ const SettingsButton = () => {
       });
     },
     false,
-    true
+    true,
   );
 };
 

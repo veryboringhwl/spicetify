@@ -1,11 +1,11 @@
 import React from "react";
-import options from "./options";
-import RenderOptions from "./RenderOptions";
-import useSettings from "../hooks/useSettings";
-import resetOptions from "../helpers/resetOptions";
-import saveOptions from "../helpers/saveOptions";
 import CategoryCarousel from "../components/CategoryCarousel";
 import Section from "../components/Section";
+import resetOptions from "../helpers/resetOptions";
+import saveOptions from "../helpers/saveOptions";
+import useSettings from "../hooks/useSettings";
+import RenderOptions from "./RenderOptions";
+import options from "./options";
 
 const SettingsMenu = React.memo(() => {
   const [settings, handleSettingChange, setSettings] = useSettings();
@@ -27,10 +27,7 @@ const SettingsMenu = React.memo(() => {
         </Section>
       ))}
       <div className="buttonContainer">
-        <button
-          className="resetButton"
-          onClick={() => resetOptions(setSettings)}
-        >
+        <button className="resetButton" onClick={() => resetOptions(setSettings)}>
           Reset
         </button>
         <button className="saveButton" onClick={() => saveOptions(settings)}>

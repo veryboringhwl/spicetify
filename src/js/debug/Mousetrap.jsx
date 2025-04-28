@@ -1,5 +1,5 @@
-import DebugMenu from "./DebugMenu";
 import PopupModal from "../components/PopupModal";
+import DebugMenu from "./DebugMenu";
 
 const Mousetrap = () => {
   Spicetify.Mousetrap.bind(
@@ -15,7 +15,7 @@ const Mousetrap = () => {
         title: "Theme Version",
         content: DebugMenu,
       });
-    }
+    },
   );
 };
 

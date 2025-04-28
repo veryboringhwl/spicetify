@@ -25,16 +25,13 @@ const SpotifyMode = async (mode) => {
             pairs: { [key]: value },
           });
         }
-      }
+      },
     );
   };
 
   window.appDevListener?.cancel();
   window.employeeListener?.cancel();
-  window.appDevListener = await setMode(
-    "app-developer",
-    pairs["app-developer"]
-  );
+  window.appDevListener = await setMode("app-developer", pairs["app-developer"]);
   window.employeeListener = await setMode("employee", pairs.employee);
 };
 

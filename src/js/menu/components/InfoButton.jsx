@@ -8,9 +8,7 @@ const InfoButton = React.memo(({ name, popupModal }) => {
   return (
     <button
       className="themeOptionPopupButton"
-      onClick={() =>
-        PopupModal({ title: name, content: popupModal, isLarge: false })
-      }
+      onClick={() => PopupModal({ title: name, content: popupModal, isLarge: false })}
       aria-label="Open popup"
     >
       <svg

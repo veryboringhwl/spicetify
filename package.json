@@ -1,22 +1,24 @@
 {
-	"name": "theme",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"build": "npm run build-ext && npm run build-css",
-		"watch": "concurrently \"npm run watch-ext\" \"npm run watch-css\"",
-		"build-ext": "spicetify-creator --out=../",
-		"watch-ext": "spicetify-creator --watch --out=../",
-		"build-css": "sass css/app.scss ../user.css --no-source-map",
-		"watch-css": "sass css/app.scss ../user.css --watch --no-source-map"
-	},
-	"license": "MIT",
-	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"@types/react": "^18.3.11",
-		"@types/react-dom": "^18.3.1",
-		"concurrently": "^9.0.1",
-		"sass": "^1.80.6",
-		"spicetify-creator": "^1.0.17"
-	}
+  "name": "theme",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "debug": "node tasks/debug.js",
+    "build": "npm run build-js && npm run build-css && npm run copy-files",
+    "build-js": "node tasks/build-js.js && npm run copy-files",
+    "build-css": "sass src/css/app.scss dist/user.css --no-source-map && npm run copy-files",
+    "watch": "concurrently \"npm run watch-js\" \"npm run watch-css\" \"npm run watch-files\"",
+    "watch-js": "concurrently \"node tasks/build-js.js --watch\" \"npm run watch-files\"",
+    "watch-css": "concurrently \"sass src/css/app.scss dist/user.css --watch --no-source-map\" \"npm run watch-files\"",
+    "copy-files": "node tasks/copy-files.js",
+    "watch-files": "node tasks/copy-files.js --watch"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "esbuild": "^0.24.0",
+    "esbuild-plugin-external-global": "^1.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass": "^1.80.6"
+  }
 }

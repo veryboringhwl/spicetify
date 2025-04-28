@@ -1,6 +1,5 @@
 const Reload = () => {
-	Console.Log("Reloading theme...");
-  location.reload()
-}
+  location.reload();
+};
 
-export default Reload
+export default Reload;

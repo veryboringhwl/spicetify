@@ -22,13 +22,11 @@ function enableLibXUI(globalNav) {
 
   const addTextToButtons = () => {
     const elements = globalNav.querySelectorAll(
-      ".search-searchCategory-categoryGrid > div > button, .main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H"
+      ".search-searchCategory-categoryGrid > div > button, .main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H",
     );
     elements.forEach((el) => {
       if (!el.querySelector(".main-globalNav-textWrapper")) {
-        const text =
-          el.getAttribute("aria-label") ||
-          (el.querySelector("input") ? "Search" : "");
+        const text = el.getAttribute("aria-label") || (el.querySelector("input") ? "Search" : "");
         const wrapper = document.createElement("span");
         wrapper.className = "main-globalNav-textWrapper";
         wrapper.innerHTML = `<div class="main-globalNav-iconText encore-text-body-medium-bold">${text}</div>`;
@@ -67,9 +65,7 @@ function disableLibXUI(globalNav) {
     collapsedObserver = null;
   }
 
-  const textWrappers = globalNav.querySelectorAll(
-    ".main-globalNav-textWrapper"
-  );
+  const textWrappers = globalNav.querySelectorAll(".main-globalNav-textWrapper");
   textWrappers.forEach((el) => el.remove());
 }
 

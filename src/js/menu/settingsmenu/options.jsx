@@ -1,10 +1,10 @@
 import ColourScheme from "../../features/ColourScheme";
-import SpotifyMode from "../../features/SpotifyMode";
 import CoverArtBanner from "../../features/CoverArtBanner";
-import VolPercent from "../../features/VolPercent";
+import SpotifyMode from "../../features/SpotifyMode";
 import ToggleLibXUI from "../../features/ToggleLibXUI";
-import WindowsControlModal from "../../menu/modalmenu/WindowsControlModal";
+import VolPercent from "../../features/VolPercent";
 import AlbumBannerModal from "../../menu/modalmenu/AlbumBannerModal";
+import WindowsControlModal from "../../menu/modalmenu/WindowsControlModal";
 
 const options = {
   Features: [
@@ -77,6 +77,17 @@ const options = {
       defaultVal: false,
       popupModal: WindowsControlModal,
     },
+    {
+      type: "input",
+      name: "uifont",
+      desc: "Changes the font of the Spotify app",
+      defaultVal: "Segoe UI Variable Display",
+      placeholder: "Segoe UI Variable Display",
+      tippy: "This will only work if you have the font installed locally",
+      run(value) {
+        document.documentElement.style.setProperty("--FontFamily", value);
+      },
+    },
   ],
   Layouts: [
     {
@@ -105,7 +116,7 @@ const options = {
           name: "CompactLib",
           desc: "Makes library compact while keeping icons",
           defaultVal: false,
-					tippy: "Broken if library is collapsed",
+          tippy: "Broken if library is collapsed",
         },
       ],
     },

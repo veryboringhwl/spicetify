@@ -1,12 +1,12 @@
 const ColourScheme = async (scheme) => {
   if (scheme === "default") {
-    let schemeTag = document.querySelector("style.customColourScheme");
+    const schemeTag = document.querySelector("style.customColourScheme");
     schemeTag?.remove();
     return;
   }
 
   const response = await fetch(
-    "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/color.ini"
+    "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/color.ini",
   );
   const iniContent = await response.text();
   const colourSchemes = iniContent.split(/[\r\n]+/).reduce((acc, line) => {
@@ -26,20 +26,19 @@ const ColourScheme = async (scheme) => {
     return acc;
   }, {});
 
-  const injectStr =
-    Object.entries(colourSchemes[scheme]).reduce((acc, [key, value]) => {
-      const rgb =
-        value.length === 3
-          ? value
-              .split("")
-              .map((char) => parseInt(char + char, 16))
-              .join(", ")
-          : value
-              .match(/\w\w/g)
-              .map((x) => parseInt(x, 16))
-              .join(", ");
-      return `${acc}--spice-${key}:#${value};--spice-rgb-${key}:${rgb};`;
-    }, ":root{") + "}";
+  const injectStr = `${Object.entries(colourSchemes[scheme]).reduce((acc, [key, value]) => {
+    const rgb =
+      value.length === 3
+        ? value
+            .split("")
+            .map((char) => Number.parseInt(char + char, 16))
+            .join(", ")
+        : value
+            .match(/\w\w/g)
+            .map((x) => Number.parseInt(x, 16))
+            .join(", ");
+    return `${acc}--spice-${key}:#${value};--spice-rgb-${key}:${rgb};`;
+  }, ":root{")}}`;
 
   let schemeTag = document.querySelector("style.customColourScheme");
   if (!schemeTag) {

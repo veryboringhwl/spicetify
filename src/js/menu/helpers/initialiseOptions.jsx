@@ -1,8 +1,8 @@
+import Console from "../../utils/Console";
+import LocalStorage from "../../utils/LocalStorage";
+import runModalSettings from "../modalmenu/runModalSettings";
 import options from "../settingsmenu/options";
 import applyOptions from "./applyOptions";
-import runModalSettings from "../modalmenu/runModalSettings";
-import LocalStorage from "../../utils/LocalStorage";
-import Console from "../../utils/Console";
 
 const initialiseOptions = () => {
   try {
@@ -14,9 +14,7 @@ const initialiseOptions = () => {
         if (option.reveal) {
           option.reveal.forEach((subOption) => {
             const subKey = `theme:${subOption.name}`;
-            acc[subKey] = acc[mainKey]
-              ? LocalStorage.get(subKey, subOption.defaultVal)
-              : false;
+            acc[subKey] = acc[mainKey] ? LocalStorage.get(subKey, subOption.defaultVal) : false;
           });
         }
         return acc;

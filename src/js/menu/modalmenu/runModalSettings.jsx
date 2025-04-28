@@ -7,10 +7,7 @@ const runModalSettings = () => {
     options.forEach((option) => {
       const value = LocalStorage.get(`theme:${option.name}`, option.defaultVal);
       if (styleProperty) {
-        document.documentElement.style.setProperty(
-          styleProperty(option.name),
-          value
-        );
+        document.documentElement.style.setProperty(styleProperty(option.name), value);
       } else {
         document.body.classList.toggle(option.name, value);
       }
@@ -20,8 +17,7 @@ const runModalSettings = () => {
   applyModalSetting(albumBannerOptions);
   applyModalSetting(
     windowsControlOptions,
-    (name) =>
-      `--windowcontrol-${name.replace("WindowsControl", "").toLowerCase()}`
+    (name) => `--windowcontrol-${name.replace("WindowsControl", "").toLowerCase()}`,
   );
 };
 

@@ -1,9 +1,9 @@
 import React from "react";
-import OptionType from "../settingsmenu/OptionType";
 import CoverArtBanner from "../../features/CoverArtBanner";
+import LocalStorage from "../../utils/LocalStorage";
+import OptionType from "../settingsmenu/OptionType";
 import resetModal from "./resetModal";
 import saveModal from "./saveModal";
-import LocalStorage from "../../utils/LocalStorage";
 
 const AlbumBannerModal = React.memo(() => {
   const [settings, setSettings] = React.useState(() =>
@@ -11,8 +11,8 @@ const AlbumBannerModal = React.memo(() => {
       albumBannerOptions.map((option) => [
         option.name,
         LocalStorage.get(`theme:${option.name}`, option.defaultVal),
-      ])
-    )
+      ]),
+    ),
   );
 
   const handleSettingChange = React.useCallback((key, value) => {
@@ -34,10 +34,7 @@ const AlbumBannerModal = React.memo(() => {
         />
       ))}
       <div className="buttonContainer">
-        <button
-          className="resetButton"
-          onClick={() => resetModal(albumBannerOptions, setSettings)}
-        >
+        <button className="resetButton" onClick={() => resetModal(albumBannerOptions, setSettings)}>
           Reset
         </button>
         <button
@@ -92,8 +89,7 @@ export const albumBannerOptions = [
     name: "MiscPage",
     desc: "Adds Dynamic backgrounds to Misc Pages",
     defaultVal: true,
-    tippy:
-      "Enables album art for Station, Collection, Show, Episode, Genre, User",
+    tippy: "Enables album art for Station, Collection, Show, Episode, Genre, User",
   },
 ];
 

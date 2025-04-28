@@ -16,9 +16,7 @@ const CategoryCarousel = React.memo(({ categories }) => {
     return () => carousel?.removeEventListener("wheel", handleWheel);
   }, []);
 
-  const buttonWidth = `calc((100% - ${(categories.length - 1) * 8}px) / ${
-    categories.length
-  })`;
+  const buttonWidth = `calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`;
 
   return (
     <div className="category-carousel-container">

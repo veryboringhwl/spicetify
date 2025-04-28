@@ -2,6 +2,10 @@ body {
   zoom: var(--Zoomlevel);
 }
 
+* {
+  font-family: var(--FontFamily), "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI" !important; 
+}
+
 .spotify__os--is-windows:not(.fullscreen) .WindowsControl #main::after {
   content: "";
   position: absolute;
@@ -14,27 +18,33 @@ body {
   height: var(--windowcontrol-height);
 }
 
-.AlbumBannerPage .banner-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-image: var(--image);
-  background-position: center;
-  filter: blur(5px) brightness(0.75);
-  transition: background 0.5s ease;
-}
+.AlbumBannerPage {
+  .banner-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: var(--image);
+    background-position: center;
+    filter: blur(5px) brightness(0.75);
+    transition: background 0.5s ease;
+  }
 
-.AlbumBannerPage.PlaylistPage .playlist-playlist-playlistContent,
-.AlbumBannerPage.PlaylistPage .PeLrpasyfBW8ql_bmoAi,
-.AlbumBannerPage.PlaylistPage .PkOz5g82CaoKk1J3GX0e {
-  background: none !important;
-}
+  &.PlaylistPage {
+    .playlist-playlist-playlistContent,
+    .main-actionBarBackground-background,
+    .main-entityHeader-backgroundColor {
+      background: none !important;
+    }
+  }
 
-.AlbumBannerPage.LyricsPage .lyrics-lyrics-background {
-  background-color: unset !important;
-}
+  &.LyricsPage {
+    .lyrics-lyrics-background {
+      background-color: unset !important;
+    }
 
-.AlbumBannerPage.LyricsPage .lyrics-lyricsContainer-LyricsBackground {
-  display: none;
+    .lyrics-lyricsContainer-LyricsBackground {
+      display: none;
+    }
+  }
 }

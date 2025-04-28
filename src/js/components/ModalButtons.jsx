@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Tippy from "./Tippy";
 import Icons from "../icons/icons";
+import Tippy from "./Tippy";
 
 const ModalButtons = () => {
   const header = document.querySelector(".main-trackCreditsModal-header");
@@ -16,9 +16,7 @@ const ModalButtons = () => {
     <>
       <button
         className="main-trackCreditsModal-githubBtn"
-        onClick={() =>
-          window.open("https://github.com/veryboringhwl/spicetify")
-        }
+        onClick={() => window.open("https://github.com/veryboringhwl/spicetify")}
         ref={(label) => label && Tippy(label, "View on GitHub")}
       >
         <svg
@@ -42,7 +40,7 @@ const ModalButtons = () => {
           dangerouslySetInnerHTML={{ __html: Icons.close }}
         />
       </button>
-    </>
+    </>,
   );
 
   header.appendChild(buttonContainer);

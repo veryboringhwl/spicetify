@@ -34,18 +34,14 @@ const CoverArtBanner = () => {
     const imageUrl = Spicetify.Player.data?.item?.metadata?.image_xlarge_url;
 
     const showBanner = Object.values(channels).some(
-      ({ regex, key }) => LocalStorage.get(key, false) && regex.test(pathname)
+      ({ regex, key }) => LocalStorage.get(key, false) && regex.test(pathname),
     );
 
     if (showBanner) {
       banner.style.display = "";
       const img = new Image();
       img.src = imageUrl;
-      img.onload = () =>
-        document.documentElement.style.setProperty(
-          "--image",
-          `url(${imageUrl})`
-        );
+      img.onload = () => document.documentElement.style.setProperty("--image", `url(${imageUrl})`);
     } else {
       banner.style.display = "none";
     }

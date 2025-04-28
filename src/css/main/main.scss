@@ -5,10 +5,6 @@
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
 }
 
-* {
-  font-family: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI" !important;
-}
-
 .spotify__os--is-windows:not(.fullscreen) #main::after {
   content: "";
   position: absolute;

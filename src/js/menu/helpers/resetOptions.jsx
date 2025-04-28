@@ -1,11 +1,11 @@
-import options from "../settingsmenu/options";
-import applyOptions from "./applyOptions";
-import runModalSettings from "../modalmenu/runModalSettings";
-import { albumBannerOptions } from "../modalmenu/AlbumBannerModal";
-import { windowsControlOptions } from "../modalmenu/WindowsControlModal";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import Console from "../../utils/Console";
 import LocalStorage from "../../utils/LocalStorage";
+import { albumBannerOptions } from "../modalmenu/AlbumBannerModal";
+import { windowsControlOptions } from "../modalmenu/WindowsControlModal";
+import runModalSettings from "../modalmenu/runModalSettings";
+import options from "../settingsmenu/options";
+import applyOptions from "./applyOptions";
 
 const resetOptions = (setSettings) => {
   ConfirmDialog({
@@ -19,20 +19,18 @@ const resetOptions = (setSettings) => {
       try {
         Console.Log("Resetting settings");
         const defaultSettings = {};
-        [
-          ...Object.values(options).flat(),
-          ...albumBannerOptions,
-          ...windowsControlOptions,
-        ].forEach((option) => {
-          defaultSettings[`theme:${option.name}`] = option.defaultVal;
-          if (option.reveal) {
-            option.reveal.forEach((subOption) => {
-              defaultSettings[`theme:${subOption.name}`] = option.defaultVal
-                ? subOption.defaultVal
-                : false;
-            });
-          }
-        });
+        [...Object.values(options).flat(), ...albumBannerOptions, ...windowsControlOptions].forEach(
+          (option) => {
+            defaultSettings[`theme:${option.name}`] = option.defaultVal;
+            if (option.reveal) {
+              option.reveal.forEach((subOption) => {
+                defaultSettings[`theme:${subOption.name}`] = option.defaultVal
+                  ? subOption.defaultVal
+                  : false;
+              });
+            }
+          },
+        );
         Object.entries(defaultSettings).forEach(([key, value]) => {
           LocalStorage.set(key, value);
         });

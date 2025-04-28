@@ -1,6 +1,6 @@
 import React from "react";
-import options from "../settingsmenu/options";
 import LocalStorage from "../../utils/LocalStorage";
+import options from "../settingsmenu/options";
 
 const useSettings = () => {
   const [settings, setSettings] = React.useState(() =>
@@ -12,13 +12,11 @@ const useSettings = () => {
         if (option.reveal) {
           option.reveal.forEach((subOption) => {
             const subKey = `theme:${subOption.name}`;
-            acc[subKey] = acc[key]
-              ? LocalStorage.get(subKey, subOption.defaultVal)
-              : false;
+            acc[subKey] = acc[key] ? LocalStorage.get(subKey, subOption.defaultVal) : false;
           });
         }
         return acc;
-      }, {})
+      }, {}),
   );
 
   const handleSettingChange = React.useCallback((key, value) => {

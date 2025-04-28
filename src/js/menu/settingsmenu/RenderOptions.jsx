@@ -1,6 +1,6 @@
 import React from "react";
-import OptionType from "./OptionType";
 import RevealableOption from "../components/RevealableOption";
+import OptionType from "./OptionType";
 
 const RenderOptions = React.memo(({ option, settings, onChange }) => {
   const mainValue = settings[`theme:${option.name}`];
@@ -16,11 +16,7 @@ const RenderOptions = React.memo(({ option, settings, onChange }) => {
         />
       </div>
       {mainValue && option.reveal && (
-        <RevealableOption
-          option={option}
-          settings={settings}
-          onChange={onChange}
-        />
+        <RevealableOption option={option} settings={settings} onChange={onChange} />
       )}
     </div>
   );

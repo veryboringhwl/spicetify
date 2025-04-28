@@ -1,9 +1,7 @@
-const VolPercent = (isEnabled) => {
-  const volumeBar = document.querySelector(".main-nowPlayingBar-volumeBar");
-  if (!(volumeBar && Spicetify.Player && Spicetify.Platform.PlaybackAPI)) {
-    setTimeout(() => VolPercent(isEnabled), 200);
-    return;
-  }
+import waitForElements from "../utils/waitForElements";
+
+const VolPercent = async (isEnabled) => {
+  const volumeBar = await waitForElements(".main-nowPlayingBar-volumeBar");
 
   const updateVol = () => {
     const input = volumeBar.querySelector(".vol-input");
@@ -22,12 +20,12 @@ const VolPercent = (isEnabled) => {
 											style="width: 30px; font-size: 15px; border: none; background: transparent; text-align: right;">
 									<span style="font-size: 15px;">%</span>
 							</div>
-					`
+					`,
       );
       volumeBar.style.flex = "0 1 200px";
       const input = volumeBar.querySelector(".vol-input");
       input.addEventListener("change", () => {
-        const newVol = parseInt(input.value, 10);
+        const newVol = Number.parseInt(input.value, 10);
         if (newVol >= 0 && newVol <= 100) {
           Spicetify.Player.setVolume(newVol / 100);
         }
@@ -41,10 +39,7 @@ const VolPercent = (isEnabled) => {
     if (volumeBar) {
       volumeBar.querySelector(".vol-percent")?.remove();
       volumeBar.style.flex = "";
-      Spicetify.Platform.PlaybackAPI._events.removeListener(
-        "volume",
-        updateVol
-      );
+      Spicetify.Platform.PlaybackAPI._events.removeListener("volume", updateVol);
     }
   }
 };

@@ -1,18 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import initialiseSettings from "./menu/helpers/initialiseOptions";
+import Notification from "./components/Notification";
+import DebugMenu from "./debug/DebugMenu";
+import Mousetrap from "./debug/Mousetrap";
+import UpdateZoom from "./features/UpdateZoom";
+import Icons from "./icons/icons";
+import initialiseOptions from "./menu/helpers/initialiseOptions";
 import SettingsButton from "./menu/settingsmenu/SettingsButton";
 import SettingsMenu from "./menu/settingsmenu/SettingsMenu";
-import Mousetrap from "./debug/Mousetrap";
-import DebugMenu from "./debug/DebugMenu";
-import UpdateZoom from "./features/UpdateZoom";
 import Console from "./utils/Console";
-import Notification from "./components/Notification";
-import Icons from "./icons/icons";
+import waitForElements from "./utils/waitForElements";
 
-import Reload from "./utils/Reload";
 import ConfirmDialog from "./components/ConfirmDialog";
 import PopupModal from "./components/PopupModal";
+import Reload from "./utils/Reload";
 
 (async function main() {
   while (
@@ -39,8 +40,7 @@ import PopupModal from "./components/PopupModal";
   // };
 
   const SpotifyVersion =
-    Spicetify.Platform.PlatformData.event_sender_context_information
-      .client_version_int;
+    Spicetify.Platform.PlatformData.event_sender_context_information.client_version_int;
 
   if (SpotifyVersion < 125000000) {
     Notification({
@@ -55,9 +55,7 @@ import PopupModal from "./components/PopupModal";
             fill="currentColor"
             dangerouslySetInnerHTML={{ __html: Icons.warning }}
           />
-          <span>
-            Theme only supports Spotify versions greater than 1.2.50.000
-          </span>
+          <span>Theme only supports Spotify versions greater than 1.2.50.000</span>
         </>
       ),
     });
@@ -74,17 +72,20 @@ import PopupModal from "./components/PopupModal";
           configuration={Spicetify.Platform.RemoteConfiguration}
         >
           <Spicetify.ReactComponent.Menu>
-            <Spicetify.ReactComponent.MenuItem onClick={Reload} divider>
+            <Spicetify.ReactComponent.MenuItem
+              onClick={() => {
+                Reload();
+              }}
+              divider={true}
+            >
               Reload theme
             </Spicetify.ReactComponent.MenuItem>
-
             <Spicetify.ReactComponent.MenuItem
               onClick={() => {
                 ConfirmDialog({
                   titleText: "Confirm Dialog",
                   descriptionText: "Are you <b>sure</b>?",
-                  onOutside: () =>
-                    Spicetify.showNotification("Clicked outside"),
+                  onOutside: () => Spicetify.showNotification("Clicked outside"),
                   confirmLabel: "Ok",
                   allowHTML: true,
                 });
@@ -93,7 +94,6 @@ import PopupModal from "./components/PopupModal";
             >
               Confirm Dialog
             </Spicetify.ReactComponent.MenuItem>
-
             <Spicetify.ReactComponent.MenuItem
               onClick={() => {
                 PopupModal({
@@ -105,7 +105,6 @@ import PopupModal from "./components/PopupModal";
             >
               Theme Settings
             </Spicetify.ReactComponent.MenuItem>
-
             <Spicetify.ReactComponent.MenuItem
               onClick={() => {
                 PopupModal({
@@ -133,13 +132,8 @@ import PopupModal from "./components/PopupModal";
     </Spicetify.ReactComponent.ContextMenu>
   ));
 
-  (function mountComponent() {
-    const mountPoint = document.querySelector('[aria-label="Theme Settings"]');
-    if (!mountPoint) {
-      setTimeout(mountComponent, 300);
-      return;
-    }
-
+  (async function mountComponent() {
+    const mountPoint = await waitForElements('[aria-label="Theme Settings"]');
     const container = document.createElement("div");
     container.className = "context-menu-container";
     container.style.position = "absolute";
@@ -151,66 +145,11 @@ import PopupModal from "./components/PopupModal";
     ReactDOM.createRoot(container).render(<ContextMenuButton />);
   })();
 
-  new Spicetify.ContextMenuV2.ItemSubMenu({
-    text: "Theme Options",
-    leadingIcon: Icons.settings,
-    items: [
-      new Spicetify.ContextMenuV2.Item({
-        children: "Reload theme",
-        onClick: () => {
-          Spicetify.showNotification("Theme reloading...");
-          setTimeout(Reload, 1000);
-        },
-      }),
-      new Spicetify.ContextMenuV2.Item({
-        children: "Theme Settings",
-        onClick: () => {
-          PopupModal({
-            title: "Theme Settings",
-            content: SettingsMenu,
-          });
-        },
-      }),
-      new Spicetify.ContextMenuV2.Item({
-        children: "Debug Menu",
-        onClick: () => {
-          PopupModal({
-            title: "Debug Menu",
-            content: DebugMenu,
-          });
-        },
-      }),
-      new Spicetify.ContextMenuV2.Item({
-        children: "Confirm Dialog",
-        onClick: () => {
-          ConfirmDialog({
-            titleText: "Debug Menu",
-            descriptionText: "Are you <b>sure</b>?",
-            onOutside: () => {
-              Spicetify.showNotification("Clicked outside");
-            },
-            confirmLabel: "Ok",
-            allowHTML: true,
-          });
-        },
-      }),
-    ],
-    shouldAdd: (_, trigger, target) => {
-      const targetElement = target || trigger?.target;
-      return (
-        target?.classList.contains("view-homeShortcutsGrid-shortcut") ||
-        targetElement?.getAttribute("aria-label") === "Theme Settings" ||
-        target?.classList.contains("main-topBar-buddyFeed") ||
-        target?.classList.contains("main-actionButtons") ||
-        target?.classList.contains("main-actionButtons > *")
-      );
-    },
-  }).register();
-
   UpdateZoom();
   Mousetrap();
   SettingsButton();
 
-  initialiseSettings();
+  initialiseOptions();
+
   Console.Log("Spicetify theme initialised");
 })();

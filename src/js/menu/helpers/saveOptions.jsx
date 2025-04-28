@@ -1,6 +1,6 @@
-import applyOptions from "./applyOptions";
 import Console from "../../utils/Console";
 import LocalStorage from "../../utils/LocalStorage";
+import applyOptions from "./applyOptions";
 
 const saveOptions = (options) => {
   try {
@@ -14,9 +14,7 @@ const saveOptions = (options) => {
     });
 
     if (changedOptions.length > 0) {
-      const formattedChanges = changedOptions
-        .map(([key, value]) => `${key} = ${value}`)
-        .join(", ");
+      const formattedChanges = changedOptions.map(([key, value]) => `${key} = ${value}`).join(", ");
       Console.Log(`Saving settings: ${formattedChanges}`);
       applyOptions(options);
     }

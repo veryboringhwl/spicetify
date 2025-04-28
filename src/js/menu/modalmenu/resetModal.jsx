@@ -2,7 +2,7 @@ import LocalStorage from "../../utils/LocalStorage";
 
 const resetModal = (options, setSettings) => {
   const defaultSettings = Object.fromEntries(
-    options.map((option) => [option.name, option.defaultVal])
+    options.map((option) => [option.name, option.defaultVal]),
   );
   setSettings(defaultSettings);
   options.forEach((option) => {

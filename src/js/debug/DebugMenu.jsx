@@ -1,4 +1,5 @@
 import React from "react";
+import Notification from "../components/Notification";
 import Console from "../utils/Console";
 
 const DebugMenu = React.memo(() => {
@@ -6,22 +7,15 @@ const DebugMenu = React.memo(() => {
   const [lastUpdated, setLastUpdated] = React.useState("Loading...");
 
   React.useEffect(() => {
-    fetch(
-      "https://api.github.com/repos/veryboringhwl/spicetify/releases/latest"
-    )
+    fetch("https://api.github.com/repos/veryboringhwl/spicetify/releases/latest")
       .then((response) => response.json())
       .then((data) => {
         setLastVersion(data.tag_name);
 
         const publishDate = new Date(data.published_at);
-        const formattedDate = `${publishDate.getFullYear()}/${(
-          publishDate.getMonth() + 1
-        )
+        const formattedDate = `${publishDate.getFullYear()}/${(publishDate.getMonth() + 1)
           .toString()
-          .padStart(2, "0")}/${publishDate
-          .getDate()
-          .toString()
-          .padStart(2, "0")}`;
+          .padStart(2, "0")}/${publishDate.getDate().toString().padStart(2, "0")}`;
         setLastUpdated(formattedDate);
       })
       .catch((error) => {
@@ -32,7 +26,8 @@ const DebugMenu = React.memo(() => {
   }, []);
 
   const Info = {
-    "Theme Version": lastVersion,
+    "Current Theme Version": "v1.1.0",
+    "Newest Theme Version": lastVersion,
     "Last Updated": lastUpdated,
     "Spotify Version": Spicetify.Platform.version,
     "Spicetify Version": Spicetify.Config.version,
@@ -48,32 +43,20 @@ const DebugMenu = React.memo(() => {
     <div className="theme-version">
       {Object.entries(Info).map(([key, value]) => (
         <p key={key} className="theme-info-item">
-          <span className="theme-info-key encore-text-body-medium-bold">
-            {key}:{" "}
-          </span>
+          <span className="theme-info-key encore-text-body-medium-bold">{key}: </span>
           <span className="theme-info-value">{value}</span>
         </p>
       ))}
-      <button onClick={() => Notification()}>Special Button</button>
+      <button
+        onClick={() =>
+          Notification({
+            message: "Theme only supports Spotify versions greater than 1.2.50.000",
+          })
+        }
+      >
+        Special Button
+      </button>
     </div>
   );
 });
-
-const Notification = () => {
-  Spicetify.Snackbar?.enqueueCustomSnackbar("sidebar-config", {
-    keyPrefix: "sidebar-config",
-    autoHideDuration: 7500,
-    children: Spicetify.ReactComponent.Snackbar.wrapper({
-      children: Spicetify.React.createElement("div", {
-        dangerouslySetInnerHTML: {
-          __html: "stuff",
-        },
-        style: {
-          "text-size": "12px",
-        },
-      }),
-    }),
-  });
-};
-
 export default DebugMenu;

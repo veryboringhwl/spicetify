@@ -38,7 +38,19 @@
   padding-bottom: 7px;
 }
 
-.main-actionBar-ActionBarRow > *:not(:last-child) {
+.main-actionBar-ActionBarRow > *:not(:last-child):has(.Wrapper-medium-only),
+.main-actionBar-ActionBarRow
+  > *:not(:last-child):has(.Wrapper-medium-only-medium) {
+  background-color: rgba(var(--spice-rgb-card), 0.85);
+  border-radius: 7px;
+  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
+  margin-right: 8px !important;
+  min-width: 48px;
+}
+
+.main-actionBar-ActionBarRow > *:not(:last-child):has(.Wrapper-large-only),
+.main-actionBar-ActionBarRow
+  > *:not(:last-child):has(.Wrapper-large-only-medium) {
   background-color: rgba(var(--spice-rgb-card), 0.85);
   border-radius: 7px;
   box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);

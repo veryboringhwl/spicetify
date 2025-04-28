@@ -1,5 +1,5 @@
-import options from "../settingsmenu/options";
 import Console from "../../utils/Console";
+import options from "../settingsmenu/options";
 
 const applyOptions = (settings) => {
   try {
@@ -14,10 +14,7 @@ const applyOptions = (settings) => {
         if (reveal) {
           reveal.forEach(({ name: subName, type: subType }) => {
             if (subType === "toggle") {
-              document.body.classList.toggle(
-                subName,
-                value && settings[`theme:${subName}`]
-              );
+              document.body.classList.toggle(subName, value && settings[`theme:${subName}`]);
             }
           });
         }

@@ -14,7 +14,6 @@
 }
 
 .themeOptionDropdown {
-  align-items: center;
   background-color: var(--spice-tab-active);
   border: 0;
   border-radius: 4px;
@@ -22,20 +21,18 @@
   font-size: 14px;
   font-weight: 400;
   height: 32px;
-  width: 122px;
   letter-spacing: 0.24px;
   line-height: 20px;
   padding: 0px 18px 0 4px;
 }
 
 .themeOptionInput {
-  align-items: center;
   background-color: var(--spice-tab-active);
   border: 0;
   border-radius: 4px;
   color: rgba(var(--spice-rgb-selected-row), 0.7);
   height: 32px;
-  width: 82px;
+  width: 128px;
   text-overflow: ellipsis;
   padding-left: 10px;
 }
