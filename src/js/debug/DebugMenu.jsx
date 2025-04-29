@@ -1,6 +1,6 @@
 import React from "react";
-import Notification from "../components/Notification";
 import Console from "../utils/Console";
+import Notification from "../utils/Notification";
 
 const DebugMenu = React.memo(() => {
   const [lastVersion, setLastVersion] = React.useState("Loading...");
@@ -50,6 +50,7 @@ const DebugMenu = React.memo(() => {
       <button
         onClick={() =>
           Notification({
+            autoHideDuration: 99999999,
             message: "Theme only supports Spotify versions greater than 1.2.50.000",
           })
         }

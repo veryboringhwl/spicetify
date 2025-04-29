@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Icons from "../icons/icons";
+import waitForElements from "../utils/waitForElements";
 import Tippy from "./Tippy";
 
-const ModalButtons = () => {
-  const header = document.querySelector(".main-trackCreditsModal-header");
-  if (!header) return;
+const ModalButtons = async () => {
+  const header = await waitForElements(".main-trackCreditsModal-header");
 
   document.querySelector(".main-trackCreditsModal-closeBtn")?.remove();
 

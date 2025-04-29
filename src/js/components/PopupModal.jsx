@@ -1,6 +1,6 @@
 import ModalButtons from "./ModalButtons";
 
-const PopupModal = ({ title = "", content = "", isLarge = true } = {}) => {
+const PopupModal = ({ title = "", content = "", isLarge = true, buttons = true } = {}) => {
   Spicetify.PopupModal.hide();
   setTimeout(() => {
     Spicetify.PopupModal.display({
@@ -8,7 +8,10 @@ const PopupModal = ({ title = "", content = "", isLarge = true } = {}) => {
       content: Spicetify.React.createElement(content),
       isLarge,
     });
-    ModalButtons();
+
+    if (buttons === true) {
+      ModalButtons();
+    }
   }, 1);
 };
 

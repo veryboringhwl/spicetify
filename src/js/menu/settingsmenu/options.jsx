@@ -81,8 +81,8 @@ const options = {
       type: "input",
       name: "uifont",
       desc: "Changes the font of the Spotify app",
-      defaultVal: "Segoe UI Variable Display",
-      placeholder: "Segoe UI Variable Display",
+      defaultVal: "SpotifyMixUI",
+      placeholder: "SpotifyMixUI",
       tippy: "This will only work if you have the font installed locally",
       run(value) {
         document.documentElement.style.setProperty("--FontFamily", value);

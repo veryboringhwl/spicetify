@@ -1,14 +1,8 @@
-/*Scroll fix on playlist page*/
-.main-entityHeader-container {
-  margin-top: 64px;
-  padding-bottom: 0px;
-}
-
 /*adds space to drag small window*/
 @media (max-width: 1100px) {
   body:not(.LibX) .main-topBar-topbarContentRight::after {
     content: " |    ";
-		-webkit-app-region: drag;
+    -webkit-app-region: drag;
     color: rgba(var(--spice-rgb-text), 0.2);
     font-weight: 1;
     font-size: 30px;
@@ -51,9 +45,4 @@
 /*what is this*/
 .Vn9yz8P5MjIvDT8c0U6w {
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
-}
-
-/*Fix Playlist name overflow*/
-.main-yourLibraryX-listItem .LineClamp {
-  white-space: nowrap;
 }
