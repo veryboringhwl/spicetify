@@ -1,13 +1,1551 @@
 (async function() {
           while (!Spicetify.React || !Spicetify.ReactDOM) {
             await new Promise(resolve => setTimeout(resolve, 10));
-           }
-          "use strict";(()=>{var Ae=Object.create;var ae=Object.defineProperty;var We=Object.getOwnPropertyDescriptor;var je=Object.getOwnPropertyNames;var qe=Object.getPrototypeOf,Re=Object.prototype.hasOwnProperty;var ie=(e,o)=>()=>(o||e((o={exports:{}}).exports,o),o.exports);var Ue=(e,o,r,t)=>{if(o&&typeof o=="object"||typeof o=="function")for(let n of je(o))!Re.call(e,n)&&n!==r&&ae(e,n,{get:()=>o[n],enumerable:!(t=We(o,n))||t.enumerable});return e};var p=(e,o,r)=>(r=e!=null?Ae(qe(e)):{},Ue(o||!e||!e.__esModule?ae(r,"default",{value:e,enumerable:!0}):r,e));var c=ie((Et,le)=>{le.exports=Spicetify.React});var R=ie((Tt,se)=>{se.exports=Spicetify.ReactDOM});var f=p(c(),1),_e=p(R(),1);var me=p(c(),1),ze=({message:e="",keyPrefix:o="custom-notif",autoHideDuration:r=3e3,backgroundColor:t="#fff"}={})=>{Spicetify.Snackbar.enqueueCustomSnackbar(o,{keyPrefix:o,autoHideDuration:r,children:me.default.createElement("div",{className:"custom-notification",style:{display:"flex",gap:"8px",alignItems:"center",color:"#fff",backgroundColor:t,padding:"14px 16px",borderRadius:"4px",fontSize:"0.875rem"}},e)})},U=ze;var h=p(c(),1);var A={Log:(e,...o)=>console.log(`%c\u25CF \u1D17 \u25CF [Theme]%c${e}`,"color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;","color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;",...o),Error:(e,...o)=>console.error(`%c\u25CF \u1D17 \u25CF [Theme]%c${e}`,"color:#ff6060; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #ee6969; border-right:none; border-radius:3px 0 0 3px;","color:#000000; background:#ffffff; padding:3px; border:2px solid #ee6969; border-left:none; border-radius:0 3px 3px 0;",...o),Warn:(e,...o)=>console.warn(`%c\u25CF \u1D17 \u25CF [Theme]%c${e}`,"color:#ee8860; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #ff8860; border-right:none; border-radius:3px 0 0 3px;","color:#000000; background:#ffffff; padding:3px; border:2px solid #ff8860; border-left:none; border-radius:0 3px 3px 0;",...o),Debug:(e,...o)=>console.debug(`%c\u25CF \u1D17 \u25CF [Theme]%c${e}`,"color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;","color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;",...o)};A.Log("Log message");A.Error("Error message");A.Warn("Warning message");A.Debug("Debug message");var s=A;var He=h.default.memo(()=>{let[e,o]=h.default.useState("Loading..."),[r,t]=h.default.useState("Loading...");h.default.useEffect(()=>{fetch("https://api.github.com/repos/veryboringhwl/spicetify/releases/latest").then(a=>a.json()).then(a=>{o(a.tag_name);let i=new Date(a.published_at),l=`${i.getFullYear()}/${(i.getMonth()+1).toString().padStart(2,"0")}/${i.getDate().toString().padStart(2,"0")}`;t(l)}).catch(a=>{s.Error("Error fetching latest version:",a),o("Error fetching"),t("Error fetching")})},[]);let n={"Current Theme Version":"v1.1.0","Newest Theme Version":e,"Last Updated":r,"Spotify Version":Spicetify.Platform.version,"Spicetify Version":Spicetify.Config.version,Platform:Spicetify.Platform.PlatformData.app_platform,OS:Spicetify.Platform.PlatformData.os_name,Theme:Spicetify.Config.current_theme,Extensions:Spicetify.Config.extensions.join(", "),"Custom apps":Spicetify.Config.custom_apps.join(", "),"Color Scheme":Spicetify.Config.color_scheme};return h.default.createElement("div",{className:"theme-version"},Object.entries(n).map(([a,i])=>h.default.createElement("p",{key:a,className:"theme-info-item"},h.default.createElement("span",{className:"theme-info-key encore-text-body-medium-bold"},a,": "),h.default.createElement("span",{className:"theme-info-value"},i))),h.default.createElement("button",{onClick:()=>U({message:"Theme only supports Spotify versions greater than 1.2.50.000"})},"Special Button"))}),z=He;var V=p(c(),1),pe=p(R(),1);var Fe={editButton:'<path d="M14.236 1.764a2.62 2.62 0 0 0-3.707 0L2.657 9.636a2.96 2.96 0 0 0-.772 1.354l-.87 3.386a.5.5 0 0 0 .61.608l3.385-.869a2.95 2.95 0 0 0 1.354-.772l7.872-7.872a2.62 2.62 0 0 0 0-3.707m-3 .707a1.621 1.621 0 1 1 2.293 2.293l-.779.779l-2.293-2.293zM9.75 3.957l2.293 2.293l-6.386 6.386a1.95 1.95 0 0 1-.896.51l-2.567.66l.66-2.567a1.94 1.94 0 0 1 .51-.896z"</path>',settings:'<svg viewBox="0 0 16 16" width="16px" height="16px" fill="currentcolor"><path d="M8.04 5.36a2.68 2.68 90 100 5.36 2.68 2.68 90 000-5.36zM6.7 8.04a1.34 1.34 90 112.68 0 1.34 1.34 90 01-2.68 0zM11.5481 3.2133a.9487.9487 90 01-1.1042-.7598l-.3484-1.8974a.4744.4744 90 00-.3685-.3779 8.1365 8.1365 90 00-3.3755 0 .4744.4744 90 00-.3685.3779l-.3471 1.8974a.9514.9514 90 01-1.2542.7209l-1.8211-.6486a.4757.4757 90 00-.5119.1273c-.7625.8402-1.34 1.8318-1.6911 2.9118a.4717.4717 90 00.1447.5065l1.4767 1.2475a.9434.9434 90 010 1.4418l-1.4767 1.2475a.4717.4717 90 00-.1447.5065A8.0212 8.0212 90 002.0502 13.4268a.4757.4757 90 00.5119.1273l1.8224-.6486a.9487.9487 90 011.2542.7209l.3457 1.8974c.0348.1876.1809.3377.3685.3765a8.1405 8.1405 90 003.3768 0 .473.473 90 00.3672-.3765l.3484-1.8974a.9514.9514 90 011.2542-.7209l1.8211.6486c.1809.0643.3832.0134.5119-.1273.7625-.8402 1.34-1.8318 1.6911-2.9118a.4717.4717 90 00-.1447-.5065l-1.4767-1.2475a.942.942 90 010-1.4418l1.4767-1.2475a.4717.4717 90 00.1447-.5065A8.0199 8.0199 90 0014.0298 2.6532a.4757.4757 90 00-.5119-.1273l-1.8224.6486a.9514.9514 90 01-.1487.0402zm-8.8708.7772 1.2556.4462a2.2914 2.2914 90 003.0217-1.742l.2372-1.2998a6.8407 6.8407 90 011.6951 0l.2385 1.2998a2.2887 2.2887 90 003.0217 1.742L13.4 3.9892c.3417.4476.6258.9353.8442 1.4526l-1.0104.8536a2.2834 2.2834 90 000 3.4894l1.0117.8536a6.6866 6.6866 90 01-.8442 1.4526l-1.2556-.4476a2.2914 2.2914 90 00-3.0217 1.742l-.2385 1.2998a6.8327 6.8327 90 01-1.6951 0l-.2372-1.2998a2.2887 2.2887 90 00-3.0217-1.742L2.68 12.0908a6.6826 6.6826 90 01-.8442-1.4526l1.0104-.8549a2.2834 2.2834 90 000-3.488l-1.0117-.8536c.2198-.5172.5038-1.005.8442-1.4526z"/></svg>',github:'<path d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"></path>',close:'<path d="M31.098 29.794L16.955 15.65 31.097 1.51 29.683.093 15.54 14.237 1.4.094-.016 1.508 14.126 15.65-.016 29.795l1.414 1.414L15.54 17.065l14.144 14.143"></path>',warning:'<path d="M12.884 2.532c-.346-.654-1.422-.654-1.768 0l-9 17A1 1 0 0 0 3 21h18a1 1 0 0 0 .884-1.5zM13 18h-2v-2h2zm-2-4V9h2l0 5z"</path>'},S=Fe;var Xe=(e,o)=>{o&&Spicetify.Tippy(e,{...Spicetify.TippyProps,content:o,placement:"top",delay:[0,0],onShow(r){r.popper.classList.add("options-tippy")}})},C=Xe;var Ze=()=>{let e=document.querySelector(".main-trackCreditsModal-header");if(!e)return;document.querySelector(".main-trackCreditsModal-closeBtn")?.remove();let o=document.createElement("div");o.className="main-trackCreditsModal-BtnContainer",pe.default.createRoot(o).render(V.default.createElement(V.default.Fragment,null,V.default.createElement("button",{className:"main-trackCreditsModal-githubBtn",onClick:()=>window.open("https://github.com/veryboringhwl/spicetify"),ref:r=>r&&C(r,"View on GitHub")},V.default.createElement("svg",{width:"18",height:"18",viewBox:"0 0 96 96",fill:"currentColor",dangerouslySetInnerHTML:{__html:S.github}})),V.default.createElement("button",{className:"main-trackCreditsModal-closeBtn",onClick:()=>Spicetify.PopupModal.hide(),ref:r=>r&&C(r,"Close")},V.default.createElement("svg",{width:"18",height:"18",viewBox:"0 0 32 32",fill:"currentColor",dangerouslySetInnerHTML:{__html:S.close}})))),e.appendChild(o)},ce=Ze;var Ge=({title:e="",content:o="",isLarge:r=!0}={})=>{Spicetify.PopupModal.hide(),setTimeout(()=>{Spicetify.PopupModal.display({title:e,content:Spicetify.React.createElement(o),isLarge:r}),ce()},1)},w=Ge;var Je=()=>{Spicetify.Mousetrap.bind(["up up down down left right left right b a","v e r s i o n","s p o t i f y","s p i c e t i f y","d e b u g"],()=>{w({title:"Theme Version",content:z})})},ue=Je;var Ke=()=>{let e=window.outerWidth,o=window.innerWidth,r=window.devicePixelRatio,t=()=>{let n=window.outerWidth,a=window.innerWidth,i=window.devicePixelRatio;if((e<=160||r!==i)&&(e!==n||o!==a)){let l=n/a||1;document.documentElement.style.setProperty("--zoom",l),s.Log(`Zoom: ${l}`),e=n,o=a,r=i}requestAnimationFrame(t)};t()},de=Ke;var Ye={get(e,o){try{let r=localStorage.getItem(e);return r!==null?JSON.parse(r):o}catch(r){return s.Error(`Error getting ${e} from localStorage:`,r),o}},set(e,o){try{return localStorage.setItem(e,JSON.stringify(o)),!0}catch(r){return s.Error(`Error setting ${e} in localStorage:`,r),!1}}},m=Ye;var b=p(c(),1);var fe=()=>{if(!Spicetify.Player.data?.item){setTimeout(fe,100);return}let e={Album:{regex:/^\/album\//,key:"theme:AlbumPage"},Artist:{regex:/^\/artist\/(?!artists\b)\w+$/,key:"theme:ArtistPage"},Lyrics:{regex:/^\/lyrics$/,key:"theme:LyricsPage"},LyricsPlus:{regex:/^\/lyrics-plus$/,key:"theme:LyricsPage"},Playlist:{regex:/^\/playlist\//,key:"theme:PlaylistPage"},Station:{regex:/^\/station\/playlist\//,key:"theme:MiscPage"},Collection:{regex:/^\/collection\/tracks$/,key:"theme:MiscPage"},Show:{regex:/^\/show\//,key:"theme:MiscPage"},Episode:{regex:/^\/episode\//,key:"theme:MiscPage"},User:{regex:/^\/user\/(?!users\b)\w+$/,key:"theme:MiscPage"},Genre:{regex:/^\/genre\//,key:"theme:MiscPage"}},o=document.querySelector(".banner-image")||(()=>{let t=document.createElement("div");return t.className="banner-image",document.querySelector(".under-main-view")?.appendChild(t),t})(),r=()=>{let{pathname:t}=Spicetify.Platform.History.location,n=Spicetify.Player.data?.item?.metadata?.image_xlarge_url;if(Object.values(e).some(({regex:i,key:l})=>m.get(l,!1)&&i.test(t))){o.style.display="";let i=new Image;i.src=n,i.onload=()=>document.documentElement.style.setProperty("--image",`url(${n})`)}else o.style.display="none"};Spicetify.Platform.History.listen(r),Spicetify.Player.addEventListener("songchange",r),r()},H=fe;var oe=p(c(),1);var k=p(c(),1);var E=p(c(),1);var F=p(c(),1);var Qe=F.default.memo(({name:e,popupModal:o})=>o?F.default.createElement("button",{className:"themeOptionPopupButton",onClick:()=>w({title:e,content:o,isLarge:!1}),"aria-label":"Open popup"},F.default.createElement("svg",{width:"16",height:"16",viewBox:"0 0 16 16",fill:"currentColor",dangerouslySetInnerHTML:{__html:S.editButton}})):null),ge=Qe;var et=E.default.memo(({name:e,desc:o,children:r,popupModal:t})=>E.default.createElement("div",{className:"themeOptionRow","data-name":`theme:${e}`},E.default.createElement("div",{className:"themeOptionContent"},E.default.createElement("div",{className:"themeOptionDesc"},o)),E.default.createElement("div",{className:"themeOptionControl"},E.default.createElement(ge,{name:e,popupModal:t}),r))),B=et;var tt=k.default.memo(({name:e,desc:o,tippy:r,value:t,options:n,onChange:a,popupModal:i})=>{let l=k.default.useRef(null);k.default.useEffect(()=>{l.current&&r&&C(l.current,r)},[r]);let u=k.default.useCallback(d=>{a(`theme:${e}`,d.target.value)},[e,a]);return k.default.createElement(B,{name:e,desc:o,popupModal:i},k.default.createElement("select",{className:"themeOptionDropdown",value:t,onChange:u,ref:l},n.map(({value:d,label:g})=>k.default.createElement("option",{key:d,value:d},g))))}),ye=tt;var T=p(c(),1);var ot=T.default.memo(({name:e,desc:o,tippy:r,value:t,onChange:n,placeholder:a,popupModal:i})=>{let l=T.default.useRef(null);T.default.useEffect(()=>{l.current&&r&&C(l.current,r)},[r]);let u=T.default.useCallback(d=>{n(`theme:${e}`,d.target.value)},[e,n]);return T.default.createElement(B,{name:e,desc:o,popupModal:i},T.default.createElement("input",{className:"themeOptionInput",type:"text",value:t,onChange:u,placeholder:a,ref:l}))}),he=ot;var x=p(c(),1);var rt=x.default.memo(({name:e,desc:o,tippy:r,value:t,onChange:n,popupModal:a})=>{let i=x.default.useRef(null);x.default.useEffect(()=>{i.current&&r&&C(i.current,r)},[r]);let l=x.default.useCallback(()=>{n(`theme:${e}`,!t)},[e,t,n]);return x.default.createElement(B,{name:e,desc:o,popupModal:a},x.default.createElement("button",{className:"themeOptionToggle",onClick:l,ref:i},x.default.createElement("span",{className:"toggleWrapper"},x.default.createElement("span",{className:`toggle ${t?"enabled":""}`}))))}),be=rt;var nt=oe.default.memo(({option:e,value:o,onChange:r})=>{let t={toggle:be,dropdown:ye,input:he}[e.type];return oe.default.createElement(t,{...e,value:o,onChange:r})}),O=nt;var at=(e,o)=>{let r=Object.fromEntries(e.map(t=>[t.name,t.defaultVal]));o(r),e.forEach(t=>{let n=`theme:${t.name}`;m.set(n,t.defaultVal),document.body.classList.toggle(t.name,t.defaultVal),t.run&&t.run(t.defaultVal)})},X=at;var it=(e,o)=>{Object.entries(e).forEach(([r,t])=>{m.set(`theme:${r}`,t),document.body.classList.toggle(r,t),o.find(n=>n.name===r)?.run?.(t)})},Z=it;var lt=b.default.memo(()=>{let[e,o]=b.default.useState(()=>Object.fromEntries(M.map(t=>[t.name,m.get(`theme:${t.name}`,t.defaultVal)]))),r=b.default.useCallback((t,n)=>{o(a=>({...a,[t.replace("theme:","")]:n}))},[]);return b.default.useEffect(()=>{M.forEach(t=>t.run?.(e[t.name]))},[e]),b.default.createElement("div",{className:"themeModalOptions albumBannerSettings"},M.map(t=>b.default.createElement(O,{key:t.name,option:t,value:e[t.name],onChange:r})),b.default.createElement("div",{className:"buttonContainer"},b.default.createElement("button",{className:"resetButton",onClick:()=>X(M,o)},"Reset"),b.default.createElement("button",{className:"saveButton",onClick:()=>{Z(e,M),H()}},"Save")))}),M=[{type:"toggle",name:"AlbumBannerPage",desc:"Puts album art in places",defaultVal:!0,tippy:"Includes Spotify Lyrics page and Spicetify's Lyrics Plus"},{type:"toggle",name:"LyricsPage",desc:"Adds Dynamic backgrounds to Lyrics Page",defaultVal:!0,tippy:"Includes Spotify Lyrics page and Spicetify's Lyrics Plus"},{type:"toggle",name:"PlaylistPage",desc:"Adds Dynamic backgrounds to your Playlist Pages",defaultVal:!0},{type:"toggle",name:"ArtistPage",desc:"Adds Dynamic backgrounds to Artist Pages",defaultVal:!0},{type:"toggle",name:"AlbumPage",desc:"Adds Dynamic backgrounds to Album Pages",defaultVal:!0},{type:"toggle",name:"MiscPage",desc:"Adds Dynamic backgrounds to Misc Pages",defaultVal:!0,tippy:"Enables album art for Station, Collection, Show, Episode, Genre, User"}],ve=lt;var v=p(c(),1);var st=v.default.memo(()=>{let[e,o]=v.default.useState(()=>Object.fromEntries(P.map(t=>[t.name,m.get(`theme:${t.name}`,t.defaultVal)]))),r=v.default.useCallback((t,n)=>{let a=t.replace("theme:","");o(i=>({...i,[a]:n})),document.documentElement.style.setProperty(`--windowcontrol-${a.toLowerCase()}`,n)},[]);return v.default.useEffect(()=>{P.forEach(t=>{let n=e[t.name];document.documentElement.style.setProperty(`--windowcontrol-${t.name.toLowerCase()}`,n)})},[e]),v.default.createElement("div",{className:"themeModalOptions windowsControlSettings"},P.map(t=>v.default.createElement(O,{key:t.name,option:t,value:e[t.name],onChange:r})),v.default.createElement("div",{className:"buttonContainer"},v.default.createElement("button",{className:"resetButton",onClick:()=>X(P,o)},"Reset"),v.default.createElement("button",{className:"saveButton",onClick:()=>Z(e,P)},"Save")))}),P=[{type:"toggle",name:"WindowsControl",desc:"Enable custom Windows Controls",defaultVal:!0,run:e=>{document.body.classList.toggle("WindowsControl",e)}},{type:"input",name:"WindowsControlBrightness",desc:"Set Brightness",defaultVal:"2.12",run:e=>document.documentElement.style.setProperty("--windowcontrol-brightness",e)},{type:"input",name:"WindowsControlTop",desc:"Set Top",defaultVal:"16px",run:e=>document.documentElement.style.setProperty("--windowcontrol-top",e)},{type:"input",name:"WindowsControlWidth",desc:"Set Width",defaultVal:"135px",run:e=>document.documentElement.style.setProperty("--windowcontrol-width",e)},{type:"input",name:"WindowsControlHeight",desc:"Set Height",defaultVal:"32px",run:e=>document.documentElement.style.setProperty("--windowcontrol-height",e)}],Se=st;var mt=()=>{let e=(o,r)=>{o.forEach(t=>{let n=m.get(`theme:${t.name}`,t.defaultVal);r?document.documentElement.style.setProperty(r(t.name),n):document.body.classList.toggle(t.name,n)})};e(M),e(P,o=>`--windowcontrol-${o.replace("WindowsControl","").toLowerCase()}`)},G=mt;var pt=async e=>{if(e==="default"){document.querySelector("style.customColourScheme")?.remove();return}let t=(await(await fetch("https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/color.ini")).text()).split(/[\r\n]+/).reduce((i,l)=>{if(l=l.trim(),l.startsWith(";"))return i;let u=l.match(/^\[([^\]]+)\]$/);if(u)return i[u[1]]={},i;let d=l.match(/^([^=]+?)\s*=\s*(.+)$/);if(d){let[,g,q]=d,$=Object.keys(i).pop();$&&(i[$][g]=q.split(";")[0].trim())}return i},{}),n=`${Object.entries(t[e]).reduce((i,[l,u])=>{let d=u.length===3?u.split("").map(g=>Number.parseInt(g+g,16)).join(", "):u.match(/\w\w/g).map(g=>Number.parseInt(g,16)).join(", ");return`${i}--spice-${l}:#${u};--spice-rgb-${l}:${d};`},":root{")}}`,a=document.querySelector("style.customColourScheme");a||(a=document.createElement("style"),a.classList.add("customColourScheme"),document.body.appendChild(a)),a.textContent=n},Ce=pt;var we=async e=>{if(!Spicetify.Platform.UserAPI._product_state_service){setTimeout(()=>we(e),100);return}let o={default:{"app-developer":"0",employee:"0"},developer:{"app-developer":"2",employee:"0"},employee:{"app-developer":"0",employee:"1"},both:{"app-developer":"2",employee:"1"}},r=o[e]||o.default,t=async(n,a)=>(await Spicetify.Platform.UserAPI._product_state_service.putValues({pairs:{[n]:a}}),Spicetify.Platform.UserAPI._product_state_service.subValues({keys:[n]},async i=>{i[n]!==a&&await Spicetify.Platform.UserAPI._product_state_service.putValues({pairs:{[n]:a}})}));window.appDevListener?.cancel(),window.employeeListener?.cancel(),window.appDevListener=await t("app-developer",r["app-developer"]),window.employeeListener=await t("employee",r.employee)},xe=we;var W=null,j=null;function ct(e){let o=document.querySelector(".Root__globalNav");o&&(re(o),e?ut(o):re(o))}function ut(e){re(e),e.classList.add("global-libraryX");let o=()=>{e.querySelectorAll(".search-searchCategory-categoryGrid > div > button, .main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H").forEach(n=>{if(!n.querySelector(".main-globalNav-textWrapper")){let a=n.getAttribute("aria-label")||(n.querySelector("input")?"Search":""),i=document.createElement("span");i.className="main-globalNav-textWrapper",i.innerHTML=`<div class="main-globalNav-iconText encore-text-body-medium-bold">${a}</div>`,n.appendChild(i)}})};o(),W=new MutationObserver(o),W.observe(e,{childList:!0,subtree:!0});let r=()=>{let t=document.querySelector(".sikBfynL1Y6I25nVpbAg");e.classList.toggle("collapsed",t!=null)};r(),j=new MutationObserver(r),j.observe(document.body,{childList:!0,subtree:!0})}function re(e){e.classList.remove("global-libraryX","collapsed"),W&&(s.Log("Removing libx observer"),W.disconnect(),W=null),j&&(s.Log("Removing collapsedobserver"),j.disconnect(),j=null),e.querySelectorAll(".main-globalNav-textWrapper").forEach(r=>r.remove())}var Me=ct;var dt=async(e,o=50)=>{let r=1;for(console.log(r,e);!document.querySelector(e)&&r<o;)r=r+1,console.log(r,e),await new Promise(t=>setTimeout(t,100));return document.querySelector(e)||null},J=dt;var ft=async e=>{let o=await J(".main-nowPlayingBar-volumeBar"),r=()=>{let t=o.querySelector(".vol-input");t&&(t.value=Math.round(Spicetify.Player.getVolume()*100))};if(e){if(!o.querySelector(".vol-percent")){o.insertAdjacentHTML("beforeend",`
+          }
+          (() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+
+  // external-global-plugin:react
+  var require_react = __commonJS({
+    "external-global-plugin:react"(exports, module) {
+      module.exports = Spicetify.React;
+    }
+  });
+
+  // external-global-plugin:react-dom
+  var require_react_dom = __commonJS({
+    "external-global-plugin:react-dom"(exports, module) {
+      module.exports = Spicetify.ReactDOM;
+    }
+  });
+
+  // src/js/app.jsx
+  var import_react20 = __toESM(require_react(), 1);
+
+  // src/js/components/ModalButtons.jsx
+  var import_react = __toESM(require_react(), 1);
+  var import_react_dom = __toESM(require_react_dom(), 1);
+
+  // src/js/icons/icons.jsx
+  var Icons = {
+    editButton: `<path d="M11.472.279L2.583 10.686l-.887 4.786 4.588-1.625L15.173 3.44 11.472.279zM5.698 12.995l-2.703.957.523-2.819v-.001l2.18 1.863zm-1.53-2.623l7.416-8.683 2.18 1.862-7.415 8.683-2.181-1.862z"/>`,
+    settings: `<svg viewBox="0 0 16 16" width="16px" height="16px" fill="currentcolor"><path d="M8 5.36a2.68 2.68 90 100 5.36 2.68 2.68 90 000-5.36zM6.7 8.04a1.34 1.34 90 112.68 0 1.34 1.34 90 01-2.68 0zM11.55 3.21a.95.9487 90 01-1.1042-.76l-.3484-1.8974a.4744.4744 90 00-.3685-.3779 8.1365 8.1365 90 00-3.3755 0 .4744.4744 90 00-.3685.3779l-.3471 1.8974a.9514.9514 90 01-1.2542.7209l-1.8211-.6486a.4757.4757 90 00-.5119.1273c-.7625.8402-1.34 1.8318-1.6911 2.9118a.4717.4717 90 00.1447.5065l1.4767 1.2475a.9434.9434 90 010 1.4418l-1.4767 1.2475a.4717.4717 90 00-.1447.5065A8.0212 8.0212 90 002.0502 13.4268a.4757.4757 90 00.5119.1273l1.8224-.6486a.9487.9487 90 011.2542.7209l.3457 1.8974c.0348.1876.1809.3377.3685.3765a8.1405 8.1405 90 003.3768 0 .473.473 90 00.3672-.3765l.3484-1.8974a.9514.9514 90 011.2542-.7209l1.8211.6486c.1809.0643.3832.0134.5119-.1273.7625-.8402 1.34-1.8318 1.6911-2.9118a.4717.4717 90 00-.1447-.5065l-1.4767-1.2475a.942.942 90 010-1.4418l1.4767-1.2475a.4717.4717 90 00.1447-.5065A8.0199 8.0199 90 0014.0298 2.6532a.4757.4757 90 00-.5119-.1273l-1.8224.6486a.9514.9514 90 01-.1487.0402zm-8.8708.7772 1.2556.4462a2.2914 2.2914 90 003.0217-1.742l.2372-1.2998a6.8407 6.8407 90 011.6951 0l.2385 1.2998a2.2887 2.2887 90 003.0217 1.742L13.4 3.9892c.3417.4476.6258.9353.8442 1.4526l-1.0104.8536a2.2834 2.2834 90 000 3.4894l1.0117.8536a6.6866 6.6866 90 01-.8442 1.4526l-1.2556-.4476a2.2914 2.2914 90 00-3.0217 1.742l-.2385 1.2998a6.8327 6.8327 90 01-1.6951 0l-.2372-1.2998a2.2887 2.2887 90 00-3.0217-1.742L2.68 12.0908a6.6826 6.6826 90 01-.8442-1.4526l1.0104-.8549a2.2834 2.2834 90 000-3.488l-1.0117-.8536c.2198-.5172.5038-1.005.8442-1.4526z"/></svg>`,
+    github: `<path d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"></path>`,
+    close: `<path d="M31.098 29.794L16.955 15.65 31.097 1.51 29.683.093 15.54 14.237 1.4.094-.016 1.508 14.126 15.65-.016 29.795l1.414 1.414L15.54 17.065l14.144 14.143"></path>`,
+    warning: `<path d="M12.884 2.532c-.346-.654-1.422-.654-1.768 0l-9 17A1 1 0 0 0 3 21h18a1 1 0 0 0 .884-1.5zM13 18h-2v-2h2zm-2-4V9h2l0 5z"</path>`
+  };
+  var icons_default = Icons;
+
+  // src/js/utils/waitForElements.jsx
+  var waitForElements = async (selector, maxAttempts = 50) => {
+    let attempts = 1;
+    while (!document.querySelector(selector) && attempts < maxAttempts) {
+      attempts = attempts + 1;
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    return document.querySelector(selector) || null;
+  };
+  var waitForElements_default = waitForElements;
+
+  // src/js/components/Tippy.jsx
+  var Tippy = (element, content) => {
+    if (content) {
+      Spicetify.Tippy(element, {
+        ...Spicetify.TippyProps,
+        content,
+        placement: "top",
+        delay: [0, 0],
+        onShow(instance) {
+          instance.popper.classList.add("options-tippy");
+        }
+      });
+    }
+  };
+  var Tippy_default = Tippy;
+
+  // src/js/components/ModalButtons.jsx
+  var ModalButtons = async () => {
+    const header = await waitForElements_default(".main-trackCreditsModal-header");
+    document.querySelector(".main-trackCreditsModal-closeBtn")?.remove();
+    const buttonContainer = document.createElement("div");
+    buttonContainer.className = "main-trackCreditsModal-BtnContainer";
+    import_react_dom.default.createRoot(buttonContainer).render(
+      /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          className: "main-trackCreditsModal-githubBtn",
+          onClick: () => window.open("https://github.com/veryboringhwl/spicetify"),
+          ref: (label) => label && Tippy_default(label, "View on GitHub")
+        },
+        /* @__PURE__ */ import_react.default.createElement(
+          "svg",
+          {
+            width: "18",
+            height: "18",
+            viewBox: "0 0 96 96",
+            fill: "currentColor",
+            dangerouslySetInnerHTML: { __html: icons_default.github }
+          }
+        )
+      ), /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          className: "main-trackCreditsModal-closeBtn",
+          onClick: () => Spicetify.PopupModal.hide(),
+          ref: (label) => label && Tippy_default(label, "Close")
+        },
+        /* @__PURE__ */ import_react.default.createElement(
+          "svg",
+          {
+            width: "18",
+            height: "18",
+            viewBox: "0 0 32 32",
+            fill: "currentColor",
+            dangerouslySetInnerHTML: { __html: icons_default.close }
+          }
+        )
+      ))
+    );
+    header.appendChild(buttonContainer);
+  };
+  var ModalButtons_default = ModalButtons;
+
+  // src/js/components/PopupModal.jsx
+  var PopupModal = ({ title = "", content = "", isLarge = true, buttons = true } = {}) => {
+    Spicetify.PopupModal.hide();
+    setTimeout(() => {
+      Spicetify.PopupModal.display({
+        title,
+        content: Spicetify.React.createElement(content),
+        isLarge
+      });
+      if (buttons === true) {
+        ModalButtons_default();
+      }
+    }, 1);
+  };
+  var PopupModal_default = PopupModal;
+
+  // src/js/debug/DebugMenu.jsx
+  var import_react3 = __toESM(require_react(), 1);
+
+  // src/js/utils/Console.jsx
+  var Console = {
+    Log: (message, ...args) => console.log(
+      `%c\u25CF \u1D17 \u25CF [Theme]%c${message}`,
+      "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
+      "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;",
+      ...args
+    ),
+    Error: (message, ...args) => console.error(
+      `%c\u25CF \u1D17 \u25CF [Theme]%c${message}`,
+      "color:#ff6060; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #ee6969; border-right:none; border-radius:3px 0 0 3px;",
+      "color:#000000; background:#ffffff; padding:3px; border:2px solid #ee6969; border-left:none; border-radius:0 3px 3px 0;",
+      ...args
+    ),
+    Warn: (message, ...args) => console.warn(
+      `%c\u25CF \u1D17 \u25CF [Theme]%c${message}`,
+      "color:#ee8860; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #ff8860; border-right:none; border-radius:3px 0 0 3px;",
+      "color:#000000; background:#ffffff; padding:3px; border:2px solid #ff8860; border-left:none; border-radius:0 3px 3px 0;",
+      ...args
+    ),
+    Debug: (message, ...args) => console.debug(
+      `%c\u25CF \u1D17 \u25CF [Theme]%c${message}`,
+      "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
+      "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;",
+      ...args
+    )
+  };
+  Console.Log("Log message");
+  Console.Error("Error message");
+  Console.Warn("Warning message");
+  Console.Debug("Debug message");
+  var Console_default = Console;
+
+  // src/js/utils/Notification.jsx
+  var import_react2 = __toESM(require_react(), 1);
+  var Notification = ({
+    message = "",
+    keyPrefix = "custom-notif",
+    autoHideDuration = 3e3,
+    backgroundColor = "#fff"
+  } = {}) => {
+    Spicetify.Snackbar.enqueueCustomSnackbar(keyPrefix, {
+      keyPrefix,
+      autoHideDuration,
+      children: /* @__PURE__ */ import_react2.default.createElement(
+        "div",
+        {
+          className: "custom-notification",
+          style: {
+            display: "flex",
+            gap: "8px",
+            alignItems: "center",
+            color: "#fff",
+            backgroundColor,
+            padding: "14px 16px",
+            borderRadius: "4px",
+            fontSize: "0.875rem"
+          }
+        },
+        message
+      )
+    });
+  };
+  var Notification_default = Notification;
+
+  // src/js/debug/DebugMenu.jsx
+  var DebugMenu = import_react3.default.memo(() => {
+    const [lastVersion, setLastVersion] = import_react3.default.useState("Loading...");
+    const [lastUpdated, setLastUpdated] = import_react3.default.useState("Loading...");
+    import_react3.default.useEffect(() => {
+      fetch("https://api.github.com/repos/veryboringhwl/spicetify/releases/latest").then((response) => response.json()).then((data) => {
+        setLastVersion(data.tag_name);
+        const publishDate = new Date(data.published_at);
+        const formattedDate = `${publishDate.getFullYear()}/${(publishDate.getMonth() + 1).toString().padStart(2, "0")}/${publishDate.getDate().toString().padStart(2, "0")}`;
+        setLastUpdated(formattedDate);
+      }).catch((error) => {
+        Console_default.Error("Error fetching latest version:", error);
+        setLastVersion("Error fetching");
+        setLastUpdated("Error fetching");
+      });
+    }, []);
+    const Info = {
+      "Current Theme Version": "v1.1.0",
+      "Newest Theme Version": lastVersion,
+      "Last Updated": lastUpdated,
+      "Spotify Version": Spicetify.Platform.version,
+      "Spicetify Version": Spicetify.Config.version,
+      Platform: Spicetify.Platform.PlatformData.app_platform,
+      OS: Spicetify.Platform.PlatformData.os_name,
+      Theme: Spicetify.Config.current_theme,
+      Extensions: Spicetify.Config.extensions.join(", "),
+      "Custom apps": Spicetify.Config.custom_apps.join(", "),
+      "Color Scheme": Spicetify.Config.color_scheme
+    };
+    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "theme-version" }, Object.entries(Info).map(([key, value]) => /* @__PURE__ */ import_react3.default.createElement("p", { key, className: "theme-info-item" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "theme-info-key encore-text-body-medium-bold" }, key, ": "), /* @__PURE__ */ import_react3.default.createElement("span", { className: "theme-info-value" }, value))), /* @__PURE__ */ import_react3.default.createElement(
+      "button",
+      {
+        onClick: () => Notification_default({
+          autoHideDuration: 99999999,
+          message: "Theme only supports Spotify versions greater than 1.2.50.000"
+        })
+      },
+      "Special Button"
+    ));
+  });
+  var DebugMenu_default = DebugMenu;
+
+  // src/js/debug/Mousetrap.jsx
+  var Mousetrap = () => {
+    Spicetify.Mousetrap.bind(
+      [
+        "up up down down left right left right b a",
+        "v e r s i o n",
+        "s p o t i f y",
+        "s p i c e t i f y",
+        "d e b u g"
+      ],
+      () => {
+        PopupModal_default({
+          title: "Theme Version",
+          content: DebugMenu_default
+        });
+      }
+    );
+  };
+  var Mousetrap_default = Mousetrap;
+
+  // src/js/features/UpdateZoom.jsx
+  var UpdateZoom = () => {
+    let prevOuter = window.outerWidth;
+    let prevInner = window.innerWidth;
+    let prevRatio = window.devicePixelRatio;
+    const checkZoom = () => {
+      const newOuter = window.outerWidth;
+      const newInner = window.innerWidth;
+      const newRatio = window.devicePixelRatio;
+      if ((prevOuter <= 160 || prevRatio !== newRatio) && (prevOuter !== newOuter || prevInner !== newInner)) {
+        const zoom = newOuter / newInner || 1;
+        document.documentElement.style.setProperty("--zoom", zoom);
+        Console_default.Log(`Zoom: ${zoom}`);
+        prevOuter = newOuter;
+        prevInner = newInner;
+        prevRatio = newRatio;
+      }
+      requestAnimationFrame(checkZoom);
+    };
+    checkZoom();
+  };
+  var UpdateZoom_default = UpdateZoom;
+
+  // src/js/utils/LocalStorage.jsx
+  var LocalStorage = {
+    get(key, defaultValue) {
+      try {
+        const item = localStorage.getItem(key);
+        return item !== null ? JSON.parse(item) : defaultValue;
+      } catch (error) {
+        Console_default.Error(`Error getting ${key} from localStorage:`, error);
+        return defaultValue;
+      }
+    },
+    set(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+      } catch (error) {
+        Console_default.Error(`Error setting ${key} in localStorage:`, error);
+        return false;
+      }
+    }
+  };
+  var LocalStorage_default = LocalStorage;
+
+  // src/js/menu/modalmenu/AlbumBannerModal.jsx
+  var import_react10 = __toESM(require_react(), 1);
+
+  // src/js/features/CoverArtBanner.jsx
+  var CoverArtBanner = () => {
+    if (!Spicetify.Player.data?.item) {
+      setTimeout(CoverArtBanner, 100);
+      return;
+    }
+    const channels = {
+      Album: { regex: /^\/album\//, key: "theme:AlbumPage" },
+      Artist: { regex: /^\/artist\/(?!artists\b)\w+$/, key: "theme:ArtistPage" },
+      Lyrics: { regex: /^\/lyrics$/, key: "theme:LyricsPage" },
+      LyricsPlus: { regex: /^\/lyrics-plus$/, key: "theme:LyricsPage" },
+      Playlist: { regex: /^\/playlist\//, key: "theme:PlaylistPage" },
+      Station: { regex: /^\/station\/playlist\//, key: "theme:MiscPage" },
+      Collection: { regex: /^\/collection\/tracks$/, key: "theme:MiscPage" },
+      Show: { regex: /^\/show\//, key: "theme:MiscPage" },
+      Episode: { regex: /^\/episode\//, key: "theme:MiscPage" },
+      User: { regex: /^\/user\/(?!users\b)\w+$/, key: "theme:MiscPage" },
+      Genre: { regex: /^\/genre\//, key: "theme:MiscPage" }
+    };
+    const banner = document.querySelector(".banner-image") || (() => {
+      const newBanner = document.createElement("div");
+      newBanner.className = "banner-image";
+      document.querySelector(".under-main-view")?.appendChild(newBanner);
+      return newBanner;
+    })();
+    const updateBanner = () => {
+      const { pathname } = Spicetify.Platform.History.location;
+      const imageUrl = Spicetify.Player.data?.item?.metadata?.image_xlarge_url;
+      const showBanner = Object.values(channels).some(
+        ({ regex, key }) => LocalStorage_default.get(key, false) && regex.test(pathname)
+      );
+      if (showBanner) {
+        banner.style.display = "";
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => document.documentElement.style.setProperty("--image", `url(${imageUrl})`);
+      } else {
+        banner.style.display = "none";
+      }
+    };
+    Spicetify.Platform.History.listen(updateBanner);
+    Spicetify.Player.addEventListener("songchange", updateBanner);
+    updateBanner();
+  };
+  var CoverArtBanner_default = CoverArtBanner;
+
+  // src/js/menu/settingsmenu/OptionType.jsx
+  var import_react9 = __toESM(require_react(), 1);
+
+  // src/js/menu/components/Dropdown.jsx
+  var import_react6 = __toESM(require_react(), 1);
+
+  // src/js/menu/components/OptionRow.jsx
+  var import_react5 = __toESM(require_react(), 1);
+
+  // src/js/menu/components/InfoButton.jsx
+  var import_react4 = __toESM(require_react(), 1);
+  var InfoButton = import_react4.default.memo(({ name, popupModal }) => {
+    if (!popupModal) return null;
+    return /* @__PURE__ */ import_react4.default.createElement(
+      "button",
+      {
+        className: "themeOptionPopupButton",
+        onClick: () => PopupModal_default({ title: name, content: popupModal, isLarge: false }),
+        "aria-label": "Open popup"
+      },
+      /* @__PURE__ */ import_react4.default.createElement(
+        "svg",
+        {
+          width: "16",
+          height: "16",
+          viewBox: "0 0 16 16",
+          fill: "currentColor",
+          dangerouslySetInnerHTML: { __html: icons_default.editButton }
+        }
+      )
+    );
+  });
+  var InfoButton_default = InfoButton;
+
+  // src/js/menu/components/OptionRow.jsx
+  var OptionRow = import_react5.default.memo(({ name, desc, children, popupModal }) => {
+    return /* @__PURE__ */ import_react5.default.createElement("div", { className: "themeOptionRow", "data-name": `theme:${name}` }, /* @__PURE__ */ import_react5.default.createElement("div", { className: "themeOptionContent" }, /* @__PURE__ */ import_react5.default.createElement("div", { className: "themeOptionDesc" }, desc)), /* @__PURE__ */ import_react5.default.createElement("div", { className: "themeOptionControl" }, /* @__PURE__ */ import_react5.default.createElement(InfoButton_default, { name, popupModal }), children));
+  });
+  var OptionRow_default = OptionRow;
+
+  // src/js/menu/components/Dropdown.jsx
+  var Dropdown = import_react6.default.memo(({ name, desc, tippy, value, options: options2, onChange, popupModal }) => {
+    const dropdownRef = import_react6.default.useRef(null);
+    import_react6.default.useEffect(() => {
+      if (dropdownRef.current && tippy) {
+        Tippy_default(dropdownRef.current, tippy);
+      }
+    }, [tippy]);
+    const handleChange = import_react6.default.useCallback(
+      (e) => {
+        onChange(`theme:${name}`, e.target.value);
+      },
+      [name, onChange]
+    );
+    return /* @__PURE__ */ import_react6.default.createElement(OptionRow_default, { name, desc, popupModal }, /* @__PURE__ */ import_react6.default.createElement(
+      "select",
+      {
+        className: "themeOptionDropdown",
+        value,
+        onChange: handleChange,
+        ref: dropdownRef
+      },
+      options2.map(({ value: value2, label }) => /* @__PURE__ */ import_react6.default.createElement("option", { key: value2, value: value2 }, label))
+    ));
+  });
+  var Dropdown_default = Dropdown;
+
+  // src/js/menu/components/Input.jsx
+  var import_react7 = __toESM(require_react(), 1);
+  var Input = import_react7.default.memo(({ name, desc, tippy, value, onChange, placeholder, popupModal }) => {
+    const inputRef = import_react7.default.useRef(null);
+    import_react7.default.useEffect(() => {
+      if (inputRef.current && tippy) {
+        Tippy_default(inputRef.current, tippy);
+      }
+    }, [tippy]);
+    const handleChange = import_react7.default.useCallback(
+      (e) => {
+        onChange(`theme:${name}`, e.target.value);
+      },
+      [name, onChange]
+    );
+    return /* @__PURE__ */ import_react7.default.createElement(OptionRow_default, { name, desc, popupModal }, /* @__PURE__ */ import_react7.default.createElement(
+      "input",
+      {
+        className: "themeOptionInput",
+        type: "text",
+        value,
+        onChange: handleChange,
+        placeholder,
+        ref: inputRef
+      }
+    ));
+  });
+  var Input_default = Input;
+
+  // src/js/menu/components/Toggle.jsx
+  var import_react8 = __toESM(require_react(), 1);
+  var Toggle = import_react8.default.memo(({ name, desc, tippy, value, onChange, popupModal }) => {
+    const toggleRef = import_react8.default.useRef(null);
+    import_react8.default.useEffect(() => {
+      if (toggleRef.current && tippy) {
+        Tippy_default(toggleRef.current, tippy);
+      }
+    }, [tippy]);
+    const handleChange = import_react8.default.useCallback(() => {
+      onChange(`theme:${name}`, !value);
+    }, [name, value, onChange]);
+    return /* @__PURE__ */ import_react8.default.createElement(OptionRow_default, { name, desc, popupModal }, /* @__PURE__ */ import_react8.default.createElement("button", { className: "themeOptionToggle", onClick: handleChange, ref: toggleRef }, /* @__PURE__ */ import_react8.default.createElement("span", { className: "toggleWrapper" }, /* @__PURE__ */ import_react8.default.createElement("span", { className: `toggle ${value ? "enabled" : ""}` }))));
+  });
+  var Toggle_default = Toggle;
+
+  // src/js/menu/settingsmenu/OptionType.jsx
+  var OptionType = import_react9.default.memo(({ option, value, onChange }) => {
+    const Component = { toggle: Toggle_default, dropdown: Dropdown_default, input: Input_default }[option.type];
+    return /* @__PURE__ */ import_react9.default.createElement(Component, { ...option, value, onChange });
+  });
+  var OptionType_default = OptionType;
+
+  // src/js/menu/modalmenu/resetModal.jsx
+  var resetModal = (options2, setSettings) => {
+    const defaultSettings = Object.fromEntries(
+      options2.map((option) => [option.name, option.defaultVal])
+    );
+    setSettings(defaultSettings);
+    options2.forEach((option) => {
+      const key = `theme:${option.name}`;
+      LocalStorage_default.set(key, option.defaultVal);
+      document.body.classList.toggle(option.name, option.defaultVal);
+      if (option.run) {
+        option.run(option.defaultVal);
+      }
+    });
+  };
+  var resetModal_default = resetModal;
+
+  // src/js/menu/modalmenu/saveModal.jsx
+  var saveModal = (settings, options2) => {
+    Object.entries(settings).forEach(([key, value]) => {
+      LocalStorage_default.set(`theme:${key}`, value);
+      document.body.classList.toggle(key, value);
+      options2.find((opt) => opt.name === key)?.run?.(value);
+    });
+  };
+  var saveModal_default = saveModal;
+
+  // src/js/menu/modalmenu/AlbumBannerModal.jsx
+  var AlbumBannerModal = import_react10.default.memo(() => {
+    const [settings, setSettings] = import_react10.default.useState(
+      () => Object.fromEntries(
+        albumBannerOptions.map((option) => [
+          option.name,
+          LocalStorage_default.get(`theme:${option.name}`, option.defaultVal)
+        ])
+      )
+    );
+    const handleSettingChange = import_react10.default.useCallback((key, value) => {
+      setSettings((prev) => ({ ...prev, [key.replace("theme:", "")]: value }));
+    }, []);
+    import_react10.default.useEffect(() => {
+      albumBannerOptions.forEach((option) => option.run?.(settings[option.name]));
+    }, [settings]);
+    return /* @__PURE__ */ import_react10.default.createElement("div", { className: "themeModalOptions albumBannerSettings" }, albumBannerOptions.map((option) => /* @__PURE__ */ import_react10.default.createElement(
+      OptionType_default,
+      {
+        key: option.name,
+        option,
+        value: settings[option.name],
+        onChange: handleSettingChange
+      }
+    )), /* @__PURE__ */ import_react10.default.createElement("div", { className: "buttonContainer" }, /* @__PURE__ */ import_react10.default.createElement("button", { className: "resetButton", onClick: () => resetModal_default(albumBannerOptions, setSettings) }, "Reset"), /* @__PURE__ */ import_react10.default.createElement(
+      "button",
+      {
+        className: "saveButton",
+        onClick: () => {
+          saveModal_default(settings, albumBannerOptions);
+          CoverArtBanner_default();
+        }
+      },
+      "Save"
+    )));
+  });
+  var albumBannerOptions = [
+    {
+      type: "toggle",
+      name: "AlbumBannerPage",
+      desc: "Puts album art in places",
+      defaultVal: true,
+      tippy: "Includes Spotify Lyrics page and Spicetify's Lyrics Plus"
+    },
+    {
+      type: "toggle",
+      name: "LyricsPage",
+      desc: "Adds Dynamic backgrounds to Lyrics Page",
+      defaultVal: true,
+      tippy: "Includes Spotify Lyrics page and Spicetify's Lyrics Plus"
+    },
+    {
+      type: "toggle",
+      name: "PlaylistPage",
+      desc: "Adds Dynamic backgrounds to your Playlist Pages",
+      defaultVal: true
+    },
+    {
+      type: "toggle",
+      name: "ArtistPage",
+      desc: "Adds Dynamic backgrounds to Artist Pages",
+      defaultVal: true
+    },
+    {
+      type: "toggle",
+      name: "AlbumPage",
+      desc: "Adds Dynamic backgrounds to Album Pages",
+      defaultVal: true
+    },
+    {
+      type: "toggle",
+      name: "MiscPage",
+      desc: "Adds Dynamic backgrounds to Misc Pages",
+      defaultVal: true,
+      tippy: "Enables album art for Station, Collection, Show, Episode, Genre, User"
+    }
+  ];
+  var AlbumBannerModal_default = AlbumBannerModal;
+
+  // src/js/menu/modalmenu/WindowsControlModal.jsx
+  var import_react11 = __toESM(require_react(), 1);
+  var WindowsControlModal = import_react11.default.memo(() => {
+    const [settings, setSettings] = import_react11.default.useState(
+      () => Object.fromEntries(
+        windowsControlOptions.map((option) => [
+          option.name,
+          LocalStorage_default.get(`theme:${option.name}`, option.defaultVal)
+        ])
+      )
+    );
+    const handleSettingChange = import_react11.default.useCallback((key, value) => {
+      const optionName = key.replace("theme:", "");
+      setSettings((prev) => ({ ...prev, [optionName]: value }));
+      document.documentElement.style.setProperty(
+        `--windowcontrol-${optionName.toLowerCase()}`,
+        value
+      );
+    }, []);
+    import_react11.default.useEffect(() => {
+      windowsControlOptions.forEach((option) => {
+        const value = settings[option.name];
+        document.documentElement.style.setProperty(
+          `--windowcontrol-${option.name.toLowerCase()}`,
+          value
+        );
+      });
+    }, [settings]);
+    return /* @__PURE__ */ import_react11.default.createElement("div", { className: "themeModalOptions windowsControlSettings" }, windowsControlOptions.map((option) => /* @__PURE__ */ import_react11.default.createElement(
+      OptionType_default,
+      {
+        key: option.name,
+        option,
+        value: settings[option.name],
+        onChange: handleSettingChange
+      }
+    )), /* @__PURE__ */ import_react11.default.createElement("div", { className: "buttonContainer" }, /* @__PURE__ */ import_react11.default.createElement(
+      "button",
+      {
+        className: "resetButton",
+        onClick: () => resetModal_default(windowsControlOptions, setSettings)
+      },
+      "Reset"
+    ), /* @__PURE__ */ import_react11.default.createElement("button", { className: "saveButton", onClick: () => saveModal_default(settings, windowsControlOptions) }, "Save")));
+  });
+  var windowsControlOptions = [
+    {
+      type: "toggle",
+      name: "WindowsControl",
+      desc: "Enable custom Windows Controls",
+      defaultVal: true,
+      run: (value) => {
+        document.body.classList.toggle("WindowsControl", value);
+      }
+    },
+    {
+      type: "input",
+      name: "WindowsControlBrightness",
+      desc: "Set Brightness",
+      defaultVal: "2.12",
+      run: (value) => document.documentElement.style.setProperty("--windowcontrol-brightness", value)
+    },
+    {
+      type: "input",
+      name: "WindowsControlTop",
+      desc: "Set Top",
+      defaultVal: "16px",
+      run: (value) => document.documentElement.style.setProperty("--windowcontrol-top", value)
+    },
+    {
+      type: "input",
+      name: "WindowsControlWidth",
+      desc: "Set Width",
+      defaultVal: "135px",
+      run: (value) => document.documentElement.style.setProperty("--windowcontrol-width", value)
+    },
+    {
+      type: "input",
+      name: "WindowsControlHeight",
+      desc: "Set Height",
+      defaultVal: "32px",
+      run: (value) => document.documentElement.style.setProperty("--windowcontrol-height", value)
+    }
+  ];
+  var WindowsControlModal_default = WindowsControlModal;
+
+  // src/js/menu/modalmenu/runModalSettings.jsx
+  var runModalSettings = () => {
+    const applyModalSetting = (options2, styleProperty) => {
+      options2.forEach((option) => {
+        const value = LocalStorage_default.get(`theme:${option.name}`, option.defaultVal);
+        if (styleProperty) {
+          document.documentElement.style.setProperty(styleProperty(option.name), value);
+        } else {
+          document.body.classList.toggle(option.name, value);
+        }
+      });
+    };
+    applyModalSetting(albumBannerOptions);
+    applyModalSetting(
+      windowsControlOptions,
+      (name) => `--windowcontrol-${name.replace("WindowsControl", "").toLowerCase()}`
+    );
+  };
+  var runModalSettings_default = runModalSettings;
+
+  // src/js/features/ColourScheme.jsx
+  var ColourScheme = async (scheme) => {
+    if (scheme === "default") {
+      const schemeTag2 = document.querySelector("style.customColourScheme");
+      schemeTag2?.remove();
+      return;
+    }
+    const response = await fetch(
+      "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/color.ini"
+    );
+    const iniContent = await response.text();
+    const colourSchemes = iniContent.split(/[\r\n]+/).reduce((acc, line) => {
+      line = line.trim();
+      if (line.startsWith(";")) return acc;
+      const sectionMatch = line.match(/^\[([^\]]+)\]$/);
+      if (sectionMatch) {
+        acc[sectionMatch[1]] = {};
+        return acc;
+      }
+      const paramMatch = line.match(/^([^=]+?)\s*=\s*(.+)$/);
+      if (paramMatch) {
+        const [, key, value] = paramMatch;
+        const section = Object.keys(acc).pop();
+        if (section) acc[section][key] = value.split(";")[0].trim();
+      }
+      return acc;
+    }, {});
+    const injectStr = `${Object.entries(colourSchemes[scheme]).reduce((acc, [key, value]) => {
+      const rgb = value.length === 3 ? value.split("").map((char) => Number.parseInt(char + char, 16)).join(", ") : value.match(/\w\w/g).map((x) => Number.parseInt(x, 16)).join(", ");
+      return `${acc}--spice-${key}:#${value};--spice-rgb-${key}:${rgb};`;
+    }, ":root{")}}`;
+    let schemeTag = document.querySelector("style.customColourScheme");
+    if (!schemeTag) {
+      schemeTag = document.createElement("style");
+      schemeTag.classList.add("customColourScheme");
+      document.body.appendChild(schemeTag);
+    }
+    schemeTag.textContent = injectStr;
+  };
+  var ColourScheme_default = ColourScheme;
+
+  // src/js/features/SpotifyMode.jsx
+  var SpotifyMode = async (mode) => {
+    if (!Spicetify.Platform.UserAPI._product_state_service) {
+      setTimeout(() => SpotifyMode(mode), 100);
+      return;
+    }
+    const modePairs = {
+      default: { "app-developer": "0", employee: "0" },
+      developer: { "app-developer": "2", employee: "0" },
+      employee: { "app-developer": "0", employee: "1" },
+      both: { "app-developer": "2", employee: "1" }
+    };
+    const pairs = modePairs[mode] || modePairs.default;
+    const setMode = async (key, value) => {
+      await Spicetify.Platform.UserAPI._product_state_service.putValues({
+        pairs: { [key]: value }
+      });
+      return Spicetify.Platform.UserAPI._product_state_service.subValues(
+        { keys: [key] },
+        async (newValues) => {
+          if (newValues[key] !== value) {
+            await Spicetify.Platform.UserAPI._product_state_service.putValues({
+              pairs: { [key]: value }
+            });
+          }
+        }
+      );
+    };
+    window.appDevListener?.cancel();
+    window.employeeListener?.cancel();
+    window.appDevListener = await setMode("app-developer", pairs["app-developer"]);
+    window.employeeListener = await setMode("employee", pairs.employee);
+  };
+  var SpotifyMode_default = SpotifyMode;
+
+  // src/js/features/ToggleLibXUI.jsx
+  var libXObserver = null;
+  var collapsedObserver = null;
+  function ToggleLibXUI(isEnabled) {
+    const globalNav = document.querySelector(".Root__globalNav");
+    if (!globalNav) return;
+    disableLibXUI(globalNav);
+    if (isEnabled) {
+      enableLibXUI(globalNav);
+    } else {
+      disableLibXUI(globalNav);
+    }
+  }
+  function enableLibXUI(globalNav) {
+    disableLibXUI(globalNav);
+    globalNav.classList.add("global-libraryX");
+    const addTextToButtons = () => {
+      const elements = globalNav.querySelectorAll(
+        ".search-searchCategory-categoryGrid > div > button, .main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H"
+      );
+      elements.forEach((el) => {
+        if (!el.querySelector(".main-globalNav-textWrapper")) {
+          const text = el.getAttribute("aria-label") || (el.querySelector("input") ? "Search" : "");
+          const wrapper = document.createElement("span");
+          wrapper.className = "main-globalNav-textWrapper";
+          wrapper.innerHTML = `<div class="main-globalNav-iconText encore-text-body-medium-bold">${text}</div>`;
+          el.appendChild(wrapper);
+        }
+      });
+    };
+    addTextToButtons();
+    libXObserver = new MutationObserver(addTextToButtons);
+    libXObserver.observe(globalNav, { childList: true, subtree: true });
+    const addCollapsed = () => {
+      const elementToWatch = document.querySelector(".sikBfynL1Y6I25nVpbAg");
+      globalNav.classList.toggle("collapsed", elementToWatch != null);
+    };
+    addCollapsed();
+    collapsedObserver = new MutationObserver(addCollapsed);
+    collapsedObserver.observe(document.body, { childList: true, subtree: true });
+  }
+  function disableLibXUI(globalNav) {
+    globalNav.classList.remove("global-libraryX", "collapsed");
+    if (libXObserver) {
+      Console_default.Log("Removing libx observer");
+      libXObserver.disconnect();
+      libXObserver = null;
+    }
+    if (collapsedObserver) {
+      Console_default.Log("Removing collapsedobserver");
+      collapsedObserver.disconnect();
+      collapsedObserver = null;
+    }
+    const textWrappers = globalNav.querySelectorAll(".main-globalNav-textWrapper");
+    textWrappers.forEach((el) => el.remove());
+  }
+  var ToggleLibXUI_default = ToggleLibXUI;
+
+  // src/js/features/VolPercent.jsx
+  var VolPercent = async (isEnabled) => {
+    const volumeBar = await waitForElements_default(".main-nowPlayingBar-volumeBar");
+    const updateVol = () => {
+      const input = volumeBar.querySelector(".vol-input");
+      if (input) {
+        input.value = Math.round(Spicetify.Player.getVolume() * 100);
+      }
+    };
+    if (isEnabled) {
+      if (!volumeBar.querySelector(".vol-percent")) {
+        volumeBar.insertAdjacentHTML(
+          "beforeend",
+          `
 							<div class="vol-percent" style="display: inline-flex; align-items: center;">
 									<input type="text" class="vol-input" 
 											style="width: 30px; font-size: 15px; border: none; background: transparent; text-align: right;">
 									<span style="font-size: 15px;">%</span>
 							</div>
-					`),o.style.flex="0 1 200px";let t=o.querySelector(".vol-input");t.addEventListener("change",()=>{let n=Number.parseInt(t.value,10);n>=0&&n<=100&&Spicetify.Player.setVolume(n/100)}),Spicetify.Platform.PlaybackAPI._events.addListener("volume",r),r()}}else{let t=document.querySelector(".main-nowPlayingBar-volumeBar");t&&(t.querySelector(".vol-percent")?.remove(),t.style.flex="",Spicetify.Platform.PlaybackAPI._events.removeListener("volume",r))}},Pe=ft;var gt={Features:[{type:"dropdown",name:"colourschemeselector",desc:"Change the colour scheme of Spotify",defaultVal:"default",options:[{value:"default",label:"Default"},{value:"dark",label:"Dark"},{value:"light",label:"Light"},{value:"bloom",label:"Bloom"},{value:"spotify",label:"Spotify"}],run(e){Ce(e)}},{type:"dropdown",name:"change-Spotify-mode",desc:"Change Spotify mode",defaultVal:"developer",tippy:"Only takes effect after a restart",options:[{value:"default",label:"Default"},{value:"developer",label:"Developer"},{value:"employee",label:"Employee"},{value:"both",label:"Dev + Empl"}],run(e){xe(e)}},{type:"input",name:"ZoomLevel",desc:"Change the zoom level of Spotify page",defaultVal:100,placeholder:"100%",run(e){Zoomlevel=e/100,document.documentElement.style.setProperty("--Zoomlevel",Zoomlevel)}},{type:"toggle",name:"AlbumBannerPage",desc:"Put album cover art in various pages",defaultVal:!0,popupModal:ve,run(e){H(e)}},{type:"toggle",name:"VolumePercentage",desc:"Show volume percentage next to volume slider",defaultVal:!0,run(e){Pe(e)}},{type:"toggle",name:"WindowsControl",desc:"Adjust the position and brightness of the windows controls",defaultVal:!1,popupModal:Se},{type:"input",name:"uifont",desc:"Changes the font of the Spotify app",defaultVal:"Segoe UI Variable Display",placeholder:"Segoe UI Variable Display",tippy:"This will only work if you have the font installed locally",run(e){document.documentElement.style.setProperty("--FontFamily",e)}}],Layouts:[{type:"toggle",name:"LibX",desc:"Restore the old UI >2024 (Pre Global Nav Bar)",defaultVal:!1,run(e){Me(e)},reveal:[{type:"toggle",name:"highlightnav",desc:"Adds highlight to the selected page",defaultVal:!0},{type:"toggle",name:"PreLibX",desc:"Restore the old UI >2023 (Pre LibraryX)",defaultVal:!1},{type:"toggle",name:"CompactLib",desc:"Makes library compact while keeping icons",defaultVal:!1,tippy:"Broken if library is collapsed"}]},{type:"toggle",name:"TestLayout",desc:"Rearrange playbutton to start and cover art to middle",defaultVal:!0},{type:"toggle",name:"switchlayout",desc:"Uses different grid layout for Now playing bar",defaultVal:!0}],Snippets:[{type:"toggle",name:"hidetracklistnum",desc:"Hide tracklist numbers in various pages",defaultVal:!0},{type:"toggle",name:"greenicon",desc:"Make the selected tab icon green",defaultVal:!0},{type:"toggle",name:"transplayicon",desc:"Make the play/pause button transparent",defaultVal:!0},{type:"toggle",name:"npvlargerlyrics",desc:"Show lyrics only in Now playing view",defaultVal:!1},{type:"toggle",name:"homeheader",desc:"Remove the coloured gradient from the home page header",defaultVal:!0}],Test:[{type:"toggle",name:"test-toggle",desc:"Description",defaultVal:!0},{type:"toggle",name:"test-reveal",desc:"Description",defaultVal:!0,reveal:[{type:"toggle",name:"revealed-toggle",desc:"Description",defaultVal:!0},{type:"input",name:"revealed-input",desc:"Description",defaultVal:!0},{type:"dropdown",name:"revealed-dropdown",desc:"Description",defaultVal:"test1",options:[{value:"test1",label:"test1"},{value:"test2",label:"test2"},{value:"test3",label:"test3"},{value:"test4",label:"test4"}]}]},{type:"input",name:"test-input",desc:"Description",defaultVal:1,placeholder:"does something"},{type:"dropdown",name:"test-dropdown",desc:"Description",defaultVal:"test1",options:[{value:"test1",label:"test1"},{value:"test2",label:"test2"},{value:"test3",label:"test3"},{value:"test4",label:"test4"}]}]},y=gt;var yt=e=>{try{Object.values(y).flat().forEach(({name:o,type:r,reveal:t,run:n})=>{let a=`theme:${o}`,i=e[a];r==="toggle"&&document.body.classList.toggle(o,i),t&&t.forEach(({name:l,type:u})=>{u==="toggle"&&document.body.classList.toggle(l,i&&e[`theme:${l}`])}),n&&n(i)})}catch(o){s.Error("Failed to apply options:",o)}},D=yt;var ht=()=>{try{let e=Object.values(y).flat().reduce((o,r)=>{let t=`theme:${r.name}`;return o[t]=m.get(t,r.defaultVal),r.reveal&&r.reveal.forEach(n=>{let a=`theme:${n.name}`;o[a]=o[t]?m.get(a,n.defaultVal):!1}),o},{});return D(e),G(),e}catch(e){s.Error("Failed to initialise options:",e)}},Le=ht;var L=p(c(),1);var N=p(c(),1),bt=N.default.memo(({categories:e})=>{let o=N.default.useRef(null);N.default.useEffect(()=>{let t=a=>{o.current&&(o.current.scrollLeft+=a.deltaY,a.preventDefault())},n=o.current;return n?.addEventListener("wheel",t,{passive:!1}),()=>n?.removeEventListener("wheel",t)},[]);let r=`calc((100% - ${(e.length-1)*8}px) / ${e.length})`;return N.default.createElement("div",{className:"category-carousel-container"},N.default.createElement("div",{className:"category-carousel",ref:o},e.map((t,n)=>N.default.createElement("button",{key:t,className:"category-button",onClick:()=>{document.querySelector(`.${t.toLowerCase()}Container`)?.scrollIntoView({behavior:"smooth",block:"start"})},style:{width:r,marginRight:n<e.length-1?"8px":"0"}},t))))}),ke=bt;var K=p(c(),1),vt=K.default.memo(({name:e,children:o})=>K.default.createElement("div",{className:`themeSettingsCategory ${e.toLowerCase()}Container`},K.default.createElement("h2",{className:"categoryTitle"},e),o)),Oe=vt;var I=p(c(),1),Ve=p(R(),1);function St({titleText:e,descriptionText:o,cancelText:r="Cancel",confirmText:t="Confirm",onConfirm:n,onClose:a,onOpen:i,onOutside:l,confirmLabel:u,allowHTML:d}){let g=I.default.memo(()=>{let[q,$]=Spicetify.React.useState(!0),te=document.querySelector(".ReactModalPortal:last-of-type");return I.default.useEffect(()=>{q&&i?.()},[]),I.default.createElement(Spicetify.ReactComponent.RemoteConfigProvider,{configuration:Spicetify.Platform.RemoteConfiguration},I.default.createElement(Spicetify.ReactComponent.ConfirmDialog,{titleText:e,descriptionText:o,cancelText:r,confirmText:t,isOpen:q,onOutside:()=>{$(!1),l?.(),te?.remove()},onClose:()=>{$(!1),a?.(),te?.remove()},onConfirm:()=>{$(!1),n?.(),te?.remove()},confirmLabel:u,allowHTML:d}))});Ve.default.createRoot(document.createElement("div")).render(I.default.createElement(g,null))}var Y=St;var Ct=e=>{Y({titleText:"Are you sure?",descriptionText:"This will reset all settings to default!",confirmText:"Reset",onOpen:()=>{document.querySelector(".GenericModal__overlay").style.zIndex=0},onConfirm:()=>{try{s.Log("Resetting settings");let o={};[...Object.values(y).flat(),...M,...P].forEach(r=>{o[`theme:${r.name}`]=r.defaultVal,r.reveal&&r.reveal.forEach(t=>{o[`theme:${t.name}`]=r.defaultVal?t.defaultVal:!1})}),Object.entries(o).forEach(([r,t])=>{m.set(r,t)}),e(o),D(o),G()}catch(o){s.Error("Failed to reset settings:",o)}}})},Ee=Ct;var wt=e=>{try{let o=Object.entries(e).filter(([r,t])=>{let n=m.get(r,null);return JSON.stringify(n)!==JSON.stringify(t)?(m.set(r,t),!0):!1});if(o.length>0){let r=o.map(([t,n])=>`${t} = ${n}`).join(", ");s.Log(`Saving settings: ${r}`),D(e)}}catch(o){s.Error("Failed to save settings:",o)}},Te=wt;var ne=p(c(),1);var xt=()=>{let[e,o]=ne.default.useState(()=>Object.values(y).flat().reduce((t,n)=>{let a=`theme:${n.name}`;return t[a]=m.get(a,n.defaultVal),n.reveal&&n.reveal.forEach(i=>{let l=`theme:${i.name}`;t[l]=t[a]?m.get(l,i.defaultVal):!1}),t},{})),r=ne.default.useCallback((t,n)=>{o(a=>{let i={...a,[t]:n},l=t.replace("theme:",""),u=Object.values(y).flat().find(d=>d.name===l);return u?.reveal&&u.reveal.forEach(d=>{let g=`theme:${d.name}`;i[g]=n?d.defaultVal:!1}),i})},[]);return[e,r,o]},Ne=xt;var _=p(c(),1);var Q=p(c(),1);var Mt=Q.default.memo(({option:e,settings:o,onChange:r})=>Q.default.createElement("div",{className:"themeOptionRevealed"},e.reveal.map(t=>Q.default.createElement(O,{key:t.name,option:t,value:o[`theme:${t.name}`],onChange:r})))),$e=Mt;var Pt=_.default.memo(({option:e,settings:o,onChange:r})=>{let t=o[`theme:${e.name}`];return _.default.createElement("div",{className:"themeOptionWrapper"},_.default.createElement("div",{className:"themeOptionMain"},_.default.createElement(O,{option:e,value:t,onChange:r,popupModal:e.popupModal})),t&&e.reveal&&_.default.createElement($e,{option:e,settings:o,onChange:r}))}),Be=Pt;var Lt=L.default.memo(()=>{let[e,o,r]=Ne(),t=Object.keys(y);return L.default.createElement("div",{className:"themeContainer"},L.default.createElement(ke,{categories:t}),Object.entries(y).map(([n,a])=>L.default.createElement(Oe,{key:n,name:n},a.map(i=>L.default.createElement(Be,{key:i.name,option:i,settings:e,onChange:o})))),L.default.createElement("div",{className:"buttonContainer"},L.default.createElement("button",{className:"resetButton",onClick:()=>Ee(r)},"Reset"),L.default.createElement("button",{className:"saveButton",onClick:()=>Te(e)},"Save")))}),ee=Lt;var kt=()=>{new Spicetify.Topbar.Button("Theme Settings",S.settings,()=>{w({title:"Theme Settings",content:ee})},!1,!0)},De=kt;var Ot=()=>{location.reload()},Ie=Ot;(async function(){for(;!(Spicetify.Platform&&Spicetify.Mousetrap&&Spicetify.Snackbar.enqueueCustomSnackbar&&Spicetify.ReactComponent);)await new Promise(t=>setTimeout(t,100));s.Log("Spicetify theme initialising"),Spicetify.Mousetrap.bind(["escape"],()=>{Spicetify.PopupModal.hide()}),Spicetify.Platform.PlatformData.event_sender_context_information.client_version_int<125e6&&U({autoHideDuration:5e3,backgroundColor:"#ff9800",message:f.default.createElement(f.default.Fragment,null,f.default.createElement("svg",{width:"24",height:"24",viewBox:"0 0 24 24",fill:"currentColor",dangerouslySetInnerHTML:{__html:S.warning}}),f.default.createElement("span",null,"Theme only supports Spotify versions greater than 1.2.50.000"))});let r=Spicetify.React.memo(()=>f.default.createElement(Spicetify.ReactComponent.ContextMenu,{offset:[0,12],trigger:"right-click",placement:"top",menu:f.default.createElement(Spicetify.ReactComponent.RemoteConfigProvider,{configuration:Spicetify.Platform.RemoteConfiguration},f.default.createElement(Spicetify.ReactComponent.Menu,null,f.default.createElement(Spicetify.ReactComponent.MenuItem,{onClick:()=>{Ie()},divider:!0},"Reload theme"),f.default.createElement(Spicetify.ReactComponent.MenuItem,{onClick:()=>{Y({titleText:"Confirm Dialog",descriptionText:"Are you <b>sure</b>?",onOutside:()=>Spicetify.showNotification("Clicked outside"),confirmLabel:"Ok",allowHTML:!0})},divider:!0},"Confirm Dialog"),f.default.createElement(Spicetify.ReactComponent.MenuItem,{onClick:()=>{w({title:"Theme Settings",content:ee})},divider:!0},"Theme Settings"),f.default.createElement(Spicetify.ReactComponent.MenuItem,{onClick:()=>{w({title:"Debug Menu",content:z})},divider:!0},"Debug Menu")))},f.default.createElement("button",{style:{color:"transparent",width:"100%",height:"100%",background:"unset",border:"none"}})));(async function(){let n=await J('[aria-label="Theme Settings"]'),a=document.createElement("div");a.className="context-menu-container",a.style.position="absolute",a.style.color="transparent",a.style.height="100%",a.style.width="100%",n.appendChild(a),_e.default.createRoot(a).render(f.default.createElement(r,null))})(),de(),ue(),De(),Le(),s.Log("Spicetify theme initialised")})();})();
+					`
+        );
+        volumeBar.style.flex = "0 1 200px";
+        const input = volumeBar.querySelector(".vol-input");
+        input.addEventListener("change", () => {
+          const newVol = Number.parseInt(input.value, 10);
+          if (newVol >= 0 && newVol <= 100) {
+            Spicetify.Player.setVolume(newVol / 100);
+          }
+        });
+        Spicetify.Platform.PlaybackAPI._events.addListener("volume", updateVol);
+        updateVol();
+      }
+    } else {
+      const volumeBar2 = document.querySelector(".main-nowPlayingBar-volumeBar");
+      if (volumeBar2) {
+        volumeBar2.querySelector(".vol-percent")?.remove();
+        volumeBar2.style.flex = "";
+        Spicetify.Platform.PlaybackAPI._events.removeListener("volume", updateVol);
+      }
+    }
+  };
+  var VolPercent_default = VolPercent;
+
+  // src/js/menu/settingsmenu/options.jsx
+  var options = {
+    Features: [
+      {
+        type: "dropdown",
+        name: "colourschemeselector",
+        desc: "Change the colour scheme of Spotify",
+        defaultVal: "default",
+        options: [
+          { value: "default", label: "Default" },
+          { value: "dark", label: "Dark" },
+          { value: "light", label: "Light" },
+          { value: "bloom", label: "Bloom" },
+          { value: "spotify", label: "Spotify" }
+        ],
+        run(value) {
+          ColourScheme_default(value);
+        }
+      },
+      {
+        type: "dropdown",
+        name: "change-Spotify-mode",
+        desc: "Change Spotify mode",
+        defaultVal: "developer",
+        tippy: "Only takes effect after a restart",
+        options: [
+          { value: "default", label: "Default" },
+          { value: "developer", label: "Developer" },
+          { value: "employee", label: "Employee" },
+          { value: "both", label: "Dev + Empl" }
+        ],
+        run(value) {
+          SpotifyMode_default(value);
+        }
+      },
+      {
+        type: "input",
+        name: "ZoomLevel",
+        desc: "Change the zoom level of Spotify page",
+        defaultVal: 100,
+        placeholder: "100%",
+        run(value) {
+          Zoomlevel = value / 100;
+          document.documentElement.style.setProperty("--Zoomlevel", Zoomlevel);
+        }
+      },
+      {
+        type: "toggle",
+        name: "AlbumBannerPage",
+        desc: "Put album cover art in various pages",
+        defaultVal: true,
+        popupModal: AlbumBannerModal_default,
+        run(value) {
+          CoverArtBanner_default(value);
+        }
+      },
+      {
+        type: "toggle",
+        name: "VolumePercentage",
+        desc: "Show volume percentage next to volume slider",
+        defaultVal: true,
+        run(value) {
+          VolPercent_default(value);
+        }
+      },
+      {
+        type: "toggle",
+        name: "WindowsControl",
+        desc: "Adjust the position and brightness of the windows controls",
+        defaultVal: false,
+        popupModal: WindowsControlModal_default
+      },
+      {
+        type: "input",
+        name: "uifont",
+        desc: "Changes the font of the Spotify app",
+        defaultVal: "SpotifyMixUI",
+        placeholder: "SpotifyMixUI",
+        tippy: "This will only work if you have the font installed locally",
+        run(value) {
+          document.documentElement.style.setProperty("--FontFamily", value);
+        }
+      }
+    ],
+    Layouts: [
+      {
+        type: "toggle",
+        name: "LibX",
+        desc: "Restore the old UI >2024 (Pre Global Nav Bar)",
+        defaultVal: false,
+        run(value) {
+          ToggleLibXUI_default(value);
+        },
+        reveal: [
+          {
+            type: "toggle",
+            name: "highlightnav",
+            desc: "Adds highlight to the selected page",
+            defaultVal: true
+          },
+          {
+            type: "toggle",
+            name: "PreLibX",
+            desc: "Restore the old UI >2023 (Pre LibraryX)",
+            defaultVal: false
+          },
+          {
+            type: "toggle",
+            name: "CompactLib",
+            desc: "Makes library compact while keeping icons",
+            defaultVal: false,
+            tippy: "Broken if library is collapsed"
+          }
+        ]
+      },
+      {
+        type: "toggle",
+        name: "TestLayout",
+        desc: "Rearrange playbutton to start and cover art to middle",
+        defaultVal: true
+      },
+      {
+        type: "toggle",
+        name: "switchlayout",
+        desc: "Uses different grid layout for Now playing bar",
+        defaultVal: true
+      }
+    ],
+    Snippets: [
+      {
+        type: "toggle",
+        name: "hidetracklistnum",
+        desc: "Hide tracklist numbers in various pages",
+        defaultVal: true
+      },
+      {
+        type: "toggle",
+        name: "greenicon",
+        desc: "Make the selected tab icon green",
+        defaultVal: true
+      },
+      {
+        type: "toggle",
+        name: "transplayicon",
+        desc: "Make the play/pause button transparent",
+        defaultVal: true
+      },
+      {
+        type: "toggle",
+        name: "npvlargerlyrics",
+        desc: "Show lyrics only in Now playing view",
+        defaultVal: false
+      },
+      {
+        type: "toggle",
+        name: "homeheader",
+        desc: "Remove the coloured gradient from the home page header",
+        defaultVal: true
+      }
+    ],
+    Test: [
+      {
+        type: "toggle",
+        name: "test-toggle",
+        desc: "Description",
+        defaultVal: true
+      },
+      {
+        type: "toggle",
+        name: "test-reveal",
+        desc: "Description",
+        defaultVal: true,
+        reveal: [
+          {
+            type: "toggle",
+            name: "revealed-toggle",
+            desc: "Description",
+            defaultVal: true
+          },
+          {
+            type: "input",
+            name: "revealed-input",
+            desc: "Description",
+            defaultVal: true
+          },
+          {
+            type: "dropdown",
+            name: "revealed-dropdown",
+            desc: "Description",
+            defaultVal: "test1",
+            options: [
+              { value: "test1", label: "test1" },
+              { value: "test2", label: "test2" },
+              { value: "test3", label: "test3" },
+              { value: "test4", label: "test4" }
+            ]
+          }
+        ]
+      },
+      {
+        type: "input",
+        name: "test-input",
+        desc: "Description",
+        defaultVal: 1,
+        placeholder: "does something"
+      },
+      {
+        type: "dropdown",
+        name: "test-dropdown",
+        desc: "Description",
+        defaultVal: "test1",
+        options: [
+          { value: "test1", label: "test1" },
+          { value: "test2", label: "test2" },
+          { value: "test3", label: "test3" },
+          { value: "test4", label: "test4" }
+        ]
+      }
+    ]
+  };
+  var options_default = options;
+
+  // src/js/menu/helpers/applyOptions.jsx
+  var applyOptions = (settings) => {
+    try {
+      Object.values(options_default).flat().forEach(({ name, type, reveal, run }) => {
+        const key = `theme:${name}`;
+        const value = settings[key];
+        if (type === "toggle") {
+          document.body.classList.toggle(name, value);
+        }
+        if (reveal) {
+          reveal.forEach(({ name: subName, type: subType }) => {
+            if (subType === "toggle") {
+              document.body.classList.toggle(subName, value && settings[`theme:${subName}`]);
+            }
+          });
+        }
+        if (run) run(value);
+      });
+    } catch (error) {
+      Console_default.Error("Failed to apply options:", error);
+    }
+  };
+  var applyOptions_default = applyOptions;
+
+  // src/js/menu/helpers/initialiseOptions.jsx
+  var initialiseOptions = () => {
+    try {
+      const loadedOptions = Object.values(options_default).flat().reduce((acc, option) => {
+        const mainKey = `theme:${option.name}`;
+        acc[mainKey] = LocalStorage_default.get(mainKey, option.defaultVal);
+        if (option.reveal) {
+          option.reveal.forEach((subOption) => {
+            const subKey = `theme:${subOption.name}`;
+            acc[subKey] = acc[mainKey] ? LocalStorage_default.get(subKey, subOption.defaultVal) : false;
+          });
+        }
+        return acc;
+      }, {});
+      applyOptions_default(loadedOptions);
+      runModalSettings_default();
+      return loadedOptions;
+    } catch (error) {
+      Console_default.Error("Failed to initialise options:", error);
+    }
+  };
+  var initialiseOptions_default = initialiseOptions;
+
+  // src/js/menu/settingsmenu/SettingsButton.jsx
+  var import_react19 = __toESM(require_react(), 1);
+  var import_react_dom3 = __toESM(require_react_dom(), 1);
+
+  // src/js/components/ConfirmDialog.jsx
+  var import_react12 = __toESM(require_react(), 1);
+  var import_react_dom2 = __toESM(require_react_dom(), 1);
+  function ConfirmDialog({
+    titleText,
+    descriptionText,
+    cancelText = "Cancel",
+    confirmText = "Confirm",
+    onConfirm,
+    onClose,
+    onOpen,
+    onOutside,
+    confirmLabel,
+    allowHTML
+  }) {
+    const ConfirmDialog2 = import_react12.default.memo(() => {
+      const [state, setState] = Spicetify.React.useState(true);
+      const menu = document.querySelector(".ReactModalPortal:last-of-type");
+      import_react12.default.useEffect(() => {
+        if (state) onOpen?.();
+      }, []);
+      return /* @__PURE__ */ import_react12.default.createElement(
+        Spicetify.ReactComponent.RemoteConfigProvider,
+        {
+          configuration: Spicetify.Platform.RemoteConfiguration
+        },
+        /* @__PURE__ */ import_react12.default.createElement(
+          Spicetify.ReactComponent.ConfirmDialog,
+          {
+            titleText,
+            descriptionText,
+            cancelText,
+            confirmText,
+            isOpen: state,
+            onOutside: () => {
+              setState(false);
+              onOutside?.();
+              menu?.remove();
+            },
+            onClose: () => {
+              setState(false);
+              onClose?.();
+              menu?.remove();
+            },
+            onConfirm: () => {
+              setState(false);
+              onConfirm?.();
+              menu?.remove();
+            },
+            confirmLabel,
+            allowHTML
+          }
+        )
+      );
+    });
+    import_react_dom2.default.createRoot(document.createElement("div")).render(/* @__PURE__ */ import_react12.default.createElement(ConfirmDialog2, null));
+  }
+  var ConfirmDialog_default = ConfirmDialog;
+
+  // src/js/utils/Window.jsx
+  var Window = {
+    Reload: () => location.reload(),
+    Restart: () => Spicetify.Platform.UpdateAPI.applyUpdate()
+  };
+  var Window_default = Window;
+
+  // src/js/menu/settingsmenu/SettingsMenu.jsx
+  var import_react18 = __toESM(require_react(), 1);
+
+  // src/js/menu/components/CategoryCarousel.jsx
+  var import_react13 = __toESM(require_react(), 1);
+  var CategoryCarousel = import_react13.default.memo(({ categories }) => {
+    const carouselRef = import_react13.default.useRef(null);
+    import_react13.default.useEffect(() => {
+      const handleWheel = (e) => {
+        if (carouselRef.current) {
+          carouselRef.current.scrollLeft += e.deltaY;
+          e.preventDefault();
+        }
+      };
+      const carousel = carouselRef.current;
+      carousel?.addEventListener("wheel", handleWheel, { passive: false });
+      return () => carousel?.removeEventListener("wheel", handleWheel);
+    }, []);
+    const buttonWidth = `calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`;
+    return /* @__PURE__ */ import_react13.default.createElement("div", { className: "category-carousel-container" }, /* @__PURE__ */ import_react13.default.createElement("div", { className: "category-carousel", ref: carouselRef }, categories.map((category, index) => /* @__PURE__ */ import_react13.default.createElement(
+      "button",
+      {
+        key: category,
+        className: "category-button",
+        onClick: () => {
+          document.querySelector(`.${category.toLowerCase()}Container`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        },
+        style: {
+          width: buttonWidth,
+          marginRight: index < categories.length - 1 ? "8px" : "0"
+        }
+      },
+      category
+    ))));
+  });
+  var CategoryCarousel_default = CategoryCarousel;
+
+  // src/js/menu/components/Section.jsx
+  var import_react14 = __toESM(require_react(), 1);
+  var Section = import_react14.default.memo(({ name, children }) => {
+    return /* @__PURE__ */ import_react14.default.createElement("div", { className: `themeSettingsCategory ${name.toLowerCase()}Container` }, /* @__PURE__ */ import_react14.default.createElement("h2", { className: "categoryTitle" }, name), children);
+  });
+  var Section_default = Section;
+
+  // src/js/menu/helpers/resetOptions.jsx
+  var resetOptions = (setSettings) => {
+    ConfirmDialog_default({
+      titleText: "Are you sure?",
+      descriptionText: "This will reset all settings to default!",
+      confirmText: "Reset",
+      onOpen: () => {
+        document.querySelector(".GenericModal__overlay").style.zIndex = 0;
+      },
+      onConfirm: () => {
+        try {
+          Console_default.Log("Resetting settings");
+          const defaultSettings = {};
+          [...Object.values(options_default).flat(), ...albumBannerOptions, ...windowsControlOptions].forEach(
+            (option) => {
+              defaultSettings[`theme:${option.name}`] = option.defaultVal;
+              if (option.reveal) {
+                option.reveal.forEach((subOption) => {
+                  defaultSettings[`theme:${subOption.name}`] = option.defaultVal ? subOption.defaultVal : false;
+                });
+              }
+            }
+          );
+          Object.entries(defaultSettings).forEach(([key, value]) => {
+            LocalStorage_default.set(key, value);
+          });
+          setSettings(defaultSettings);
+          applyOptions_default(defaultSettings);
+          runModalSettings_default();
+        } catch (error) {
+          Console_default.Error("Failed to reset settings:", error);
+        }
+      }
+    });
+  };
+  var resetOptions_default = resetOptions;
+
+  // src/js/menu/helpers/saveOptions.jsx
+  var saveOptions = (options2) => {
+    try {
+      const changedOptions = Object.entries(options2).filter(([key, value]) => {
+        const currentValue = LocalStorage_default.get(key, null);
+        if (JSON.stringify(currentValue) !== JSON.stringify(value)) {
+          LocalStorage_default.set(key, value);
+          return true;
+        }
+        return false;
+      });
+      if (changedOptions.length > 0) {
+        const formattedChanges = changedOptions.map(([key, value]) => `${key} = ${value}`).join(", ");
+        Console_default.Log(`Saving settings: ${formattedChanges}`);
+        applyOptions_default(options2);
+      }
+    } catch (error) {
+      Console_default.Error("Failed to save settings:", error);
+    }
+  };
+  var saveOptions_default = saveOptions;
+
+  // src/js/menu/hooks/useSettings.jsx
+  var import_react15 = __toESM(require_react(), 1);
+  var useSettings = () => {
+    const [settings, setSettings] = import_react15.default.useState(
+      () => Object.values(options_default).flat().reduce((acc, option) => {
+        const key = `theme:${option.name}`;
+        acc[key] = LocalStorage_default.get(key, option.defaultVal);
+        if (option.reveal) {
+          option.reveal.forEach((subOption) => {
+            const subKey = `theme:${subOption.name}`;
+            acc[subKey] = acc[key] ? LocalStorage_default.get(subKey, subOption.defaultVal) : false;
+          });
+        }
+        return acc;
+      }, {})
+    );
+    const handleSettingChange = import_react15.default.useCallback((key, value) => {
+      setSettings((prev) => {
+        const newSettings = { ...prev, [key]: value };
+        const optionName = key.replace("theme:", "");
+        const categoryOption = Object.values(options_default).flat().find((opt) => opt.name === optionName);
+        if (categoryOption?.reveal) {
+          categoryOption.reveal.forEach((subOption) => {
+            const subKey = `theme:${subOption.name}`;
+            newSettings[subKey] = value ? subOption.defaultVal : false;
+          });
+        }
+        return newSettings;
+      });
+    }, []);
+    return [settings, handleSettingChange, setSettings];
+  };
+  var useSettings_default = useSettings;
+
+  // src/js/menu/settingsmenu/RenderOptions.jsx
+  var import_react17 = __toESM(require_react(), 1);
+
+  // src/js/menu/components/RevealableOption.jsx
+  var import_react16 = __toESM(require_react(), 1);
+  var RevealableOption = import_react16.default.memo(({ option, settings, onChange }) => {
+    return /* @__PURE__ */ import_react16.default.createElement("div", { className: "themeOptionRevealed" }, option.reveal.map((subOption) => /* @__PURE__ */ import_react16.default.createElement(
+      OptionType_default,
+      {
+        key: subOption.name,
+        option: subOption,
+        value: settings[`theme:${subOption.name}`],
+        onChange
+      }
+    )));
+  });
+  var RevealableOption_default = RevealableOption;
+
+  // src/js/menu/settingsmenu/RenderOptions.jsx
+  var RenderOptions = import_react17.default.memo(({ option, settings, onChange }) => {
+    const mainValue = settings[`theme:${option.name}`];
+    return /* @__PURE__ */ import_react17.default.createElement("div", { className: "themeOptionWrapper" }, /* @__PURE__ */ import_react17.default.createElement("div", { className: "themeOptionMain" }, /* @__PURE__ */ import_react17.default.createElement(
+      OptionType_default,
+      {
+        option,
+        value: mainValue,
+        onChange,
+        popupModal: option.popupModal
+      }
+    )), mainValue && option.reveal && /* @__PURE__ */ import_react17.default.createElement(RevealableOption_default, { option, settings, onChange }));
+  });
+  var RenderOptions_default = RenderOptions;
+
+  // src/js/menu/settingsmenu/SettingsMenu.jsx
+  var SettingsMenu = import_react18.default.memo(() => {
+    const [settings, handleSettingChange, setSettings] = useSettings_default();
+    const categories = Object.keys(options_default);
+    return /* @__PURE__ */ import_react18.default.createElement("div", { className: "themeContainer" }, /* @__PURE__ */ import_react18.default.createElement(CategoryCarousel_default, { categories }), Object.entries(options_default).map(([category, categoryOptions]) => /* @__PURE__ */ import_react18.default.createElement(Section_default, { key: category, name: category }, categoryOptions.map((option) => /* @__PURE__ */ import_react18.default.createElement(
+      RenderOptions_default,
+      {
+        key: option.name,
+        option,
+        settings,
+        onChange: handleSettingChange
+      }
+    )))), /* @__PURE__ */ import_react18.default.createElement("div", { className: "buttonContainer" }, /* @__PURE__ */ import_react18.default.createElement("button", { className: "resetButton", onClick: () => resetOptions_default(setSettings) }, "Reset"), /* @__PURE__ */ import_react18.default.createElement("button", { className: "saveButton", onClick: () => saveOptions_default(settings) }, "Save")));
+  });
+  var SettingsMenu_default = SettingsMenu;
+
+  // src/js/menu/settingsmenu/SettingsButton.jsx
+  var SettingsButton = () => {
+    const SettingsButton2 = new Spicetify.Topbar.Button(
+      "Theme Settings",
+      icons_default.settings,
+      () => {
+        PopupModal_default({
+          title: "Theme Settings",
+          content: SettingsMenu_default
+        });
+      },
+      false,
+      true
+    );
+    SettingsButton2.element.oncontextmenu = (event) => {
+      event.preventDefault();
+      const existingMenu = document.getElementById("context-menu");
+      if (existingMenu) {
+        existingMenu.remove();
+      }
+      const menuContainer = document.createElement("div");
+      menuContainer.id = "context-menu";
+      menuContainer.style.position = "absolute";
+      menuContainer.style.top = `${event.clientY}px`;
+      menuContainer.style.left = `${event.clientX}px`;
+      menuContainer.style.zIndex = "1000";
+      document.body.appendChild(menuContainer);
+      const removeContextMenu = (event2) => {
+        if (!menuContainer.contains(event2.target) && !SettingsButton2.element.contains(event2.target)) {
+          menuContainer.remove();
+          document.removeEventListener("mousedown", removeContextMenu);
+        }
+      };
+      import_react_dom3.default.createRoot(menuContainer).render(
+        /* @__PURE__ */ import_react19.default.createElement(Spicetify.ReactComponent.Menu, null, /* @__PURE__ */ import_react19.default.createElement(
+          Spicetify.ReactComponent.MenuItem,
+          {
+            onClick: () => {
+              Window_default.Reload();
+              removeContextMenu(new MouseEvent("mousedown"));
+            },
+            divider: true
+          },
+          "Reload theme"
+        ), /* @__PURE__ */ import_react19.default.createElement(
+          Spicetify.ReactComponent.MenuItem,
+          {
+            onClick: () => {
+              Window_default.Restart();
+              removeContextMenu(new MouseEvent("mousedown"));
+            },
+            divider: true
+          },
+          "Restart Spotify"
+        ), /* @__PURE__ */ import_react19.default.createElement(
+          Spicetify.ReactComponent.MenuItem,
+          {
+            onClick: () => {
+              ConfirmDialog_default({
+                titleText: "Confirm Dialog",
+                descriptionText: "Are you <b>sure</b>?",
+                onOutside: () => Spicetify.showNotification("Clicked outside"),
+                confirmLabel: "Ok",
+                allowHTML: true
+              });
+              removeContextMenu(new MouseEvent("mousedown"));
+            },
+            divider: true
+          },
+          "Confirm Dialog"
+        ), /* @__PURE__ */ import_react19.default.createElement(
+          Spicetify.ReactComponent.MenuItem,
+          {
+            onClick: () => {
+              PopupModal_default({
+                title: "Theme Settings",
+                content: SettingsMenu_default
+              });
+              removeContextMenu(new MouseEvent("mousedown"));
+            },
+            divider: true
+          },
+          "Theme Settings"
+        ), /* @__PURE__ */ import_react19.default.createElement(
+          Spicetify.ReactComponent.MenuItem,
+          {
+            onClick: () => {
+              PopupModal_default({
+                title: "Debug Menu",
+                content: DebugMenu_default
+              });
+              removeContextMenu(new MouseEvent("mousedown"));
+            },
+            divider: true
+          },
+          "Debug Menu"
+        ))
+      );
+      document.addEventListener("mousedown", removeContextMenu);
+    };
+  };
+  var SettingsButton_default = SettingsButton;
+
+  // src/js/app.jsx
+  (async function main() {
+    while (!(Spicetify.Platform && Spicetify.Mousetrap && Spicetify.CosmosAsync && Spicetify.Snackbar.enqueueCustomSnackbar && Spicetify.ReactComponent)) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    Console_default.Log("Spicetify theme initialising");
+    Spicetify.Mousetrap.bind(["escape"], () => {
+      Spicetify.PopupModal.hide();
+    });
+    Spicetify.Mousetrap.bind("f8", () => {
+      debugger;
+    });
+    const SpotifyVersion = Spicetify.Platform.PlatformData.event_sender_context_information.client_version_int;
+    if (SpotifyVersion < 125e6) {
+      Notification_default({
+        autoHideDuration: 5e3,
+        backgroundColor: "#ff9800",
+        message: /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(
+          "svg",
+          {
+            width: "24",
+            height: "24",
+            viewBox: "0 0 24 24",
+            fill: "currentColor",
+            dangerouslySetInnerHTML: { __html: icons_default.warning }
+          }
+        ), /* @__PURE__ */ import_react20.default.createElement("span", null, "Theme only supports Spotify versions greater than 1.2.50.000"))
+      });
+    }
+    UpdateZoom_default();
+    Mousetrap_default();
+    SettingsButton_default();
+    initialiseOptions_default();
+    Console_default.Log("Spicetify theme initialised");
+  })();
+})();
 
         })();

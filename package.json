@@ -3,15 +3,14 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "debug": "node tasks/debug.js",
-    "build": "npm run build-js && npm run build-css && npm run copy-files",
-    "build-js": "node tasks/build-js.js && npm run copy-files",
-    "build-css": "sass src/css/app.scss dist/user.css --no-source-map && npm run copy-files",
-    "watch": "concurrently \"npm run watch-js\" \"npm run watch-css\" \"npm run watch-files\"",
-    "watch-js": "concurrently \"node tasks/build-js.js --watch\" \"npm run watch-files\"",
-    "watch-css": "concurrently \"sass src/css/app.scss dist/user.css --watch --no-source-map\" \"npm run watch-files\"",
-    "copy-files": "node tasks/copy-files.js",
-    "watch-files": "node tasks/copy-files.js --watch"
+    "w": "concurrently \"npm run watch\" \"spicetify watch -s\"",
+    "b": "npm run build && spicetify apply",
+    "build": "node tasks/build.js --js --css",
+    "watch": "node tasks/watch.js --js --css",
+    "build-js": "node tasks/build.js --js",
+    "watch-js": "node tasks/watch.js --js",
+    "build-css": "node tasks/build.js --css",
+    "watch-css": "node tasks/watch.js --css"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
