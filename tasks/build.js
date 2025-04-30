@@ -2,7 +2,6 @@ import { exec } from "node:child_process";
 import fs from "node:fs";
 import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
-import wrapperPlugin from "./wrapperPlugin.js";
 
 const buildJS = async () => {
   const OUT = "dist/theme.js";
@@ -10,19 +9,31 @@ const buildJS = async () => {
   const PARENT_OUT = "../theme.js";
 
   const buildConfig = {
-    platform: "browser",
+    format: "esm",
+    bundle: true,
+    sourcemap: false,
+    entryPoints: [SRC],
+    outfile: OUT,
     external: ["react", "react-dom"],
     plugins: [
       externalGlobalPlugin.externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
       }),
-      wrapperPlugin(OUT),
     ],
-    entryPoints: [SRC],
-    outfile: OUT,
-    bundle: true,
-    sourcemap: false,
+    banner: {
+      js: `
+        (async function() {
+          while (!Spicetify.React || !Spicetify.ReactDOM) {
+            await new Promise(resolve => setTimeout(resolve, 1));
+          }
+      `.trim(),
+    },
+    footer: {
+      js: `
+        })();
+      `.trim(),
+    },
   };
 
   await esbuild.build(buildConfig);
@@ -49,5 +60,10 @@ if (args.includes("--js")) {
 }
 
 if (args.includes("--css")) {
+  buildCSS();
+}
+
+if (args.includes("--all")) {
+  buildJS();
   buildCSS();
 }

@@ -3,22 +3,20 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "w": "concurrently \"npm run watch\" \"spicetify watch -s\"",
-    "b": "npm run build && spicetify apply",
-    "build": "node tasks/build.js --js --css",
-    "watch": "node tasks/watch.js --js --css",
+    "build": "node tasks/build.js --all ",
+    "watch": "node tasks/watch.js --all",
     "build-js": "node tasks/build.js --js",
     "watch-js": "node tasks/watch.js --js",
     "build-css": "node tasks/build.js --css",
-    "watch-css": "node tasks/watch.js --css"
+    "watch-css": "node tasks/watch.js --css",
+    "debug": "concurrently --raw \"npm run watch\" \"spicetify watch -s -q\"",
+    "test": "npm run build && spicetify apply"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "concurrently": "^9.0.1",
-    "esbuild": "^0.25.3",
+    "concurrently": "^9.1.0",
+    "esbuild": "^0.25.4",
     "esbuild-plugin-external-global": "^1.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "sass": "^1.80.6"
   }
 }

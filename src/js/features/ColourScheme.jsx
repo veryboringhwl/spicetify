@@ -6,7 +6,7 @@ const ColourScheme = async (scheme) => {
   }
 
   const response = await fetch(
-    "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/src/color.ini",
+    "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/dist/color.ini",
   );
   const iniContent = await response.text();
   const colourSchemes = iniContent.split(/[\r\n]+/).reduce((acc, line) => {
