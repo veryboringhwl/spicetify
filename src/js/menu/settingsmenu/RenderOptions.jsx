@@ -1,6 +1,6 @@
 import React from "react";
+import OptionType from "../components/OptionType";
 import RevealableOption from "../components/RevealableOption";
-import OptionType from "./OptionType";
 
 const RenderOptions = React.memo(({ option, settings, onChange }) => {
   const mainValue = settings[`theme:${option.name}`];

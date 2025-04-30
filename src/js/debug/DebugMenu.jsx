@@ -7,22 +7,31 @@ const DebugMenu = React.memo(() => {
   const [lastUpdated, setLastUpdated] = React.useState("Loading...");
 
   React.useEffect(() => {
-    fetch("https://api.github.com/repos/veryboringhwl/spicetify/releases/latest")
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://api.github.com/repos/veryboringhwl/spicetify/releases/latest",
+        );
+        const data = await response.json();
+
         setLastVersion(data.tag_name);
 
         const publishDate = new Date(data.published_at);
-        const formattedDate = `${publishDate.getFullYear()}/${(publishDate.getMonth() + 1)
-          .toString()
-          .padStart(2, "0")}/${publishDate.getDate().toString().padStart(2, "0")}`;
+        const options = {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        const formattedDate = publishDate.toLocaleString("en-GB", options);
         setLastUpdated(formattedDate);
-      })
-      .catch((error) => {
+      } catch (error) {
         Console.Error("Error fetching latest version:", error);
         setLastVersion("Error fetching");
         setLastUpdated("Error fetching");
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   const Info = {
@@ -60,4 +69,5 @@ const DebugMenu = React.memo(() => {
     </div>
   );
 });
+
 export default DebugMenu;

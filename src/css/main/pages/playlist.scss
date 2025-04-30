@@ -24,8 +24,8 @@
   );
 }
 
-.main-entityHeader-container {
-  align-items: center;
+.main-entityHeader-image {
+  border-radius: 8px;
 }
 
 .ecHWOS,
@@ -35,7 +35,7 @@
 }
 
 .main-actionBar-ActionBar {
-  padding-bottom: 7px;
+  padding: 0 var(--content-spacing) 7px var(--content-spacing);
 }
 
 .main-actionBar-ActionBarRow > *:not(:last-child):has(.Wrapper-medium-only),
@@ -66,44 +66,81 @@
   padding: 8px;
 }
 
-.main-entityHeader-imageContainerNew {
-  position: relative;
-  // left: clamp(
-  //   135px,
-  //   135px +
-  //     (
-  //       100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px -
-  //         600px
-  //     )/424 * 104,
-  //   232px
-  // );
-}
-
 .main-entityHeader-headerText {
-  flex: unset;
   justify-content: center;
-  // margin-left: calc(
-  //   clamp(
-  //       135px,
-  //       135px +
-  //         (
-  //           100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) *
-  //             1px - 600px
-  //         )/424 * 104,
-  //       232px
-  //     ) + var(--content-spacing)
-  // );
-}
-
-.main-entityHeader-image {
-  border-radius: 8px;
-}
-
-.main-entityHeader-withBackgroundImage {
-  height: min(30vh, var(--fluid-height)) !important;
 }
 
 .main-entityHeader-container {
   margin-top: 64px;
   padding-bottom: 0px;
+  padding: var(--content-spacing) 0 var(--content-spacing);
+  height: unset !important;
+  min-height: unset !important;
+}
+
+:root {
+  --playlist-image: clamp(
+    156px,
+    156px +
+      (
+        100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px -
+          600px
+      ) / 424 * 104,
+    232px
+  );
+}
+
+.main-entityHeader-imageContainerNew {
+  position: relative;
+  height: var(--playlist-image);
+  width: var(--playlist-image);
+}
+
+// :root {
+//   --playlist-image: clamp(
+//     128px,
+//     128px +
+//       (
+//         100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px -
+//           600px
+//       ) / 424 * 104,
+//     232px
+//   );
+
+//   --min-fluid-height: clamp(
+//     250px,
+//     250px +
+//       (
+//         100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px -
+//           600px
+//       ) / 424 * 90,
+//     340px
+//   );
+// }
+
+// .main-entityHeader-imageContainerNew {
+//   position: relative;
+//   height: var(--playlist-image);
+//   width: var(--playlist-image);
+// }
+
+// .playlist-playlist-playlistContent {
+//   position: relative;
+//   top: calc(
+//     -1 * (var(--playlist-image) - 148px)
+//   );
+// }
+
+// .main-actionBar-ActionBarRow {
+//   position: relative;
+//   left: calc(var(--playlist-image) + var(--content-spacing));
+//   width: calc(calc(100% - var(--playlist-image)) - var(--content-spacing));
+// }
+
+.main-entityHeader-titleInner > * {
+  font-size: 4rem !important;
+}
+
+.main-entityHeader-withBackgroundImage {
+  height: min(30vh, var(--fluid-height)) !important;
 }

@@ -7,11 +7,6 @@
       "now-playing-bar now-playing-bar now-playing-bar" !important;
   }
 
-  .Root__globalNav > * {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-
   .Root__globalNav {
     height: unset;
     background-color: var(--spice-main);
@@ -22,22 +17,26 @@
     box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
   }
 
+  .Root__globalNav > * {
+    padding: 0px 8px;
+  }
+
   .main-topBar-topbarContentRight,
   .main-globalNav-searchContainer > *,
-  .search-searchCategory-categoryGrid > div > * {
+  .custom-navlink {
     margin-top: 8px !important;
   }
 
   .Root__globalNav .main-globalNav-link-icon {
     background-color: unset;
-    transform: unset;
+    transform: none !important;
     justify-content: unset;
   }
 
   .main-actionButtons {
+    padding-inline: 0px !important;
     animation: unset !important;
     display: flex !important;
-    padding-inline: unset;
   }
 
   .search-searchCategory-categoryGrid,
@@ -56,14 +55,17 @@
     order: -1;
   }
 
+  ._b3hhmbWtOY8_1M1mM1H {
+    padding-inline: unset;
+  }
+
   [aria-label="Marketplace"],
-  ._b3hhmbWtOY8_1M1mM1H,
-  .Root__globalNav .Dp3xccI7c2f_JSJ8OHYu,
-  .main-globalNav-searchInputSection {
+  .Root__globalNav .Dp3xccI7c2f_JSJ8OHYu {
     margin-inline: unset !important;
   }
 
   .Root__globalNav,
+  .custom-navlinks-scrollable_container,
   .search-searchCategory-categoryGrid > div,
   .main-globalNav-searchContainer {
     flex-direction: column !important;
@@ -77,8 +79,7 @@
   }
 
   .main-topBar-searchBar {
-    background: unset;
-    background-color: unset !important;
+    background: unset !important;
     border-bottom: unset;
     box-shadow: none !important;
   }
@@ -94,55 +95,58 @@
     margin-left: 16px;
   }
 
-  ._b3hhmbWtOY8_1M1mM1H {
-    padding-inline: unset;
-  }
-
-  .collapsed.Root__globalNav {
-    width: 72px;
-  }
-
   .b7r2WRiu5f9Q99qmyreh {
     width: unset !important;
   }
 
-  .collapsed .b7r2WRiu5f9Q99qmyreh *:not(svg) {
-    width: 56px !important;
-    display: flex;
-    justify-content: center;
+  .Root__nav-bar .LayoutResizer__resize-bar {
+    height: calc(100vh - 142px);
+    bottom: 0px;
+  }
+  .LayoutResizer__inline-end:after {
+    height: 100%;
   }
 
-  .collapsed .BV0jjn_h5TtMMl8YKuZ0,
-  .collapsed .main-globalNav-textWrapper,
-  .forceExpandSearchInput .fmZ0hU6ImbDQi5qGWLvF .main-globalNav-textWrapper,
-  .collapsed .main-actionButtons,
-  .collapsed .main-globalNav-historyButtons {
+  ._b3hhmbWtOY8_1M1mM1H:has(.main-topBar-searchBar[tabindex="0"])
+    .main-globalNav-textWrapper {
     display: none !important;
   }
 
-  .collapsed .main-globalNav-link-icon {
-    justify-content: center !important;
-  }
+  .collapsed {
+    .main-globalNav-link-icon,
+    .b7r2WRiu5f9Q99qmyreh *:not(svg) {
+      width: 56px !important;
+      display: flex;
+      justify-content: center;
+    }
 
-  .collapsed .main-userWidget-box {
-    width: 56px;
-  }
+    .BV0jjn_h5TtMMl8YKuZ0,
+    .main-globalNav-textWrapper,
+    .main-actionButtons,
+    .main-globalNav-historyButtons {
+      display: none !important;
+    }
 
-  .collapsed .main-userWidget-hasAvatar > div,
-  .collapsed .main-userWidget-hasAvatar {
-    width: 38px !important;
+    .main-userWidget-hasAvatar > div,
+    .main-userWidget-hasAvatar {
+      width: 38px !important;
+    }
+
+    .main-userWidget-box {
+      width: 56px;
+    }
+
+    &.Root__globalNav {
+      width: 72px;
+    }
   }
 }
 
 .highlightnav {
-  .custom-navlinks-scrollable_container {
-    max-width: unset;
-  }
-
   .main-globalNav-navLinkActive[aria-label="Home"],
   .main-globalNav-navLinkActive[aria-label="Marketplace"],
   .main-globalNav-navLinkActive[aria-label="Lyrics"],
-  .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
+  #main:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
     background-color: var(--spice-highlight-elevated) !important;
     border-radius: 7px !important;
   }
@@ -157,10 +161,14 @@
 }
 
 .PreLibX {
+  .Root__top-container {
+    gap: 0 !important;
+    padding: 0px !important;
+  }
+
   .Root__globalNav,
-  .main-view-container__scroll-node,
   .main-buddyFeed-container {
-    padding-top: 48px;
+    padding-top: 48px !important;
   }
 
   .main-yourLibraryX-library,
@@ -174,13 +182,8 @@
     border-right: 1px solid var(--spice-card) !important;
   }
 
-  .Root__top-container {
-    gap: 0 !important;
-    padding: 0px !important;
-  }
-
   .Root__main-view-overlay {
-    margin: 0 !important;
+    margin: 0px !important;
   }
 
   .main-nowPlayingBar-nowPlayingBar {
@@ -202,10 +205,6 @@
     padding: 0 0 0 16px;
   }
 
-  .LayoutResizer__inline-end {
-    inset-inline-end: -4px !important;
-  }
-
   .main-buddyFeed-header {
     height: 80px;
   }
@@ -217,6 +216,12 @@
     min-block-size: unset !important;
     padding-block: 0px !important;
     height: 36px !important;
+  }
+
+  .Root__nav-bar .LayoutResizer__resize-bar {
+    height: 100vh;
+    inset-inline-end: -4px !important;
+    bottom: 0px;
   }
 }
 
@@ -258,10 +263,256 @@
   }
 }
 
-.TestLayout {
-  .player-controls {
-    flex-direction: row;
-    justify-content: flex-start;
+.AppleMusic {
+  #main {
+    --spice-accent: #fa2d48 !important;
+    --spice-button: #fa2d48 !important;
+    --spice-button-active: #fa2d48 !important;
+    --text-bright-accent: var(--spice-button-active);
+  }
+
+  .main-yourLibraryX-library,
+  .Root__now-playing-bar,
+  .Root__right-sidebar,
+  .Root__main-view {
+    box-shadow: none !important;
+  }
+
+  .Root__top-container {
+    gap: 0 !important;
+    padding: 0px !important;
+    padding-top: 48px;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      "global-nav now-playing-bar now-playing-bar"
+      "global-nav main-view right-sidebar"
+      "left-sidebar main-view right-sidebar" !important;
+  }
+
+  .Root__now-playing-bar {
+    border-bottom: 1px solid var(--spice-card);
+    background-color: #2a2a2a !important;
+    border-radius: 0px !important;
+  }
+
+  .main-nowPlayingBar-nowPlayingBar > * {
+    -webkit-app-region: no-drag;
+  }
+
+  .main-nowPlayingBar-nowPlayingBar {
+    background-color: #2a2a2a;
+    width: calc(100% - 138px);
+  }
+
+  .Root__globalNav {
+    height: unset;
+    background-color: var(--spice-main);
+    border-radius: 8px;
+    padding: unset !important;
+    margin: unset !important;
+    align-items: unset;
+    box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
+  }
+
+  .Root__globalNav > * {
+    padding: 0px 8px;
+  }
+
+  .main-globalNav-link-icon {
+    background-color: unset;
+    transform: none !important;
+    justify-content: unset;
+  }
+
+  .main-actionButtons {
+    padding-inline: 0px !important;
+    animation: unset !important;
+    display: flex !important;
+  }
+
+  .search-searchCategory-categoryGrid,
+  .main-globalNav-historyButtonsContainer,
+  .main-globalNav-historyButtons > * {
+    display: unset !important;
+  }
+
+  .main-globalNav-historyButtons {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+  }
+
+  .main-globalNav-searchSection {
+    order: -1;
+  }
+
+  ._b3hhmbWtOY8_1M1mM1H {
+    padding-inline: unset;
+  }
+
+  [aria-label="Marketplace"],
+  .Root__globalNav .Dp3xccI7c2f_JSJ8OHYu {
+    margin-inline: unset !important;
+  }
+
+  .Root__globalNav,
+  .custom-navlinks-scrollable_container,
+  .search-searchCategory-categoryGrid > div,
+  .main-globalNav-searchContainer {
+    flex-direction: column !important;
+    max-width: unset;
+  }
+
+  .main-topBar-topbarContentRight {
+    gap: 8px;
+    justify-content: unset;
+    padding-bottom: 8px;
+  }
+
+  .main-topBar-searchBar {
+    background: unset !important;
+    border-bottom: unset;
+    box-shadow: none !important;
+  }
+
+  .fmZ0hU6ImbDQi5qGWLvF .main-globalNav-textWrapper {
+    position: absolute;
+    margin-left: 52px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .main-globalNav-textWrapper {
+    margin-left: 16px;
+  }
+
+  .b7r2WRiu5f9Q99qmyreh {
+    width: unset !important;
+  }
+
+  .Root__nav-bar .LayoutResizer__resize-bar {
+    height: 100vh;
+    inset-inline-end: -4px !important;
+    bottom: 0px;
+  }
+
+  .LayoutResizer__inline-end:after {
+    height: 100%;
+  }
+
+  ._b3hhmbWtOY8_1M1mM1H:has(.main-topBar-searchBar[tabindex="0"])
+    .main-globalNav-textWrapper {
+    display: none !important;
+  }
+
+  .collapsed {
+    .main-globalNav-link-icon,
+    .b7r2WRiu5f9Q99qmyreh *:not(svg) {
+      width: 56px !important;
+      display: flex;
+      justify-content: center;
+    }
+
+    .BV0jjn_h5TtMMl8YKuZ0,
+    .main-globalNav-textWrapper,
+    .main-actionButtons,
+    .main-globalNav-historyButtons {
+      display: none !important;
+    }
+
+    .main-userWidget-hasAvatar > div,
+    .main-userWidget-hasAvatar {
+      width: 38px !important;
+    }
+
+    .main-userWidget-box {
+      width: 56px;
+    }
+
+    &.Root__globalNav {
+      width: 72px;
+    }
+  }
+
+  .Root__globalNav,
+  .main-buddyFeed-container {
+    padding-top: 48px !important;
+  }
+
+  .main-yourLibraryX-library,
+  .Root__globalNav {
+    background-color: var(--spice-sidebar);
+    border-radius: 0px;
+  }
+
+  .Root__globalNav,
+  .Root__nav-bar {
+    border-right: 1px solid var(--spice-card) !important;
+  }
+
+  .Root__main-view-overlay {
+    margin: 0px !important;
+    z-index: 10000;
+  }
+
+  .Root__right-sidebar {
+    border-left: 1px solid var(--spice-card);
+  }
+
+  .main-buddyFeed-container,
+  .Root__main-view {
+    border-radius: 0px !important;
+  }
+
+  .main-yourLibraryX-header {
+    padding: 0 0 0 16px;
+  }
+
+  .main-buddyFeed-header {
+    height: 80px;
+  }
+
+  .J4qD2RoZgGLbOdpfs63w > div > *,
+  .main-globalNav-searchContainer > *,
+  .main-topBar-searchBar,
+  .EJttP30F1zYHeAw7ISHb {
+    min-block-size: unset !important;
+    padding-block: 0px !important;
+    height: 36px !important;
+  }
+
+  .main-globalNav-navLinkActive[aria-label="Home"],
+  .main-globalNav-navLinkActive[aria-label="Marketplace"],
+  .main-globalNav-navLinkActive[aria-label="Lyrics"],
+  #main:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
+    background-color: var(--spice-highlight-elevated) !important;
+    border-radius: 7px !important;
+  }
+
+  .b7r2WRiu5f9Q99qmyreh:hover,
+  [aria-label="Home"]:hover,
+  [aria-label="Marketplace"]:hover,
+  [aria-label="Lyrics"]:hover {
+    background-color: var(--spice-highlight);
+    border-radius: 7px;
+  }
+
+  .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ)::before,
+  .b7r2WRiu5f9Q99qmyreh:has(.MdMAXXFPalD99eigsBug)::before,
+  .main-globalNav-navLinkActive.main-globalNav-link-icon::before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 18px;
+    top: 9px;
+    background-color: var(--spice-accent);
+    border-radius: 7px;
+    left: 0px;
+  }
+
+  .main-nowPlayingBar-left {
+    padding-inline-start: 0px;
+    max-width: 275px;
   }
 
   .main-nowPlayingBar-center {
@@ -272,9 +523,59 @@
     order: 1;
   }
 
+  .player-controls {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0 8px;
+  }
+
+  .player-controls__right {
+    order: 1;
+  }
+
+  .player-controls__buttons,
+  .player-controls__left,
+  .player-controls__right {
+    gap: 0;
+    flex: unset;
+    width: unset;
+  }
+
+  .main-playbackBarRemainingTime-container,
+  .playback-bar__progress-time-elapsed {
+    min-width: 30px;
+  }
+
+  .playback-bar {
+    max-width: 375px;
+  }
+
+  [data-testid="control-button-playpause"],
+  [data-testid="control-button-skip-forward"],
+  [data-testid="control-button-repeat"],
+  [data-testid="control-button-shuffle"],
+  [data-testid="control-button-skip-back"] {
+    padding: 7px;
+  }
+}
+
+.TestLayout {
+  .player-controls {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
   .main-nowPlayingBar-left {
     padding-inline-start: 0px;
     max-width: 275px;
+  }
+
+  .main-nowPlayingBar-center {
+    order: -1;
+  }
+
+  .main-nowPlayingBar-right {
+    order: 1;
   }
 
   .player-controls__left {

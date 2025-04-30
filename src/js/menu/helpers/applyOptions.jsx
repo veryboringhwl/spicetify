@@ -1,7 +1,7 @@
 import Console from "../../utils/Console";
 import options from "../settingsmenu/options";
 
-const applyOptions = (settings) => {
+const applyOptions = (settings, changedOptions = []) => {
   try {
     Object.values(options)
       .flat()
@@ -18,7 +18,9 @@ const applyOptions = (settings) => {
             }
           });
         }
-        if (run) run(value);
+        if (changedOptions.includes(key) && run) {
+          run(value);
+        }
       });
   } catch (error) {
     Console.Error("Failed to apply options:", error);

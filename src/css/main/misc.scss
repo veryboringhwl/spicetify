@@ -1,6 +1,6 @@
 /*adds space to drag small window*/
 @media (max-width: 1100px) {
-  body:not(.LibX) .main-topBar-topbarContentRight::after {
+  body:not(.LibX):not(.AppleMusic) .main-topBar-topbarContentRight::after {
     content: " |    ";
     -webkit-app-region: drag;
     color: rgba(var(--spice-rgb-text), 0.2);

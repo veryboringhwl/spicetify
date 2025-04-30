@@ -1,7 +1,7 @@
 import React from "react";
 import CoverArtBanner from "../../features/CoverArtBanner";
 import LocalStorage from "../../utils/LocalStorage";
-import OptionType from "../settingsmenu/OptionType";
+import OptionType from "../components/OptionType";
 import resetModal from "./resetModal";
 import saveModal from "./saveModal";
 

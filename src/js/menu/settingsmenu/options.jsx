@@ -1,6 +1,7 @@
 import ColourScheme from "../../features/ColourScheme";
 import CoverArtBanner from "../../features/CoverArtBanner";
 import SpotifyMode from "../../features/SpotifyMode";
+import ToggleAppleMusic from "../../features/ToggleAppleMusic";
 import ToggleLibXUI from "../../features/ToggleLibXUI";
 import VolPercent from "../../features/VolPercent";
 import AlbumBannerModal from "../../menu/modalmenu/AlbumBannerModal";
@@ -122,6 +123,16 @@ const options = {
     },
     {
       type: "toggle",
+      name: "AppleMusic",
+      desc: "Changes the UI to look like Apple Music",
+      defaultVal: false,
+      tippy: "Incompatible with LibX, Switchlayout and testlayout",
+      run(value) {
+        ToggleAppleMusic(value);
+      },
+    },
+    {
+      type: "toggle",
       name: "TestLayout",
       desc: "Rearrange playbutton to start and cover art to middle",
       defaultVal: true,
@@ -171,6 +182,32 @@ const options = {
       name: "test-toggle",
       desc: "Description",
       defaultVal: true,
+      popupModal: WindowsControlModal,
+      run(value) {
+        console.log(value);
+      },
+    },
+    {
+      type: "input",
+      name: "test-input",
+      desc: "Description",
+      defaultVal: 1,
+      placeholder: "does something",
+    },
+    {
+      type: "dropdown",
+      name: "test-dropdown",
+      desc: "Description",
+      defaultVal: "test1",
+      options: [
+        { value: "test1", label: "test1" },
+        { value: "test2", label: "test2" },
+        { value: "test3", label: "test3" },
+        { value: "test4", label: "test4" },
+      ],
+      run(value) {
+        console.log(value);
+      },
     },
     {
       type: "toggle",
@@ -202,25 +239,6 @@ const options = {
             { value: "test4", label: "test4" },
           ],
         },
-      ],
-    },
-    {
-      type: "input",
-      name: "test-input",
-      desc: "Description",
-      defaultVal: 1,
-      placeholder: "does something",
-    },
-    {
-      type: "dropdown",
-      name: "test-dropdown",
-      desc: "Description",
-      defaultVal: "test1",
-      options: [
-        { value: "test1", label: "test1" },
-        { value: "test2", label: "test2" },
-        { value: "test3", label: "test3" },
-        { value: "test4", label: "test4" },
       ],
     },
   ],

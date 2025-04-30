@@ -1,23 +1,21 @@
-import Console from "../utils/Console";
-import waitForElements from "../utils/waitForElements";
+let textObserverApple = null;
+let collapsedObserverApple = null;
 
-let textObserver = null;
-let collapsedObserver = null;
+function ToggleAppleMusic(isEnabled) {
+  const globalNav = document.querySelector(".Root__globalNav");
+  if (!globalNav) return;
 
-async function ToggleLibXUI(isEnabled) {
-  const globalNav = await waitForElements(".Root__globalNav");
-
-  disableLibXUI(globalNav);
+  disableAppleMusic(globalNav);
 
   if (isEnabled) {
-    enableLibXUI(globalNav);
+    enableAppleMusic(globalNav);
   } else {
-    disableLibXUI(globalNav);
+    disableAppleMusic(globalNav);
   }
 }
 
-function enableLibXUI(globalNav) {
-  disableLibXUI(globalNav);
+function enableAppleMusic(globalNav) {
+  disableAppleMusic(globalNav);
   globalNav.classList.add("global-libraryX");
 
   const addTextToButtons = () => {
@@ -37,8 +35,8 @@ function enableLibXUI(globalNav) {
 
   addTextToButtons();
 
-  textObserver = new MutationObserver(addTextToButtons);
-  textObserver.observe(globalNav, { childList: true, subtree: true });
+  textObserverApple = new MutationObserver(addTextToButtons);
+  textObserverApple.observe(globalNav, { childList: true, subtree: true });
 
   const addCollapsed = () => {
     const elementToWatch = document.querySelector(".sikBfynL1Y6I25nVpbAg");
@@ -46,27 +44,25 @@ function enableLibXUI(globalNav) {
   };
 
   addCollapsed();
-  collapsedObserver = new MutationObserver(addCollapsed);
-  collapsedObserver.observe(document.body, { childList: true, subtree: true });
+  collapsedObserverApple = new MutationObserver(addCollapsed);
+  collapsedObserverApple.observe(document.body, { childList: true, subtree: true });
 }
 
-function disableLibXUI(globalNav) {
+function disableAppleMusic(globalNav) {
   globalNav.classList.remove("global-libraryX", "collapsed");
 
-  if (textObserver) {
-    Console.Log("Removing libx observer");
-    textObserver.disconnect();
-    textObserver = null;
+  if (textObserverApple) {
+    textObserverApple.disconnect();
+    textObserverApple = null;
   }
 
-  if (collapsedObserver) {
-    Console.Log("Removing collapsedobserver");
-    collapsedObserver.disconnect();
-    collapsedObserver = null;
+  if (collapsedObserverApple) {
+    collapsedObserverApple.disconnect();
+    collapsedObserverApple = null;
   }
 
   const textWrappers = globalNav.querySelectorAll(".main-globalNav-textWrapper");
   textWrappers.forEach((el) => el.remove());
 }
 
-export default ToggleLibXUI;
+export default ToggleAppleMusic;

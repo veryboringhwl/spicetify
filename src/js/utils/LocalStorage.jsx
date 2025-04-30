@@ -4,7 +4,7 @@ const LocalStorage = {
   get(key, defaultValue) {
     try {
       const item = localStorage.getItem(key);
-      return item !== null ? JSON.parse(item) : defaultValue;
+      return item !== null && item !== "undefined" ? JSON.parse(item) : defaultValue;
     } catch (error) {
       Console.Error(`Error getting ${key} from localStorage:`, error);
       return defaultValue;

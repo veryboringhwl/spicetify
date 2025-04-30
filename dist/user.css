@@ -145,8 +145,8 @@
   background-image: linear-gradient(rgba(var(--spice-rgb-main), 0.5), var(--spice-main));
 }
 
-.main-entityHeader-container {
-  align-items: center;
+.main-entityHeader-image {
+  border-radius: 8px;
 }
 
 .ecHWOS,
@@ -156,7 +156,7 @@
 }
 
 .main-actionBar-ActionBar {
-  padding-bottom: 7px;
+  padding: 0 var(--content-spacing) 7px var(--content-spacing);
 }
 
 .main-actionBar-ActionBarRow > *:not(:last-child):has(.Wrapper-medium-only),
@@ -185,26 +185,42 @@
   padding: 8px;
 }
 
-.main-entityHeader-imageContainerNew {
-  position: relative;
-}
-
 .main-entityHeader-headerText {
-  flex: unset;
   justify-content: center;
-}
-
-.main-entityHeader-image {
-  border-radius: 8px;
-}
-
-.main-entityHeader-withBackgroundImage {
-  height: min(30vh, var(--fluid-height)) !important;
 }
 
 .main-entityHeader-container {
   margin-top: 64px;
   padding-bottom: 0px;
+  padding: var(--content-spacing) 0 var(--content-spacing);
+  height: unset !important;
+  min-height: unset !important;
+}
+
+:root {
+  --playlist-image: clamp(
+    156px,
+    156px +
+      (
+        100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px -
+          600px
+      ) / 424 * 104,
+    232px
+  );
+}
+
+.main-entityHeader-imageContainerNew {
+  position: relative;
+  height: var(--playlist-image);
+  width: var(--playlist-image);
+}
+
+.main-entityHeader-titleInner > * {
+  font-size: 4rem !important;
+}
+
+.main-entityHeader-withBackgroundImage {
+  height: min(30vh, var(--fluid-height)) !important;
 }
 
 .KROerAKSuwZBbse9iJT_ {
@@ -523,7 +539,7 @@ div#context-menu::before,
 
 /*adds space to drag small window*/
 @media (max-width: 1100px) {
-  body:not(.LibX) .main-topBar-topbarContentRight::after {
+  body:not(.LibX):not(.AppleMusic) .main-topBar-topbarContentRight::after {
     content: " |    ";
     -webkit-app-region: drag;
     color: rgba(var(--spice-rgb-text), 0.2);
@@ -854,7 +870,8 @@ body {
   background-size: cover;
   background-image: var(--image);
   background-position: center;
-  filter: blur(5px) brightness(0.75);
+  filter: blur(5px);
+  mask-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   transition: background 0.5s ease;
 }
 .AlbumBannerPage.PlaylistPage .playlist-playlist-playlistContent,
@@ -862,132 +879,10 @@ body {
 .AlbumBannerPage.PlaylistPage .main-entityHeader-backgroundColor {
   background: none !important;
 }
-.AlbumBannerPage.LyricsPage .lyrics-lyrics-background {
-  background-color: unset !important;
-}
-.AlbumBannerPage.LyricsPage .lyrics-lyricsContainer-LyricsBackground {
-  display: none;
-}
-
-.GenericModal:has(.playlist-modal) .main-trackCreditsModal-header {
-  padding: 24px 24px 0px !important;
-  font-size: 0.75rem;
-  border-bottom: none !important;
-}
-
-.GenericModal:has(.playlist-modal) .main-trackCreditsModal-mainSection {
-  padding: 16px 24px 0px !important;
-  font-size: 0.75rem;
-  border-bottom: none !important;
-}
-
-.main-embedWidgetGenerator-container:has(.playlist-modal) {
-  background-color: var(--spice-card) !important;
-  width: 550px;
-}
-
-.playlist-modal {
-  display: grid;
-  grid-template: 40px 132px 40px 6px/184px 1fr;
-  grid-template-areas: "album-image title title" "album-image description description" "disclaimer  disclaimer save-button";
-  grid-gap: 12px;
-}
-
-.image-button {
-  grid-area: album-image;
-  height: 184px;
-  width: 184px;
-  margin: 0;
-  position: relative;
-  box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.25);
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-}
-
-.title-input {
-  height: 40px;
-  width: 100%;
-  padding: 0 12px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  background: rgba(var(--spice-rgb-selected-row), 0.1);
-  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1);
-  color: var(--spice-text);
-}
-
-.title-input:focus {
-  background-color: var(--spice-tab-active);
-  border: 1px solid var(--spice-button-disabled);
-}
-
-.title-container {
-  grid-area: title;
-}
-
-.description-input {
-  width: 100%;
-  height: 100%;
-  padding: 8px 8px 28px;
-  font-size: 16px;
-  border-radius: 5px;
-  min-height: 100px;
-  border: none;
-  background: rgba(var(--spice-rgb-selected-row), 0.1);
-  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1);
-  color: var(--spice-text);
-}
-
-.description-input:focus {
-  background-color: var(--spice-tab-active);
-  border: 1px solid var(--spice-button-disabled);
-}
-
-.description-container {
-  grid-area: description;
-}
-
-.playlistSaveButton {
-  grid-area: save-button;
-  justify-self: flex-end;
-  background-color: var(--spice-text);
-  color: var(--spice-sidebar);
-  height: 48px;
-  border: none;
-  border-radius: 1000px;
-  font-size: 1rem;
-  font-weight: 700;
-  width: 100px;
-}
-
-.playlistSaveButton:hover {
-  transform: scale(1.04);
-}
-
-.playlistSaveButton:active {
-  background-color: var(--background-press, #c7c7c7);
-  box-shadow: none;
-  transform: scale(1);
-}
-
-.disclaimer-text {
-  grid-area: disclaimer;
-  font-size: 0.75rem;
-  font-weight: 700;
-  align-self: center;
-}
 
 .LibX .Root__top-container {
   padding-top: 48px;
   grid-template-areas: "global-nav main-view right-sidebar" "left-sidebar main-view right-sidebar" "now-playing-bar now-playing-bar now-playing-bar" !important;
-}
-.LibX .Root__globalNav > * {
-  padding-left: 8px;
-  padding-right: 8px;
 }
 .LibX .Root__globalNav {
   height: unset;
@@ -998,20 +893,23 @@ body {
   align-items: unset;
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
 }
+.LibX .Root__globalNav > * {
+  padding: 0px 8px;
+}
 .LibX .main-topBar-topbarContentRight,
 .LibX .main-globalNav-searchContainer > *,
-.LibX .search-searchCategory-categoryGrid > div > * {
+.LibX .custom-navlink {
   margin-top: 8px !important;
 }
 .LibX .Root__globalNav .main-globalNav-link-icon {
   background-color: unset;
-  transform: unset;
+  transform: none !important;
   justify-content: unset;
 }
 .LibX .main-actionButtons {
+  padding-inline: 0px !important;
   animation: unset !important;
   display: flex !important;
-  padding-inline: unset;
 }
 .LibX .search-searchCategory-categoryGrid,
 .LibX .main-globalNav-historyButtonsContainer,
@@ -1026,13 +924,15 @@ body {
 .LibX .main-globalNav-searchSection {
   order: -1;
 }
+.LibX ._b3hhmbWtOY8_1M1mM1H {
+  padding-inline: unset;
+}
 .LibX [aria-label=Marketplace],
-.LibX ._b3hhmbWtOY8_1M1mM1H,
-.LibX .Root__globalNav .Dp3xccI7c2f_JSJ8OHYu,
-.LibX .main-globalNav-searchInputSection {
+.LibX .Root__globalNav .Dp3xccI7c2f_JSJ8OHYu {
   margin-inline: unset !important;
 }
 .LibX .Root__globalNav,
+.LibX .custom-navlinks-scrollable_container,
 .LibX .search-searchCategory-categoryGrid > div,
 .LibX .main-globalNav-searchContainer {
   flex-direction: column !important;
@@ -1044,8 +944,7 @@ body {
   padding-bottom: 8px;
 }
 .LibX .main-topBar-searchBar {
-  background: unset;
-  background-color: unset !important;
+  background: unset !important;
   border-bottom: unset;
   box-shadow: none !important;
 }
@@ -1058,15 +957,20 @@ body {
 .LibX .main-globalNav-textWrapper {
   margin-left: 16px;
 }
-.LibX ._b3hhmbWtOY8_1M1mM1H {
-  padding-inline: unset;
-}
-.LibX .collapsed.Root__globalNav {
-  width: 72px;
-}
 .LibX .b7r2WRiu5f9Q99qmyreh {
   width: unset !important;
 }
+.LibX .Root__nav-bar .LayoutResizer__resize-bar {
+  height: calc(100vh - 142px);
+  bottom: 0px;
+}
+.LibX .LayoutResizer__inline-end:after {
+  height: 100%;
+}
+.LibX ._b3hhmbWtOY8_1M1mM1H:has(.main-topBar-searchBar[tabindex="0"]) .main-globalNav-textWrapper {
+  display: none !important;
+}
+.LibX .collapsed .main-globalNav-link-icon,
 .LibX .collapsed .b7r2WRiu5f9Q99qmyreh *:not(svg) {
   width: 56px !important;
   display: flex;
@@ -1074,29 +978,25 @@ body {
 }
 .LibX .collapsed .BV0jjn_h5TtMMl8YKuZ0,
 .LibX .collapsed .main-globalNav-textWrapper,
-.LibX .forceExpandSearchInput .fmZ0hU6ImbDQi5qGWLvF .main-globalNav-textWrapper,
 .LibX .collapsed .main-actionButtons,
 .LibX .collapsed .main-globalNav-historyButtons {
   display: none !important;
-}
-.LibX .collapsed .main-globalNav-link-icon {
-  justify-content: center !important;
-}
-.LibX .collapsed .main-userWidget-box {
-  width: 56px;
 }
 .LibX .collapsed .main-userWidget-hasAvatar > div,
 .LibX .collapsed .main-userWidget-hasAvatar {
   width: 38px !important;
 }
-
-.highlightnav .custom-navlinks-scrollable_container {
-  max-width: unset;
+.LibX .collapsed .main-userWidget-box {
+  width: 56px;
 }
+.LibX .collapsed.Root__globalNav {
+  width: 72px;
+}
+
 .highlightnav .main-globalNav-navLinkActive[aria-label=Home],
 .highlightnav .main-globalNav-navLinkActive[aria-label=Marketplace],
 .highlightnav .main-globalNav-navLinkActive[aria-label=Lyrics],
-.highlightnav .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
+.highlightnav #main:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
   background-color: var(--spice-highlight-elevated) !important;
   border-radius: 7px !important;
 }
@@ -1108,10 +1008,13 @@ body {
   border-radius: 7px;
 }
 
+.PreLibX .Root__top-container {
+  gap: 0 !important;
+  padding: 0px !important;
+}
 .PreLibX .Root__globalNav,
-.PreLibX .main-view-container__scroll-node,
 .PreLibX .main-buddyFeed-container {
-  padding-top: 48px;
+  padding-top: 48px !important;
 }
 .PreLibX .main-yourLibraryX-library,
 .PreLibX .Root__globalNav {
@@ -1122,12 +1025,8 @@ body {
 .PreLibX .Root__nav-bar {
   border-right: 1px solid var(--spice-card) !important;
 }
-.PreLibX .Root__top-container {
-  gap: 0 !important;
-  padding: 0px !important;
-}
 .PreLibX .Root__main-view-overlay {
-  margin: 0 !important;
+  margin: 0px !important;
 }
 .PreLibX .main-nowPlayingBar-nowPlayingBar {
   background-color: var(--spice-player);
@@ -1144,9 +1043,6 @@ body {
 .PreLibX .main-yourLibraryX-header {
   padding: 0 0 0 16px;
 }
-.PreLibX .LayoutResizer__inline-end {
-  inset-inline-end: -4px !important;
-}
 .PreLibX .main-buddyFeed-header {
   height: 80px;
 }
@@ -1157,6 +1053,11 @@ body {
   min-block-size: unset !important;
   padding-block: 0px !important;
   height: 36px !important;
+}
+.PreLibX .Root__nav-bar .LayoutResizer__resize-bar {
+  height: 100vh;
+  inset-inline-end: -4px !important;
+  bottom: 0px;
 }
 
 .CompactLib .fYWNdY4zhj4OX_T2Xtg6 {
@@ -1189,19 +1090,258 @@ body {
   max-height: 40px;
 }
 
+.AppleMusic #main {
+  --spice-accent: #fa2d48 !important;
+  --spice-button: #fa2d48 !important;
+  --spice-button-active: #fa2d48 !important;
+  --text-bright-accent: var(--spice-button-active);
+}
+.AppleMusic .main-yourLibraryX-library,
+.AppleMusic .Root__now-playing-bar,
+.AppleMusic .Root__right-sidebar,
+.AppleMusic .Root__main-view {
+  box-shadow: none !important;
+}
+.AppleMusic .Root__top-container {
+  gap: 0 !important;
+  padding: 0px !important;
+  padding-top: 48px;
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas: "global-nav now-playing-bar now-playing-bar" "global-nav main-view right-sidebar" "left-sidebar main-view right-sidebar" !important;
+}
+.AppleMusic .Root__now-playing-bar {
+  border-bottom: 1px solid var(--spice-card);
+  background-color: #2a2a2a !important;
+  border-radius: 0px !important;
+}
+.AppleMusic .main-nowPlayingBar-nowPlayingBar > * {
+  -webkit-app-region: no-drag;
+}
+.AppleMusic .main-nowPlayingBar-nowPlayingBar {
+  background-color: #2a2a2a;
+  width: calc(100% - 138px);
+}
+.AppleMusic .Root__globalNav {
+  height: unset;
+  background-color: var(--spice-main);
+  border-radius: 8px;
+  padding: unset !important;
+  margin: unset !important;
+  align-items: unset;
+  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
+}
+.AppleMusic .Root__globalNav > * {
+  padding: 0px 8px;
+}
+.AppleMusic .main-globalNav-link-icon {
+  background-color: unset;
+  transform: none !important;
+  justify-content: unset;
+}
+.AppleMusic .main-actionButtons {
+  padding-inline: 0px !important;
+  animation: unset !important;
+  display: flex !important;
+}
+.AppleMusic .search-searchCategory-categoryGrid,
+.AppleMusic .main-globalNav-historyButtonsContainer,
+.AppleMusic .main-globalNav-historyButtons > * {
+  display: unset !important;
+}
+.AppleMusic .main-globalNav-historyButtons {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+.AppleMusic .main-globalNav-searchSection {
+  order: -1;
+}
+.AppleMusic ._b3hhmbWtOY8_1M1mM1H {
+  padding-inline: unset;
+}
+.AppleMusic [aria-label=Marketplace],
+.AppleMusic .Root__globalNav .Dp3xccI7c2f_JSJ8OHYu {
+  margin-inline: unset !important;
+}
+.AppleMusic .Root__globalNav,
+.AppleMusic .custom-navlinks-scrollable_container,
+.AppleMusic .search-searchCategory-categoryGrid > div,
+.AppleMusic .main-globalNav-searchContainer {
+  flex-direction: column !important;
+  max-width: unset;
+}
+.AppleMusic .main-topBar-topbarContentRight {
+  gap: 8px;
+  justify-content: unset;
+  padding-bottom: 8px;
+}
+.AppleMusic .main-topBar-searchBar {
+  background: unset !important;
+  border-bottom: unset;
+  box-shadow: none !important;
+}
+.AppleMusic .fmZ0hU6ImbDQi5qGWLvF .main-globalNav-textWrapper {
+  position: absolute;
+  margin-left: 52px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.AppleMusic .main-globalNav-textWrapper {
+  margin-left: 16px;
+}
+.AppleMusic .b7r2WRiu5f9Q99qmyreh {
+  width: unset !important;
+}
+.AppleMusic .Root__nav-bar .LayoutResizer__resize-bar {
+  height: 100vh;
+  inset-inline-end: -4px !important;
+  bottom: 0px;
+}
+.AppleMusic .LayoutResizer__inline-end:after {
+  height: 100%;
+}
+.AppleMusic ._b3hhmbWtOY8_1M1mM1H:has(.main-topBar-searchBar[tabindex="0"]) .main-globalNav-textWrapper {
+  display: none !important;
+}
+.AppleMusic .collapsed .main-globalNav-link-icon,
+.AppleMusic .collapsed .b7r2WRiu5f9Q99qmyreh *:not(svg) {
+  width: 56px !important;
+  display: flex;
+  justify-content: center;
+}
+.AppleMusic .collapsed .BV0jjn_h5TtMMl8YKuZ0,
+.AppleMusic .collapsed .main-globalNav-textWrapper,
+.AppleMusic .collapsed .main-actionButtons,
+.AppleMusic .collapsed .main-globalNav-historyButtons {
+  display: none !important;
+}
+.AppleMusic .collapsed .main-userWidget-hasAvatar > div,
+.AppleMusic .collapsed .main-userWidget-hasAvatar {
+  width: 38px !important;
+}
+.AppleMusic .collapsed .main-userWidget-box {
+  width: 56px;
+}
+.AppleMusic .collapsed.Root__globalNav {
+  width: 72px;
+}
+.AppleMusic .Root__globalNav,
+.AppleMusic .main-buddyFeed-container {
+  padding-top: 48px !important;
+}
+.AppleMusic .main-yourLibraryX-library,
+.AppleMusic .Root__globalNav {
+  background-color: var(--spice-sidebar);
+  border-radius: 0px;
+}
+.AppleMusic .Root__globalNav,
+.AppleMusic .Root__nav-bar {
+  border-right: 1px solid var(--spice-card) !important;
+}
+.AppleMusic .Root__main-view-overlay {
+  margin: 0px !important;
+  z-index: 10000;
+}
+.AppleMusic .Root__right-sidebar {
+  border-left: 1px solid var(--spice-card);
+}
+.AppleMusic .main-buddyFeed-container,
+.AppleMusic .Root__main-view {
+  border-radius: 0px !important;
+}
+.AppleMusic .main-yourLibraryX-header {
+  padding: 0 0 0 16px;
+}
+.AppleMusic .main-buddyFeed-header {
+  height: 80px;
+}
+.AppleMusic .J4qD2RoZgGLbOdpfs63w > div > *,
+.AppleMusic .main-globalNav-searchContainer > *,
+.AppleMusic .main-topBar-searchBar,
+.AppleMusic .EJttP30F1zYHeAw7ISHb {
+  min-block-size: unset !important;
+  padding-block: 0px !important;
+  height: 36px !important;
+}
+.AppleMusic .main-globalNav-navLinkActive[aria-label=Home],
+.AppleMusic .main-globalNav-navLinkActive[aria-label=Marketplace],
+.AppleMusic .main-globalNav-navLinkActive[aria-label=Lyrics],
+.AppleMusic #main:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
+  background-color: var(--spice-highlight-elevated) !important;
+  border-radius: 7px !important;
+}
+.AppleMusic .b7r2WRiu5f9Q99qmyreh:hover,
+.AppleMusic [aria-label=Home]:hover,
+.AppleMusic [aria-label=Marketplace]:hover,
+.AppleMusic [aria-label=Lyrics]:hover {
+  background-color: var(--spice-highlight);
+  border-radius: 7px;
+}
+.AppleMusic .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ)::before,
+.AppleMusic .b7r2WRiu5f9Q99qmyreh:has(.MdMAXXFPalD99eigsBug)::before,
+.AppleMusic .main-globalNav-navLinkActive.main-globalNav-link-icon::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 18px;
+  top: 9px;
+  background-color: var(--spice-accent);
+  border-radius: 7px;
+  left: 0px;
+}
+.AppleMusic .main-nowPlayingBar-left {
+  padding-inline-start: 0px;
+  max-width: 275px;
+}
+.AppleMusic .main-nowPlayingBar-center {
+  order: -1;
+}
+.AppleMusic .main-nowPlayingBar-right {
+  order: 1;
+}
+.AppleMusic .player-controls {
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0 8px;
+}
+.AppleMusic .player-controls__right {
+  order: 1;
+}
+.AppleMusic .player-controls__buttons,
+.AppleMusic .player-controls__left,
+.AppleMusic .player-controls__right {
+  gap: 0;
+  flex: unset;
+  width: unset;
+}
+.AppleMusic .main-playbackBarRemainingTime-container,
+.AppleMusic .playback-bar__progress-time-elapsed {
+  min-width: 30px;
+}
+.AppleMusic .playback-bar {
+  max-width: 375px;
+}
+.AppleMusic [data-testid=control-button-playpause],
+.AppleMusic [data-testid=control-button-skip-forward],
+.AppleMusic [data-testid=control-button-repeat],
+.AppleMusic [data-testid=control-button-shuffle],
+.AppleMusic [data-testid=control-button-skip-back] {
+  padding: 7px;
+}
+
 .TestLayout .player-controls {
   flex-direction: row;
   justify-content: flex-start;
+}
+.TestLayout .main-nowPlayingBar-left {
+  padding-inline-start: 0px;
+  max-width: 275px;
 }
 .TestLayout .main-nowPlayingBar-center {
   order: -1;
 }
 .TestLayout .main-nowPlayingBar-right {
   order: 1;
-}
-.TestLayout .main-nowPlayingBar-left {
-  padding-inline-start: 0px;
-  max-width: 275px;
 }
 .TestLayout .player-controls__left {
   order: 1;
@@ -1297,6 +1437,12 @@ body {
   border-radius: 7px;
   left: 0px;
   top: 12px;
+}
+.greenicon.PreLibX .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ)::before,
+.greenicon.PreLibX .b7r2WRiu5f9Q99qmyreh:has(.MdMAXXFPalD99eigsBug)::before,
+.greenicon.PreLibX .main-globalNav-navLinkActive.main-globalNav-link-icon::before {
+  height: 24px;
+  top: 6px;
 }
 
 .transplayicon .main-nowPlayingBar-center [aria-label=Pause] svg,

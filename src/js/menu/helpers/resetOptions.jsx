@@ -35,7 +35,7 @@ const resetOptions = (setSettings) => {
           LocalStorage.set(key, value);
         });
         setSettings(defaultSettings);
-        applyOptions(defaultSettings);
+        applyOptions(defaultSettings, Object.keys(defaultSettings));
         runModalSettings();
       } catch (error) {
         Console.Error("Failed to reset settings:", error);

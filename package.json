@@ -9,8 +9,8 @@
     "watch-js": "node tasks/watch.js --js",
     "build-css": "node tasks/build.js --css",
     "watch-css": "node tasks/watch.js --css",
-    "debug": "concurrently --raw \"npm run watch\" \"spicetify watch -s -q\"",
-    "test": "npm run build && spicetify apply"
+    "debug": "concurrently --raw \"spicetify watch -s -q\" \"npm run watch\" ",
+    "test": "npm run build && spicetify apply -q"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

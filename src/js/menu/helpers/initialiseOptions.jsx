@@ -20,6 +20,14 @@ const initialiseOptions = () => {
         return acc;
       }, {});
 
+    Object.values(options)
+      .flat()
+      .forEach((option) => {
+        const key = `theme:${option.name}`;
+        const value = loadedOptions[key];
+        option.run?.(value);
+      });
+
     applyOptions(loadedOptions);
     runModalSettings();
     return loadedOptions;

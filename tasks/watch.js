@@ -57,9 +57,15 @@ const watchJS = async () => {
 };
 
 const watchCSS = () => {
+  //make it build then watch
   const OUT = "dist/user.css";
   const SRC = "src/css/app.scss";
   const PARENT_OUT = "../user.css";
+
+  //build css first then watch
+  exec(`sass ${SRC} ${OUT} --no-source-map`, {
+    stdio: "ignore",
+  });
 
   sassProcess = exec(`sass ${SRC} ${OUT} --watch --no-source-map`, {
     stdio: "ignore",

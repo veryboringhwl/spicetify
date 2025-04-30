@@ -1,5 +1,5 @@
 import React from "react";
-import OptionType from "../settingsmenu/OptionType";
+import OptionType from "./OptionType";
 
 const RevealableOption = React.memo(({ option, settings, onChange }) => {
   return (

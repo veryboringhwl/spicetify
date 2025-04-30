@@ -1,7 +1,7 @@
 import React from "react";
-import Dropdown from "../components/Dropdown";
-import Input from "../components/Input";
-import Toggle from "../components/Toggle";
+import Dropdown from "./Dropdown";
+import Input from "./Input";
+import Toggle from "./Toggle";
 
 const OptionType = React.memo(({ option, value, onChange }) => {
   const Component = { toggle: Toggle, dropdown: Dropdown, input: Input }[option.type];
