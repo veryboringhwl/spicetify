@@ -14,18 +14,20 @@ const SettingsMenu = React.memo(() => {
   return (
     <div className="themeContainer">
       <CategoryCarousel categories={categories} />
-      {Object.entries(options).map(([category, categoryOptions]) => (
-        <Section key={category} name={category}>
-          {categoryOptions.map((option) => (
-            <RenderOptions
-              key={option.name}
-              option={option}
-              settings={settings}
-              onChange={handleSettingChange}
-            />
-          ))}
-        </Section>
-      ))}
+      <div className="optionsContainer">
+        {Object.entries(options).map(([category, categoryOptions]) => (
+          <Section key={category} name={category}>
+            {categoryOptions.map((option) => (
+              <RenderOptions
+                key={option.name}
+                option={option}
+                settings={settings}
+                onChange={handleSettingChange}
+              />
+            ))}
+          </Section>
+        ))}
+      </div>
       <div className="buttonContainer">
         <button className="resetButton" onClick={() => resetOptions(setSettings)}>
           Reset

@@ -1,4 +1,5 @@
 import React from "react";
+import LoadingIndicator from "../components/LoadingIndicator";
 import Console from "../utils/Console";
 import Notification from "../utils/Notification";
 
@@ -66,6 +67,16 @@ const DebugMenu = React.memo(() => {
       >
         Special Button
       </button>
+      <div className="loading-wrapper">
+        <LoadingIndicator />
+      </div>
+      <svg
+        viewBox="0 0 16 16"
+        width="128"
+        height="128"
+        fill="currentColor"
+        dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.menu }}
+      />
     </div>
   );
 });

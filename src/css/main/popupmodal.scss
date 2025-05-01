@@ -1,18 +1,20 @@
 .GenericModal {
   background-color: unset;
-  box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
 }
 
 .main-trackCreditsModal-container {
   background-color: var(--spice-main) !important;
   width: 450px;
   border-radius: 7px;
+  box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
 }
 
 .main-embedWidgetGenerator-container {
-  background-color: var(--spice-main) !important;
+  background-color: rgba(var(--spice-rgb-main), 0.9) !important;
+  backdrop-filter: blur(20px) saturate(1.4) brightness(1.2);
   max-height: 80vh;
   border-radius: 7px;
+  box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
 }
 
 .GenericModal__overlay {

@@ -12,7 +12,7 @@ div#context-menu::before,
 .main-contextMenu-menu:before {
   content: "";
   border-radius: 7px;
-  backdrop-filter: blur(15px) saturate(1.4) brightness(1.2);
+  backdrop-filter: blur(20px) saturate(1.4) brightness(1.2);
   position: absolute;
   top: 0;
   left: 0;

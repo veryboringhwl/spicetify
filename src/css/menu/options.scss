@@ -23,7 +23,7 @@
 
 .themeOptionRow {
   display: flex;
-	height: 32px;
+  height: 32px;
   justify-content: space-between;
 }
 
@@ -34,11 +34,18 @@
   gap: 8px;
 }
 
+.optionsContainer {
+  overflow-y: auto;
+  height: 600px;
+  scrollbar-width: none;
+}
+
 .themeModalOptions,
 .themeOptionWrapper,
 .themeOptionRevealed,
-.themeContainer > .themeSettingsCategory {
-  display: grid;
+.themeOptionsCategory {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 

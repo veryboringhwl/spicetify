@@ -19,7 +19,7 @@ const CategoryCarousel = React.memo(({ categories }) => {
   const buttonWidth = `calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`;
 
   return (
-    <div className="category-carousel-container">
+    <div className="carouselContainer">
       <div className="category-carousel" ref={carouselRef}>
         {categories.map((category, index) => (
           <button
