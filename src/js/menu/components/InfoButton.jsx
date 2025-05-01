@@ -18,13 +18,7 @@ const InfoButton = React.memo(({ name, popupModal }) => {
       }
       aria-label="Open popup"
     >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        dangerouslySetInnerHTML={{ __html: Icons.editButton }}
-      />
+      <Icons.React.editButton size={16} />
     </button>
   );
 });

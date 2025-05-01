@@ -35,7 +35,8 @@ body {
   &.PlaylistPage {
     .playlist-playlist-playlistContent,
     .main-actionBarBackground-background,
-    .main-entityHeader-backgroundColor {
+    .main-entityHeader-backgroundColor,
+    .main-entityHeader-background {
       background: none !important;
     }
   }

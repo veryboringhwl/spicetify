@@ -11,12 +11,13 @@ import Notification from "./utils/Notification";
   const timeout = Date.now() + 5000;
   while (
     !(
-      Spicetify.Platform &&
-      Spicetify.Mousetrap &&
+      Spicetify.Config &&
       Spicetify.CosmosAsync &&
+      Spicetify.Mousetrap &&
+      Spicetify.Platform &&
+      Spicetify.ReactComponent &&
       Spicetify.Snackbar.enqueueSnackbar &&
-      Spicetify.Snackbar.enqueueCustomSnackbar &&
-      Spicetify.ReactComponent
+      Spicetify.Snackbar.enqueueCustomSnackbar
     )
   ) {
     if (Date.now() > timeout) {

@@ -1,9 +1,8 @@
 import LocalStorage from "../utils/LocalStorage";
 
-const CoverArtBanner = () => {
-  if (!Spicetify.Player.data?.item) {
-    setTimeout(CoverArtBanner, 100);
-    return;
+const CoverArtBanner = async () => {
+  while (!Spicetify.Player.data?.item) {
+    await new Promise((resolve) => setTimeout(resolve, 10));
   }
 
   const channels = {
@@ -30,11 +29,10 @@ const CoverArtBanner = () => {
     })();
 
   const updateBanner = () => {
-    const { pathname } = Spicetify.Platform.History.location;
     const imageUrl = Spicetify.Player.data?.item?.metadata?.image_xlarge_url;
-
     const showBanner = Object.values(channels).some(
-      ({ regex, key }) => LocalStorage.get(key, false) && regex.test(pathname),
+      ({ regex, key }) =>
+        LocalStorage.get(key, false) && regex.test(Spicetify.Platform.History.location.pathname),
     );
 
     if (showBanner) {

@@ -1,5 +1,5 @@
 import React from "react";
-import OptionType from "../components/OptionType";
+import IncompatibleOption from "../components/IncompatibleOption";
 import RevealableOption from "../components/RevealableOption";
 
 const RenderOptions = React.memo(({ option, settings, onChange }) => {
@@ -8,12 +8,7 @@ const RenderOptions = React.memo(({ option, settings, onChange }) => {
   return (
     <div className="themeOptionWrapper">
       <div className="themeOptionMain">
-        <OptionType
-          option={option}
-          value={mainValue}
-          onChange={onChange}
-          popupModal={option.popupModal}
-        />
+        <IncompatibleOption option={option} settings={settings} onChange={onChange} />
       </div>
       {mainValue && option.reveal && (
         <RevealableOption option={option} settings={settings} onChange={onChange} />

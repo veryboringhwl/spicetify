@@ -82,6 +82,7 @@
     background: unset !important;
     border-bottom: unset;
     box-shadow: none !important;
+    font-weight: 700;
   }
 
   .fmZ0hU6ImbDQi5qGWLvF .main-globalNav-textWrapper {
@@ -171,6 +172,7 @@
     padding-top: 48px !important;
   }
 
+  .ffFwfKcPDbmAPLXzxzKq:before,
   .main-yourLibraryX-library,
   .Root__globalNav {
     background-color: var(--spice-sidebar);
@@ -264,6 +266,8 @@
 }
 
 .AppleMusic {
+  .ReactModalPortal,
+  generic-modal,
   #main {
     --spice-accent: #fa2d48 !important;
     --spice-button: #fa2d48 !important;
@@ -373,6 +377,7 @@
     background: unset !important;
     border-bottom: unset;
     box-shadow: none !important;
+    font-weight: 700;
   }
 
   .fmZ0hU6ImbDQi5qGWLvF .main-globalNav-textWrapper {
@@ -438,7 +443,7 @@
   .main-buddyFeed-container {
     padding-top: 48px !important;
   }
-
+  .ffFwfKcPDbmAPLXzxzKq:before,
   .main-yourLibraryX-library,
   .Root__globalNav {
     background-color: var(--spice-sidebar);
@@ -617,13 +622,13 @@
     grid-template-areas:
       "global-nav global-nav global-nav"
       "left-sidebar main-view right-sidebar"
-      "left-sidebar now-playing-bar now-playing-bar" !important;
+      "left-sidebar now-playing-bar right-sidebar" !important;
   }
 
   &.LibX .Root__top-container {
     grid-template-areas:
       "global-nav main-view right-sidebar"
       "left-sidebar main-view right-sidebar"
-      "left-sidebar now-playing-bar now-playing-bar" !important;
+      "left-sidebar now-playing-bar right-sidebar" !important;
   }
 }

@@ -3,15 +3,19 @@
   max-width: 325px;
 }
 
-.main-trackCreditsModal-BtnContainer > *:hover {
+.main-trackCreditsModal-BtnContainer {
+  display: flex;
+}
+
+.main-trackCreditsModal-BtnContainer button:hover {
   transform: scale(1.1);
 }
 
-.main-trackCreditsModal-BtnContainer > *:active {
+.main-trackCreditsModal-BtnContainer button:active {
   transform: scale(0.9);
 }
 
-.main-trackCreditsModal-BtnContainer > * {
+.main-trackCreditsModal-BtnContainer button {
   background-color: var(--spice-highlight);
   border-radius: 8px;
   height: 34px;

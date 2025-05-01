@@ -19,26 +19,14 @@ const ModalButtons = async () => {
         onClick={() => window.open("https://github.com/veryboringhwl/spicetify")}
         ref={(label) => label && Tippy(label, "View on GitHub")}
       >
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 96 96"
-          fill="currentColor"
-          dangerouslySetInnerHTML={{ __html: Icons.github }}
-        />
+        <Icons.React.github size={18} />
       </button>
       <button
         className="main-trackCreditsModal-closeBtn"
         onClick={() => Spicetify.PopupModal.hide()}
         ref={(label) => label && Tippy(label, "Close")}
       >
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 32 32"
-          fill="currentColor"
-          dangerouslySetInnerHTML={{ __html: Icons.close }}
-        />
+        <Icons.React.close size={18} />
       </button>
     </>,
   );

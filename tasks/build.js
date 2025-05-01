@@ -14,6 +14,7 @@ const buildJS = async () => {
     sourcemap: false,
     entryPoints: [SRC],
     outfile: OUT,
+    minify: true,
     external: ["react", "react-dom"],
     plugins: [
       externalGlobalPlugin.externalGlobalPlugin({

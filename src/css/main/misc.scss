@@ -1,9 +1,9 @@
 /*adds space to drag small window*/
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   body:not(.LibX):not(.AppleMusic) .main-topBar-topbarContentRight::after {
     content: " |    ";
     -webkit-app-region: drag;
-    color: rgba(var(--spice-rgb-text), 0.2);
+    color: rgba(var(--spice-rgb-text), 0.5);
     font-weight: 1;
     font-size: 30px;
     white-space: pre-wrap;
@@ -45,4 +45,13 @@
 /*what is this*/
 .Vn9yz8P5MjIvDT8c0U6w {
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
+  color: white;
+  height: 10000px;
+  width: 10000px;
+}
+
+/*fix home screen scrolliong performance*/
+.search-searchCategory-categoryGrid,
+[data-overlayscrollbars-viewport] {
+  will-change: transform !important;
 }

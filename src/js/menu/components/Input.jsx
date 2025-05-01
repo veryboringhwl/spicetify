@@ -12,9 +12,7 @@ const Input = React.memo(({ name, desc, tippy, value, onChange, placeholder, pop
   }, [tippy]);
 
   const handleChange = React.useCallback(
-    (e) => {
-      onChange(`theme:${name}`, e.target.value);
-    },
+    (e) => onChange(`theme:${name}`, e.target.value),
     [name, onChange],
   );
 

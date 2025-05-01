@@ -1,3 +1,4 @@
+import DebugMenu from "../../debug/DebugMenu";
 import ColourScheme from "../../features/ColourScheme";
 import CoverArtBanner from "../../features/CoverArtBanner";
 import SpotifyMode from "../../features/SpotifyMode";
@@ -21,6 +22,7 @@ const options = {
         { value: "bloom", label: "Bloom" },
         { value: "spotify", label: "Spotify" },
       ],
+      tippy: "Default uses the colour scheme set in config-xpui.ini",
       run(value) {
         ColourScheme(value);
       },
@@ -76,6 +78,7 @@ const options = {
       name: "WindowsControl",
       desc: "Adjust the position and brightness of the windows controls",
       defaultVal: false,
+      tippy: "This will override the themes default windows controls",
       popupModal: WindowsControlModal,
     },
     {
@@ -96,6 +99,8 @@ const options = {
       name: "LibX",
       desc: "Restore the old UI >2024 (Pre Global Nav Bar)",
       defaultVal: false,
+      incompatible: ["AppleMusic"],
+      tippy: "Incompatible with AppleMusic",
       run(value) {
         ToggleLibXUI(value);
       },
@@ -126,7 +131,8 @@ const options = {
       name: "AppleMusic",
       desc: "Changes the UI to look like Apple Music",
       defaultVal: false,
-      tippy: "Incompatible with LibX, Switchlayout and testlayout",
+      incompatible: ["LibX", "switchlayout", "TestLayout", "greenicon"],
+      tippy: "Incompatible with LibX, Switchlayout, greenicon and testlayout",
       run(value) {
         ToggleAppleMusic(value);
       },
@@ -135,12 +141,16 @@ const options = {
       type: "toggle",
       name: "TestLayout",
       desc: "Rearrange playbutton to start and cover art to middle",
+      incompatible: ["AppleMusic"],
+      tippy: "Incompatible with AppleMusic",
       defaultVal: true,
     },
     {
       type: "toggle",
       name: "switchlayout",
       desc: "Uses different grid layout for Now playing bar",
+      incompatible: ["AppleMusic"],
+      tippy: "Incompatible with AppleMusic",
       defaultVal: true,
     },
   ],
@@ -155,6 +165,8 @@ const options = {
       type: "toggle",
       name: "greenicon",
       desc: "Make the selected tab icon green",
+      incompatible: ["AppleMusic"],
+      tippy: "Incompatible with AppleMusic",
       defaultVal: true,
     },
     {
@@ -180,24 +192,29 @@ const options = {
     {
       type: "toggle",
       name: "test-toggle",
-      desc: "Description",
+      desc: "test-toggle",
       defaultVal: true,
-      popupModal: WindowsControlModal,
-      run(value) {
-        console.log(value);
-      },
+      popupModal: DebugMenu,
+      incompatible: ["test-incompatible"],
+      tippy: "Incompatible with test-incompatible",
+    },
+    {
+      type: "toggle",
+      name: "test-incompatible",
+      desc: "test-incompatible",
+      defaultVal: true,
     },
     {
       type: "input",
       name: "test-input",
-      desc: "Description",
+      desc: "test-input",
       defaultVal: 1,
       placeholder: "does something",
     },
     {
       type: "dropdown",
       name: "test-dropdown",
-      desc: "Description",
+      desc: "test-dropdown",
       defaultVal: "test1",
       options: [
         { value: "test1", label: "test1" },
@@ -205,32 +222,29 @@ const options = {
         { value: "test3", label: "test3" },
         { value: "test4", label: "test4" },
       ],
-      run(value) {
-        console.log(value);
-      },
     },
     {
       type: "toggle",
       name: "test-reveal",
-      desc: "Description",
+      desc: "test-reveal",
       defaultVal: true,
       reveal: [
         {
           type: "toggle",
           name: "revealed-toggle",
-          desc: "Description",
+          desc: "revealed-toggle",
           defaultVal: true,
         },
         {
           type: "input",
           name: "revealed-input",
-          desc: "Description",
+          desc: "revealed-input",
           defaultVal: true,
         },
         {
           type: "dropdown",
           name: "revealed-dropdown",
-          desc: "Description",
+          desc: "revealed-dropdown",
           defaultVal: "test1",
           options: [
             { value: "test1", label: "test1" },

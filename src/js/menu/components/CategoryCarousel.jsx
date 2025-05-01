@@ -21,7 +21,7 @@ const CategoryCarousel = React.memo(({ categories }) => {
   return (
     <div className="carouselContainer">
       <div className="category-carousel" ref={carouselRef}>
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <button
             key={category}
             className="category-button"
@@ -32,7 +32,6 @@ const CategoryCarousel = React.memo(({ categories }) => {
             }}
             style={{
               width: buttonWidth,
-              marginRight: index < categories.length - 1 ? "8px" : "0",
             }}
           >
             {category}

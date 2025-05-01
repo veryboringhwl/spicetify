@@ -126,17 +126,25 @@
 }
 
 .npvlargerlyrics {
+  .main-nowPlayingView-contextItemInfo:before {
+    background: unset !important;
+  }
+
   .main-buddyFeed-header {
     display: none;
   }
 
+  .main-nowPlayingView-nowPlayingWidget {
+    margin: unset !important;
+  }
+
   .main-nowPlayingView-coverArt {
-    width: 85px;
+    width: 94px;
   }
 
   .main-nowPlayingView-coverArtContainer {
-    height: 85px !important;
-    width: 80px;
+    height: 94px !important;
+    width: 94px;
   }
 
   .main-nowPlayingView-nowPlayingGrid {
@@ -177,8 +185,75 @@
   #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
   .main-nowPlayingView-lyricsContent .RootContainer,
   .main-nowPlayingView-sectionHeaderSpacing {
-    height: 66cqh;
-    max-height: 66.5cqh;
+    //64+64+94+16+16+8+78+8=348
+    height: calc(100vh - 348px);
+    max-height: unset !important;
+  }
+
+  &.LibX {
+    #BeautifulLyrics-CardView,
+    #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
+    .main-nowPlayingView-lyricsContent .RootContainer,
+    .main-nowPlayingView-sectionHeaderSpacing {
+      //48+64+94+16+16=332
+      height: calc(100vh - 332px);
+      max-height: unset !important;
+    }
+  }
+
+  &.PreLibX {
+    #BeautifulLyrics-CardView,
+    #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
+    .main-nowPlayingView-lyricsContent .RootContainer,
+    .main-nowPlayingView-sectionHeaderSpacing {
+      //64+94+16+16+88=278
+      height: calc(100vh - 278px);
+      max-height: unset !important;
+    }
+  }
+
+  &.switchlayout {
+    #BeautifulLyrics-CardView,
+    #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
+    .main-nowPlayingView-lyricsContent .RootContainer,
+    .main-nowPlayingView-sectionHeaderSpacing {
+      //64+64+94+16+16+8=262
+      height: calc(100vh - 262px);
+      max-height: unset !important;
+    }
+  }
+
+  &.LibX.switchlayout {
+    #BeautifulLyrics-CardView,
+    #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
+    .main-nowPlayingView-lyricsContent .RootContainer,
+    .main-nowPlayingView-sectionHeaderSpacing {
+      //48+64+94+16+16+8=246
+      height: calc(100vh - 246px);
+      max-height: unset !important;
+    }
+  }
+
+  &.PreLibX.switchlayout {
+    #BeautifulLyrics-CardView,
+    #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
+    .main-nowPlayingView-lyricsContent .RootContainer,
+    .main-nowPlayingView-sectionHeaderSpacing {
+      //64+94+16+16=190
+      height: calc(100vh - 190px);
+      max-height: unset !important;
+    }
+  }
+
+  &.AppleMusic {
+    #BeautifulLyrics-CardView,
+    #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
+    .main-nowPlayingView-lyricsContent .RootContainer,
+    .main-nowPlayingView-sectionHeaderSpacing {
+      // 79+64+94+16+16=269
+      height: calc(100vh - 269px);
+      max-height: unset !important;
+    }
   }
 }
 

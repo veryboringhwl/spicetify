@@ -17,20 +17,26 @@ const resetOptions = (setSettings) => {
     },
     onConfirm: () => {
       try {
-        Console.Log("Resetting settings");
+        console.log("Resetting settings");
+        const allOptions = [
+          ...Object.values(options).flat(),
+          ...albumBannerOptions,
+          ...windowsControlOptions,
+        ];
         const defaultSettings = {};
-        [...Object.values(options).flat(), ...albumBannerOptions, ...windowsControlOptions].forEach(
-          (option) => {
-            defaultSettings[`theme:${option.name}`] = option.defaultVal;
-            if (option.reveal) {
-              option.reveal.forEach((subOption) => {
-                defaultSettings[`theme:${subOption.name}`] = option.defaultVal
-                  ? subOption.defaultVal
-                  : false;
-              });
-            }
-          },
-        );
+
+        allOptions.forEach((option) => {
+          const mainKey = `theme:${option.name}`;
+          defaultSettings[mainKey] = option.defaultVal;
+          if (option.reveal) {
+            option.reveal.forEach((subOption) => {
+              defaultSettings[`theme:${subOption.name}`] = option.defaultVal
+                ? subOption.defaultVal
+                : false;
+            });
+          }
+        });
+
         Object.entries(defaultSettings).forEach(([key, value]) => {
           LocalStorage.set(key, value);
         });

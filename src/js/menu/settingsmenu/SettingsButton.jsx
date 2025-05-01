@@ -124,7 +124,9 @@ const SettingsButton = () => {
               width="16"
               height="16"
               fill="currentColor"
-              dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.subtitles }}
+              dangerouslySetInnerHTML={{
+                __html: Spicetify.SVGIcons.subtitles,
+              }}
             />
           }
         >

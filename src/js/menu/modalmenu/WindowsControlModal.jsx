@@ -14,24 +14,14 @@ const WindowsControlModal = React.memo(() => {
     ),
   );
 
-  const handleSettingChange = React.useCallback((key, value) => {
+  const handleSettingChange = (key, value) => {
     const optionName = key.replace("theme:", "");
     setSettings((prev) => ({ ...prev, [optionName]: value }));
     document.documentElement.style.setProperty(
       `--windowcontrol-${optionName.toLowerCase()}`,
       value,
     );
-  }, []);
-
-  React.useEffect(() => {
-    windowsControlOptions.forEach((option) => {
-      const value = settings[option.name];
-      document.documentElement.style.setProperty(
-        `--windowcontrol-${option.name.toLowerCase()}`,
-        value,
-      );
-    });
-  }, [settings]);
+  };
 
   return (
     <div className="themeModalOptions windowsControlSettings">
