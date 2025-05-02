@@ -1,13 +1,13 @@
 import React from "react";
 
-const ReactComponent = (html, defaultSize = 16) => {
+const ReactComponent = (icon, defaultSize = 16) => {
   return ({ size = defaultSize, fill = "currentColor" }) => (
     <svg
       viewBox={`0 0 ${defaultSize} ${defaultSize}`}
       width={size}
       height={size}
       fill={fill}
-      dangerouslySetInnerHTML={{ __html: html }}
+      dangerouslySetInnerHTML={{ __html: icon }}
     />
   );
 };
@@ -27,7 +27,6 @@ const Icons = {
   more: `<path d="M3 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm6.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>`,
 };
 
-// React components
 Icons.React = {
   editButton: ReactComponent(Icons.editButton, 24),
   settings: ReactComponent(Icons.settings, 16),

@@ -27,13 +27,7 @@ import Notification from "./utils/Notification";
         backgroundColor: "#ff9800",
         message: (
           <>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              dangerouslySetInnerHTML={{ __html: Icons.warning }}
-            />
+            <Icons.React.warning size={24} />
             <span>Theme could not load. Please refresh the page and try again.</span>
           </>
         ),
@@ -54,22 +48,15 @@ import Notification from "./utils/Notification";
     debugger;
   });
 
-  const SpotifyVersion =
-    Spicetify.Platform.PlatformData.event_sender_context_information.client_version_int;
-
-  if (SpotifyVersion < 125500000) {
+  const version = Spicetify.Platform.version.split(".").map((e) => Number.parseInt(e));
+  if (version[2] >= 39) {
     Notification({
       autoHideDuration: 5000,
       backgroundColor: "#ff9800",
+      color: "#fff",
       message: (
         <>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            dangerouslySetInnerHTML={{ __html: Icons.warning }}
-          />
+          <Icons.React.warning size={24} />
           <span>Theme only supports Spotify versions greater than 1.2.50.000</span>
         </>
       ),

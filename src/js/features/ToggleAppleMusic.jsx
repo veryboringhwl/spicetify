@@ -19,9 +19,9 @@ function enableAppleMusic(globalNav) {
   globalNav.classList.add("global-libraryX");
 
   const addTextToButtons = () => {
-    const elements = globalNav.querySelectorAll(
-      ".search-searchCategory-categoryGrid > div > button, .main-globalNav-searchContainer > .main-globalNav-link-icon, ._b3hhmbWtOY8_1M1mM1H",
-    );
+    const elements = globalNav.querySelectorAll(".main-globalNav-navLink, ._b3hhmbWtOY8_1M1mM1H");
+    // .main-globalNav-navLink: Nav Links
+    // _b3hhmbWtOY8_1M1mM1H: Search tab
     elements.forEach((el) => {
       if (!el.querySelector(".main-globalNav-textWrapper")) {
         const text = el.getAttribute("aria-label") || (el.querySelector("input") ? "Search" : "");
@@ -45,7 +45,10 @@ function enableAppleMusic(globalNav) {
 
   addCollapsed();
   collapsedObserverApple = new MutationObserver(addCollapsed);
-  collapsedObserverApple.observe(document.body, { childList: true, subtree: true });
+  collapsedObserverApple.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
 }
 
 function disableAppleMusic(globalNav) {

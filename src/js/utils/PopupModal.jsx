@@ -1,4 +1,4 @@
-import ModalButtons from "./ModalButtons";
+import ModalButtons from "../components/ModalButtons";
 
 const PopupModal = ({ title = "", content = "", isLarge = true, buttons = true } = {}) => {
   requestAnimationFrame(() => {

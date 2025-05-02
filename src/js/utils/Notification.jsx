@@ -1,10 +1,12 @@
 import React from "react";
+import Console from "./Console";
 
 const Notification = ({
   message = "",
   keyPrefix = "custom-notif",
   autoHideDuration = 3000,
   backgroundColor = "#fff",
+  color = "#000",
 } = {}) => {
   Spicetify.Snackbar.enqueueCustomSnackbar(keyPrefix, {
     keyPrefix,
@@ -16,7 +18,7 @@ const Notification = ({
           display: "flex",
           gap: "8px",
           alignItems: "center",
-          color: "#fff",
+          color: color,
           backgroundColor: backgroundColor,
           padding: "14px 16px",
           borderRadius: "4px",

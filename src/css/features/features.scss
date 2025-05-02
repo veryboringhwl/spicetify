@@ -40,14 +40,4 @@ body {
       background: none !important;
     }
   }
-
-  &.LyricsPage {
-    .lyrics-lyrics-background {
-      mask-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-    }
-
-    .lyrics-lyricsContainer-LyricsBackground {
-      mask-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-    }
-  }
 }

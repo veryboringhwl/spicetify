@@ -242,19 +242,15 @@ div#context-menu::before,
   background-color: var(--spice-highlight);
 }
 
-.main-globalNav-link-icon {
-  border-radius: 7px !important;
-}
-
 .main-topBar-topbarContentRight {
   gap: 0;
 }
 
+.main-globalNav-navLink,
 .main-userWidget-box,
-.main-topBar-buddyFeed,
 .main-actionButtons > * {
   background-color: var(--spice-highlight) !important;
-  border-radius: 7px;
+  border-radius: 7px !important;
 }
 
 .main-globalNav-buddyFeed > svg {
@@ -357,11 +353,9 @@ div#context-menu::before,
 }
 
 /*what is this*/
+/*THIS IS FOR THE SEARCH TAB FOR THE ITEMS SO THEY HAVE DROPSHADOW*/
 .Vn9yz8P5MjIvDT8c0U6w {
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
-  color: white;
-  height: 10000px;
-  width: 10000px;
 }
 
 /*fix home screen scrolliong performance*/
@@ -433,6 +427,7 @@ div#context-menu::before,
 
 .main-trackCreditsModal-mainSection {
   scrollbar-width: thin;
+  padding: 16px 32px !important;
 }
 
 .main-trackCreditsModal-originalCredits {
@@ -501,6 +496,7 @@ div#context-menu::before,
   box-shadow: inset 0 0 200px var(--spice-sidebar);
 }
 
+.lyrics-lyricsContainer-LyricsBackground,
 .lyrics-lyricsContainer-Provider {
   background: none !important;
 }
@@ -913,12 +909,6 @@ body {
 .AlbumBannerPage.PlaylistPage .main-entityHeader-background {
   background: none !important;
 }
-.AlbumBannerPage.LyricsPage .lyrics-lyrics-background {
-  mask-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-}
-.AlbumBannerPage.LyricsPage .lyrics-lyricsContainer-LyricsBackground {
-  mask-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-}
 
 .LibX .Root__top-container {
   padding-top: 48px;
@@ -941,7 +931,7 @@ body {
 .LibX .custom-navlink {
   margin-top: 8px !important;
 }
-.LibX .Root__globalNav .main-globalNav-link-icon {
+.LibX .main-globalNav-navLink {
   background-color: unset;
   transform: none !important;
   justify-content: unset;
@@ -1069,6 +1059,8 @@ body {
 }
 .PreLibX .Root__main-view-overlay {
   margin: 0px !important;
+  /*makes notif go to bottom*/
+  grid-area: 1/1/main-view/-1;
 }
 .PreLibX .main-nowPlayingBar-nowPlayingBar {
   background-color: var(--spice-player);
@@ -1177,7 +1169,7 @@ body {
 .AppleMusic .Root__globalNav > * {
   padding: 0px 8px;
 }
-.AppleMusic .main-globalNav-link-icon {
+.AppleMusic .main-globalNav-navLink {
   background-color: unset;
   transform: none !important;
   justify-content: unset;
@@ -1286,6 +1278,9 @@ body {
 }
 .AppleMusic .Root__main-view-overlay {
   margin: 0px !important;
+  /*makes notif go to bottom*/
+  grid-area: 1/1/main-view/-1;
+  /*go infront of now playing bar*/
   z-index: 10000;
 }
 .AppleMusic .Root__right-sidebar {
@@ -1418,10 +1413,10 @@ body {
 }
 
 .switchlayout .Root__top-container {
-  grid-template-areas: "global-nav global-nav global-nav" "left-sidebar main-view right-sidebar" "left-sidebar now-playing-bar right-sidebar" !important;
+  grid-template-areas: "global-nav global-nav global-nav" "left-sidebar main-view right-sidebar" "left-sidebar now-playing-bar now-playing-bar" !important;
 }
 .switchlayout.LibX .Root__top-container {
-  grid-template-areas: "global-nav main-view right-sidebar" "left-sidebar main-view right-sidebar" "left-sidebar now-playing-bar right-sidebar" !important;
+  grid-template-areas: "global-nav main-view right-sidebar" "left-sidebar main-view right-sidebar" "left-sidebar now-playing-bar now-playing-bar" !important;
 }
 
 .hidetracklistnum .main-trackList-trackListHeader .main-trackList-rowSectionIndex {

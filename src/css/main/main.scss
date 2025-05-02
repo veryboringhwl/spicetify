@@ -89,19 +89,15 @@
   background-color: var(--spice-highlight);
 }
 
-.main-globalNav-link-icon {
-  border-radius: 7px !important;
-}
-
 .main-topBar-topbarContentRight {
   gap: 0;
 }
 
+.main-globalNav-navLink,
 .main-userWidget-box,
-.main-topBar-buddyFeed,
 .main-actionButtons > * {
   background-color: var(--spice-highlight) !important;
-  border-radius: 7px;
+  border-radius: 7px !important;
 }
 
 .main-globalNav-buddyFeed > svg {
