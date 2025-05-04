@@ -29,130 +29,128 @@ const SettingsButton = () => {
     }
   };
 
-  const createMenu = () => {
+  const showMenu = (event) => {
+    event.preventDefault();
     removeContextMenu();
-
     menuContainer = document.createElement("div");
     menuContainer.id = "context-menu";
     menuContainer.style.position = "absolute";
     menuContainer.style.zIndex = "1000";
     document.body.appendChild(menuContainer);
-
     document.addEventListener("mousedown", handleClickOutside);
-    return menuContainer;
-  };
 
-  const showMenu = (event) => {
-    event.preventDefault();
     const bound = SettingsButton.element.getBoundingClientRect();
+    menuContainer.style.top = `${bound.bottom}px`;
+    menuContainer.style.left = `${bound.left}px`;
 
-    const menu = createMenu();
-    menu.style.top = `${bound.bottom}px`;
-    menu.style.left = `${bound.left}px`;
-
-    ReactDOM.createRoot(menu).render(
-      <Spicetify.ReactComponent.Menu>
-        <Spicetify.ReactComponent.MenuItem
-          onClick={() => {
-            Window.Reload();
-            menu.remove();
-          }}
-          leadingIcon={
-            <svg
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-              fill="currentColor"
-              dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.repeat }}
-            />
-          }
-        >
-          Reload theme
-        </Spicetify.ReactComponent.MenuItem>
-        <Spicetify.ReactComponent.MenuItem
-          onClick={() => {
-            Window.Restart();
-            menu.remove();
-          }}
-          leadingIcon={
-            <svg
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-              fill="currentColor"
-              dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.locked }}
-            />
-          }
-        >
-          Restart Spotify
-        </Spicetify.ReactComponent.MenuItem>
-        <Spicetify.ReactComponent.MenuItem
-          onClick={() => {
-            ConfirmDialog({
-              titleText: "Confirm Dialog",
-              descriptionText: "Are you <b>sure</b>?",
-              onOutside: () => Spicetify.showNotification("Clicked outside"),
-              confirmLabel: "Ok",
-              allowHTML: true,
-            });
-            menu.remove();
-          }}
-          leadingIcon={
-            <svg
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-              fill="currentColor"
-              dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.check }}
-            />
-          }
-          divider={"after"}
-        >
-          Confirm Dialog
-        </Spicetify.ReactComponent.MenuItem>
-        <Spicetify.ReactComponent.MenuItem
-          onClick={() => {
-            PopupModal({
-              title: "Theme Settings",
-              content: SettingsMenu,
-            });
-            menu.remove();
-          }}
-          leadingIcon={
-            <svg
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-              fill="currentColor"
-              dangerouslySetInnerHTML={{
-                __html: Spicetify.SVGIcons.subtitles,
-              }}
-            />
-          }
-        >
-          Theme Settings
-        </Spicetify.ReactComponent.MenuItem>
-        <Spicetify.ReactComponent.MenuItem
-          leadingIcon={
-            <svg
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-              fill="currentColor"
-              dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.menu }}
-            />
-          }
-          onClick={() => {
-            PopupModal({
-              title: "Debug Menu",
-              content: DebugMenu,
-            });
-            menu.remove();
-          }}
-        >
-          Debug Menu
-        </Spicetify.ReactComponent.MenuItem>
-      </Spicetify.ReactComponent.Menu>,
+    ReactDOM.createRoot(menuContainer).render(
+      <Spicetify.ReactComponent.RemoteConfigProvider
+        configuration={Spicetify.Platform.RemoteConfiguration}
+      >
+        <Spicetify.ReactComponent.Menu>
+          <Spicetify.ReactComponent.MenuItem
+            onClick={() => {
+              Window.Reload();
+              menuContainer.remove();
+            }}
+            leadingIcon={
+              <svg
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                fill="currentColor"
+                dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.repeat }}
+              />
+            }
+          >
+            Reload theme
+          </Spicetify.ReactComponent.MenuItem>
+          <Spicetify.ReactComponent.MenuItem
+            onClick={() => {
+              Window.Restart();
+              menuContainer.remove();
+            }}
+            leadingIcon={
+              <svg
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                fill="currentColor"
+                dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.locked }}
+              />
+            }
+            divider={"after"}
+          >
+            Restart Spotify
+          </Spicetify.ReactComponent.MenuItem>
+          <Spicetify.ReactComponent.MenuItem
+            onClick={() => {
+              ConfirmDialog({
+                titleText: "Confirm Dialog",
+                descriptionText: "Are you <b>sure</b>?",
+                onOutside: () => Spicetify.showNotification("Clicked outside"),
+                confirmLabel: "Ok",
+                allowHTML: true,
+              });
+              menuContainer.remove();
+            }}
+            leadingIcon={
+              <svg
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                fill="currentColor"
+                dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.check }}
+              />
+            }
+            divider={"after"}
+          >
+            Confirm Dialog
+          </Spicetify.ReactComponent.MenuItem>
+          <Spicetify.ReactComponent.MenuItem
+            onClick={() => {
+              PopupModal({
+                title: "Theme Settings",
+                content: SettingsMenu,
+              });
+              menuContainer.remove();
+            }}
+            leadingIcon={
+              <svg
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                fill="currentColor"
+                dangerouslySetInnerHTML={{
+                  __html: Spicetify.SVGIcons.subtitles,
+                }}
+              />
+            }
+          >
+            Theme Settings
+          </Spicetify.ReactComponent.MenuItem>
+          <Spicetify.ReactComponent.MenuItem
+            leadingIcon={
+              <svg
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                fill="currentColor"
+                dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.menu }}
+              />
+            }
+            onClick={() => {
+              PopupModal({
+                title: "Debug Menu",
+                content: DebugMenu,
+              });
+              menuContainer.remove();
+            }}
+          >
+            Debug Menu
+          </Spicetify.ReactComponent.MenuItem>
+        </Spicetify.ReactComponent.Menu>
+      </Spicetify.ReactComponent.RemoteConfigProvider>,
     );
   };
 

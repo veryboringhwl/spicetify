@@ -28,7 +28,7 @@
   }
 
   .main-globalNav-navLink {
-    background-color: unset;
+    background-color: unset !important;
     transform: none !important;
     justify-content: unset;
   }
@@ -114,7 +114,7 @@
   }
 
   .collapsed {
-    .main-globalNav-link-icon,
+    .main-globalNav-navLink,
     .b7r2WRiu5f9Q99qmyreh *:not(svg) {
       width: 56px !important;
       display: flex;
@@ -150,13 +150,14 @@
   #main:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
     background-color: var(--spice-highlight-elevated) !important;
     border-radius: 7px !important;
+    position: relative;
   }
 
   .b7r2WRiu5f9Q99qmyreh:hover,
   [aria-label="Home"]:hover,
   [aria-label="Marketplace"]:hover,
   [aria-label="Lyrics"]:hover {
-    background-color: var(--spice-highlight);
+    background-color: var(--spice-highlight) !important;
     border-radius: 7px;
   }
 }
@@ -325,7 +326,7 @@
   }
 
   .main-globalNav-navLink {
-    background-color: unset;
+    background-color: unset !important;
     transform: none !important;
     justify-content: unset;
   }
@@ -413,7 +414,7 @@
   }
 
   .collapsed {
-    .main-globalNav-link-icon,
+    .main-globalNav-navLink,
     .b7r2WRiu5f9Q99qmyreh *:not(svg) {
       width: 56px !important;
       display: flex;
@@ -509,7 +510,7 @@
 
   .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ)::before,
   .b7r2WRiu5f9Q99qmyreh:has(.MdMAXXFPalD99eigsBug)::before,
-  .main-globalNav-navLinkActive.main-globalNav-link-icon::before {
+  .main-globalNav-navLinkActive.main-globalNav-navLink::before {
     content: "";
     position: absolute;
     width: 4px;

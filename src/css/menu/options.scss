@@ -40,7 +40,7 @@
 
 .optionsContainer {
   overflow-y: auto;
-  height: 600px;
+  height: calc(80vh - 227px);
   scrollbar-width: none;
 }
 
@@ -58,6 +58,14 @@
 }
 
 .themeOptionDesc {
+  display: flex;
+  height: 100%;
+  align-items: center;
   font-size: 15px;
   color: var(--spice-subtext);
+}
+
+.themeOptionTippy {
+  display: flex;
+  align-items: center;
 }

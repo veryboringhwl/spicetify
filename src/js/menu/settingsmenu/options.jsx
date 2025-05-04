@@ -195,14 +195,40 @@ const options = {
       desc: "test-toggle",
       defaultVal: true,
       popupModal: DebugMenu,
-      incompatible: ["test-incompatible"],
+      incompatible: [
+        "test-incompatible-toggle",
+        "test-incompatible-input",
+        "test-incompatible-dropdown",
+      ],
       tippy: "Incompatible with test-incompatible",
+      run(value) {
+        console.log("test-toggle set to ", value);
+      },
     },
     {
       type: "toggle",
-      name: "test-incompatible",
-      desc: "test-incompatible",
+      name: "test-incompatible-toggle",
+      desc: "test-incompatible-toggle",
       defaultVal: true,
+    },
+    {
+      type: "input",
+      name: "test-incompatible-input",
+      desc: "test-input",
+      defaultVal: 1,
+      placeholder: "does something",
+    },
+    {
+      type: "dropdown",
+      name: "test-incompatible-dropdown",
+      desc: "test-dropdown",
+      defaultVal: "test1",
+      options: [
+        { value: "test1", label: "test1" },
+        { value: "test2", label: "test2" },
+        { value: "test3", label: "test3" },
+        { value: "test4", label: "test4" },
+      ],
     },
     {
       type: "input",

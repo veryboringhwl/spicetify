@@ -22,6 +22,11 @@
   width: 128px;
   text-overflow: ellipsis;
   padding-left: 10px;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .themeOptionDropdown {
@@ -35,6 +40,12 @@
   letter-spacing: 0.24px;
   line-height: 20px;
   padding: 0px 18px 0 4px;
+
+  &:disabled {
+    color: unset;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .themeOptionToggle {
@@ -42,46 +53,37 @@
   align-items: center;
   background: none !important;
   border: none;
+  background: none !important;
+  border: none;
+  cursor: pointer;
 
-  .toggleButton {
-    background: none !important;
-    border: none;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
-    &:disabled {
-      .toggleBackground {
-        background: rgba(var(--spice-rgb-selected-row), 0.1) !important;
-        opacity: 0.35;
-        .toggle {
-          opacity: 0.35;
-          margin-left: 2px !important;
-        }
+  .toggleBackground {
+    width: 42px;
+    height: 24px;
+    background: rgba(var(--spice-rgb-selected-row), 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+
+    &:has(.enabled) {
+      background: var(--spice-button-active);
+      .toggle {
+        margin-left: 20px;
       }
     }
 
-    .toggleBackground {
-      width: 42px;
-      height: 24px;
-      background: rgba(var(--spice-rgb-selected-row), 0.1);
-      border-radius: 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-
-      &:has(.enabled) {
-        background: var(--spice-button-active);
-        .toggle {
-          margin-left: 20px;
-        }
-      }
-
-      .toggle {
-        width: 20px;
-        height: 20px;
-        background: var(--spice-text);
-        border-radius: 50%;
-        margin-left: 2px;
-        transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-      }
+    .toggle {
+      width: 20px;
+      height: 20px;
+      background: var(--spice-text);
+      border-radius: 50%;
+      margin-left: 2px;
+      transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
     }
   }
 }
