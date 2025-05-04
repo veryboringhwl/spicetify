@@ -627,7 +627,6 @@ div#context-menu::before,
 }
 
 .main-entityHeader-container {
-  margin-top: 64px;
   padding-bottom: 0px;
   padding: var(--content-spacing) 0 var(--content-spacing);
   height: unset !important;
@@ -769,7 +768,7 @@ div#context-menu::before,
 
 .optionsContainer {
   overflow-y: auto;
-  height: 600px;
+  height: calc(80vh - 227px);
   scrollbar-width: none;
 }
 
@@ -787,8 +786,16 @@ div#context-menu::before,
 }
 
 .themeOptionDesc {
+  display: flex;
+  height: 100%;
+  align-items: center;
   font-size: 15px;
   color: var(--spice-subtext);
+}
+
+.themeOptionTippy {
+  display: flex;
+  align-items: center;
 }
 
 .themeOptionPopupButton {
@@ -816,6 +823,10 @@ div#context-menu::before,
   text-overflow: ellipsis;
   padding-left: 10px;
 }
+.themeOptionInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 .themeOptionDropdown {
   background: rgba(var(--spice-rgb-selected-row), 0.1);
@@ -829,41 +840,40 @@ div#context-menu::before,
   line-height: 20px;
   padding: 0px 18px 0 4px;
 }
+.themeOptionDropdown:disabled {
+  color: unset;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 .themeOptionToggle {
   display: flex;
   align-items: center;
   background: none !important;
   border: none;
-}
-.themeOptionToggle .toggleButton {
   background: none !important;
   border: none;
+  cursor: pointer;
 }
-.themeOptionToggle .toggleButton:disabled .toggleBackground {
-  background: rgba(var(--spice-rgb-selected-row), 0.1) !important;
-  opacity: 0.35;
+.themeOptionToggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
-.themeOptionToggle .toggleButton:disabled .toggleBackground .toggle {
-  opacity: 0.35;
-  margin-left: 2px !important;
-}
-.themeOptionToggle .toggleButton .toggleBackground {
+.themeOptionToggle .toggleBackground {
   width: 42px;
   height: 24px;
   background: rgba(var(--spice-rgb-selected-row), 0.1);
   border-radius: 12px;
-  cursor: pointer;
   display: flex;
   align-items: center;
 }
-.themeOptionToggle .toggleButton .toggleBackground:has(.enabled) {
+.themeOptionToggle .toggleBackground:has(.enabled) {
   background: var(--spice-button-active);
 }
-.themeOptionToggle .toggleButton .toggleBackground:has(.enabled) .toggle {
+.themeOptionToggle .toggleBackground:has(.enabled) .toggle {
   margin-left: 20px;
 }
-.themeOptionToggle .toggleButton .toggleBackground .toggle {
+.themeOptionToggle .toggleBackground .toggle {
   width: 20px;
   height: 20px;
   background: var(--spice-text);
@@ -932,7 +942,7 @@ body {
   margin-top: 8px !important;
 }
 .LibX .main-globalNav-navLink {
-  background-color: unset;
+  background-color: unset !important;
   transform: none !important;
   justify-content: unset;
 }
@@ -1001,7 +1011,7 @@ body {
 .LibX ._b3hhmbWtOY8_1M1mM1H:has(.main-topBar-searchBar[tabindex="0"]) .main-globalNav-textWrapper {
   display: none !important;
 }
-.LibX .collapsed .main-globalNav-link-icon,
+.LibX .collapsed .main-globalNav-navLink,
 .LibX .collapsed .b7r2WRiu5f9Q99qmyreh *:not(svg) {
   width: 56px !important;
   display: flex;
@@ -1030,12 +1040,13 @@ body {
 .highlightnav #main:has(.j4xi27AJ3oy5qZ8CGhhQ) .ODl7TwNawIfBwiZv1Czg {
   background-color: var(--spice-highlight-elevated) !important;
   border-radius: 7px !important;
+  position: relative;
 }
 .highlightnav .b7r2WRiu5f9Q99qmyreh:hover,
 .highlightnav [aria-label=Home]:hover,
 .highlightnav [aria-label=Marketplace]:hover,
 .highlightnav [aria-label=Lyrics]:hover {
-  background-color: var(--spice-highlight);
+  background-color: var(--spice-highlight) !important;
   border-radius: 7px;
 }
 
@@ -1170,7 +1181,7 @@ body {
   padding: 0px 8px;
 }
 .AppleMusic .main-globalNav-navLink {
-  background-color: unset;
+  background-color: unset !important;
   transform: none !important;
   justify-content: unset;
 }
@@ -1240,7 +1251,7 @@ body {
 .AppleMusic ._b3hhmbWtOY8_1M1mM1H:has(.main-topBar-searchBar[tabindex="0"]) .main-globalNav-textWrapper {
   display: none !important;
 }
-.AppleMusic .collapsed .main-globalNav-link-icon,
+.AppleMusic .collapsed .main-globalNav-navLink,
 .AppleMusic .collapsed .b7r2WRiu5f9Q99qmyreh *:not(svg) {
   width: 56px !important;
   display: flex;
@@ -1320,7 +1331,7 @@ body {
 }
 .AppleMusic .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ)::before,
 .AppleMusic .b7r2WRiu5f9Q99qmyreh:has(.MdMAXXFPalD99eigsBug)::before,
-.AppleMusic .main-globalNav-navLinkActive.main-globalNav-link-icon::before {
+.AppleMusic .main-globalNav-navLinkActive.main-globalNav-navLink::before {
   content: "";
   position: absolute;
   width: 4px;
@@ -1469,7 +1480,7 @@ body {
 }
 .greenicon .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ)::before,
 .greenicon .b7r2WRiu5f9Q99qmyreh:has(.MdMAXXFPalD99eigsBug)::before,
-.greenicon .main-globalNav-navLinkActive.main-globalNav-link-icon::before {
+.greenicon .main-globalNav-navLinkActive.main-globalNav-navLink::before {
   content: "";
   position: absolute;
   width: 4px;
@@ -1481,7 +1492,7 @@ body {
 }
 .greenicon.PreLibX .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ)::before,
 .greenicon.PreLibX .b7r2WRiu5f9Q99qmyreh:has(.MdMAXXFPalD99eigsBug)::before,
-.greenicon.PreLibX .main-globalNav-navLinkActive.main-globalNav-link-icon::before {
+.greenicon.PreLibX .main-globalNav-navLinkActive.main-globalNav-navLink::before {
   height: 24px;
   top: 6px;
 }

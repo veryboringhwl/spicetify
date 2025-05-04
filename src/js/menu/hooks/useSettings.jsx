@@ -1,31 +1,53 @@
 import React from "react";
 import getInitialOptions from "../helpers/getInitialOptions";
+import resetOptions from "../helpers/resetOptions";
+import saveOptions from "../helpers/saveOptions";
 import options from "../settingsmenu/options";
 
 const useSettings = () => {
-  const initialSettings = getInitialOptions(Object.values(options).flat());
-  const [settings, setSettings] = React.useState(initialSettings);
+  const allOptions = Object.values(options).flat();
+  const [settings, setSettings] = React.useState(() => getInitialOptions(allOptions));
 
-  const handleSettingChange = (key, value) => {
-    setSettings((prev) => {
-      const newSettings = { ...prev, [key]: value };
-      const optionName = key.replace("theme:", "");
+  const handleSettingChange = React.useCallback(
+    (key, value) => {
+      setSettings((prev) => {
+        const newSettings = { ...prev, [key]: value };
+        const optionName = key.replace("theme:", "");
 
-      const changedOption = Object.values(options)
-        .flat()
-        .find((opt) => opt.name === optionName);
-      if (changedOption?.reveal) {
-        changedOption.reveal.forEach((subOption) => {
-          const subKey = `theme:${subOption.name}`;
-          newSettings[subKey] = value ? subOption.defaultVal : false;
-        });
-      }
+        const changedOption = allOptions.find((opt) => opt.name === optionName);
 
-      return newSettings;
-    });
+        if (changedOption?.reveal) {
+          changedOption.reveal.forEach((subOption) => {
+            const subKey = `theme:${subOption.name}`;
+            if (value) {
+              newSettings[subKey] = subOption.defaultVal;
+            } else {
+              newSettings[subKey] = false;
+            }
+          });
+        }
+
+        if (value && changedOption?.incompatible) {
+          changedOption.incompatible.forEach((incompName) => {
+            newSettings[`theme:${incompName}`] = false;
+          });
+        }
+
+        return newSettings;
+      });
+    },
+    [allOptions],
+  );
+
+  return {
+    settings,
+    handleSettingChange,
+    resetSettings: () => resetOptions(setSettings),
+    saveSettings: () => {
+      const updatedSettings = saveOptions(settings);
+      setSettings(updatedSettings);
+    },
   };
-
-  return [settings, handleSettingChange, setSettings];
 };
 
 export default useSettings;

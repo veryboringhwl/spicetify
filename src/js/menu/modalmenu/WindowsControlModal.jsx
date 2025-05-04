@@ -1,27 +1,10 @@
 import React from "react";
-import LocalStorage from "../../utils/LocalStorage";
 import OptionType from "../components/OptionType";
-import resetModal from "./resetModal";
-import saveModal from "./saveModal";
+import useModalSettings from "./useModalSettings";
 
 const WindowsControlModal = React.memo(() => {
-  const [settings, setSettings] = React.useState(() =>
-    Object.fromEntries(
-      windowsControlOptions.map((option) => [
-        option.name,
-        LocalStorage.get(`theme:${option.name}`, option.defaultVal),
-      ]),
-    ),
-  );
-
-  const handleSettingChange = (key, value) => {
-    const optionName = key.replace("theme:", "");
-    setSettings((prev) => ({ ...prev, [optionName]: value }));
-    document.documentElement.style.setProperty(
-      `--windowcontrol-${optionName.toLowerCase()}`,
-      value,
-    );
-  };
+  const { settings, updateSetting, resetSettings, saveSettings } =
+    useModalSettings(windowsControlOptions);
 
   return (
     <div className="themeModalOptions windowsControlSettings">
@@ -30,17 +13,14 @@ const WindowsControlModal = React.memo(() => {
           key={option.name}
           option={option}
           value={settings[option.name]}
-          onChange={handleSettingChange}
+          onChange={(key, value) => updateSetting(key.replace("theme:", ""), value)}
         />
       ))}
       <div className="buttonContainer">
-        <button
-          className="resetButton"
-          onClick={() => resetModal(windowsControlOptions, setSettings)}
-        >
+        <button className="resetButton" onClick={resetSettings}>
           Reset
         </button>
-        <button className="saveButton" onClick={() => saveModal(settings, windowsControlOptions)}>
+        <button className="saveButton" onClick={saveSettings}>
           Save
         </button>
       </div>
@@ -53,7 +33,7 @@ export const windowsControlOptions = [
     type: "toggle",
     name: "WindowsControl",
     desc: "Enable custom Windows Controls",
-    defaultVal: true,
+    defaultVal: false,
     run: (value) => {
       document.body.classList.toggle("WindowsControl", value);
     },

@@ -17,7 +17,7 @@ const resetOptions = (setSettings) => {
     },
     onConfirm: () => {
       try {
-        console.log("Resetting settings");
+        Console.Log("Resetting settings");
         const allOptions = [
           ...Object.values(options).flat(),
           ...albumBannerOptions,

@@ -1,11 +1,13 @@
 import React from "react";
 import LoadingIndicator from "../components/LoadingIndicator";
+import Toggle from "../menu/components/Toggle";
 import Console from "../utils/Console";
 import Notification from "../utils/Notification";
 
 const DebugMenu = React.memo(() => {
   const [lastVersion, setLastVersion] = React.useState("Loading...");
   const [lastUpdated, setLastUpdated] = React.useState("Loading...");
+  const [enabled, setEnabled] = React.useState(false);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +38,7 @@ const DebugMenu = React.memo(() => {
   }, []);
 
   const Info = {
-    "Current Theme Version": "v1.1.0",
+    "Current Theme Version": "v1.2.0",
     "Newest Theme Version": lastVersion,
     "Last Updated": lastUpdated,
     "Spotify Version": Spicetify.Platform.version,
@@ -60,8 +62,8 @@ const DebugMenu = React.memo(() => {
       <button
         onClick={() =>
           Notification({
-            autoHideDuration: 99999999,
-            message: "Theme only supports Spotify versions greater than 1.2.50.000",
+            autoHideDuration: 10000,
+            message: "Debug Menu notification lolololol",
           })
         }
       >
@@ -70,12 +72,45 @@ const DebugMenu = React.memo(() => {
       <div className="loading-wrapper">
         <LoadingIndicator />
       </div>
-      <svg
-        viewBox="0 0 16 16"
-        width="128"
-        height="128"
-        fill="currentColor"
-        dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.menu }}
+      <Spicetify.ReactComponent.Cards.Default
+        id="card-id"
+        title="Card Title"
+        subtitle="Card Subtitle"
+        media="https://placehold.co/100"
+        size="sm" // "sm" or "md"
+        onClick={() => console.log("Card clicked")}
+      >
+        <Spicetify.ReactComponent.Cards.Default.Body>
+          Additional content here
+        </Spicetify.ReactComponent.Cards.Default.Body>
+        <Spicetify.ReactComponent.Cards.Default.Footer>
+          Footer content
+        </Spicetify.ReactComponent.Cards.Default.Footer>
+      </Spicetify.ReactComponent.Cards.Default>
+      <Spicetify.ReactComponent.TextComponent
+        semanticColor="textBase"
+        variant="viola"
+        weight="book"
+      >
+        Hello World
+      </Spicetify.ReactComponent.TextComponent>
+      <Spicetify.ReactComponent.TooltipWrapper
+        label="Hello World"
+        placement="top"
+        trigger="mouseenter"
+      >
+        <div>Hover me</div>
+      </Spicetify.ReactComponent.TooltipWrapper>
+      <Toggle
+        name="examplwasdeToggle"
+        desc="Toggle an example feature"
+        // value={enabled}
+        onChange={(key, newValue) => {
+          console.log(key, "set to ", newValue);
+          setEnabled(newValue);
+        }}
+        disabled={false}
+        tippy={"HALLO"}
       />
     </div>
   );

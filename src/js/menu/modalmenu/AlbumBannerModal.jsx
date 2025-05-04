@@ -1,23 +1,10 @@
 import React from "react";
-import CoverArtBanner from "../../features/CoverArtBanner";
-import LocalStorage from "../../utils/LocalStorage";
 import OptionType from "../components/OptionType";
-import resetModal from "./resetModal";
-import saveModal from "./saveModal";
+import useModalSettings from "./useModalSettings";
 
 const AlbumBannerModal = React.memo(() => {
-  const [settings, setSettings] = React.useState(() =>
-    Object.fromEntries(
-      albumBannerOptions.map((option) => [
-        option.name,
-        LocalStorage.get(`theme:${option.name}`, option.defaultVal),
-      ]),
-    ),
-  );
-
-  const handleSettingChange = React.useCallback((key, value) => {
-    setSettings((prev) => ({ ...prev, [key.replace("theme:", "")]: value }));
-  }, []);
+  const { settings, updateSetting, resetSettings, saveSettings } =
+    useModalSettings(albumBannerOptions);
 
   React.useEffect(() => {
     albumBannerOptions.forEach((option) => option.run?.(settings[option.name]));
@@ -30,20 +17,14 @@ const AlbumBannerModal = React.memo(() => {
           key={option.name}
           option={option}
           value={settings[option.name]}
-          onChange={handleSettingChange}
+          onChange={(key, value) => updateSetting(key.replace("theme:", ""), value)}
         />
       ))}
       <div className="buttonContainer">
-        <button className="resetButton" onClick={() => resetModal(albumBannerOptions, setSettings)}>
+        <button className="resetButton" onClick={resetSettings}>
           Reset
         </button>
-        <button
-          className="saveButton"
-          onClick={() => {
-            saveModal(settings, albumBannerOptions);
-            CoverArtBanner();
-          }}
-        >
+        <button className="saveButton" onClick={saveSettings}>
           Save
         </button>
       </div>
@@ -57,7 +38,6 @@ export const albumBannerOptions = [
     name: "AlbumBannerPage",
     desc: "Puts album art in places",
     defaultVal: true,
-    tippy: "Includes Spotify Lyrics page and Spicetify's Lyrics Plus",
   },
   {
     type: "toggle",

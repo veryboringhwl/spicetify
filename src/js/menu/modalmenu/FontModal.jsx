@@ -1,22 +1,9 @@
 import React from "react";
-import LocalStorage from "../../utils/LocalStorage";
-import OptionType from "../settingsmenu/OptionType";
-import resetModal from "./resetModal";
-import saveModal from "./saveModal";
+import OptionType from "../components/OptionType";
+import useModalSettings from "./useModalSettings";
 
 const FontModal = React.memo(() => {
-  const [settings, setSettings] = React.useState(() =>
-    Object.fromEntries(
-      fontOptions.map((option) => [
-        option.name,
-        LocalStorage.get(`theme:${option.name}`, option.defaultVal),
-      ]),
-    ),
-  );
-
-  const handleSettingChange = React.useCallback((key, value) => {
-    setSettings((prev) => ({ ...prev, [key.replace("theme:", "")]: value }));
-  }, []);
+  const { settings, updateSetting, resetSettings, saveSettings } = useModalSettings(fontOptions);
 
   React.useEffect(() => {
     fontOptions.forEach((option) => option.run?.(settings[option.name]));
@@ -29,14 +16,14 @@ const FontModal = React.memo(() => {
           key={option.name}
           option={option}
           value={settings[option.name]}
-          onChange={handleSettingChange}
+          onChange={(key, value) => updateSetting(key.replace("theme:", ""), value)}
         />
       ))}
       <div className="buttonContainer">
-        <button className="resetButton" onClick={() => resetModal(fontOptions, setSettings)}>
+        <button className="resetButton" onClick={resetSettings}>
           Reset
         </button>
-        <button className="saveButton" onClick={() => saveModal(settings, fontOptions)}>
+        <button className="saveButton" onClick={saveSettings}>
           Save
         </button>
       </div>
