@@ -214,14 +214,14 @@ const options = {
     {
       type: "input",
       name: "test-incompatible-input",
-      desc: "test-input",
+      desc: "test-incompatible-input",
       defaultVal: 1,
       placeholder: "does something",
     },
     {
       type: "dropdown",
       name: "test-incompatible-dropdown",
-      desc: "test-dropdown",
+      desc: "test-incompatible-dropdown",
       defaultVal: "test1",
       options: [
         { value: "test1", label: "test1" },

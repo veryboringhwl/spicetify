@@ -1,4 +1,4 @@
-import PopupModal from "../utils/PopupModal";
+import PopupModal from "../components/PopupModal";
 import DebugMenu from "./DebugMenu";
 
 const Mousetrap = () => {

@@ -14,7 +14,7 @@ function ConfirmDialog({
   allowHTML,
 }) {
   const ConfirmDialog = React.memo(() => {
-    const [state, setState] = Spicetify.React.useState(true);
+    const [state, setState] = React.useState(true);
     const menu = document.querySelector(".ReactModalPortal:last-of-type");
 
     React.useEffect(() => {
@@ -22,38 +22,37 @@ function ConfirmDialog({
     }, []);
 
     return (
-      <Spicetify.ReactComponent.RemoteConfigProvider
-        configuration={Spicetify.Platform.RemoteConfiguration}
-      >
-        <Spicetify.ReactComponent.ConfirmDialog
-          titleText={titleText}
-          descriptionText={descriptionText}
-          cancelText={cancelText}
-          confirmText={confirmText}
-          isOpen={state}
-          onOutside={() => {
-            setState(false);
-            onOutside?.();
-            menu?.remove();
-          }}
-          onClose={() => {
-            setState(false);
-            onClose?.();
-            menu?.remove();
-          }}
-          onConfirm={() => {
-            setState(false);
-            onConfirm?.();
-            menu?.remove();
-          }}
-          confirmLabel={confirmLabel}
-          allowHTML={allowHTML}
-        />
-      </Spicetify.ReactComponent.RemoteConfigProvider>
+      <Spicetify.ReactComponent.ConfirmDialog
+        titleText={titleText}
+        descriptionText={descriptionText}
+        cancelText={cancelText}
+        confirmText={confirmText}
+        isOpen={state}
+        onOutside={() => {
+          setState(false);
+          onOutside?.();
+          menu?.remove();
+        }}
+        onClose={() => {
+          setState(false);
+          onClose?.();
+          menu?.remove();
+        }}
+        onConfirm={() => {
+          setState(false);
+          onConfirm?.();
+          menu?.remove();
+        }}
+        confirmLabel={confirmLabel}
+        allowHTML={allowHTML}
+      />
     );
   });
 
-  ReactDOM.createRoot(document.createElement("div")).render(<ConfirmDialog />);
+  const container = document.createElement("div");
+  document.body.appendChild(container);
+  container.className = "ReactModalPortal";
+  ReactDOM.createRoot(container).render(<ConfirmDialog />);
 }
 
 // Example usage:

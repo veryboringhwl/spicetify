@@ -1,41 +1,7 @@
-.options-tippy > div {
-  font-size: 16px !important;
-  max-width: 325px;
-}
-
-.main-trackCreditsModal-BtnContainer {
-  display: flex;
-}
-
-.main-trackCreditsModal-BtnContainer button:hover {
-  transform: scale(1.1);
-}
-
-.main-trackCreditsModal-BtnContainer button:active {
-  transform: scale(0.9);
-}
-
-.main-trackCreditsModal-BtnContainer button {
-  background-color: var(--spice-highlight);
-  border-radius: 8px;
-  height: 34px;
-  cursor: pointer;
-  margin-right: 8px;
-  padding: 8px;
-  border: 0;
-}
-
 .themeOptionRow {
   display: flex;
   height: 32px;
   justify-content: space-between;
-}
-
-.themeOptionControl {
-  align-content: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
 }
 
 .optionsContainer {
@@ -65,7 +31,16 @@
   color: var(--spice-subtext);
 }
 
-.themeOptionTippy {
-  display: flex;
-  align-items: center;
+kbd {
+  border-radius: var(--encore-corner-radius-base);
+  -webkit-box-shadow: 0 1px 0 var(--background-base),
+    0 0 0 1px var(--essential-subdued) inset;
+  box-shadow: 0 1px 0 var(--background-base),
+    0 0 0 1px var(--essential-subdued) inset;
+  display: inline-block;
+  line-height: 1.5;
+  margin: var(--encore-spacing-tighter-5);
+  min-width: 1.5em;
+  padding: var(--encore-spacing-tighter-5) var(--encore-spacing-tighter-3);
+  text-align: center;
 }

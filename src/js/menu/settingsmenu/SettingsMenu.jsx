@@ -1,7 +1,7 @@
 import React from "react";
 import CategoryCarousel from "../components/CategoryCarousel";
+import RenderOptions from "../components/RenderOptions";
 import useSettings from "../hooks/useSettings";
-import RenderOptions from "./RenderOptions";
 import options from "./options";
 
 const SettingsMenu = React.memo(() => {
@@ -13,7 +13,8 @@ const SettingsMenu = React.memo(() => {
       <CategoryCarousel categories={categories} />
       <div className="optionsContainer">
         {Object.entries(options).map(([category, categoryOptions]) => (
-          <Section key={category} name={category}>
+          <div className={`themeOptionsCategory ${category.toLowerCase()}Container`}>
+            <h2 className="categoryTitle">{category}</h2>
             {categoryOptions.map((option) => (
               <RenderOptions
                 key={option.name}
@@ -22,7 +23,7 @@ const SettingsMenu = React.memo(() => {
                 onChange={handleSettingChange}
               />
             ))}
-          </Section>
+          </div>
         ))}
       </div>
       <div className="buttonContainer">

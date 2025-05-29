@@ -1,5 +1,6 @@
 import React from "react";
 import LoadingIndicator from "../components/LoadingIndicator";
+import OptionRow from "../menu/components/OptionRow";
 import Toggle from "../menu/components/Toggle";
 import Console from "../utils/Console";
 import Notification from "../utils/Notification";
@@ -59,13 +60,30 @@ const DebugMenu = React.memo(() => {
           <span className="theme-info-value">{value}</span>
         </p>
       ))}
+      <p>
+        Press <kbd>F8</kbd> to pause script execution.
+      </p>
       <button
-        onClick={() =>
+        onClick={() => {
           Notification({
             autoHideDuration: 10000,
             message: "Debug Menu notification lolololol",
-          })
-        }
+          });
+          Spicetify.ReactComponent.ConfirmDialog({
+            titleText: "Confirm Action",
+            descriptionText: "Are you sure you want to proceed?",
+            confirmText: "Yes",
+            cancelText: "No",
+            onConfirm: () => {
+              // Code to run when confirmed
+              console.log("User confirmed");
+            },
+            onClose: () => {
+              // Code to run when dialog is closed/canceled
+              console.log("Dialog closed");
+            },
+          });
+        }}
       >
         Special Button
       </button>
@@ -101,17 +119,9 @@ const DebugMenu = React.memo(() => {
       >
         <div>Hover me</div>
       </Spicetify.ReactComponent.TooltipWrapper>
-      <Toggle
-        name="examplwasdeToggle"
-        desc="Toggle an example feature"
-        // value={enabled}
-        onChange={(key, newValue) => {
-          console.log(key, "set to ", newValue);
-          setEnabled(newValue);
-        }}
-        disabled={false}
-        tippy={"HALLO"}
-      />
+      <OptionRow name={"BITCH"} desc={"REEEEEE"} tippy={"HELLOE"} popupModal={DebugMenu}>
+        <Toggle value={enabled} onChange={() => setEnabled(!enabled)} />
+      </OptionRow>
     </div>
   );
 });

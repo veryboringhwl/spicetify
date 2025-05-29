@@ -2,7 +2,7 @@ import React from "react";
 import TippyButton from "../../components/TippyButton";
 import InfoButton from "./InfoButton";
 
-const OptionRow = React.memo(({ name, desc, children, popupModal, tippy }) => (
+const OptionRow = React.memo(({ name, desc, tippy, children, popupModal }) => (
   <div className="themeOptionRow" data-name={`theme:${name}`}>
     <div className="themeOptionContent">
       <div className="themeOptionDesc">{desc}</div>
@@ -10,6 +10,7 @@ const OptionRow = React.memo(({ name, desc, children, popupModal, tippy }) => (
     <div className="themeOptionControl">
       {tippy && <TippyButton tippy={tippy} />}
       <InfoButton name={name} popupModal={popupModal} />
+
       {children}
     </div>
   </div>

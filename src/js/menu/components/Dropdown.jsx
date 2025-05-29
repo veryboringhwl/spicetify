@@ -1,32 +1,62 @@
 import React from "react";
-import OptionRow from "./OptionRow";
+import Icons from "../../icons/icons";
 
-const Dropdown = React.memo(
-  ({ name, desc, tippy, value, options, onChange, popupModal, disabled }) => {
-    const handleChange = React.useCallback(
-      (e) => {
-        onChange(`theme:${name}`, e.target.value);
-      },
-      [name, onChange],
-    );
+const Dropdown = React.memo(({ value, options, onChange, disabled }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const dropdownRef = React.useRef(null);
 
-    return (
-      <OptionRow name={name} desc={desc} popupModal={popupModal} tippy={tippy}>
-        <select
-          className="themeOptionDropdown"
-          value={value}
-          onChange={handleChange}
-          disabled={disabled}
-        >
-          {options.map(({ value, label }) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const toggleOpen = (e) => {
+    e.stopPropagation();
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleSelect = (option, e) => {
+    e.stopPropagation();
+    onChange?.({ target: { value: option.value } });
+    setIsOpen(false);
+  };
+
+  return (
+    <div
+      ref={dropdownRef}
+      className={`themeOptionDropdown ${isOpen ? "menu-open" : ""} ${disabled ? "disabled" : ""}`}
+    >
+      <div className="themeOptionDropdownButton" onClick={disabled ? null : toggleOpen}>
+        <div className="themeOptionDropdownText">
+          {options.find((opt) => opt.value === value)?.label}
+        </div>
+        <div className="themeOptionDropdownArrow">
+          <Icons.React.dropdown size={12} />
+        </div>
+      </div>
+      {isOpen && !disabled && (
+        <div className="themeOptionDropdownMenu">
+          {options.map((option) => (
+            <div
+              key={option.value}
+              className={`themeOptionDropdownOptions ${value === option.value ? "selected" : ""}`}
+              role="option"
+              onClick={(e) => handleSelect(option, e)}
+            >
+              {option.label}
+            </div>
           ))}
-        </select>
-      </OptionRow>
-    );
-  },
-);
+        </div>
+      )}
+    </div>
+  );
+});
 
 export default Dropdown;
