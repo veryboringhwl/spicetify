@@ -49,7 +49,7 @@ import Notification from "./utils/Notification";
   });
 
   const version = Spicetify.Platform.version.split(".").map((e) => Number.parseInt(e));
-  if (version[2] >= 39) {
+  if (version[2] >= 50) {
     Notification({
       autoHideDuration: 5000,
       backgroundColor: "#ff9800",

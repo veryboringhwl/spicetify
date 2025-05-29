@@ -1,6 +1,6 @@
 import React from "react";
+import PopupModal from "../../components/PopupModal";
 import Icons from "../../icons/icons";
-import PopupModal from "../../utils/PopupModal";
 
 const InfoButton = React.memo(({ name, popupModal }) => {
   if (!popupModal) return null;
@@ -13,7 +13,6 @@ const InfoButton = React.memo(({ name, popupModal }) => {
           title: name,
           content: popupModal,
           isLarge: false,
-          buttons: false,
         })
       }
       aria-label="Open popup"

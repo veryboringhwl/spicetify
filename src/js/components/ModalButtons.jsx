@@ -1,17 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Icons from "../icons/icons";
-import waitForElements from "../utils/waitForElements";
 
-const ModalButtons = async () => {
-  const header = await waitForElements(".main-trackCreditsModal-header");
-
-  document.querySelector(".main-trackCreditsModal-closeBtn")?.remove();
-
-  const buttonContainer = document.createElement("div");
-  buttonContainer.className = "main-trackCreditsModal-BtnContainer";
-
-  ReactDOM.createRoot(buttonContainer).render(
+const ModalButtons = () => {
+  return (
     <>
       <Spicetify.ReactComponent.TooltipWrapper label="GitHub" placement="top">
         <button
@@ -29,10 +20,8 @@ const ModalButtons = async () => {
           <Icons.React.close size={18} />
         </button>
       </Spicetify.ReactComponent.TooltipWrapper>
-    </>,
+    </>
   );
-
-  header.appendChild(buttonContainer);
 };
 
 export default ModalButtons;

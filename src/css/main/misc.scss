@@ -42,7 +42,6 @@
   border-radius: 7px !important;
 }
 
-/*what is this*/
 /*THIS IS FOR THE SEARCH TAB FOR THE ITEMS SO THEY HAVE DROPSHADOW*/
 .Vn9yz8P5MjIvDT8c0U6w {
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
@@ -52,4 +51,9 @@
 .search-searchCategory-categoryGrid,
 [data-overlayscrollbars-viewport] {
   will-change: transform !important;
+}
+
+/*search page play button*/
+.NI1OxoVdokxENPAjoeOk{
+  box-shadow: none !important;
 }

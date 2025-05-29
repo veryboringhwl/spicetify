@@ -53,14 +53,10 @@
 }
 
 .progress-bar__slider {
-  background-color: var(--spice-highlight) !important;
-  border: 6px solid var(--spice-highlight);
+  border: 10px solid var(--spice-highlight);
   box-shadow: 0 0 3px 0 #080808 !important;
-  box-sizing: content-box !important;
   width: 8px;
   height: 8px;
-  opacity: 1 !important;
-  display: block;
   margin-left: -10px;
 }
 
@@ -70,9 +66,6 @@
   width: 10px;
   height: 10px;
   background-color: var(--spice-accent);
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
   border-radius: 50%;
 }
 
