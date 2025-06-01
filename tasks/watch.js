@@ -1,8 +1,11 @@
-import { exec } from "node:child_process";
+import { spawn } from "node:child_process";
 import fs from "node:fs";
+import { join } from "node:path";
 import chokidar from "chokidar";
 import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
+import { compileAsync } from "sass";
+import WebSocket from "ws";
 
 const getCurrentTime = () => {
   const now = new Date();
@@ -10,34 +13,47 @@ const getCurrentTime = () => {
 };
 
 let jsWatcher = null;
-let sassProcess = null;
+let cssWatcher = null;
+let shouldWatchSpotify = false;
 
 const watchJS = async () => {
+  console.log("\x1b[36mJavaScript watcher starting.\x1b[0m");
+
   const OUT = "dist/theme.js";
   const SRC = "src/js/app.jsx";
   const PARENT_OUT = "../theme.js";
 
   jsWatcher = await esbuild.context({
     format: "esm",
+    target: "es2024",
+    platform: "browser",
     bundle: true,
     sourcemap: false,
+    // sourcemap: "inline",
     entryPoints: [SRC],
     outfile: OUT,
     minify: true,
+    jsx: "automatic",
     external: ["react", "react-dom"],
     plugins: [
       externalGlobalPlugin.externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
+        "react/jsx-runtime": "Spicetify.ReactJSX",
       }),
     ],
     banner: {
       js: `
         (async function() {
           while (!Spicetify.React || !Spicetify.ReactDOM) {
-            await new Promise(resolve => setTimeout(resolve, 1));
+            await new Promise(resolve => setTimeout(resolve, 10));
           }
-      `.trim(),
+              console.debug(
+              "%c● ᴗ ● [Theme]%cTheme is running",
+              "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
+              "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
+            );
+    `.trim(),
     },
     footer: {
       js: `
@@ -48,58 +64,128 @@ const watchJS = async () => {
 
   await jsWatcher.watch();
 
-  chokidar.watch(OUT).on("change", () => {
+  chokidar.watch(OUT).on("change", async () => {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m JavaScript Changes Detected.`);
     fs.copyFileSync(OUT, PARENT_OUT);
-    console.log("Theme's JS was updated.");
+    if (shouldWatchSpotify) {
+      await reloadSpotify();
+      console.log("Theme's JS was updated.");
+    }
   });
-
-  console.log("\x1b[36mJavaScript watcher started.\x1b[0m");
 };
 
-const watchCSS = () => {
-  //make it build then watch
+const watchCSS = async () => {
+  console.log("\x1b[36mCSS watcher starting.\x1b[0m");
+
   const OUT = "dist/user.css";
   const SRC = "src/css/app.scss";
   const PARENT_OUT = "../user.css";
 
-  //build css first then watch
-  exec(`sass ${SRC} ${OUT} --no-source-map`, {
-    stdio: "ignore",
-  });
-
-  sassProcess = exec(`sass ${SRC} ${OUT} --watch --no-source-map`, {
-    stdio: "ignore",
-  });
-
-  chokidar.watch(OUT).on("change", () => {
+  cssWatcher = chokidar.watch(SRC).on("all", async () => {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m CSS Changes Detected.`);
+    const result = await compileAsync(SRC, { style: "compressed" });
+    fs.writeFileSync(OUT, result.css);
     fs.copyFileSync(OUT, PARENT_OUT);
-    console.log("Theme's CSS was updated.");
+    if (shouldWatchSpotify) {
+      await reloadSpotify();
+      console.log("Theme's CSS was updated.");
+    }
   });
-
-  console.log("\x1b[36mCSS watcher started.\x1b[0m");
 };
 
-process.stdin.resume();
+const watchSpotify = async () => {
+  console.log("\x1b[36mWatching Spotify\x1b[0m");
+
+  const enableDevTools = async () => {
+    const file = fs.readFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
+    [file.indexOf("app-developer") + 14, file.lastIndexOf("app-developer") + 15].forEach((pos) => {
+      file[pos] = 50;
+    });
+    fs.writeFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
+  };
+
+  await Promise.all([
+    enableDevTools(),
+    new Promise((resolve) => spawn("taskkill", ["/F", "/IM", "spotify.exe"]).on("close", resolve)),
+  ]);
+
+  spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), ["--remote-debugging-port=9222"], {
+    detached: true,
+  });
+};
+
+const reloadSpotify = async () => {
+  const srcJS = join(process.cwd(), "dist", "theme.js");
+  const srcCSS = join(process.cwd(), "dist", "user.css");
+  const destJS = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions", "theme.js");
+  const destCSS = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "user.css");
+  try {
+    fs.copyFileSync(srcJS, destJS);
+    fs.copyFileSync(srcCSS, destCSS);
+
+    const response = await fetch("http://localhost:9222/json/list");
+    const wsUrl = (await response.json()).find((d) =>
+      d.url.includes("spotify"),
+    )?.webSocketDebuggerUrl;
+
+    if (wsUrl) {
+      await new Promise((resolve) => {
+        const ws = new WebSocket(wsUrl);
+        ws.once("open", () => {
+          ws.send(
+            JSON.stringify({
+              id: 0,
+              method: "Runtime.evaluate",
+              params: { expression: "window.location.reload();" },
+            }),
+          );
+          console.log("Reloading Spotify...");
+          ws.close();
+          resolve();
+        });
+      });
+    }
+  } catch {
+    watchSpotify();
+  }
+};
+
+process.stdin.on("data", (data) => {
+  if (data.toString().trim().toLowerCase() === "reload") {
+    reloadSpotify();
+  }
+});
+
 process.on("SIGINT", async () => {
-  await jsWatcher.dispose();
-  sassProcess.kill("SIGINT");
-  console.log("\x1b[31mWatch process terminated.\x1b[0m");
-  process.exit();
+  if (jsWatcher) {
+    await jsWatcher.dispose();
+    console.log("\x1b[33mJavaScript watcher stopped.\x1b[0m");
+  }
+  if (cssWatcher) {
+    await cssWatcher.close();
+    console.log("\x1b[33mCSS watcher stopped.\x1b[0m");
+  }
+  process.exit(0);
 });
 
 const args = process.argv.slice(2);
+const runWatchers = async () => {
+  const tasks = [];
 
-if (args.includes("--js")) {
-  watchJS();
-}
+  if (args.includes("--spicetify") || args.includes("--all")) {
+    await watchSpotify();
+    shouldWatchSpotify = true;
+  }
 
-if (args.includes("--css")) {
-  watchCSS();
-}
+  if (args.includes("--js") || args.includes("--all")) {
+    tasks.push(watchJS());
+  }
 
-if (args.includes("--all")) {
-  watchJS();
-  watchCSS();
-}
+  if (args.includes("--css") || args.includes("--all")) {
+    tasks.push(watchCSS());
+  }
+
+  await Promise.all(tasks);
+};
+
+runWatchers();

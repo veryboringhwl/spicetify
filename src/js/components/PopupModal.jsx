@@ -28,8 +28,7 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
   };
 
   const handleClickOutside = (event) => {
-    const modalContent = document.querySelector(".Modal");
-    if (modalContent && !modalContent.contains(event.target)) {
+    if (event.target.classList.contains("Modal__overlay")) {
       closeModal();
     }
   };
@@ -50,6 +49,7 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
               {buttons && (
                 <Spicetify.ReactComponent.TooltipWrapper label="GitHub" placement="top">
                   <button
+                    type="button"
                     className="Modal__button Modal__button--github"
                     onClick={() => window.open("https://github.com/veryboringhwl/spicetify")}
                   >
@@ -59,6 +59,7 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
               )}
               <Spicetify.ReactComponent.TooltipWrapper label="Close" placement="top">
                 <button
+                  type="button"
                   className="Modal__button Modal__button--close"
                   onClick={() => closeModal()}
                 >
