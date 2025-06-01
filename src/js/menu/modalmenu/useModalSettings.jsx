@@ -31,6 +31,7 @@ const useModalSettings = (options) => {
 
     options.forEach((option) => {
       const key = `theme:${option.name}`;
+      LocalStorage.set(key, option.defaultVal);
       document.documentElement.style.setProperty(
         `--windowcontrol-${option.name.replace("WindowsControl", "").toLowerCase()}`,
         option.defaultVal,

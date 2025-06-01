@@ -1,5 +1,4 @@
 .LibX {
-
   .TTB3lAVAhCK9Apl8quWw {
     padding: unset !important;
   }
@@ -82,6 +81,11 @@
   .main-globalNav-searchContainer {
     flex-direction: column !important;
     max-width: unset;
+  }
+
+  .custom-navlinks-scrollable_container {
+    width: 100%;
+    padding-left: 8px;
   }
 
   .main-topBar-topbarContentRight {

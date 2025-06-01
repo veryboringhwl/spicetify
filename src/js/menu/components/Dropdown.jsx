@@ -1,60 +1,53 @@
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useId, useRef } from "react";
 import Icons from "../../icons/icons";
 
 const Dropdown = memo(({ value, options, onChange, disabled }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const popoverId = useId();
+  const popoverRef = useRef(null);
+  const anchorName = `--dropdown-anchor-${popoverId.replace(/:/g, "id")}`;
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const toggleOpen = (e) => {
-    e.stopPropagation();
-    setIsOpen((prev) => !prev);
-  };
-
-  const handleSelect = (option, e) => {
-    e.stopPropagation();
+  const handleSelect = (option) => {
     onChange?.({ target: { value: option.value } });
-    setIsOpen(false);
+    popoverRef.current?.hidePopover();
   };
+
+  const selectedLabel = options.find((opt) => opt.value === value)?.label || "Select...";
 
   return (
-    <div
-      ref={dropdownRef}
-      className={`themeOptionDropdown ${isOpen ? "menu-open" : ""} ${disabled ? "disabled" : ""}`}
-    >
-      <div className="themeOptionDropdownButton" onClick={disabled ? null : toggleOpen}>
-        <div className="themeOptionDropdownText">
-          {options.find((opt) => opt.value === value)?.label}
-        </div>
+    <div className={`themeOptionDropdown ${disabled ? "disabled" : ""}`}>
+      <button
+        className="themeOptionDropdownButton"
+        popovertarget={popoverId}
+        popovertargetaction="toggle"
+        disabled={disabled}
+        style={{ anchorName: anchorName }}
+      >
+        <div className="themeOptionDropdownText">{selectedLabel}</div>
         <div className="themeOptionDropdownArrow">
           <Icons.React.dropdown size={12} />
         </div>
+      </button>
+      <div
+        popover="auto"
+        id={popoverId}
+        ref={popoverRef}
+        className="themeOptionDropdownMenu"
+        style={{
+          top: `calc(anchor(${anchorName} bottom) + 4px)`,
+          left: `anchor(${anchorName} left)`,
+          width: `anchor-size(${anchorName} width)`,
+        }}
+      >
+        {options.map((option) => (
+          <div
+            key={option.value}
+            className={`themeOptionDropdownOptions ${value === option.value ? "selected" : ""}`}
+            onClick={() => handleSelect(option)}
+          >
+            {option.label}
+          </div>
+        ))}
       </div>
-      {isOpen && !disabled && (
-        <div className="themeOptionDropdownMenu">
-          {options.map((option) => (
-            <div
-              key={option.value}
-              className={`themeOptionDropdownOptions ${value === option.value ? "selected" : ""}`}
-              role="option"
-              onClick={(e) => handleSelect(option, e)}
-            >
-              {option.label}
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 });

@@ -1,6 +1,6 @@
-import { memo, useEffect, useRef } from "react";
+import React, { memo, useRef, useEffect } from "react";
 
-const CategoryCarousel = memo(({ categories }) => {
+const CategoryCarousel = memo(({ categories, selectedCategory, onSelectCategory }) => {
   const carouselRef = useRef(null);
 
   useEffect(() => {
@@ -16,28 +16,23 @@ const CategoryCarousel = memo(({ categories }) => {
     return () => carousel?.removeEventListener("wheel", handleWheel);
   }, []);
 
-  const buttonWidth = `calc((100% - ${(categories.length - 1) * 8}px) / ${categories.length})`;
+  const totalButtons = categories.length;
+  const buttonWidth = `calc((100% - ${(totalButtons - 1) * 8}px) / ${totalButtons})`;
 
   return (
-    <div className="carouselContainer">
-      <div className="category-carousel" ref={carouselRef}>
-        {categories.map((category) => (
-          <button
-            key={category}
-            className="category-button"
-            onClick={() => {
-              document
-                .querySelector(`.${category.toLowerCase()}Container`)
-                ?.scrollIntoView({ behavior: "smooth", block: "start" });
-            }}
-            style={{
-              width: buttonWidth,
-            }}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+    <div className="carouselContainer" ref={carouselRef}>
+      {categories.map((category) => (
+        <button
+          key={category}
+          className={`category-button ${selectedCategory === category ? "active" : ""}`}
+          onClick={() => onSelectCategory(category)}
+          style={{
+            width: buttonWidth,
+          }}
+        >
+          {category}
+        </button>
+      ))}
     </div>
   );
 });

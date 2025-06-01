@@ -7,47 +7,35 @@ import Window from "../../utils/Window";
 import SettingsMenu from "./SettingsMenu";
 
 const SettingsButton = () => {
-  let menuContainer = null;
-  let SettingsButton = null;
+  const popoverId = "settings-menu-popover";
+  let popoverElement = document.getElementById(popoverId);
 
-  const removeContextMenu = () => {
-    if (menuContainer) {
-      menuContainer.remove();
-      menuContainer = null;
-    }
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-
-  const handleClickOutside = (event) => {
-    if (menuContainer && SettingsButton) {
-      const clickedInside =
-        menuContainer.contains(event.target) || SettingsButton.element.contains(event.target);
-      if (!clickedInside) {
-        removeContextMenu();
-      }
-    }
+  const hideMenu = () => {
+    popoverElement?.hidePopover?.();
   };
 
   const showMenu = (event) => {
     event.preventDefault();
-    removeContextMenu();
-    menuContainer = document.createElement("div");
-    menuContainer.id = "context-menu";
-    menuContainer.style.position = "absolute";
-    menuContainer.style.zIndex = "1000";
-    document.body.appendChild(menuContainer);
-    document.addEventListener("mousedown", handleClickOutside);
+    popoverElement?.showPopover?.();
+  };
 
-    const bound = SettingsButton.element.getBoundingClientRect();
-    menuContainer.style.top = `${bound.bottom}px`;
-    menuContainer.style.left = `${bound.left}px`;
+  if (!popoverElement) {
+    popoverElement = document.createElement("div");
+    popoverElement.id = popoverId;
+    popoverElement.style.top = "calc(anchor(--SettingsButton bottom) + 8px)";
+    popoverElement.style.left = "anchor(--SettingsButton left)";
+    popoverElement.style.background = "transparent";
+    popoverElement.style.overflow = "visible";
+    popoverElement.popover = "auto";
+    document.body.appendChild(popoverElement);
 
-    ReactDOM.createRoot(menuContainer).render(
+    ReactDOM.createRoot(popoverElement).render(
       <Spicetify.ReactComponent.Menu>
         <Spicetify.ReactComponent.MenuItem
+          key="reload-theme"
           onClick={() => {
             Window.Reload();
-            removeContextMenu();
+            hideMenu();
           }}
           leadingIcon={
             <svg
@@ -62,9 +50,10 @@ const SettingsButton = () => {
           Reload theme
         </Spicetify.ReactComponent.MenuItem>
         <Spicetify.ReactComponent.MenuItem
+          key="restart-spotify"
           onClick={() => {
             Window.Restart();
-            removeContextMenu();
+            hideMenu();
           }}
           leadingIcon={
             <svg
@@ -75,11 +64,12 @@ const SettingsButton = () => {
               dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.locked }}
             />
           }
-          divider={"after"}
+          divider="after"
         >
           Restart Spotify
         </Spicetify.ReactComponent.MenuItem>
         <Spicetify.ReactComponent.MenuItem
+          key="confirm-dialog"
           onClick={() => {
             ConfirmDialog({
               titleText: "Confirm Dialog",
@@ -88,7 +78,7 @@ const SettingsButton = () => {
               confirmLabel: "Ok",
               allowHTML: true,
             });
-            removeContextMenu();
+            hideMenu();
           }}
           leadingIcon={
             <svg
@@ -99,17 +89,15 @@ const SettingsButton = () => {
               dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.check }}
             />
           }
-          divider={"after"}
+          divider="after"
         >
           Confirm Dialog
         </Spicetify.ReactComponent.MenuItem>
         <Spicetify.ReactComponent.MenuItem
+          key="theme-settings-menu"
           onClick={() => {
-            PopupModal({
-              title: "Theme Settings",
-              content: SettingsMenu,
-            });
-            removeContextMenu();
+            PopupModal({ title: "Theme Settings", content: SettingsMenu });
+            hideMenu();
           }}
           leadingIcon={
             <svg
@@ -117,15 +105,18 @@ const SettingsButton = () => {
               width="16"
               height="16"
               fill="currentColor"
-              dangerouslySetInnerHTML={{
-                __html: Spicetify.SVGIcons.subtitles,
-              }}
+              dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.subtitles }}
             />
           }
         >
           Theme Settings
         </Spicetify.ReactComponent.MenuItem>
         <Spicetify.ReactComponent.MenuItem
+          key="debug-menu"
+          onClick={() => {
+            PopupModal({ title: "Debug Menu", content: DebugMenu });
+            hideMenu();
+          }}
           leadingIcon={
             <svg
               viewBox="0 0 16 16"
@@ -135,21 +126,14 @@ const SettingsButton = () => {
               dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.menu }}
             />
           }
-          onClick={() => {
-            PopupModal({
-              title: "Debug Menu",
-              content: DebugMenu,
-            });
-            removeContextMenu();
-          }}
         >
           Debug Menu
         </Spicetify.ReactComponent.MenuItem>
       </Spicetify.ReactComponent.Menu>,
     );
-  };
+  }
 
-  SettingsButton = new Spicetify.Topbar.Button(
+  const SettingsButton = new Spicetify.Topbar.Button(
     "Theme Settings",
     `<svg viewBox="0 0 16 16" width="16px" height="16px" fill="currentColor">${Icons.settings}</svg>`,
     () => {
@@ -165,7 +149,7 @@ const SettingsButton = () => {
   );
 
   SettingsButton.element.oncontextmenu = showMenu;
-
+  SettingsButton.element.style.anchorName = "--SettingsButton";
   return SettingsButton;
 };
 

@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React, { memo, useState, useCallback, useMemo } from "react";
 import CategoryCarousel from "../components/CategoryCarousel";
 import RenderOptions from "../components/RenderOptions";
 import useSettings from "../hooks/useSettings";
@@ -6,13 +6,29 @@ import options from "./options";
 
 const SettingsMenu = memo(() => {
   const { settings, handleSettingChange, resetSettings, saveSettings } = useSettings();
-  const categories = Object.keys(options);
+  const allCategories = ["All", ...Object.keys(options)];
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const handleSelectCategory = useCallback((category) => {
+    setSelectedCategory(category);
+  }, []);
+
+  const filteredOptions = useMemo(() => {
+    if (selectedCategory === "All") {
+      return Object.entries(options);
+    }
+    return Object.entries(options).filter(([category]) => category === selectedCategory);
+  }, [selectedCategory]);
 
   return (
     <div className="themeContainer">
-      <CategoryCarousel categories={categories} />
+      <CategoryCarousel
+        categories={allCategories}
+        selectedCategory={selectedCategory}
+        onSelectCategory={handleSelectCategory}
+      />
       <div className="optionsContainer">
-        {Object.entries(options).map(([category, categoryOptions]) => (
+        {filteredOptions.map(([category, categoryOptions]) => (
           <div key={category} className={`themeOptionsCategory ${category.toLowerCase()}Container`}>
             <h2 className="categoryTitle">{category}</h2>
             {categoryOptions.map((option) => (

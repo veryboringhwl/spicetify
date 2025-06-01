@@ -11,6 +11,7 @@
 @forward "main/pages/marketplace";
 @forward "main/pages/playlist";
 
+@forward "menu/menu";
 @forward "menu/buttons";
 @forward "menu/carousel";
 @forward "menu/options";
@@ -20,3 +21,7 @@
 @forward "features/features";
 @forward "features/layouts";
 @forward "features/snippets";
+
+body {
+  overflow: hidden !important;
+}

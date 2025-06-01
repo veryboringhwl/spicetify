@@ -1,6 +1,5 @@
-import * as React from "react";
+import React from "react";
 import Mousetrap from "./debug/Mousetrap";
-import UpdateZoom from "./features/UpdateZoom";
 import Icons from "./icons/icons";
 import initialiseOptions from "./menu/helpers/initialiseOptions";
 import SettingsButton from "./menu/settingsmenu/SettingsButton";
@@ -49,7 +48,7 @@ import Notification from "./utils/Notification";
   });
 
   const version = Spicetify.Platform.version.split(".").map((e) => Number.parseInt(e));
-  if (version[2] >= 50) {
+  if (version[2] < 55) {
     Notification({
       autoHideDuration: 5000,
       backgroundColor: "#ff9800",
@@ -57,13 +56,12 @@ import Notification from "./utils/Notification";
       message: (
         <>
           <Icons.React.warning size={24} />
-          <span>Theme only supports Spotify versions greater than 1.2.50.000</span>
+          <span>Theme only supports Spotify versions greater than 1.2.55.000</span>
         </>
       ),
     });
   }
 
-  UpdateZoom();
   Mousetrap();
   SettingsButton();
 

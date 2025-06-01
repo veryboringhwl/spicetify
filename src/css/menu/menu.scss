@@ -1,0 +1,26 @@
+.themeContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.optionsContainer {
+  border-radius: 8px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+kbd {
+  border-radius: var(--encore-corner-radius-base);
+  -webkit-box-shadow: 0 1px 0 var(--background-base),
+    0 0 0 1px var(--essential-subdued) inset;
+  box-shadow: 0 1px 0 var(--background-base),
+    0 0 0 1px var(--essential-subdued) inset;
+  display: inline-block;
+  line-height: 1.5;
+  margin: var(--encore-spacing-tighter-5);
+  min-width: 1.5em;
+  padding: var(--encore-spacing-tighter-5) var(--encore-spacing-tighter-3);
+  text-align: center;
+}

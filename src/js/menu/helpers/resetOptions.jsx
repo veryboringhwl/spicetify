@@ -12,9 +12,6 @@ const resetOptions = (setSettings) => {
     titleText: "Are you sure?",
     descriptionText: "This will reset all settings to default!",
     confirmText: "Reset",
-    onOpen: () => {
-      document.querySelector(".GenericModal__overlay").style.zIndex = 0;
-    },
     onConfirm: () => {
       try {
         Console.Log("Resetting settings");

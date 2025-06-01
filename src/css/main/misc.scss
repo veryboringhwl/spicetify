@@ -1,15 +1,15 @@
 /*adds space to drag small window*/
 @media (max-width: 1200px) {
   body:not(.LibX):not(.AppleMusic) .main-topBar-topbarContentRight::after {
-    content: " |    ";
+    content: "|";
     -webkit-app-region: drag;
     color: rgba(var(--spice-rgb-text), 0.5);
     font-weight: 1;
-    font-size: 30px;
-    white-space: pre-wrap;
+    font-size: xx-large;
     height: 48px;
-    position: relative;
-  }
+    width: 48px;
+    margin-left: 8px;
+}
 }
 
 /*compact connect bar*/

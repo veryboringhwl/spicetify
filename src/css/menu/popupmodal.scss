@@ -28,7 +28,7 @@
 
 .Modal__container--large {
   max-height: 80vh;
-  width: clamp(550px, 60vw, 700px);
+  width: clamp(550px, 60vw, 650px);
 }
 
 .Modal__header {
@@ -76,7 +76,7 @@
 }
 
 .Modal__content {
-  scrollbar-width: thin;
-  overflow-y: scroll;
+  display: flex;
+  overflow: hidden;
   padding: 16px 32px !important;
 }

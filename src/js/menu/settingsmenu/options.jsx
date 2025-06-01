@@ -31,7 +31,7 @@ const options = {
       type: "dropdown",
       name: "change-Spotify-mode",
       desc: "Change Spotify mode",
-      defaultVal: "developer",
+      defaultVal: "default",
       tippy: "Only takes effect after a restart",
       options: [
         { value: "default", label: "Default" },
