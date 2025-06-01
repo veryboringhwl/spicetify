@@ -1,10 +1,9 @@
-import { spawn } from "node:child_process";
+import { exec, spawn } from "node:child_process";
 import fs from "node:fs";
 import { join } from "node:path";
 import chokidar from "chokidar";
 import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
-import { compileAsync } from "sass";
 import WebSocket from "ws";
 
 const getCurrentTime = () => {
@@ -17,8 +16,6 @@ let cssWatcher = null;
 let shouldWatchSpotify = false;
 
 const watchJS = async () => {
-  console.log("\x1b[36mJavaScript watcher starting.\x1b[0m");
-
   const OUT = "dist/theme.js";
   const SRC = "src/js/app.jsx";
   const PARENT_OUT = "../theme.js";
@@ -28,11 +25,10 @@ const watchJS = async () => {
     target: "es2024",
     platform: "browser",
     bundle: true,
-    sourcemap: false,
-    // sourcemap: "inline",
+    sourcemap: "inline",
     entryPoints: [SRC],
     outfile: OUT,
-    minify: true,
+    minify: false,
     jsx: "automatic",
     external: ["react", "react-dom"],
     plugins: [
@@ -72,25 +68,28 @@ const watchJS = async () => {
       console.log("Theme's JS was updated.");
     }
   });
+  console.log("\x1b[36mJS watcher started.\x1b[0m");
 };
 
 const watchCSS = async () => {
-  console.log("\x1b[36mCSS watcher starting.\x1b[0m");
-
   const OUT = "dist/user.css";
   const SRC = "src/css/app.scss";
   const PARENT_OUT = "../user.css";
 
-  cssWatcher = chokidar.watch(SRC).on("all", async () => {
+  cssWatcher = exec(`sass ${SRC} ${OUT} --watch --no-source-map`, {
+    stdio: "ignore",
+  });
+
+  chokidar.watch(OUT).on("change", async () => {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m CSS Changes Detected.`);
-    const result = await compileAsync(SRC, { style: "compressed" });
-    fs.writeFileSync(OUT, result.css);
     fs.copyFileSync(OUT, PARENT_OUT);
     if (shouldWatchSpotify) {
       await reloadSpotify();
       console.log("Theme's CSS was updated.");
     }
   });
+
+  console.log("\x1b[36mCSS watcher started.\x1b[0m");
 };
 
 const watchSpotify = async () => {
@@ -146,6 +145,7 @@ const reloadSpotify = async () => {
       });
     }
   } catch {
+    console.log("Couldnt reload Spotify, attempting to restart");
     watchSpotify();
   }
 };
@@ -162,7 +162,7 @@ process.on("SIGINT", async () => {
     console.log("\x1b[33mJavaScript watcher stopped.\x1b[0m");
   }
   if (cssWatcher) {
-    await cssWatcher.close();
+    cssWatcher.kill("SIGINT");
     console.log("\x1b[33mCSS watcher stopped.\x1b[0m");
   }
   process.exit(0);

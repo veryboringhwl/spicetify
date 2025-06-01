@@ -14,11 +14,10 @@ const buildJS = async () => {
     target: "es2024",
     platform: "browser",
     bundle: true,
-    sourcemap: false,
-    // sourcemap: "inline",
+    sourcemap: "inline",
     entryPoints: [SRC],
     outfile: OUT,
-    minify: true,
+    minify: false,
     jsx: "automatic",
     external: ["react", "react-dom"],
     plugins: [
@@ -65,14 +64,6 @@ const buildCSS = async () => {
 };
 
 const applySpotify = async () => {
-  console.log("\x1b[36mApplying to Spotify\x1b[0m");
-  const killProccess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
-  await new Promise((resolve) => killProccess.on("close", resolve));
-
-  spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), ["--remote-debugging-port=9222"], {
-    detached: true,
-  });
-
   const srcJS = join(process.cwd(), "dist", "theme.js");
   const srcCSS = join(process.cwd(), "dist", "user.css");
 
@@ -81,6 +72,15 @@ const applySpotify = async () => {
 
   fs.copyFileSync(srcJS, destJS);
   fs.copyFileSync(srcCSS, destCSS);
+
+  console.log("\x1b[36mApplying to Spotify\x1b[0m");
+  const killProccess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
+  await new Promise((resolve) => killProccess.on("close", resolve));
+
+  spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), {
+    detached: true,
+  });
+
   console.log("\x1b[36mFinished applying to Spotify\x1b[0m");
 };
 
