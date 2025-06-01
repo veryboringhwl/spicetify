@@ -42,7 +42,8 @@
 
 .themeOptionDropdown {
   position: relative;
-  min-width: 120px;
+  min-width: 100px;
+  width: fit-content;
   font-size: 14px !important;
   cursor: pointer;
 
@@ -77,6 +78,9 @@
     color: rgba(var(--spice-rgb-text), 0.8);
     border: solid rgba(var(--spice-rgb-subtext), 0.1) 1px;
     z-index: 10;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    max-height: 250px;
 
     .themeOptionDropdownOptions {
       display: flex;

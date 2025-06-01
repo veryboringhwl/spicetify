@@ -1,5 +1,3 @@
-import React from "react";
-
 const ReactComponent = (icon, defaultSize = 16) => {
   return ({ size = defaultSize, fill = "currentColor" }) => (
     <svg

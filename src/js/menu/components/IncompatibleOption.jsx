@@ -1,8 +1,8 @@
-import React from "react";
+import { memo } from "react";
 import OptionType from "../components/OptionType";
 import options from "../settingsmenu/options";
 
-const IncompatibleOption = React.memo(({ option, settings, onChange }) => {
+const IncompatibleOption = memo(({ option, settings, onChange }) => {
   const allOptions = Object.values(options).flat();
 
   const isDisabled = allOptions.some(

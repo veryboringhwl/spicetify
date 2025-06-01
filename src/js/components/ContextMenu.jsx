@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import ReactDOM from "react-dom";
 import ConfirmDialog from "../components/ConfirmDialog";
 import PopupModal from "../components/PopupModal";
@@ -8,7 +8,7 @@ import Window from "../utils/Window";
 import waitForElements from "../utils/waitForElements";
 
 //why divider not work
-const ContextMenuButton = Spicetify.React.memo(() => (
+const ContextMenuButton = memo(() => (
   <Spicetify.ReactComponent.ContextMenu
     offset={[0, 12]}
     trigger="right-click"

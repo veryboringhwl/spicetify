@@ -1,8 +1,8 @@
-import React from "react";
+import { memo } from "react";
 import TippyButton from "../../components/TippyButton";
 import InfoButton from "./InfoButton";
 
-const OptionRow = React.memo(({ name, desc, tippy, children, popupModal }) => (
+const OptionRow = memo(({ name, desc, tippy, children, popupModal }) => (
   <div className="themeOptionRow" data-name={`theme:${name}`}>
     <div className="themeOptionContent">
       <div className="themeOptionDesc">{desc}</div>

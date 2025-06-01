@@ -1,6 +1,3 @@
-import React from "react";
-import Console from "./Console";
-
 const Notification = ({
   message = "",
   keyPrefix = "custom-notif",

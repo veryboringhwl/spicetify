@@ -1,10 +1,10 @@
-import React from "react";
+import { memo } from "react";
 import CategoryCarousel from "../components/CategoryCarousel";
 import RenderOptions from "../components/RenderOptions";
 import useSettings from "../hooks/useSettings";
 import options from "./options";
 
-const SettingsMenu = React.memo(() => {
+const SettingsMenu = memo(() => {
   const { settings, handleSettingChange, resetSettings, saveSettings } = useSettings();
   const categories = Object.keys(options);
 
@@ -13,7 +13,7 @@ const SettingsMenu = React.memo(() => {
       <CategoryCarousel categories={categories} />
       <div className="optionsContainer">
         {Object.entries(options).map(([category, categoryOptions]) => (
-          <div className={`themeOptionsCategory ${category.toLowerCase()}Container`}>
+          <div key={category} className={`themeOptionsCategory ${category.toLowerCase()}Container`}>
             <h2 className="categoryTitle">{category}</h2>
             {categoryOptions.map((option) => (
               <RenderOptions

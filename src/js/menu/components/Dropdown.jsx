@@ -1,11 +1,11 @@
-import React from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import Icons from "../../icons/icons";
 
-const Dropdown = React.memo(({ value, options, onChange, disabled }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const dropdownRef = React.useRef(null);
+const Dropdown = memo(({ value, options, onChange, disabled }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);

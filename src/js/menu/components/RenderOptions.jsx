@@ -1,8 +1,8 @@
-import React from "react";
+import { memo } from "react";
 import IncompatibleOption from "./IncompatibleOption";
 import RevealableOption from "./RevealableOption";
 
-const RenderOptions = React.memo(({ option, settings, onChange }) => {
+const RenderOptions = memo(({ option, settings, onChange }) => {
   const mainValue = settings[`theme:${option.name}`];
 
   return (

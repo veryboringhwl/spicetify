@@ -1,9 +1,9 @@
-import React from "react";
+import { memo, useEffect, useRef } from "react";
 
-const CategoryCarousel = React.memo(({ categories }) => {
-  const carouselRef = React.useRef(null);
+const CategoryCarousel = memo(({ categories }) => {
+  const carouselRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleWheel = (e) => {
       if (carouselRef.current) {
         carouselRef.current.scrollLeft += e.deltaY;

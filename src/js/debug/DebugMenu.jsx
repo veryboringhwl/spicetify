@@ -1,16 +1,16 @@
-import React from "react";
+import { memo, useEffect, useState } from "react";
 import LoadingIndicator from "../components/LoadingIndicator";
 import OptionRow from "../menu/components/OptionRow";
 import Toggle from "../menu/components/Toggle";
 import Console from "../utils/Console";
 import Notification from "../utils/Notification";
 
-const DebugMenu = React.memo(() => {
-  const [lastVersion, setLastVersion] = React.useState("Loading...");
-  const [lastUpdated, setLastUpdated] = React.useState("Loading...");
-  const [enabled, setEnabled] = React.useState(false);
+const DebugMenu = memo(() => {
+  const [lastVersion, setLastVersion] = useState("Loading...");
+  const [lastUpdated, setLastUpdated] = useState("Loading...");
+  const [enabled, setEnabled] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(

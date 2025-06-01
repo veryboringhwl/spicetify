@@ -1,11 +1,11 @@
-import React from "react";
+import { memo, useEffect } from "react";
 import OptionType from "../components/OptionType";
 import useModalSettings from "./useModalSettings";
 
-const FontModal = React.memo(() => {
+const FontModal = memo(() => {
   const { settings, updateSetting, resetSettings, saveSettings } = useModalSettings(fontOptions);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fontOptions.forEach((option) => option.run?.(settings[option.name]));
   }, [settings]);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import { useCallback, useState } from "react";
 import getInitialOptions from "../helpers/getInitialOptions";
 import resetOptions from "../helpers/resetOptions";
 import saveOptions from "../helpers/saveOptions";
@@ -6,9 +6,9 @@ import options from "../settingsmenu/options";
 
 const useSettings = () => {
   const allOptions = Object.values(options).flat();
-  const [settings, setSettings] = React.useState(() => getInitialOptions(allOptions));
+  const [settings, setSettings] = useState(() => getInitialOptions(allOptions));
 
-  const handleSettingChange = React.useCallback(
+  const handleSettingChange = useCallback(
     (key, value) => {
       setSettings((prev) => {
         const newSettings = { ...prev, [key]: value };

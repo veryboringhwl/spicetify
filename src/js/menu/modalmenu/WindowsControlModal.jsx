@@ -1,8 +1,8 @@
-import React from "react";
+import { memo } from "react";
 import OptionType from "../components/OptionType";
 import useModalSettings from "./useModalSettings";
 
-const WindowsControlModal = React.memo(() => {
+const WindowsControlModal = memo(() => {
   const { settings, updateSetting, resetSettings, saveSettings } =
     useModalSettings(windowsControlOptions);
 

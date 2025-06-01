@@ -1,5 +1,3 @@
-import React from "react";
-
 const LoadingIndicator = () => (
   <div className="loading-indicator-container">
     <svg viewBox="0 0 120 40" className="loading-indicator">

@@ -1,12 +1,12 @@
-import React from "react";
+import { memo, useEffect } from "react";
 import OptionType from "../components/OptionType";
 import useModalSettings from "./useModalSettings";
 
-const AlbumBannerModal = React.memo(() => {
+const AlbumBannerModal = memo(() => {
   const { settings, updateSetting, resetSettings, saveSettings } =
     useModalSettings(albumBannerOptions);
 
-  React.useEffect(() => {
+  useEffect(() => {
     albumBannerOptions.forEach((option) => option.run?.(settings[option.name]));
   }, [settings]);
 

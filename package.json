@@ -9,14 +9,14 @@
     "watch-js": "node tasks/watch.js --js",
     "build-css": "node tasks/build.js --css",
     "watch-css": "node tasks/watch.js --css",
-    "debug": "concurrently --raw \"spicetify watch -s -q\" \"npm run watch\" ",
-    "test": "npm run build && spicetify apply -q"
+    "debug": "concurrently --raw \"spicetify watch -s \" \"npm run watch\" ",
+    "test": "npm run build && spicetify config current_theme dev -q && spicetify apply -q"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "concurrently": "^9.1.0",
-    "esbuild": "^0.25.4",
+    "@biomejs/biome": "^1.9.4",
+    "concurrently": "^9.1.2",
+    "esbuild": "^0.25.0",
     "esbuild-plugin-external-global": "^1.0.1",
-    "sass": "^1.80.6"
+    "sass": "^1.85.0"
   }
 }

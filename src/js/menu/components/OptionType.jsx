@@ -1,11 +1,11 @@
-import React from "react";
+import { memo, useCallback } from "react";
 import Dropdown from "./Dropdown";
 import Input from "./Input";
 import OptionRow from "./OptionRow";
 import Toggle from "./Toggle";
 
-const OptionType = React.memo(({ option, value, onChange, disabled }) => {
-  const handleChange = React.useCallback(
+const OptionType = memo(({ option, value, onChange, disabled }) => {
+  const handleChange = useCallback(
     (e) => {
       const newValue = option.type === "toggle" ? !value : e.target.value;
       onChange(`theme:${option.name}`, newValue);

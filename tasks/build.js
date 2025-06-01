@@ -48,7 +48,7 @@ const buildCSS = () => {
   const SRC = "src/css/app.scss";
   const PARENT_OUT = "../user.css";
 
-  exec(`sass ${SRC} ${OUT} --no-source-map`, () => {
+  exec(`sass ${SRC} ${OUT} --no-source-map --style=compressed`, () => {
     fs.copyFileSync(OUT, PARENT_OUT);
     console.log("\x1b[32mCSS build completed.\x1b[0m");
   });

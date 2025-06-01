@@ -1,7 +1,7 @@
-import React from "react";
+import { memo } from "react";
 import OptionType from "./OptionType";
 
-const RevealableOption = React.memo(({ option, settings, onChange }) => {
+const RevealableOption = memo(({ option, settings, onChange }) => {
   return (
     <div className="themeOptionRevealed">
       {option.reveal.map((subOption) => (

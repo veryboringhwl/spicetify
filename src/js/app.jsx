@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Mousetrap from "./debug/Mousetrap";
 import UpdateZoom from "./features/UpdateZoom";
 import Icons from "./icons/icons";
@@ -16,8 +16,8 @@ import Notification from "./utils/Notification";
       Spicetify.Mousetrap &&
       Spicetify.Platform &&
       Spicetify.ReactComponent &&
-      Spicetify.Snackbar.enqueueSnackbar &&
-      Spicetify.Snackbar.enqueueCustomSnackbar
+      Spicetify.Snackbar.enqueueCustomSnackbar &&
+      Spicetify.Snackbar.enqueueSnackbar
     )
   ) {
     if (Date.now() > timeout) {
@@ -35,7 +35,7 @@ import Notification from "./utils/Notification";
       break;
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 10));
   }
 
   Console.Log("Spicetify theme initialising");

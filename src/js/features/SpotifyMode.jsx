@@ -4,6 +4,8 @@ const SpotifyMode = async (mode) => {
     return;
   }
 
+  // Spicetify.Platform.ProductStateAPI.productStateApi.getValues()
+  // employee seems to not work 1.2.55+
   const modePairs = {
     default: { "app-developer": "0", employee: "0" },
     developer: { "app-developer": "2", employee: "0" },

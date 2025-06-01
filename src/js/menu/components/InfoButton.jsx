@@ -1,8 +1,8 @@
-import React from "react";
+import { memo } from "react";
 import PopupModal from "../../components/PopupModal";
 import Icons from "../../icons/icons";
 
-const InfoButton = React.memo(({ name, popupModal }) => {
+const InfoButton = memo(({ name, popupModal }) => {
   if (!popupModal) return null;
 
   return (

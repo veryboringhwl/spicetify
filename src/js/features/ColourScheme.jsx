@@ -10,14 +10,14 @@ const ColourScheme = async (scheme) => {
   );
   const iniContent = await response.text();
   const colourSchemes = iniContent.split(/[\r\n]+/).reduce((acc, line) => {
-    line = line.trim();
-    if (line.startsWith(";")) return acc;
-    const sectionMatch = line.match(/^\[([^\]]+)\]$/);
+    const trimmedLine = line.trim();
+    if (trimmedLine.startsWith(";")) return acc;
+    const sectionMatch = trimmedLine.match(/^\[([^\]]+)\]$/);
     if (sectionMatch) {
       acc[sectionMatch[1]] = {};
       return acc;
     }
-    const paramMatch = line.match(/^([^=]+?)\s*=\s*(.+)$/);
+    const paramMatch = trimmedLine.match(/^([^=]+?)\s*=\s*(.+)$/);
     if (paramMatch) {
       const [, key, value] = paramMatch;
       const section = Object.keys(acc).pop();

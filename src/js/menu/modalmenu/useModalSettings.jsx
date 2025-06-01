@@ -1,8 +1,8 @@
-import React from "react";
+import { useCallback, useState } from "react";
 import LocalStorage from "../../utils/LocalStorage";
 
 const useModalSettings = (options) => {
-  const [settings, setSettings] = React.useState(() =>
+  const [settings, setSettings] = useState(() =>
     Object.fromEntries(
       options.map((option) => [
         option.name,
@@ -11,7 +11,7 @@ const useModalSettings = (options) => {
     ),
   );
 
-  const updateSetting = React.useCallback((key, value) => {
+  const updateSetting = useCallback((key, value) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
 
     if (key.toLowerCase().includes("windowcontrol")) {
@@ -22,7 +22,7 @@ const useModalSettings = (options) => {
     }
   }, []);
 
-  const resetSettings = React.useCallback(() => {
+  const resetSettings = useCallback(() => {
     const defaultSettings = Object.fromEntries(
       options.map((option) => [option.name, option.defaultVal]),
     );
@@ -40,7 +40,7 @@ const useModalSettings = (options) => {
     });
   }, [options]);
 
-  const saveSettings = React.useCallback(() => {
+  const saveSettings = useCallback(() => {
     Object.entries(settings).forEach(([key, value]) => {
       LocalStorage.set(`theme:${key}`, value);
 

@@ -1,7 +1,7 @@
-import React from "react";
+import { memo } from "react";
 import Icons from "../icons/icons";
 
-const TippyButton = React.memo(({ tippy }) => {
+const TippyButton = memo(({ tippy }) => {
   return (
     <Spicetify.ReactComponent.TooltipWrapper label={tippy} placement="top" showDelay={0}>
       <div className="themeOptionTippy">

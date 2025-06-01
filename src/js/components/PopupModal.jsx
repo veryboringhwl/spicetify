@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import ReactDOM from "react-dom";
 import Icons from "../icons/icons";
 
@@ -15,6 +15,7 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
 
   const closeModal = () => {
     modalRoot.unmount();
+    container.remove();
     document.body.style.overflow = "auto";
     document.removeEventListener("keydown", handleEscKey);
     document.removeEventListener("mousedown", handleClickOutside);
@@ -36,7 +37,7 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
   document.addEventListener("keydown", handleEscKey);
   document.addEventListener("mousedown", handleClickOutside);
 
-  const ModalComponent = React.memo(() => (
+  const ModalComponent = memo(() => (
     <div className="Modal__overlay">
       <div className="Modal">
         <div className={`Modal__container${isLarge ? " Modal__container--large" : ""}`}>
@@ -57,7 +58,10 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
                 </Spicetify.ReactComponent.TooltipWrapper>
               )}
               <Spicetify.ReactComponent.TooltipWrapper label="Close" placement="top">
-                <button className="Modal__button Modal__button--close" onClick={() => closeModal()}>
+                <button
+                  className="Modal__button Modal__button--close"
+                  onClick={() => closeModal()}
+                >
                   <Icons.React.close size={18} />
                 </button>
               </Spicetify.ReactComponent.TooltipWrapper>
