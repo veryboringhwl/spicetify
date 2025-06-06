@@ -151,8 +151,19 @@ const reloadSpotify = async () => {
 };
 
 process.stdin.on("data", (data) => {
-  if (data.toString().trim().toLowerCase() === "reload") {
-    reloadSpotify();
+  if (data.toString().trim().toLowerCase() === "format") {
+    console.log("Formatting...");
+    exec("npx biome check --fix --unsafe", (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.error(`stderr: ${stderr}`);
+        return;
+      }
+      console.log(stdout);
+    });
   }
 });
 

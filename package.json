@@ -3,24 +3,19 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "release": "node tasks/release.js",
     "dev-build": "node tasks/build.js --all",
     "dev-watch": "node tasks/watch.js --all",
-    "debug": "node tasks/debug.js",
     "build": "node tasks/build.js --js --css",
-    "build-js": "node tasks/build.js --js",
-    "build-css": "node tasks/build.js --css",
     "watch": "node tasks/watch.js --js --css",
-    "watch-js": "node tasks/watch.js --js",
-    "watch-css": "node tasks/watch.js --css",
+    "debug": "node tasks/debug.js",
     "lint": "biome lint --write",
     "format": "biome format --write",
-    "check": "biome check --fix --unsafe",
-    "test": "concurrently --raw \"spicetify watch -s -q\" \"npm run dev-watch\""
+    "check": "biome check --fix --unsafe"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "chokidar": "^4.0.3",
-    "concurrently": "^9.1.2",
     "esbuild": "^0.25.0",
     "esbuild-plugin-external-global": "^1.0.1",
     "sass": "^1.85.0",
