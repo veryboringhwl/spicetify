@@ -25,9 +25,4 @@ const Console = {
     ),
 };
 
-Console.Log("Log message");
-Console.Error("Error message");
-Console.Warn("Warning message");
-Console.Debug("Debug message");
-
 export default Console;

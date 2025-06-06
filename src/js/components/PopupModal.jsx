@@ -2,36 +2,43 @@ import React, { memo } from "react";
 import ReactDOM from "react-dom";
 import Icons from "../icons/icons";
 
-const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon = "" } = {}) => {
-  let container = document.getElementById("popup-modal");
-  if (!container) {
-    container = document.createElement("popup-modal");
-    container.id = "popup-modal";
-    document.body.appendChild(container);
-  }
+let modalContainer = null;
+let modalRoot = null;
 
-  const modalRoot = ReactDOM.createRoot(container);
-  document.body.style.overflow = "hidden";
-
-  const closeModal = () => {
+const closeModal = () => {
+  if (modalRoot && modalContainer) {
     modalRoot.unmount();
-    container.remove();
+    modalContainer.remove();
     document.body.style.overflow = "auto";
     document.removeEventListener("keydown", handleEscKey);
     document.removeEventListener("mousedown", handleClickOutside);
-  };
+    modalContainer = null;
+    modalRoot = null;
+  }
+};
 
-  const handleEscKey = (event) => {
-    if (event.key === "Escape") {
-      closeModal();
-    }
-  };
+const handleEscKey = (event) => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+};
 
-  const handleClickOutside = (event) => {
-    if (event.target.classList.contains("Modal__overlay")) {
-      closeModal();
-    }
-  };
+const handleClickOutside = (event) => {
+  if (event.target.classList.contains("Modal__overlay")) {
+    closeModal();
+  }
+};
+
+const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon = "" } = {}) => {
+  modalContainer = document.getElementById("popup-modal");
+  if (!modalContainer) {
+    modalContainer = document.createElement("popup-modal");
+    modalContainer.id = "popup-modal";
+    document.body.appendChild(modalContainer);
+  }
+
+  modalRoot = ReactDOM.createRoot(modalContainer);
+  document.body.style.overflow = "hidden";
 
   document.addEventListener("keydown", handleEscKey);
   document.addEventListener("mousedown", handleClickOutside);
@@ -78,5 +85,7 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
 
   modalRoot.render(<ModalComponent />);
 };
+
+PopupModal.hide = closeModal;
 
 export default PopupModal;

@@ -1,11 +1,11 @@
 import { memo } from "react";
 import ReactDOM from "react-dom";
-import ConfirmDialog from "../components/ConfirmDialog";
-import PopupModal from "../components/PopupModal";
 import DebugMenu from "../debug/DebugMenu";
 import SettingsMenu from "../menu/settingsmenu/SettingsMenu";
 import Window from "../utils/Window";
 import waitForElements from "../utils/waitForElements";
+import ConfirmDialog from "./ConfirmDialog";
+import PopupModal from "./PopupModal";
 
 //why divider not work
 const ContextMenuButton = memo(() => (

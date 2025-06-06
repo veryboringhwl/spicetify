@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
 function ConfirmDialog({
@@ -13,46 +13,47 @@ function ConfirmDialog({
   confirmLabel,
   allowHTML,
 }) {
-  const ConfirmDialog = memo(() => {
-    const [state, setState] = useState(true);
+  const ConfirmDialog = React.memo(() => {
+    const [state, setState] = Spicetify.React.useState(true);
     const menu = document.querySelector(".ReactModalPortal:last-of-type");
 
-    useEffect(() => {
+    React.useEffect(() => {
       if (state) onOpen?.();
     }, [state, onOpen]);
 
     return (
-      <Spicetify.ReactComponent.ConfirmDialog
-        titleText={titleText}
-        descriptionText={descriptionText}
-        cancelText={cancelText}
-        confirmText={confirmText}
-        isOpen={state}
-        onOutside={() => {
-          setState(false);
-          onOutside?.();
-          menu?.remove();
-        }}
-        onClose={() => {
-          setState(false);
-          onClose?.();
-          menu?.remove();
-        }}
-        onConfirm={() => {
-          setState(false);
-          onConfirm?.();
-          menu?.remove();
-        }}
-        confirmLabel={confirmLabel}
-        allowHTML={allowHTML}
-      />
+      <Spicetify.ReactComponent.RemoteConfigProvider
+        configuration={Spicetify.Platform.RemoteConfiguration}
+      >
+        <Spicetify.ReactComponent.ConfirmDialog
+          titleText={titleText}
+          descriptionText={descriptionText}
+          cancelText={cancelText}
+          confirmText={confirmText}
+          isOpen={state}
+          onOutside={() => {
+            setState(false);
+            onOutside?.();
+            menu?.remove();
+          }}
+          onClose={() => {
+            setState(false);
+            onClose?.();
+            menu?.remove();
+          }}
+          onConfirm={() => {
+            setState(false);
+            onConfirm?.();
+            menu?.remove();
+          }}
+          confirmLabel={confirmLabel}
+          allowHTML={allowHTML}
+        />
+      </Spicetify.ReactComponent.RemoteConfigProvider>
     );
   });
 
-  const container = document.createElement("div");
-  document.body.appendChild(container);
-  container.className = "ReactModalPortal";
-  ReactDOM.createRoot(container).render(<ConfirmDialog />);
+  ReactDOM.createRoot(document.createElement("div")).render(<ConfirmDialog />);
 }
 
 // Example usage:
