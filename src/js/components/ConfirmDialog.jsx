@@ -10,7 +10,6 @@ function ConfirmDialog({
   onClose,
   onOpen,
   onOutside,
-  confirmLabel,
   allowHTML,
 }) {
   const ConfirmDialog = React.memo(() => {
@@ -46,7 +45,6 @@ function ConfirmDialog({
             onConfirm?.();
             menu?.remove();
           }}
-          confirmLabel={confirmLabel}
           allowHTML={allowHTML}
         />
       </Spicetify.ReactComponent.RemoteConfigProvider>
@@ -63,7 +61,7 @@ function ConfirmDialog({
 //   onOutside: () => {
 //     Spicetify.showNotification("Clicked outside");
 //   },
-//   confirmLabel: "Ok",
+//   confirmText: "Ok",
 //   allowHTML: true,
 // });
 

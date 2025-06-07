@@ -140,7 +140,17 @@ const SettingsButton = () => {
       PopupModal({
         title: "Theme Settings",
         content: SettingsMenu,
-        buttons: true,
+        buttons: (
+          <Spicetify.ReactComponent.TooltipWrapper label="GitHub" placement="top">
+            <button
+              type="button"
+              className="Modal__button Modal__button--github"
+              onClick={() => window.open("https://github.com/veryboringhwl/spicetify")}
+            >
+              <Icons.React.github size={18} />
+            </button>
+          </Spicetify.ReactComponent.TooltipWrapper>
+        ),
         icon: <Icons.React.settings size={30} />,
       });
     },

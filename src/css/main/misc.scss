@@ -57,3 +57,8 @@
 .NI1OxoVdokxENPAjoeOk{
   box-shadow: none !important;
 }
+
+/*makes my contextmenu icons have same colour*/
+#context-menu [data-encore-id="icon"] {
+  --encore-icon-fill: var(--text-subdued, #656565);
+}

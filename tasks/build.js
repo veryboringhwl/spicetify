@@ -8,7 +8,7 @@ import { compileAsync } from "sass";
 const buildJS = async () => {
   const OUT = "dist/theme.js";
   const SRC = "src/js/app.jsx";
-  const PARENT_OUT = "../theme.js";
+  const PARENT_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "theme.js");
   const buildConfig = {
     format: "esm",
     target: "es2024",
@@ -54,9 +54,9 @@ const buildJS = async () => {
 const buildCSS = async () => {
   const OUT = "dist/user.css";
   const SRC = "src/css/app.scss";
-  const PARENT_OUT = "../user.css";
+  const PARENT_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "user.css");
 
-  const result = await compileAsync(SRC, { style: "compressed" });
+  const result = await compileAsync(SRC);
   fs.writeFileSync(OUT, result.css);
   fs.copyFileSync(OUT, PARENT_OUT);
 
@@ -64,6 +64,10 @@ const buildCSS = async () => {
 };
 
 const applySpotify = async () => {
+  console.log("\x1b[36mApplying to Spotify\x1b[0m");
+  const killProccess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
+  await new Promise((resolve) => killProccess.on("close", resolve));
+
   const srcJS = join(process.cwd(), "dist", "theme.js");
   const srcCSS = join(process.cwd(), "dist", "user.css");
 
@@ -72,10 +76,6 @@ const applySpotify = async () => {
 
   fs.copyFileSync(srcJS, destJS);
   fs.copyFileSync(srcCSS, destCSS);
-
-  console.log("\x1b[36mApplying to Spotify\x1b[0m");
-  const killProccess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
-  await new Promise((resolve) => killProccess.on("close", resolve));
 
   spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), {
     detached: true,

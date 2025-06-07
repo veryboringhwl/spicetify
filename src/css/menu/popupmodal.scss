@@ -77,6 +77,7 @@
 
 .Modal__content {
   display: flex;
-  overflow: hidden;
-  padding: 16px 32px !important;
+  padding: 16px 24px !important;
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
 }

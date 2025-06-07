@@ -1,6 +1,7 @@
 import { exec, spawn } from "node:child_process";
 import fs from "node:fs";
 import { join } from "node:path";
+import readline from "node:readline";
 import chokidar from "chokidar";
 import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
@@ -18,7 +19,7 @@ let shouldWatchSpotify = false;
 const watchJS = async () => {
   const OUT = "dist/theme.js";
   const SRC = "src/js/app.jsx";
-  const PARENT_OUT = "../theme.js";
+  const PARENT_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "theme.js");
 
   jsWatcher = await esbuild.context({
     format: "esm",
@@ -74,8 +75,9 @@ const watchJS = async () => {
 const watchCSS = async () => {
   const OUT = "dist/user.css";
   const SRC = "src/css/app.scss";
-  const PARENT_OUT = "../user.css";
+  const PARENT_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "user.css");
 
+  //sass doesnt have node api
   cssWatcher = exec(`sass ${SRC} ${OUT} --watch --no-source-map`, {
     stdio: "ignore",
   });
@@ -95,22 +97,19 @@ const watchCSS = async () => {
 const watchSpotify = async () => {
   console.log("\x1b[36mWatching Spotify\x1b[0m");
 
-  const enableDevTools = async () => {
-    const file = fs.readFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
-    [file.indexOf("app-developer") + 14, file.lastIndexOf("app-developer") + 15].forEach((pos) => {
-      file[pos] = 50;
-    });
-    fs.writeFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
-  };
+  new Promise((resolve) => spawn("taskkill", ["/F", "/IM", "spotify.exe"]).on("close", resolve));
 
-  await Promise.all([
-    enableDevTools(),
-    new Promise((resolve) => spawn("taskkill", ["/F", "/IM", "spotify.exe"]).on("close", resolve)),
-  ]);
-
+  const file = fs.readFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
+  for (const pos of [file.indexOf("app-developer") + 14, file.lastIndexOf("app-developer") + 15]) {
+    file[pos] = 50;
+  }
+  fs.writeFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
+  // timeouts as other wise spotify doesnt open
+  await new Promise((resolve) => setTimeout(resolve, 500));
   spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), ["--remote-debugging-port=9222"], {
     detached: true,
   });
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 };
 
 const reloadSpotify = async () => {
@@ -138,7 +137,6 @@ const reloadSpotify = async () => {
               params: { expression: "window.location.reload();" },
             }),
           );
-          console.log("Reloading Spotify...");
           ws.close();
           resolve();
         });
@@ -149,35 +147,6 @@ const reloadSpotify = async () => {
     watchSpotify();
   }
 };
-
-process.stdin.on("data", (data) => {
-  if (data.toString().trim().toLowerCase() === "format") {
-    console.log("Formatting...");
-    exec("npx biome check --fix --unsafe", (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error: ${error.message}`);
-        return;
-      }
-      if (stderr) {
-        console.error(`stderr: ${stderr}`);
-        return;
-      }
-      console.log(stdout);
-    });
-  }
-});
-
-process.on("SIGINT", async () => {
-  if (jsWatcher) {
-    await jsWatcher.dispose();
-    console.log("\x1b[33mJavaScript watcher stopped.\x1b[0m");
-  }
-  if (cssWatcher) {
-    cssWatcher.kill("SIGINT");
-    console.log("\x1b[33mCSS watcher stopped.\x1b[0m");
-  }
-  process.exit(0);
-});
 
 const args = process.argv.slice(2);
 const runWatchers = async () => {
@@ -200,3 +169,44 @@ const runWatchers = async () => {
 };
 
 runWatchers();
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.on("line", async (input) => {
+  const command = input.trim().toLowerCase();
+
+  if (command === "format") {
+    console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Formatting...`);
+    exec("npx biome check --fix --unsafe", (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.error(`stderr: ${stderr}`);
+        return;
+      }
+      console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${stdout}`);
+    });
+  }
+});
+
+rl.on("SIGINT", async () => {
+  console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Exiting...`);
+
+  if (cssWatcher) {
+    await new Promise((resolve) => {
+      cssWatcher.kill("SIGINT");
+      console.log("\x1b[33mCSS watcher terminated.\x1b[0m");
+      resolve();
+    });
+  }
+  if (jsWatcher) {
+    await jsWatcher.dispose();
+    console.log("\x1b[33mJavaScript watcher terminated.\x1b[0m");
+  }
+  process.exit(0);
+});

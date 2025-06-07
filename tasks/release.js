@@ -1,3 +1,4 @@
+import { exec } from "node:child_process";
 import fs from "node:fs";
 import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
@@ -56,6 +57,21 @@ const runBuilds = async () => {
   const startTime = performance.now();
 
   await Promise.all([buildJS(), buildCSS()]);
+
+  await new Promise((resolve, reject) => {
+    exec("bunx biome check --fix --unsafe", (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Biome Error: ${error.message}`);
+        reject(error);
+        return;
+      }
+      if (stderr) {
+        console.error(`Biome stderr: ${stderr}`);
+      }
+      console.log(`Biome stdout: ${stdout}`);
+      resolve();
+    });
+  });
 
   const endTime = performance.now();
   const elapsed = ((endTime - startTime) / 1000).toFixed(2);

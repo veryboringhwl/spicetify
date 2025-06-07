@@ -1,3 +1,5 @@
+import Console from "./Console";
+
 const Notification = ({
   message = "",
   keyPrefix = "custom-notif",
@@ -5,27 +7,31 @@ const Notification = ({
   backgroundColor = "#fff",
   color = "#000",
 } = {}) => {
-  Spicetify.Snackbar.enqueueCustomSnackbar(keyPrefix, {
-    keyPrefix,
-    autoHideDuration,
-    children: (
-      <div
-        className="custom-notification"
-        style={{
-          display: "flex",
-          gap: "8px",
-          alignItems: "center",
-          color: color,
-          backgroundColor: backgroundColor,
-          padding: "14px 16px",
-          borderRadius: "4px",
-          fontSize: "0.875rem",
-        }}
-      >
-        {message}
-      </div>
-    ),
-  });
+  try {
+    Spicetify.Snackbar.enqueueCustomSnackbar(keyPrefix, {
+      keyPrefix,
+      autoHideDuration,
+      children: (
+        <div
+          className="custom-notification"
+          style={{
+            display: "flex",
+            gap: "8px",
+            alignItems: "center",
+            color: color,
+            backgroundColor: backgroundColor,
+            padding: "14px 16px",
+            borderRadius: "4px",
+            fontSize: "0.875rem",
+          }}
+        >
+          {message}
+        </div>
+      ),
+    });
+  } catch (error) {
+    Console.Error(error);
+  }
 };
 
 // Example usage:

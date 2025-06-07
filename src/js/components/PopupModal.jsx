@@ -53,23 +53,9 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
               <h1 className="Modal__title">{title}</h1>
             </div>
             <div className="Modal__buttonContainer">
-              {buttons && (
-                <Spicetify.ReactComponent.TooltipWrapper label="GitHub" placement="top">
-                  <button
-                    type="button"
-                    className="Modal__button Modal__button--github"
-                    onClick={() => window.open("https://github.com/veryboringhwl/spicetify")}
-                  >
-                    <Icons.React.github size={18} />
-                  </button>
-                </Spicetify.ReactComponent.TooltipWrapper>
-              )}
+              {buttons}
               <Spicetify.ReactComponent.TooltipWrapper label="Close" placement="top">
-                <button
-                  type="button"
-                  className="Modal__button Modal__button--close"
-                  onClick={() => closeModal()}
-                >
+                <button className="Modal__button Modal__button--close" onClick={() => closeModal()}>
                   <Icons.React.close size={18} />
                 </button>
               </Spicetify.ReactComponent.TooltipWrapper>

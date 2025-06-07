@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import LoadingIndicator from "../components/LoadingIndicator";
+import Icons from "../icons/icons";
 import OptionRow from "../menu/components/OptionRow";
 import Toggle from "../menu/components/Toggle";
 import Console from "../utils/Console";
@@ -69,20 +70,6 @@ const DebugMenu = memo(() => {
             autoHideDuration: 10000,
             message: "Debug Menu notification lolololol",
           });
-          Spicetify.ReactComponent.ConfirmDialog({
-            titleText: "Confirm Action",
-            descriptionText: "Are you sure you want to proceed?",
-            confirmText: "Yes",
-            cancelText: "No",
-            onConfirm: () => {
-              // Code to run when confirmed
-              console.log("User confirmed");
-            },
-            onClose: () => {
-              // Code to run when dialog is closed/canceled
-              console.log("Dialog closed");
-            },
-          });
         }}
       >
         Special Button
@@ -90,6 +77,8 @@ const DebugMenu = memo(() => {
       <div className="loading-wrapper">
         <LoadingIndicator />
       </div>
+      <Icons.React.duplicate size={50} />
+      <Icons.React.palette size={50} />
       <Spicetify.ReactComponent.Cards.Default
         id="card-id"
         title="Card Title"
