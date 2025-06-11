@@ -1,19 +1,14 @@
-.KROerAKSuwZBbse9iJT_ {
-  background-color: unset;
-}
-
 .main-contextMenu-menu {
   scrollbar-width: thin;
-  border-radius: 7px;
+  border-radius: var(--border-radius);
   background-color: rgba(var(--spice-rgb-main), 0.9) !important;
-  box-shadow: 0 0px 32px rgba(var(--spice-rgb-shadow), 0.5);
+  box-shadow: 0 0px 24px rgba(var(--spice-rgb-shadow), 0.5);
 }
 
-div#context-menu::before,
 .main-contextMenu-menu:before {
   content: "";
-  border-radius: 7px;
-  backdrop-filter: blur(20px) saturate(1.4) brightness(1.2);
+  border-radius: var(--border-radius);
+  backdrop-filter: var(--mica-effect);
   position: absolute;
   top: 0;
   left: 0;

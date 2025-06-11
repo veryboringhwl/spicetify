@@ -1,15 +1,14 @@
 /*adds space to drag small window*/
-@media (max-width: 1200px) {
+@media (max-width: 1500px) {
   body:not(.LibX):not(.AppleMusic) .main-topBar-topbarContentRight::after {
     content: "|";
     -webkit-app-region: drag;
     color: rgba(var(--spice-rgb-text), 0.5);
     font-weight: 1;
-    font-size: xx-large;
+    font-size: 30px;
     height: 48px;
     width: 48px;
-    margin-left: 8px;
-}
+  }
 }
 
 /*compact connect bar*/
@@ -32,13 +31,12 @@
   margin-top: 0px;
 }
 
+/*cant get emplyee mode anymore from 1.2.60 >*/
 /*employee update button*/
 .YyUcY0HTiYikUOwhh29d {
   height: 48px;
   background-color: var(--spice-button-active) !important;
   color: var(--spice-sidebar) !important;
-  /* font-weight: 500;
-  font-size: 15px; */
   border-radius: 7px !important;
 }
 
@@ -47,14 +45,8 @@
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
 }
 
-/*fix home screen scrolliong performance*/
-.search-searchCategory-categoryGrid,
-[data-overlayscrollbars-viewport] {
-  will-change: transform !important;
-}
-
 /*search page play button*/
-.NI1OxoVdokxENPAjoeOk{
+.NI1OxoVdokxENPAjoeOk {
   box-shadow: none !important;
 }
 

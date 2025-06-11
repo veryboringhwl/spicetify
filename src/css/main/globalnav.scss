@@ -1,0 +1,44 @@
+.TTB3lAVAhCK9Apl8quWw {
+  gap: 12px !important;
+}
+
+.main-globalNav-historyButtons {
+  gap: 8px !important;
+}
+
+.main-topBar-searchBar {
+  border-radius: var(--border-radius) !important;
+  box-shadow: unset !important;
+  outline: unset;
+  transition: unset !important;
+}
+
+.main-topBar-searchBar:focus {
+  border-bottom: 2px solid var(--spice-accent);
+}
+
+.main-globalNav-navLink,
+.main-userWidget-box,
+.main-actionButtons > * {
+  position: relative;
+  background-color: var(--spice-highlight) !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.main-actionButtons {
+  padding-inline: 0px 0px !important;
+}
+
+.main-topBar-buddyFeed {
+  height: 48px !important;
+  width: 48px !important;
+}
+
+.main-topBar-buddyFeed > svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.main-avatar-image {
+  border-radius: 4px;
+}

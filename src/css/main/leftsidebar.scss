@@ -1,23 +1,16 @@
-//scrolled libx
+// scrolled libx
 .RHRitk6QC3rvuG24RAdj {
   box-shadow: 0px 15px 20px 10px var(--spice-main);
 }
 
 // playlist item hover
-.fYWNdY4zhj4OX_T2Xtg6:hover {
+.BoxComponent-group-listRow-naked-isInteractive-minBlockSize_56px-padding_8px:hover {
   background-color: var(--spice-highlight) !important;
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
 }
 
+// playlist item active
 .BoxComponent-group-listRow-tinted-isInteractive-minBlockSize_56px-padding_8px {
   background-color: var(--spice-highlight-elevated) !important;
   box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.2);
-}
-
-.x-entityImage-imageContainer {
-  box-shadow: 0 0px 10px rgba(var(--spice-rgb-shadow), 0.3);
-}
-
-.main-yourLibraryX-listItem .LineClamp {
-  line-clamp: 1 !important;
 }

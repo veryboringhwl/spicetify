@@ -1,8 +1,8 @@
-.main-yourLibraryX-library,
-.Root__now-playing-bar,
+.Root__nav-bar,
 .Root__right-sidebar,
+.Root__now-playing-bar,
 .Root__main-view {
-  box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
+  box-shadow: var(--box-shadow) !important;
 }
 
 .spotify__os--is-windows:not(.fullscreen) #main::after {
@@ -17,128 +17,33 @@
   height: calc(32px / var(--zoom, 1));
 }
 
-.main-topBar-searchBar {
-  background-color: var(--spice-highlight) !important;
-  color: var(--spice-text) !important;
-  box-shadow: 0 0px 4px rgba(var(--spice-rgb-shadow), 0.2) !important;
-  transition: none !important;
-}
-
-.main-topBar-searchBar,
-.main-topBar-searchBar:hover {
-  border-radius: 7px !important;
-  height: 32px;
-}
-
-.main-topBar-searchBar:focus {
-  border-bottom: 2px solid var(--spice-accent);
-  outline: none;
-}
-
-@property --progress-bar-transform {
-  inherits: true;
-  initial-value: 0%;
-  syntax: "<percentage>";
-}
-
-.progress-bar {
-  --bg-color: rgba(var(--spice-rgb-selected-row), 0.3);
-  --fg-color: var(--spice-accent);
-  --is-active-fg-color: var(--spice-accent);
-  transition: --progress-bar-transform 1s linear !important;
-}
-
-.progress-bar--isDragging {
-  transition-duration: 0ms !important;
-}
-
-.progress-bar__slider {
-  border: 10px solid var(--spice-highlight);
-  box-shadow: 0 0 3px 0 #080808 !important;
-  width: 8px;
-  height: 8px;
-  margin-left: -10px;
-}
-
-.progress-bar__slider::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: var(--spice-accent);
-  border-radius: 50%;
-}
-
-.progress-bar__slider:hover::after {
-  transform: scale(1.25);
-}
-
-.progress-bar__slider:active::after {
-  transform: scale(0.8);
-}
-
-.x-progressBar-progressBarBg,
-.x-progressBar-sliderArea {
-  background-color: var(--spice-highlight);
-}
-
-.main-topBar-topbarContentRight {
-  gap: 0;
-}
-
-.main-globalNav-navLink,
-.main-userWidget-box,
-.main-actionButtons > * {
-  background-color: var(--spice-highlight) !important;
-  border-radius: 7px !important;
-}
-
-.main-globalNav-buddyFeed > svg {
-  width: 20px;
-  height: 20px;
-}
-
-.main-topBar-buddyFeed {
-  height: 48px !important;
-  width: 48px !important;
-  border: none;
-}
-
-.main-avatar-image {
-  border-radius: 4px;
-}
-
-.main-globalNav-historyButtons > *:disabled {
-  display: none !important;
-}
-
-.main-globalNav-historyButtons > * {
-  display: block;
-}
-
-.main-topBar-buddyFeed > svg {
-  width: 20px !important;
-  height: 20px !important;
-}
-
 .os-scrollbar {
   cursor: pointer;
   display: unset;
 }
 
-.os-scrollbar-handle {
-  border-radius: 99px !important;
-  background: var(--spice-subtext) !important;
-}
-
 .os-scrollbar-vertical {
   width: 4px !important;
   margin-right: 5px;
+
+  &:hover,
+  &:active {
+    width: 6px !important;
+  }
 }
 
-.os-scrollbar-vertical:hover,
-.os-scrollbar-vertical:active {
-  width: 6px !important;
+.os-scrollbar-horizontal {
+  height: 4px !important;
+
+  &:hover,
+  &:active {
+    height: 6px !important;
+  }
+}
+
+.os-scrollbar-handle {
+  border-radius: 999px !important;
+  background: var(--spice-subtext) !important;
 }
 
 .main-trackList-playingIcon,

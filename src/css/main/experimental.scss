@@ -1,13 +1,7 @@
-/*
---------------------------
-	MARK: TEST FEATURES
---------------------------
-*/
-
 /*rounded filters turn square*/
 .x-filterBox-filterInput,
 .search-searchCategory-categoryGrid > div > button > span {
-  border-radius: 7px;
+  border-radius: var(--border-radius);
 }
 
 /* ctrl + k popup*/
