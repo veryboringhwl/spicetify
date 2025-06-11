@@ -1,6 +1,6 @@
 import React, { memo, useState, useCallback, useMemo } from "react";
 import CategoryCarousel from "../components/CategoryCarousel";
-import RenderOptions from "../components/RenderOptions";
+import RenderCategory from "../components/RenderCategory";
 import useSettings from "../hooks/useSettings";
 import options from "./options";
 
@@ -21,32 +21,36 @@ const SettingsMenu = memo(() => {
   }, [selectedCategory]);
 
   return (
-    <div className="themeContainer">
-      <CategoryCarousel
-        categories={allCategories}
-        selectedCategory={selectedCategory}
-        onSelectCategory={handleSelectCategory}
-      />
-      <div className="optionsContainer">
+    <div className="settings-menu">
+      <div className="settings-menu__carousel">
+        <CategoryCarousel
+          categories={allCategories}
+          selectedCategory={selectedCategory}
+          onSelectCategory={handleSelectCategory}
+        />
+      </div>
+      <div className="settings-menu__options">
         {filteredOptions.map(([category, categoryOptions]) => (
-          <div key={category} className={`themeOptionsCategory ${category.toLowerCase()}Container`}>
-            <h2 className="categoryTitle">{category}</h2>
-            {categoryOptions.map((option) => (
-              <RenderOptions
-                key={option.name}
-                option={option}
-                settings={settings}
-                onChange={handleSettingChange}
-              />
-            ))}
-          </div>
+          <RenderCategory
+            key={category}
+            category={category}
+            categoryOptions={categoryOptions}
+            settings={settings}
+            onChange={handleSettingChange}
+          />
         ))}
       </div>
-      <div className="buttonContainer">
-        <button className="resetButton" onClick={resetSettings}>
+      <div className="settings-menu__buttons-container">
+        <button
+          className="settings-menu__button settings-menu__button--reset"
+          onClick={resetSettings}
+        >
           Reset
         </button>
-        <button className="saveButton" onClick={saveSettings}>
+        <button
+          className="settings-menu__button settings-menu__button--save"
+          onClick={saveSettings}
+        >
           Save
         </button>
       </div>

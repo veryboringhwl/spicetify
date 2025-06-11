@@ -2,7 +2,7 @@ import { memo } from "react";
 
 const Input = memo(({ value, onChange, placeholder, disabled }) => (
   <input
-    className="themeOptionInput"
+    className="input"
     type="text"
     value={value}
     onChange={onChange}

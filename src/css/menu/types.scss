@@ -1,9 +1,9 @@
-.themeOptionTippy {
+.info-tippy {
   display: flex;
   align-items: center;
 }
 
-.themeOptionPopupButton {
+.popup-button {
   height: 32px;
   color: rgba(var(--spice-rgb-text), 0.8);
   background: rgba(var(--spice-rgb-selected-row), 0.1);
@@ -11,14 +11,14 @@
   cursor: pointer;
   padding: 8px;
   border: 0;
+
+  &:hover {
+    transform: scale(1.04);
+    color: var(--spice-text);
+  }
 }
 
-.themeOptionPopupButton:hover {
-  transform: scale(1.04);
-  color: var(--spice-text);
-}
-
-.themeOptionInput {
+.input {
   background: rgba(var(--spice-rgb-selected-row), 0.1);
   border: 0;
   border-radius: 4px;
@@ -34,19 +34,19 @@
   }
 }
 
-.themeOptionDropdown {
+.dropdown {
   position: relative;
   min-width: 100px;
   width: fit-content;
   font-size: 14px !important;
   cursor: pointer;
 
-  &.disabled {
+  &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .themeOptionDropdownButton {
+  &__button {
     display: flex;
     border: none;
     justify-content: space-between;
@@ -59,11 +59,11 @@
     width: 100%;
   }
 
-  .themeOptionDropdownArrow {
+  &__arrow {
     display: flex;
   }
 
-  .themeOptionDropdownMenu {
+  &__menu {
     background: var(--spice-card);
     border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -72,33 +72,33 @@
     overflow-y: scroll;
     scrollbar-width: none;
     max-height: 250px;
+  }
 
-    .themeOptionDropdownOptions {
-      display: flex;
-      align-items: center;
-      padding: 0 8px;
-      height: 32px;
-      cursor: pointer;
+  &__option {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    height: 32px;
+    cursor: pointer;
 
-      &:first-child {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-      }
+    &:first-child {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
 
-      &:last-child {
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-      }
+    &:last-child {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
 
-      &:hover,
-      &.selected {
-        background: var(--spice-button);
-      }
+    &:hover,
+    &--selected {
+      background: var(--spice-button);
     }
   }
 }
 
-.themeOptionToggle {
+.toggle {
   display: flex;
   align-items: center;
   border: none;
@@ -110,7 +110,7 @@
     cursor: not-allowed;
   }
 
-  .toggleBackground {
+  &__background {
     width: 42px;
     height: 24px;
     background: rgba(var(--spice-rgb-selected-row), 0.1);
@@ -118,21 +118,21 @@
     display: flex;
     align-items: center;
 
-    &:has(.enabled) {
+    &:has(.toggle__slider--enabled) {
       background: var(--spice-button);
-      .toggle {
+      .toggle__slider {
         margin-left: 20px;
       }
     }
+  }
 
-    .toggle {
-      width: 20px;
-      height: 20px;
-      background: var(--spice-text);
-      border-radius: 50%;
-      margin-left: 2px;
-      transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-      box-shadow: 0px 0px 5px rgba(var(--spice-rgb-shadow), 0.3);
-    }
+  &__slider {
+    width: 20px;
+    height: 20px;
+    background: var(--spice-text);
+    border-radius: 50%;
+    margin-left: 2px;
+    transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    box-shadow: 0px 0px 5px rgba(var(--spice-rgb-shadow), 0.3);
   }
 }

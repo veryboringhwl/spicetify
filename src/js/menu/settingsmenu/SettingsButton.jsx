@@ -135,7 +135,7 @@ const SettingsButton = () => {
 
   const SettingsButton = new Spicetify.Topbar.Button(
     "Theme Settings",
-    `<svg viewBox="0 0 16 16" width="16px" height="16px" fill="currentColor">${Icons.settings}</svg>`,
+    `<svg viewBox="0 0 16 16" width="16px" height="16px" fill="currentColor">${Icons.HTML.settings}</svg>`,
     () => {
       PopupModal({
         title: "Theme Settings",

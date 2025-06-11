@@ -44,28 +44,18 @@ export const windowsControlOptions = [
     desc: "Removes Spotifys Windows Controls completely",
     defaultVal: false,
     run: (value) => {
+      const threeDots = document.querySelector(".CCIGxtpAreSdwWRo14FE");
+      const windowsControl = document.querySelector(".main-topBar-topbarContentRight");
       if (value) {
-        Spicetify.Platform.ControlMessageAPI._updateUiClient.setButtonsVisibility({
-          showButtons: false,
-        });
+        Spicetify.Platform.ControlMessageAPI._updateUiClient.setButtonsVisibility({ showButtons: false });
         Spicetify.Platform.ControlMessageAPI._updateUiClient.updateTitlebarHeight({ height: 1 });
-        document.querySelectorAll(".CCIGxtpAreSdwWRo14FE").forEach((el) => {
-          el.style.display = "none";
-        });
-        document.querySelectorAll(".main-topBar-topbarContentRight").forEach((el) => {
-          el.style.paddingRight = "8px";
-        });
+        if (threeDots) threeDots.style.display = "none";
+        if (windowsControl) windowsControl.style.paddingRight = "8px";
       } else {
-        Spicetify.Platform.ControlMessageAPI._updateUiClient.setButtonsVisibility({
-          showButtons: true,
-        });
+        Spicetify.Platform.ControlMessageAPI._updateUiClient.setButtonsVisibility({ showButtons: true });
         Spicetify.Platform.ControlMessageAPI._updateUiClient.updateTitlebarHeight({ height: 64 });
-        document.querySelectorAll(".CCIGxtpAreSdwWRo14FE").forEach((el) => {
-          el.style.display = "";
-        });
-        document.querySelectorAll(".main-topBar-topbarContentRight").forEach((el) => {
-          el.style.paddingRight = "";
-        });
+        if (threeDots) threeDots.style.display = "";
+        if (windowsControl) windowsControl.style.paddingRight = "";
       }
     },
   },

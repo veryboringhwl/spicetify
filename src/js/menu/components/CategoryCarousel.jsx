@@ -16,19 +16,13 @@ const CategoryCarousel = memo(({ categories, selectedCategory, onSelectCategory 
     return () => carousel?.removeEventListener("wheel", handleWheel);
   }, []);
 
-  const totalButtons = categories.length;
-  const buttonWidth = `calc((100% - ${(totalButtons - 1) * 8}px) / ${totalButtons})`;
-
   return (
-    <div className="carouselContainer" ref={carouselRef}>
+    <div className="carousel" ref={carouselRef}>
       {categories.map((category) => (
         <button
           key={category}
-          className={`category-button ${selectedCategory === category ? "active" : ""}`}
+          className={`carousel__button ${selectedCategory === category ? "carousel__button--active" : ""}`}
           onClick={() => onSelectCategory(category)}
-          style={{
-            width: buttonWidth,
-          }}
         >
           {category}
         </button>

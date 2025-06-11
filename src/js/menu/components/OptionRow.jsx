@@ -1,6 +1,6 @@
 import { memo } from "react";
 import TippyButton from "../../components/TippyButton";
-import InfoButton from "./InfoButton";
+import PopupButton from "./PopupButton";
 
 const OptionRow = memo(({ name, desc, tippy, children, popupModal }) => (
   <div className="themeOptionRow" data-name={`theme:${name}`}>
@@ -9,7 +9,7 @@ const OptionRow = memo(({ name, desc, tippy, children, popupModal }) => (
     </div>
     <div className="themeOptionControl">
       {tippy && <TippyButton tippy={tippy} />}
-      <InfoButton name={name} popupModal={popupModal} />
+      <PopupButton name={name} popupModal={popupModal} />
 
       {children}
     </div>

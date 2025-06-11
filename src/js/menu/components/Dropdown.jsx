@@ -14,16 +14,16 @@ const Dropdown = memo(({ value, options, onChange, disabled }) => {
   const selectedLabel = options.find((opt) => opt.value === value)?.label || "Select...";
 
   return (
-    <div className={`themeOptionDropdown ${disabled ? "disabled" : ""}`}>
+    <div className={`dropdown${disabled ? " dropdown--disabled" : ""}`}>
       <button
-        className="themeOptionDropdownButton"
+        className="dropdown__button"
         popovertarget={popoverId}
         popovertargetaction="toggle"
         disabled={disabled}
         style={{ anchorName: anchorName }}
       >
-        <div className="themeOptionDropdownText">{selectedLabel}</div>
-        <div className="themeOptionDropdownArrow">
+        <div className="dropdown__text">{selectedLabel}</div>
+        <div className="dropdown__arrow">
           <Icons.React.dropdown size={12} />
         </div>
       </button>
@@ -31,7 +31,7 @@ const Dropdown = memo(({ value, options, onChange, disabled }) => {
         popover="auto"
         id={popoverId}
         ref={popoverRef}
-        className="themeOptionDropdownMenu"
+        className="dropdown__menu"
         style={{
           top: `calc(anchor(${anchorName} bottom) + 4px)`,
           left: `anchor(${anchorName} left)`,
@@ -41,7 +41,7 @@ const Dropdown = memo(({ value, options, onChange, disabled }) => {
         {options.map((option) => (
           <div
             key={option.value}
-            className={`themeOptionDropdownOptions ${value === option.value ? "selected" : ""}`}
+            className={`dropdown__option${value === option.value ? " dropdown__option--selected" : ""}`}
             onClick={() => handleSelect(option)}
           >
             {option.label}

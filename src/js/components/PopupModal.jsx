@@ -24,7 +24,7 @@ const handleEscKey = (event) => {
 };
 
 const handleClickOutside = (event) => {
-  if (event.target.classList.contains("Modal__overlay")) {
+  if (event.target.classList.contains("modal-overlay")) {
     closeModal();
   }
 };
@@ -44,24 +44,24 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
   document.addEventListener("mousedown", handleClickOutside);
 
   const ModalComponent = memo(() => (
-    <div className="Modal__overlay">
-      <div className="Modal">
-        <div className={`Modal__container${isLarge ? " Modal__container--large" : ""}`}>
-          <div className="Modal__header">
-            <div className="Modal__titleContainer">
-              <div className="Modal__icon">{icon}</div>
-              <h1 className="Modal__title">{title}</h1>
+    <div className="modal-overlay">
+      <div className="modal">
+        <div className={`modal__container${isLarge ? " modal__container--large" : ""}`}>
+          <div className="modal__header">
+            <div className="modal__titleContainer">
+              <div className="modal__icon">{icon}</div>
+              <h1 className="modal__title">{title}</h1>
             </div>
-            <div className="Modal__buttonContainer">
+            <div className="modal__buttonContainer">
               {buttons}
               <Spicetify.ReactComponent.TooltipWrapper label="Close" placement="top">
-                <button className="Modal__button Modal__button--close" onClick={() => closeModal()}>
+                <button className="modal__button modal__button--close" onClick={() => closeModal()}>
                   <Icons.React.close size={18} />
                 </button>
               </Spicetify.ReactComponent.TooltipWrapper>
             </div>
           </div>
-          <div className="Modal__content">
+          <div className="modal__content">
             {React.isValidElement(content) ? content : React.createElement(content)}
           </div>
         </div>

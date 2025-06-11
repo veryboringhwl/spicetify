@@ -1,23 +1,32 @@
-.themeOptionRow {
-  display: flex;
-  height: 32px;
-  justify-content: space-between;
-}
-
-.themeModalOptions,
-.themeOptionWrapper,
-.themeOptionRevealed,
-.themeOptionsCategory {
+.option__item {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.themeOptionRevealed .themeOptionRow {
+.option__item--main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option__item--revealed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-item--revealed .theme-option-row {
   padding-left: 30px;
 }
 
-.themeOptionDesc {
+.theme-option-row {
+  display: flex;
+  height: 32px;
+  justify-content: space-between;
+}
+
+.theme-option-desc {
   display: flex;
   height: 100%;
   align-items: center;
@@ -25,7 +34,7 @@
   color: var(--spice-subtext);
 }
 
-.themeOptionControl {
+.theme-option-control {
   align-content: center;
   display: flex;
   gap: 8px;

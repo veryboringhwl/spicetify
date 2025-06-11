@@ -2,12 +2,12 @@ import { memo } from "react";
 import PopupModal from "../../components/PopupModal";
 import Icons from "../../icons/icons";
 
-const InfoButton = memo(({ name, popupModal }) => {
+const PopupButton = memo(({ name, popupModal }) => {
   if (!popupModal) return null;
 
   return (
     <button
-      className="themeOptionPopupButton"
+      className="popup-button"
       onClick={() =>
         PopupModal({
           title: name,
@@ -22,4 +22,4 @@ const InfoButton = memo(({ name, popupModal }) => {
   );
 });
 
-export default InfoButton;
+export default PopupButton;

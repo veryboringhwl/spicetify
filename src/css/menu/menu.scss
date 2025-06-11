@@ -1,21 +1,35 @@
-.themeContainer {
+.settings-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
+}
+
+.settings-menu__options {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.optionsContainer {
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   overflow-y: scroll;
   scrollbar-width: none;
 }
 
+.option__category {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option__category-title {
+  font-size: 1.5rem;
+  color: var(--spice-text);
+  border-bottom: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
+}
+
 kbd {
   border-radius: var(--encore-corner-radius-base);
-  -webkit-box-shadow: 0 1px 0 var(--background-base),
-    0 0 0 1px var(--essential-subdued) inset;
-  box-shadow: 0 1px 0 var(--background-base),
+  box-shadow:
+    0 1px 0 var(--background-base),
     0 0 0 1px var(--essential-subdued) inset;
   display: inline-block;
   line-height: 1.5;

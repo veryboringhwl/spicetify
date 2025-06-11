@@ -1,22 +1,23 @@
-.carouselContainer {
+.carousel {
   display: flex;
   gap: 8px;
 }
 
-.category-button {
-  padding: 8px 14px;
+.carousel__button {
+  height: 32px;
+  padding-inline: 12px;
   background: rgba(var(--spice-rgb-selected-row), 0.1);
   color: rgba(var(--spice-rgb-text), 0.9);
   border: none;
   border-radius: 7px;
   font-size: 15px;
-}
 
-.category-button:hover {
-  background: rgba(var(--spice-rgb-selected-row), 0.14);
-}
+  &:hover {
+    cursor: pointer;
+  }
 
-.category-button:active {
-  background: var(--spice-text);
-  color: var(--spice-sidebar);
+  &.carousel__button--active {
+    background: var(--spice-text);
+    color: var(--spice-sidebar);
+  }
 }
