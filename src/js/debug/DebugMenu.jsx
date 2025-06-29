@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import LoadingIndicator from "../components/LoadingIndicator";
-import Icons from "../icons/icons";
+import Icons from "../icons/Icons";
 import OptionRow from "../menu/components/OptionRow";
 import Toggle from "../menu/components/Toggle";
 import Console from "../utils/Console";
@@ -50,7 +50,7 @@ const DebugMenu = memo(() => {
     Theme: Spicetify.Config.current_theme,
     Extensions: Spicetify.Config.extensions.join(", "),
     "Custom apps": Spicetify.Config.custom_apps.join(", "),
-    "Color Scheme": Spicetify.Config.color_scheme,
+    "Colour Scheme": Spicetify.Config.color_scheme,
   };
 
   return (

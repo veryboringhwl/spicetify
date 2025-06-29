@@ -1,11 +1,20 @@
 .LibX {
+  //windows controls
+  .CCIGxtpAreSdwWRo14FE {
+    display: none;
+  }
+
+  //custom navlinks cause shift left
   .TTB3lAVAhCK9Apl8quWw {
     padding: unset !important;
   }
+
+  // 3 dots
   .B9lb86gGqGGFcSZZ95bA {
     position: absolute;
     top: 0px;
   }
+
   .Root__globalNav {
     position: unset !important;
   }
@@ -63,6 +72,7 @@
   }
 
   .main-globalNav-searchSection {
+    position: relative !important;
     order: -1;
   }
 
@@ -101,14 +111,15 @@
     font-weight: 700;
   }
 
-  .fmZ0hU6ImbDQi5qGWLvF .main-globalNav-textWrapper {
+  ._b3hhmbWtOY8_1M1mM1H .main-globalNav-iconText {
+    height: 48px;
     position: absolute;
-    margin-left: 52px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    align-content: center;
+    padding-inline: 32px 64px;
   }
 
-  .main-globalNav-textWrapper {
+  .main-globalNav-iconText {
     margin-left: 16px;
   }
 
@@ -120,16 +131,22 @@
     height: calc(100vh - 142px);
     bottom: 0px;
   }
+
+  &.TestLayout .Root__nav-bar .LayoutResizer__resize-bar {
+    height: calc(100vh - (48px + 8px));
+    bottom: 0px;
+  }
+
   .LayoutResizer__inline-end:after {
     height: 100%;
   }
 
   ._b3hhmbWtOY8_1M1mM1H:has(.main-topBar-searchBar[tabindex="0"])
-    .main-globalNav-textWrapper {
+    .main-globalNav-iconText {
     display: none !important;
   }
 
-  .collapsed {
+  &.collapsed {
     .main-globalNav-navLink,
     .b7r2WRiu5f9Q99qmyreh *:not(svg) {
       width: 56px !important;
@@ -138,7 +155,7 @@
     }
 
     .BV0jjn_h5TtMMl8YKuZ0,
-    .main-globalNav-textWrapper,
+    .main-globalNav-iconText,
     .main-actionButtons,
     .main-globalNav-historyButtons {
       display: none !important;
@@ -366,6 +383,7 @@
   }
 
   .main-globalNav-searchSection {
+    position: relative !important;
     order: -1;
   }
 
@@ -399,14 +417,15 @@
     font-weight: 700;
   }
 
-  .fmZ0hU6ImbDQi5qGWLvF .main-globalNav-textWrapper {
+  ._b3hhmbWtOY8_1M1mM1H .main-globalNav-iconText {
+    height: 48px;
     position: absolute;
-    margin-left: 52px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    align-content: center;
+    padding-inline: 32px 64px;
   }
 
-  .main-globalNav-textWrapper {
+  .main-globalNav-iconText {
     margin-left: 16px;
   }
 
@@ -425,7 +444,7 @@
   }
 
   ._b3hhmbWtOY8_1M1mM1H:has(.main-topBar-searchBar[tabindex="0"])
-    .main-globalNav-textWrapper {
+    .main-globalNav-iconText {
     display: none !important;
   }
 
@@ -438,7 +457,7 @@
     }
 
     .BV0jjn_h5TtMMl8YKuZ0,
-    .main-globalNav-textWrapper,
+    .main-globalNav-iconText,
     .main-actionButtons,
     .main-globalNav-historyButtons {
       display: none !important;

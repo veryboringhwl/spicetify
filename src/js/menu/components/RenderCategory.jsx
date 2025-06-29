@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React, { memo } from "react";
 import options from "../settingsmenu/options";
 import OptionType from "./OptionType";
 
@@ -13,7 +13,7 @@ const RenderCategory = memo(({ category, categoryOptions, settings, onChange }) 
         (o) => o.incompatible?.includes(option.name) && settings[`theme:${o.name}`],
       );
       return (
-        <div className="option__item" key={option.name}>
+        <React.Fragment key={option.name}>
           <div className="option__item--main">
             <OptionType option={option} value={value} onChange={onChange} disabled={disabled} />
           </div>
@@ -30,7 +30,7 @@ const RenderCategory = memo(({ category, categoryOptions, settings, onChange }) 
               ))}
             </div>
           )}
-        </div>
+        </React.Fragment>
       );
     })}
   </div>

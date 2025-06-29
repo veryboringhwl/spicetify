@@ -1,29 +1,22 @@
-.option__item {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 .option__item--main {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 .option__item--revealed {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
-.option-item--revealed .theme-option-row {
+.option__item--revealed .themeOptionRow {
   padding-left: 30px;
 }
 
-.theme-option-row {
+.themeOptionRow {
   display: flex;
   height: 32px;
   justify-content: space-between;
+  margin: 6px 0;
 }
 
 .theme-option-desc {

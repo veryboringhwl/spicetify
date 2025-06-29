@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import ReactDOM from "react-dom";
-import Icons from "../icons/icons";
+import Icons from "../icons/Icons";
 
 let modalContainer = null;
 let modalRoot = null;

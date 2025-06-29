@@ -1,9 +1,9 @@
-.settings-menu__buttons-container {
+.button-container {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
 
-  .settings-menu__button {
+  .button-container__button {
     color: var(--spice-text);
     border: none;
     padding: 8px 16px;
@@ -14,7 +14,7 @@
     width: 85px;
   }
 
-  .settings-menu__button--reset {
+  .button-container__button--reset {
     background-color: #ff0033;
 
     &:active {
@@ -22,7 +22,7 @@
     }
   }
 
-  .settings-menu__button--save {
+  .button-container__button--save {
     background-color: var(--spice-button);
 
     &:active {

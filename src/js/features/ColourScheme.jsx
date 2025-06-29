@@ -1,3 +1,5 @@
+import Notification from "../utils/Notification";
+
 const ColourScheme = async (scheme) => {
   if (scheme === "default") {
     const schemeTag = document.querySelector("style.customColourScheme");
@@ -8,6 +10,16 @@ const ColourScheme = async (scheme) => {
   const response = await fetch(
     "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/dist/color.ini",
   );
+  if (!response.ok) {
+    Notification({
+      isWarning: true,
+      autoHideDuration: 10000,
+      message:
+        "Unable to fetch the colour scheme options. You won't be able to change the colour scheme using the settings menu.",
+    });
+    return;
+  }
+
   const iniContent = await response.text();
   const colourSchemes = iniContent.split(/[\r\n]+/).reduce((acc, line) => {
     const trimmedLine = line.trim();

@@ -81,3 +81,7 @@
   overflow: auto;
   scrollbar-gutter: stable both-edges;
 }
+
+.modal__content > * {
+  width: 100%;
+}

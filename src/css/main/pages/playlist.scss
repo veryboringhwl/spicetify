@@ -36,27 +36,32 @@
 }
 
 .main-actionBar-ActionBar {
-  padding: 0 var(--content-spacing) 7px var(--content-spacing);
+  padding: 0 var(--content-spacing) 8px var(--content-spacing);
 }
 
-.main-actionBar-ActionBarRow > *:not(:last-child):has(.Wrapper-medium-only),
-.main-actionBar-ActionBarRow
-  > *:not(:last-child):has(.Wrapper-medium-only-medium) {
+.main-actionBar-ActionBarRow {
+  height: 48px;
+}
+
+.main-actionBar-ActionBarRow > *:not(:last-child):not(:nth-child(2)) {
   background-color: rgba(var(--spice-rgb-card), 0.85);
   border-radius: 7px;
   box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
   margin-right: 8px !important;
-  min-width: 48px;
+  scale: 0.86;
+  width: 56px;
+  height: 56px;
 }
 
-.main-actionBar-ActionBarRow > *:not(:last-child):has(.Wrapper-large-only),
-.main-actionBar-ActionBarRow
-  > *:not(:last-child):has(.Wrapper-large-only-medium) {
+.main-actionBar-ActionBarRow > *:nth-child(2) {
   background-color: rgba(var(--spice-rgb-card), 0.85);
   border-radius: 7px;
   box-shadow: 0 0px 16px rgba(var(--spice-rgb-shadow), 0.2);
   margin-right: 8px !important;
-  min-width: 56px;
+}
+
+k06ol8ltpt_atxe_jjup > div > div {
+  height: 56px;
 }
 
 .playlist-playlist-searchBoxContainer {
@@ -81,11 +86,13 @@
 :root {
   --playlist-image: clamp(
     156px,
-    156px +
-      (
-        100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px -
-          600px
-      ) / 424 * 104,
+    156px
+      + (
+      100vw - var(--left-sidebar-width, 0) * 1px - var(--panel-width, 0) * 1px
+        - 600px
+    )
+      / 424
+      * 104,
     232px
   );
 }

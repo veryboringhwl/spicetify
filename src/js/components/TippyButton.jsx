@@ -1,5 +1,5 @@
 import { memo } from "react";
-import Icons from "../icons/icons";
+import Icons from "../icons/Icons";
 
 const TippyButton = memo(({ tippy }) => {
   return (
