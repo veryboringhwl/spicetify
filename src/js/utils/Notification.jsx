@@ -1,12 +1,26 @@
-import Console from "./Console";
+import Icons from "../icons/Icons";
+import Console from "../utils/Console";
 
 const Notification = ({
   message = "",
   keyPrefix = "custom-notif",
   autoHideDuration = 3000,
-  backgroundColor = "#fff",
-  color = "#000",
+  backgroundColour = "#fff",
+  colour = "#000",
+  isWarning = false,
 } = {}) => {
+  const content = isWarning ? (
+    <>
+      <Icons.React.warning size={24} />
+      <span>{message}</span>
+    </>
+  ) : (
+    <span>{message}</span>
+  );
+
+  const BackgroundColour = isWarning ? "#ff9800" : backgroundColour;
+  const Colour = isWarning ? "#fff" : colour;
+
   try {
     Spicetify.Snackbar.enqueueCustomSnackbar(keyPrefix, {
       keyPrefix,
@@ -18,19 +32,19 @@ const Notification = ({
             display: "flex",
             gap: "8px",
             alignItems: "center",
-            color: color,
-            backgroundColor: backgroundColor,
+            color: Colour,
+            backgroundColor: BackgroundColour,
             padding: "14px 16px",
             borderRadius: "4px",
             fontSize: "0.875rem",
           }}
         >
-          {message}
+          {content}
         </div>
       ),
     });
   } catch (error) {
-    Console.Error(error);
+    Console.Error("Error displaying notification:", error);
   }
 };
 

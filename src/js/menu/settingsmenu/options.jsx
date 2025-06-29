@@ -50,7 +50,7 @@ const options = {
       defaultVal: 100,
       placeholder: "100%",
       run(value) {
-        Zoomlevel = value / 100;
+        const Zoomlevel = value / 100;
         document.documentElement.style.setProperty("--Zoomlevel", Zoomlevel);
       },
     },

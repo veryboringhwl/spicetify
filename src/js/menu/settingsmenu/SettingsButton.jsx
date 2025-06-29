@@ -1,8 +1,9 @@
+import React from "react";
 import ReactDOM from "react-dom";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import PopupModal from "../../components/PopupModal";
 import DebugMenu from "../../debug/DebugMenu";
-import Icons from "../../icons/icons";
+import Icons from "../../icons/Icons";
 import Window from "../../utils/Window";
 import SettingsMenu from "./SettingsMenu";
 

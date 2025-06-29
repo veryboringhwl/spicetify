@@ -1,4 +1,5 @@
-import React, { memo, useState, useCallback, useMemo } from "react";
+import { memo, useState, useCallback, useMemo } from "react";
+import ButtonContainer from "../components/ButtonContainer";
 import CategoryCarousel from "../components/CategoryCarousel";
 import RenderCategory from "../components/RenderCategory";
 import useSettings from "../hooks/useSettings";
@@ -40,19 +41,8 @@ const SettingsMenu = memo(() => {
           />
         ))}
       </div>
-      <div className="settings-menu__buttons-container">
-        <button
-          className="settings-menu__button settings-menu__button--reset"
-          onClick={resetSettings}
-        >
-          Reset
-        </button>
-        <button
-          className="settings-menu__button settings-menu__button--save"
-          onClick={saveSettings}
-        >
-          Save
-        </button>
+      <div className="settings-menu__buttons">
+        <ButtonContainer resetSettings={resetSettings} saveSettings={saveSettings} />
       </div>
     </div>
   );
