@@ -1,13 +1,10 @@
 import { memo, useEffect } from "react";
+import ButtonContainer from "../components/ButtonContainer";
 import OptionType from "../components/OptionType";
 import useModalSettings from "./useModalSettings";
 
 const FontModal = memo(() => {
   const { settings, updateSetting, resetSettings, saveSettings } = useModalSettings(fontOptions);
-
-  useEffect(() => {
-    fontOptions.forEach((option) => option.run?.(settings[option.name]));
-  }, [settings]);
 
   return (
     <div className="themeModalOptions windowsControlSettings">
@@ -19,14 +16,7 @@ const FontModal = memo(() => {
           onChange={(key, value) => updateSetting(key.replace("theme:", ""), value)}
         />
       ))}
-      <div className="buttonContainer">
-        <button className="resetButton" onClick={resetSettings}>
-          Reset
-        </button>
-        <button className="saveButton" onClick={saveSettings}>
-          Save
-        </button>
-      </div>
+      <ButtonContainer resetSettings={resetSettings} saveSettings={saveSettings} />
     </div>
   );
 });

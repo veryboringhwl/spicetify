@@ -2,8 +2,8 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import Console from "../../utils/Console";
 import LocalStorage from "../../utils/LocalStorage";
 import { albumBannerOptions } from "../modalmenu/AlbumBannerModal";
+import { fontOptions } from "../modalmenu/FontModal";
 import { windowsControlOptions } from "../modalmenu/WindowsControlModal";
-import runModalSettings from "../modalmenu/runModalSettings";
 import options from "../settingsmenu/options";
 import applyOptions from "./applyOptions";
 
@@ -18,6 +18,7 @@ const resetOptions = (setSettings) => {
         const allOptions = [
           ...Object.values(options).flat(),
           ...albumBannerOptions,
+          ...fontOptions,
           ...windowsControlOptions,
         ];
         const defaultSettings = {};
@@ -39,7 +40,6 @@ const resetOptions = (setSettings) => {
         });
         setSettings(defaultSettings);
         applyOptions(defaultSettings, Object.keys(defaultSettings));
-        runModalSettings();
       } catch (error) {
         Console.Error("Failed to reset settings:", error);
       }

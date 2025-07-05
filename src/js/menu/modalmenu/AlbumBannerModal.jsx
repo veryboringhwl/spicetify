@@ -1,14 +1,11 @@
 import { memo, useEffect } from "react";
+import ButtonContainer from "../components/ButtonContainer";
 import OptionType from "../components/OptionType";
 import useModalSettings from "./useModalSettings";
 
 const AlbumBannerModal = memo(() => {
   const { settings, updateSetting, resetSettings, saveSettings } =
     useModalSettings(albumBannerOptions);
-
-  useEffect(() => {
-    albumBannerOptions.forEach((option) => option.run?.(settings[option.name]));
-  }, [settings]);
 
   return (
     <div className="themeModalOptions albumBannerSettings">
@@ -20,14 +17,7 @@ const AlbumBannerModal = memo(() => {
           onChange={(key, value) => updateSetting(key.replace("theme:", ""), value)}
         />
       ))}
-      <div className="buttonContainer">
-        <button className="resetButton" onClick={resetSettings}>
-          Reset
-        </button>
-        <button className="saveButton" onClick={saveSettings}>
-          Save
-        </button>
-      </div>
+      <ButtonContainer resetSettings={resetSettings} saveSettings={saveSettings} />
     </div>
   );
 });
