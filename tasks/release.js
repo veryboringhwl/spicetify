@@ -5,7 +5,7 @@ import externalGlobalPlugin from "esbuild-plugin-external-global";
 import { compileAsync } from "sass";
 
 const buildJS = async () => {
-  const OUT = "dist/theme.js";
+  const OUT = "dist/theme.mjs";
   const SRC = "src/js/app.jsx";
   const buildConfig = {
     format: "esm",
@@ -27,16 +27,10 @@ const buildJS = async () => {
     ],
     banner: {
       js: `
-        (async function() {
-          while (!Spicetify.React || !Spicetify.ReactDOM) {
-            await new Promise(resolve => setTimeout(resolve, 10));
-          }
-    `.trim(),
-    },
-    footer: {
-      js: `
-        })();
-      `.trim(),
+        while (!Spicetify.React || !Spicetify.ReactDOM) {
+          await new Promise(resolve => setTimeout(resolve, 10));
+        }
+    `,
     },
   };
   await esbuild.build(buildConfig);

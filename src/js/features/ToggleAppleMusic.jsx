@@ -1,71 +1,74 @@
+import Console from "../utils/Console";
+import waitForElements from "../utils/waitForElements";
+
 let textObserverApple = null;
-let collapsedObserverApple = null;
+let sidebarStateListenerApple = null;
 
 function ToggleAppleMusic(isEnabled) {
-  const globalNav = document.querySelector(".Root__globalNav");
-  if (!globalNav) return;
-
-  disableAppleMusic(globalNav);
-
+  disableAppleMusic();
   if (isEnabled) {
-    enableAppleMusic(globalNav);
-  } else {
-    disableAppleMusic(globalNav);
+    enableAppleMusic();
   }
 }
 
-function enableAppleMusic(globalNav) {
-  disableAppleMusic(globalNav);
-  globalNav.classList.add("global-libraryX");
+async function enableAppleMusic() {
+  const globalNav = await waitForElements(".Root__globalNav");
 
   const addTextToButtons = () => {
     const elements = globalNav.querySelectorAll(".main-globalNav-navLink, ._b3hhmbWtOY8_1M1mM1H");
     // .main-globalNav-navLink: Nav Links
     // _b3hhmbWtOY8_1M1mM1H: Search tab
-    elements.forEach((el) => {
-      if (!el.querySelector(".main-globalNav-textWrapper")) {
+    for (const el of elements) {
+      if (!el.querySelector(".main-globalNav-iconText")) {
         const text = el.getAttribute("aria-label") || (el.querySelector("input") ? "Search" : "");
-        const wrapper = document.createElement("span");
-        wrapper.className = "main-globalNav-textWrapper";
-        wrapper.innerHTML = `<div class="main-globalNav-iconText encore-text-body-medium-bold">${text}</div>`;
-        el.appendChild(wrapper);
+        const div = document.createElement("div");
+        div.className = "main-globalNav-iconText encore-text-body-medium-bold";
+        div.textContent = text;
+        el.appendChild(div);
       }
-    });
+    }
   };
 
   addTextToButtons();
-
   textObserverApple = new MutationObserver(addTextToButtons);
   textObserverApple.observe(globalNav, { childList: true, subtree: true });
 
-  const addCollapsed = () => {
-    const elementToWatch = document.querySelector(".sikBfynL1Y6I25nVpbAg");
-    globalNav.classList.toggle("collapsed", elementToWatch != null);
+  const updateCollapsedClass = () => {
+    const sidebarState = Spicetify.Platform.LocalStorageAPI.getItem("left-sidebar-state");
+    document.body.classList.toggle("collapsed", sidebarState === 1);
   };
 
-  addCollapsed();
-  collapsedObserverApple = new MutationObserver(addCollapsed);
-  collapsedObserverApple.observe(document.body, {
-    childList: true,
-    subtree: true,
-  });
+  sidebarStateListenerApple = (event) => {
+    if (event.data.key === "left-sidebar-state") {
+      updateCollapsedClass();
+    }
+  };
+
+  Spicetify.Platform.LocalStorageAPI.getEvents().addListener("update", sidebarStateListenerApple);
+  updateCollapsedClass();
 }
 
-function disableAppleMusic(globalNav) {
-  globalNav.classList.remove("global-libraryX", "collapsed");
+function disableAppleMusic() {
+  document.body.classList.remove("collapsed");
 
   if (textObserverApple) {
     textObserverApple.disconnect();
     textObserverApple = null;
   }
 
-  if (collapsedObserverApple) {
-    collapsedObserverApple.disconnect();
-    collapsedObserverApple = null;
+  if (sidebarStateListenerApple) {
+    Console.Log("Removing sidebar state listener");
+    Spicetify.Platform.LocalStorageAPI.getEvents().removeListener(
+      "update",
+      sidebarStateListenerApple,
+    );
+    sidebarStateListenerApple = null;
   }
 
-  const textWrappers = globalNav.querySelectorAll(".main-globalNav-textWrapper");
-  textWrappers.forEach((el) => el.remove());
+  const iconTexts = document.querySelectorAll(".main-globalNav-iconText");
+  for (const el of iconTexts) {
+    el.remove();
+  }
 }
 
 export default ToggleAppleMusic;

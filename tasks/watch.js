@@ -17,9 +17,17 @@ let cssWatcher = null;
 let shouldWatchSpotify = false;
 
 const watchJS = async () => {
-  const OUT = "dist/theme.js";
+  const OUT = "dist/theme.mjs";
   const SRC = "src/js/app.jsx";
-  const PARENT_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "theme.js");
+  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "theme.mjs");
+  const SPOTIFY_OUT = join(
+    process.env.APPDATA,
+    "Spotify",
+    "Apps",
+    "xpui",
+    "extensions",
+    "theme.mjs",
+  );
 
   jsWatcher = await esbuild.context({
     format: "esm",
@@ -41,21 +49,15 @@ const watchJS = async () => {
     ],
     banner: {
       js: `
-        (async function() {
-          while (!Spicetify.React || !Spicetify.ReactDOM) {
-            await new Promise(resolve => setTimeout(resolve, 10));
-          }
-              console.debug(
-              "%c● ᴗ ● [Theme]%cTheme is running",
-              "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
-              "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
-            );
+        while (!Spicetify.React || !Spicetify.ReactDOM) {
+          await new Promise(resolve => setTimeout(resolve, 10));
+        }
+        console.debug(
+        "%c● ᴗ ● [Theme]%cTheme is running",
+        "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
+        "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
+        );
     `.trim(),
-    },
-    footer: {
-      js: `
-        })();
-      `.trim(),
     },
   });
 
@@ -63,8 +65,9 @@ const watchJS = async () => {
 
   chokidar.watch(OUT).on("change", async () => {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m JavaScript Changes Detected.`);
-    fs.copyFileSync(OUT, PARENT_OUT);
+    fs.copyFileSync(OUT, SPICETIFY_OUT);
     if (shouldWatchSpotify) {
+      fs.copyFileSync(OUT, SPOTIFY_OUT);
       await reloadSpotify();
       console.log("Theme's JS was updated.");
     }
@@ -75,7 +78,8 @@ const watchJS = async () => {
 const watchCSS = async () => {
   const OUT = "dist/user.css";
   const SRC = "src/css/app.scss";
-  const PARENT_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "user.css");
+  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "user.css");
+  const SPOTIFY_OUT = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "user.css");
 
   //sass doesnt have node api
   cssWatcher = exec(`sass ${SRC} ${OUT} --watch --no-source-map`, {
@@ -84,8 +88,9 @@ const watchCSS = async () => {
 
   chokidar.watch(OUT).on("change", async () => {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m CSS Changes Detected.`);
-    fs.copyFileSync(OUT, PARENT_OUT);
+    fs.copyFileSync(OUT, SPICETIFY_OUT);
     if (shouldWatchSpotify) {
+      fs.copyFileSync(OUT, SPOTIFY_OUT);
       await reloadSpotify();
       console.log("Theme's CSS was updated.");
     }
@@ -105,7 +110,7 @@ const watchSpotify = async () => {
   }
   fs.writeFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
   // timeouts as other wise spotify doesnt open
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), ["--remote-debugging-port=9222"], {
     detached: true,
   });
@@ -113,14 +118,7 @@ const watchSpotify = async () => {
 };
 
 const reloadSpotify = async () => {
-  const srcJS = join(process.cwd(), "dist", "theme.js");
-  const srcCSS = join(process.cwd(), "dist", "user.css");
-  const destJS = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions", "theme.js");
-  const destCSS = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "user.css");
   try {
-    fs.copyFileSync(srcJS, destJS);
-    fs.copyFileSync(srcCSS, destCSS);
-
     const response = await fetch("http://localhost:9222/json/list");
     const wsUrl = (await response.json()).find((d) =>
       d.url.includes("spotify"),

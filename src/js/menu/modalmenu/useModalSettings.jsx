@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import LocalStorage from "../../utils/LocalStorage";
-import { applySettingToDOM } from "./utils";
 import getInitialOptions from "../helpers/getInitialOptions";
+import { applySettingToDOM } from "./utils";
 
 const useModalSettings = (options) => {
   const [settings, setSettings] = useState(() => getInitialOptions(options, false));

@@ -3,10 +3,10 @@ import LocalStorage from "../../utils/LocalStorage";
 import { albumBannerOptions } from "../modalmenu/AlbumBannerModal";
 import { fontOptions } from "../modalmenu/FontModal";
 import { windowsControlOptions } from "../modalmenu/WindowsControlModal";
+import { applySettingToDOM } from "../modalmenu/utils";
 import options from "../settingsmenu/options";
 import applyOptions from "./applyOptions";
 import getInitialOptions from "./getInitialOptions";
-import { applySettingToDOM } from "../modalmenu/utils";
 
 const initialiseOptions = () => {
   Console.Log("Initialising options");

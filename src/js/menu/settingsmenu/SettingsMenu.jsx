@@ -1,4 +1,4 @@
-import { memo, useState, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import ButtonContainer from "../components/ButtonContainer";
 import CategoryCarousel from "../components/CategoryCarousel";
 import RenderCategory from "../components/RenderCategory";
