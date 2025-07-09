@@ -80,6 +80,9 @@ const options = {
       defaultVal: false,
       tippy: "This will override the themes default windows controls",
       popupModal: WindowsControlModal,
+      run: (value) => {
+        document.documentElement.classList.toggle("WindowsControl", value);
+      },
     },
     {
       type: "input",
@@ -102,6 +105,7 @@ const options = {
       incompatible: ["AppleMusic"],
       tippy: "Incompatible with AppleMusic",
       run(value) {
+        document.documentElement.classList.toggle("LibX", value);
         ToggleLibXUI(value);
       },
       reveal: [
@@ -110,12 +114,18 @@ const options = {
           name: "highlightnav",
           desc: "Adds highlight to the selected page",
           defaultVal: true,
+          run(value) {
+            document.documentElement.classList.toggle("highlightnav", value);
+          },
         },
         {
           type: "toggle",
           name: "PreLibX",
           desc: "Restore the old UI >2023 (Pre LibraryX)",
           defaultVal: false,
+          run(value) {
+            document.documentElement.classList.toggle("PreLibX", value);
+          },
         },
         {
           type: "toggle",
@@ -123,6 +133,9 @@ const options = {
           desc: "Makes library compact while keeping icons",
           defaultVal: false,
           tippy: "Broken if library is collapsed",
+          run(value) {
+            document.documentElement.classList.toggle("CompactLib", value);
+          },
         },
       ],
     },
@@ -134,6 +147,7 @@ const options = {
       incompatible: ["LibX", "switchlayout", "TestLayout", "greenicon"],
       tippy: "Incompatible with LibX, Switchlayout, greenicon and testlayout",
       run(value) {
+        document.documentElement.classList.toggle("AppleMusic", value);
         ToggleAppleMusic(value);
       },
     },
@@ -144,6 +158,9 @@ const options = {
       incompatible: ["AppleMusic"],
       tippy: "Incompatible with AppleMusic",
       defaultVal: true,
+      run(value) {
+        document.documentElement.classList.toggle("TestLayout", value);
+      },
     },
     {
       type: "toggle",
@@ -152,6 +169,9 @@ const options = {
       incompatible: ["AppleMusic"],
       tippy: "Incompatible with AppleMusic",
       defaultVal: true,
+      run(value) {
+        document.documentElement.classList.toggle("switchlayout", value);
+      },
     },
   ],
   Snippets: [
@@ -160,6 +180,9 @@ const options = {
       name: "hidetracklistnum",
       desc: "Hide tracklist numbers in various pages",
       defaultVal: true,
+      run(value) {
+        document.documentElement.classList.toggle("hidetracklistnum", value);
+      },
     },
     {
       type: "toggle",
@@ -168,24 +191,36 @@ const options = {
       incompatible: ["AppleMusic"],
       tippy: "Incompatible with AppleMusic",
       defaultVal: true,
+      run(value) {
+        document.documentElement.classList.toggle("greenicon", value);
+      },
     },
     {
       type: "toggle",
       name: "transplayicon",
       desc: "Make the play/pause button transparent",
       defaultVal: true,
+      run(value) {
+        document.documentElement.classList.toggle("transplayicon", value);
+      },
     },
     {
       type: "toggle",
       name: "npvlargerlyrics",
       desc: "Show lyrics only in Now playing view",
       defaultVal: false,
+      run(value) {
+        document.documentElement.classList.toggle("npvlargerlyrics", value);
+      },
     },
     {
       type: "toggle",
       name: "homeheader",
       desc: "Remove the coloured gradient from the home page header",
       defaultVal: true,
+      run(value) {
+        document.documentElement.classList.toggle("homeheader", value);
+      },
     },
   ],
   Test: [
@@ -201,9 +236,6 @@ const options = {
         "test-incompatible-dropdown",
       ],
       tippy: "Incompatible with test-incompatible",
-      run(value) {
-        console.log("test-toggle set to ", value);
-      },
     },
     {
       type: "toggle",
