@@ -6,17 +6,17 @@ const CoverArtBanner = async () => {
   }
 
   const channels = {
-    Album: { regex: /^\/album\//, key: "theme:AlbumPage" },
-    Artist: { regex: /^\/artist\/(?!artists\b)\w+$/, key: "theme:ArtistPage" },
-    Lyrics: { regex: /^\/lyrics$/, key: "theme:LyricsPage" },
-    LyricsPlus: { regex: /^\/lyrics-plus$/, key: "theme:LyricsPage" },
-    Playlist: { regex: /^\/playlist\//, key: "theme:PlaylistPage" },
-    Station: { regex: /^\/station\/playlist\//, key: "theme:MiscPage" },
-    Collection: { regex: /^\/collection\/tracks$/, key: "theme:MiscPage" },
-    Show: { regex: /^\/show\//, key: "theme:MiscPage" },
-    Episode: { regex: /^\/episode\//, key: "theme:MiscPage" },
-    User: { regex: /^\/user\/(?!users\b)\w+$/, key: "theme:MiscPage" },
-    Genre: { regex: /^\/genre\//, key: "theme:MiscPage" },
+    Album: { regex: /^\/album\//, key: "AlbumPage" },
+    Artist: { regex: /^\/artist\/(?!artists\b)\w+$/, key: "ArtistPage" },
+    Lyrics: { regex: /^\/lyrics$/, key: "LyricsPage" },
+    LyricsPlus: { regex: /^\/lyrics-plus$/, key: "LyricsPage" },
+    Playlist: { regex: /^\/playlist\//, key: "PlaylistPage" },
+    Station: { regex: /^\/station\/playlist\//, key: "MiscPage" },
+    Collection: { regex: /^\/collection\/tracks$/, key: "MiscPage" },
+    Show: { regex: /^\/show\//, key: "MiscPage" },
+    Episode: { regex: /^\/episode\//, key: "MiscPage" },
+    User: { regex: /^\/user\/(?!users\b)\w+$/, key: "MiscPage" },
+    Genre: { regex: /^\/genre\//, key: "MiscPage" },
   };
 
   const banner =

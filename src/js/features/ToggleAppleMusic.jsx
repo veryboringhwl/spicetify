@@ -35,7 +35,7 @@ async function enableAppleMusic() {
 
   const updateCollapsedClass = () => {
     const sidebarState = Spicetify.Platform.LocalStorageAPI.getItem("left-sidebar-state");
-    document.body.classList.toggle("collapsed", sidebarState === 1);
+    document.documentElement.classList.toggle("collapsed", sidebarState === 1);
   };
 
   sidebarStateListenerApple = (event) => {
@@ -49,19 +49,17 @@ async function enableAppleMusic() {
 }
 
 function disableAppleMusic() {
-  document.body.classList.remove("collapsed");
+  document.documentElement.classList.remove("collapsed");
 
   if (textObserverApple) {
+    Console.Log("Removing AppleMusic observer");
     textObserverApple.disconnect();
     textObserverApple = null;
   }
 
   if (sidebarStateListenerApple) {
     Console.Log("Removing sidebar state listener");
-    Spicetify.Platform.LocalStorageAPI.getEvents().removeListener(
-      "update",
-      sidebarStateListenerApple,
-    );
+    Spicetify.Platform.LocalStorageAPI.getEvents().removeListener("update", sidebarStateListener);
     sidebarStateListenerApple = null;
   }
 

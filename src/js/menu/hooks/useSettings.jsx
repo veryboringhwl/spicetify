@@ -12,13 +12,13 @@ const useSettings = () => {
     (key, value) => {
       setSettings((prev) => {
         const newSettings = { ...prev, [key]: value };
-        const optionName = key.replace("theme:", "");
+        const optionName = key;
 
         const changedOption = allOptions.find((opt) => opt.name === optionName);
 
         if (changedOption?.reveal) {
           changedOption.reveal.forEach((subOption) => {
-            const subKey = `theme:${subOption.name}`;
+            const subKey = subOption.name;
             if (value) {
               newSettings[subKey] = subOption.defaultVal;
             } else {
@@ -29,7 +29,7 @@ const useSettings = () => {
 
         if (value && changedOption?.incompatible) {
           changedOption.incompatible.forEach((incompName) => {
-            newSettings[`theme:${incompName}`] = false;
+            newSettings[incompName] = false;
           });
         }
 

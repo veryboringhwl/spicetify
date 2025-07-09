@@ -18,19 +18,16 @@ const resetOptions = (setSettings) => {
         const allOptions = [
           ...Object.values(options).flat(),
           ...albumBannerOptions,
-          ...fontOptions,
           ...windowsControlOptions,
         ];
         const defaultSettings = {};
 
         allOptions.forEach((option) => {
-          const mainKey = `theme:${option.name}`;
+          const mainKey = option.name;
           defaultSettings[mainKey] = option.defaultVal;
           if (option.reveal) {
             option.reveal.forEach((subOption) => {
-              defaultSettings[`theme:${subOption.name}`] = option.defaultVal
-                ? subOption.defaultVal
-                : false;
+              defaultSettings[subOption.name] = option.defaultVal ? subOption.defaultVal : false;
             });
           }
         });

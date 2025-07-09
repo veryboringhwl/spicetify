@@ -3,7 +3,7 @@ import Console from "./Console";
 const LocalStorage = {
   get(key, defaultValue) {
     try {
-      const item = localStorage.getItem(key);
+      const item = localStorage.getItem(`theme:${key}`);
       return item !== undefined && item !== null ? JSON.parse(item) : defaultValue;
     } catch (error) {
       console.error(`Error getting ${key} from localStorage:`, error);
@@ -13,7 +13,7 @@ const LocalStorage = {
 
   set(key, value) {
     try {
-      localStorage.setItem(key, JSON.stringify(value));
+      localStorage.setItem(`theme:${key}`, JSON.stringify(value));
       return true;
     } catch (error) {
       Console.Error(`Error setting ${key} in localStorage:`, error);

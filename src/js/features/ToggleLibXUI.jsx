@@ -15,7 +15,7 @@ async function enableLibXUI() {
   const globalNav = await waitForElements(".Root__globalNav");
 
   const addTextToButtons = () => {
-    const elements = document.querySelectorAll(".main-globalNav-navLink, ._b3hhmbWtOY8_1M1mM1H");
+    const elements = globalNav.querySelectorAll(".main-globalNav-navLink, ._b3hhmbWtOY8_1M1mM1H");
     // .main-globalNav-navLink: Nav Links
     // _b3hhmbWtOY8_1M1mM1H: Search tab
     for (const el of elements) {
@@ -35,7 +35,7 @@ async function enableLibXUI() {
 
   const updateCollapsedClass = () => {
     const sidebarState = Spicetify.Platform.LocalStorageAPI.getItem("left-sidebar-state");
-    document.body.classList.toggle("collapsed", sidebarState === 1);
+    document.documentElement.classList.toggle("collapsed", sidebarState === 1);
   };
 
   sidebarStateListener = (event) => {
@@ -49,7 +49,7 @@ async function enableLibXUI() {
 }
 
 function disableLibXUI() {
-  document.body.classList.remove("collapsed");
+  document.documentElement.classList.remove("collapsed");
 
   if (textObserver) {
     Console.Log("Removing libx observer");

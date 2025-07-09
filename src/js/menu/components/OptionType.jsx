@@ -8,7 +8,7 @@ const OptionType = memo(({ option, value, onChange, disabled }) => {
   const handleChange = useCallback(
     (e) => {
       const newValue = option.type === "toggle" ? !value : e.target.value;
-      onChange(`theme:${option.name}`, newValue);
+      onChange(option.name, newValue);
     },
     [option.name, option.type, value, onChange],
   );

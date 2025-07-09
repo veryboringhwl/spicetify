@@ -8,9 +8,9 @@ const RenderCategory = memo(({ category, categoryOptions, settings, onChange }) 
   <div className={`option__category option__category--${category.toLowerCase()}`}>
     <h2 className="option__category-title">{category}</h2>
     {categoryOptions.map((option) => {
-      const value = settings[`theme:${option.name}`];
+      const value = settings[option.name];
       const disabled = allOptions.some(
-        (o) => o.incompatible?.includes(option.name) && settings[`theme:${o.name}`],
+        (o) => o.incompatible?.includes(option.name) && settings[o.name],
       );
       return (
         <React.Fragment key={option.name}>
@@ -23,7 +23,7 @@ const RenderCategory = memo(({ category, categoryOptions, settings, onChange }) 
                 <OptionType
                   key={sub.name}
                   option={sub}
-                  value={settings[`theme:${sub.name}`]}
+                  value={settings[sub.name]}
                   onChange={onChange}
                   disabled={disabled}
                 />
