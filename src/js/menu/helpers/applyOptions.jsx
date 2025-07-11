@@ -6,7 +6,7 @@ const applyOptions = (settings, changedOptions = []) => {
     Object.values(options)
       .flat()
       .forEach(({ name, run }) => {
-        const key = `theme:${name}`;
+        const key = name;
         const value = settings[key];
         if (changedOptions.includes(key) && run) {
           run(value);

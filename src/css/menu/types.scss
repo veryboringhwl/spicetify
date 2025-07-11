@@ -41,12 +41,12 @@
   font-size: 14px !important;
   cursor: pointer;
 
-  &--disabled {
+  &.dropdown--disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  &__button {
+  &.dropdown__button {
     display: flex;
     border: none;
     justify-content: space-between;
@@ -59,11 +59,11 @@
     width: 100%;
   }
 
-  &__arrow {
+  &.dropdown__arrow {
     display: flex;
   }
 
-  &__menu {
+  &.dropdown__menu {
     background: var(--spice-card);
     border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -74,7 +74,7 @@
     max-height: 250px;
   }
 
-  &__option {
+  &.dropdown__option {
     display: flex;
     align-items: center;
     padding: 0 8px;
@@ -110,7 +110,7 @@
     cursor: not-allowed;
   }
 
-  &__background {
+  &.toggle__background {
     width: 42px;
     height: 24px;
     background: rgba(var(--spice-rgb-selected-row), 0.1);
@@ -120,13 +120,14 @@
 
     &:has(.toggle__slider--enabled) {
       background: var(--spice-button);
+
       .toggle__slider {
         margin-left: 20px;
       }
     }
   }
 
-  &__slider {
+  &.toggle__slider {
     width: 20px;
     height: 20px;
     background: var(--spice-text);
@@ -134,5 +135,43 @@
     margin-left: 2px;
     transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
     box-shadow: 0px 0px 5px rgba(var(--spice-rgb-shadow), 0.3);
+  }
+}
+
+
+.radio-button {
+  display: flex;
+  gap: 8px;
+
+  .radio-button__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px 12px;
+    border: 1px solid var(--spice-tab-active);
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: var(--spice-tab-active);
+    }
+
+    &:has(.radio-button__input:checked) {
+      box-shadow: inset 0 0 0 2px var(--spice-button);
+      color: var(--spice-text);
+    }
+
+    .radio-button__input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .radio-button__text {
+      color: var(--spice-text);
+      font-size: 14px;
+    }
   }
 }

@@ -1,20 +1,20 @@
-.Root__nav-bar,
-.Root__right-sidebar,
-.Root__now-playing-bar,
-.Root__main-view {
-  box-shadow: var(--box-shadow) !important;
-}
-
-.spotify__os--is-windows:not(.fullscreen) #main::after {
+body::after {
   content: "";
   position: absolute;
   pointer-events: none;
   backdrop-filter: brightness(2.12);
   z-index: 999;
   right: 0;
-  top: calc(16px / var(--zoom, 1));
-  width: calc(135px / var(--zoom, 1));
-  height: calc(32px / var(--zoom, 1));
+  top: calc(16px / 1);
+  width: calc(135px / 1);
+  height: calc(32px / 1);
+}
+
+.Root__nav-bar,
+.Root__right-sidebar,
+.Root__now-playing-bar,
+.Root__main-view {
+  box-shadow: var(--box-shadow) !important;
 }
 
 .os-scrollbar {

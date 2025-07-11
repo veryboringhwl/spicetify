@@ -147,6 +147,10 @@
   }
 
   &.collapsed {
+    .Root__globalNar {
+      width: 72px !important;
+    }
+
     .main-globalNav-navLink,
     .b7r2WRiu5f9Q99qmyreh *:not(svg) {
       width: 56px !important;
@@ -168,10 +172,6 @@
 
     .main-userWidget-box {
       width: 56px;
-    }
-
-    &.Root__globalNav {
-      width: 72px;
     }
   }
 }

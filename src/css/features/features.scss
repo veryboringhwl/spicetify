@@ -7,7 +7,7 @@ body {
     "Segoe UI Variable Display" !important;
 }
 
-.spotify__os--is-windows:not(.fullscreen) .WindowsControl #main::after {
+.WindowsControl body::after {
   content: "";
   position: absolute;
   pointer-events: none;
