@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from "react";
+import { memo, useRef, useEffect } from "react";
 
 const CategoryCarousel = memo(({ categories, selectedCategory, onSelectCategory }) => {
   const carouselRef = useRef(null);

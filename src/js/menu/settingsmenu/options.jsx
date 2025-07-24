@@ -11,7 +11,7 @@ import WindowsControlModal from "../../menu/modalmenu/WindowsControlModal";
 const options = {
   Features: [
     {
-      type: "dropdown",
+      type: "radiobutton",
       name: "colourschemeselector",
       desc: "Change the colour scheme of Spotify",
       defaultVal: "default",
@@ -280,6 +280,21 @@ const options = {
         { value: "test3", label: "test3" },
         { value: "test4", label: "test4" },
       ],
+    },
+    {
+      type: "radiobutton",
+      name: "test-radiobutton",
+      desc: "test-radiobutton",
+      defaultVal: "test1",
+      options: [
+        { value: "test1", label: "test1" },
+        { value: "test2", label: "test2" },
+        { value: "test3", label: "test3" },
+        { value: "test4", label: "test4" },
+      ],
+      run(value) {
+        console.log(value);
+      },
     },
     {
       type: "toggle",

@@ -3,6 +3,7 @@ import Dropdown from "./Dropdown";
 import Input from "./Input";
 import OptionRow from "./OptionRow";
 import Toggle from "./Toggle";
+import RadioButton from "./RadioButton";
 
 const OptionType = memo(({ option, value, onChange, disabled }) => {
   const handleChange = useCallback(
@@ -28,6 +29,10 @@ const OptionType = memo(({ option, value, onChange, disabled }) => {
   } else if (option.type === "input") {
     Component = Input;
     componentProps.placeholder = option.placeholder;
+  } else if (option.type === "radiobutton") {
+    Component = RadioButton;
+    componentProps.options = option.options;
+    componentProps.selected = value; // Pass current value as 'selected'
   }
 
   return (

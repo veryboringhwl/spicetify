@@ -5,11 +5,13 @@ import OptionRow from "../menu/components/OptionRow";
 import Toggle from "../menu/components/Toggle";
 import Console from "../utils/Console";
 import Notification from "../utils/Notification";
+import RadioButton from "../menu/components/RadioButton";
 
 const DebugMenu = memo(() => {
   const [lastVersion, setLastVersion] = useState("Loading...");
   const [lastUpdated, setLastUpdated] = useState("Loading...");
   const [enabled, setEnabled] = useState(false);
+  const [selectedRadio, setSelectedRadio] = useState("option1");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -111,6 +113,16 @@ const DebugMenu = memo(() => {
       <OptionRow name={"BITCH"} desc={"REEEEEE"} tippy={"HELLOE"} popupModal={DebugMenu}>
         <Toggle value={enabled} onChange={() => setEnabled(!enabled)} />
       </OptionRow>
+      <RadioButton
+        items={[
+          { label: "Option 1", value: "option1" },
+          { label: "Option 2", value: "option2" },
+          { label: "Option 3", value: "option3" },
+        ]}
+        name="debugRadio"
+        selected={selectedRadio}
+        onChange={setSelectedRadio}
+      />
     </div>
   );
 });
