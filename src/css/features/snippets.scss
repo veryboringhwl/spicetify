@@ -1,4 +1,4 @@
-.hidetracklistnum {
+.hide-tracklist-numbers {
   .main-trackList-trackListHeader .main-trackList-rowSectionIndex {
     opacity: 0;
   }
@@ -20,68 +20,44 @@
     text-indent: -1000px;
   }
 
-  .main-trackList-indexable[aria-colcount="3"]
-    .main-trackList-trackListRowGrid {
+  .main-trackList-indexable[aria-colcount="3"] .main-trackList-trackListRowGrid {
     padding-left: unset;
     grid-template-columns:
-      [index] 0px
-      [first] minmax(120px, var(--col1, 4fr))
-      [last] minmax(120px, var(--col2, 1fr)) !important;
+      [index] 0px [first] minmax(120px, var(--col1, 4fr)) [last] minmax(120px, var(--col2, 1fr)) !important;
   }
 
-  .main-trackList-indexable[aria-colcount="4"]
-    .main-trackList-trackListRowGrid {
+  .main-trackList-indexable[aria-colcount="4"] .main-trackList-trackListRowGrid {
     padding-left: unset;
     grid-template-columns:
-      [index] 0px
-      [first] minmax(120px, var(--col1, 4fr))
-      [var1] minmax(120px, var(--col2, 2fr))
-      [last] minmax(120px, var(--col3, 1fr)) !important;
+      [index] 0px [first] minmax(120px, var(--col1, 4fr)) [var1] minmax(120px, var(--col2, 2fr)) [last] minmax(120px, var(--col3, 1fr)) !important;
   }
 
-  .main-trackList-indexable[aria-colcount="5"]
-    .main-trackList-trackListRowGrid {
+  .main-trackList-indexable[aria-colcount="5"] .main-trackList-trackListRowGrid {
     padding-left: unset;
     grid-template-columns:
-      [index] 0px
-      [first] minmax(120px, var(--col1, 6fr))
-      [var1] minmax(120px, var(--col2, 4fr))
-      [var2] minmax(120px, var(--col3, 3fr))
-      [last] minmax(120px, var(--col4, 1fr)) !important;
+      [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [last] minmax(120px, var(--col4, 1fr)) !important;
   }
 
-  .main-trackList-indexable[aria-colcount="6"]
-    .main-trackList-trackListRowGrid {
+  .main-trackList-indexable[aria-colcount="6"] .main-trackList-trackListRowGrid {
     padding-left: unset;
     grid-template-columns:
-      [index] 0px
-      [first] minmax(120px, var(--col1, 6fr))
-      [var1] minmax(120px, var(--col2, 4fr))
-      [var2] minmax(120px, var(--col3, 3fr))
-      [var3] minmax(120px, var(--col4, 2fr))
-      [last] minmax(120px, var(--col5, 1fr));
+      [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [last] minmax(120px, var(--col5, 1fr));
   }
 
-  .main-trackList-indexable[aria-colcount="7"]
-    .main-trackList-trackListRowGrid {
+  .main-trackList-indexable[aria-colcount="7"] .main-trackList-trackListRowGrid {
     padding-left: unset;
     grid-template-columns:
-      [index] 0px
-      [first] minmax(120px, var(--col1, 6fr))
-      [var1] minmax(120px, var(--col2, 4fr))
-      [var2] minmax(120px, var(--col3, 3fr))
-      [var3] minmax(120px, var(--col4, 2fr))
-      [var4] minmax(120px, var(--col5, 2fr))
-      [last] minmax(120px, var(--col6, 1fr)) !important;
+      [index] 0px [first] minmax(120px, var(--col1, 6fr)) [var1] minmax(120px, var(--col2, 4fr)) [var2] minmax(120px, var(--col3, 3fr)) [var3] minmax(120px, var(--col4, 2fr)) [var4] minmax(120px, var(--col5, 2fr)) [last] minmax(120px, var(--col6, 1fr)) !important;
   }
 }
 
-.greenicon {
-  .main-globalNav-navLinkActive[aria-label="Home"] > span:has(svg),
-  .main-globalNav-navLinkActive.custom-navlink > span:has(svg),
-  .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ) .EJttP30F1zYHeAw7ISHb > span,
+.green-navlink-icons {
+
+  .main-globalNav-navLinkActive[aria-label="Home"]>span:has(svg),
+  .main-globalNav-navLinkActive.custom-navlink>span:has(svg),
+  .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ) .EJttP30F1zYHeAw7ISHb>span,
   .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ) .M9l40ptEBXPm03dU3X1k,
-  .b7r2WRiu5f9Q99qmyreh:not(:has(input:placeholder-shown)) .EJttP30F1zYHeAw7ISHb > span,
+  .b7r2WRiu5f9Q99qmyreh:not(:has(input:placeholder-shown)) .EJttP30F1zYHeAw7ISHb>span,
   .b7r2WRiu5f9Q99qmyreh:not(:has(input:placeholder-shown)) .M9l40ptEBXPm03dU3X1k {
     color: var(--spice-accent);
   }
@@ -100,7 +76,8 @@
     z-index: 1;
   }
 
-  &.PreLibX {
+  &.pre-libx-ui {
+
     .b7r2WRiu5f9Q99qmyreh:has(.j4xi27AJ3oy5qZ8CGhhQ)::before,
     .b7r2WRiu5f9Q99qmyreh:not(:has(input:placeholder-shown))::before,
     .main-globalNav-navLinkActive.main-globalNav-navLink::before {
@@ -110,7 +87,8 @@
   }
 }
 
-.transplayicon {
+.transparent-playbutton {
+
   .main-nowPlayingBar-center [aria-label="Pause"] svg,
   .main-nowPlayingBar-center [aria-label="Play"] svg {
     height: 22px;
@@ -118,14 +96,14 @@
     transform: scale(1.5);
   }
 
-  .main-nowPlayingBar-center [aria-label="Pause"] > span,
-  .main-nowPlayingBar-center [aria-label="Play"] > span {
+  .main-nowPlayingBar-center [aria-label="Pause"]>span,
+  .main-nowPlayingBar-center [aria-label="Play"]>span {
     background-color: transparent !important;
     color: var(--spice-text);
   }
 }
 
-.npvlargerlyrics {
+.lyrics-only-npv {
   .main-nowPlayingView-contextItemInfo:before {
     background: unset !important;
   }
@@ -190,7 +168,8 @@
     max-height: unset !important;
   }
 
-  &.LibX {
+  &.libx-ui {
+
     #BeautifulLyrics-CardView,
     #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
     .main-nowPlayingView-lyricsContent .RootContainer,
@@ -201,7 +180,8 @@
     }
   }
 
-  &.PreLibX {
+  &.pre-libx-ui {
+
     #BeautifulLyrics-CardView,
     #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
     .main-nowPlayingView-lyricsContent .RootContainer,
@@ -212,7 +192,7 @@
     }
   }
 
-  &.switchlayout {
+  &.switch-grid-layout {
     #BeautifulLyrics-CardView,
     #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
     .main-nowPlayingView-lyricsContent .RootContainer,
@@ -223,7 +203,8 @@
     }
   }
 
-  &.LibX.switchlayout {
+  &.libx-ui.switch-grid-layout {
+
     #BeautifulLyrics-CardView,
     #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
     .main-nowPlayingView-lyricsContent .RootContainer,
@@ -234,7 +215,8 @@
     }
   }
 
-  &.PreLibX.switchlayout {
+  &.pre-libx-ui.switch-grid-layout {
+
     #BeautifulLyrics-CardView,
     #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
     .main-nowPlayingView-lyricsContent .RootContainer,
@@ -245,7 +227,8 @@
     }
   }
 
-  &.AppleMusic {
+  &.apple-music-ui {
+
     #BeautifulLyrics-CardView,
     #BeautifulLyrics-CardView .LyricsContent .ContentContainer,
     .main-nowPlayingView-lyricsContent .RootContainer,
@@ -257,7 +240,7 @@
   }
 }
 
-.homeheader {
+.no-gradient {
   .main-home-homeHeader {
     display: none;
   }

@@ -5,7 +5,7 @@ import externalGlobalPlugin from "esbuild-plugin-external-global";
 import { compileAsync } from "sass";
 
 const buildJS = async () => {
-  const OUT = "dist/theme.mjs";
+  const OUT = "dist/theme.js";
   const SRC = "src/js/app.jsx";
   const buildConfig = {
     format: "esm",
@@ -17,7 +17,6 @@ const buildJS = async () => {
     outfile: OUT,
     minify: true,
     jsx: "automatic",
-    external: ["react", "react-dom"],
     plugins: [
       externalGlobalPlugin.externalGlobalPlugin({
         react: "Spicetify.React",
@@ -25,11 +24,17 @@ const buildJS = async () => {
         "react/jsx-runtime": "Spicetify.ReactJSX",
       }),
     ],
+    external: ["react", "react-dom", "react/jsx-runtime"],
     banner: {
       js: `
-        while (!Spicetify.React || !Spicetify.ReactDOM) {
-          await new Promise(resolve => setTimeout(resolve, 10));
-        }
+          while (!Spicetify.React || !Spicetify.ReactDOM) {
+            await new Promise(resolve => setTimeout(resolve, 10));
+          }
+              console.debug(
+              "%c● ᴗ ● [Theme]%cTheme is running",
+              "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
+              "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
+            );
     `,
     },
   };

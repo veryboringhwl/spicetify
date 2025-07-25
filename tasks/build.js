@@ -6,9 +6,9 @@ import externalGlobalPlugin from "esbuild-plugin-external-global";
 import { compileAsync } from "sass";
 
 const buildJS = async () => {
-  const OUT = "dist/theme.mjs";
+  const OUT = "dist/theme.js";
   const SRC = "src/js/app.jsx";
-  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "theme.mjs");
+  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "theme.js");
   const buildConfig = {
     format: "esm",
     target: "es2024",
@@ -19,7 +19,6 @@ const buildJS = async () => {
     outfile: OUT,
     minify: false,
     jsx: "automatic",
-    external: ["react", "react-dom"],
     plugins: [
       externalGlobalPlugin.externalGlobalPlugin({
         react: "Spicetify.React",
@@ -27,17 +26,15 @@ const buildJS = async () => {
         "react/jsx-runtime": "Spicetify.ReactJSX",
       }),
     ],
+    external: ["react", "react-dom", "react/jsx-runtime"],
     banner: {
-      js: `
-          while (!Spicetify.React || !Spicetify.ReactDOM) {
-            await new Promise(resolve => setTimeout(resolve, 10));
-          }
-              console.debug(
-              "%c● ᴗ ● [Theme]%cTheme is running",
-              "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
-              "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
-            );
-    `.trim(),
+      js: `(async function() {
+        while (!Spicetify.React || !Spicetify.ReactDOM) {
+          await new Promise(resolve => setTimeout(resolve, 1));
+        }`,
+    },
+    footer: {
+      js: "})();",
     },
   };
   await esbuild.build(buildConfig);
@@ -62,10 +59,10 @@ const applySpotify = async () => {
   const killProccess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
   await new Promise((resolve) => killProccess.on("close", resolve));
 
-  const srcJS = join(process.cwd(), "dist", "theme.mjs");
+  const srcJS = join(process.cwd(), "dist", "theme.js");
   const srcCSS = join(process.cwd(), "dist", "user.css");
 
-  const destJS = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions", "theme.mjs");
+  const destJS = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions", "theme.js");
   const destCSS = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "user.css");
 
   fs.copyFileSync(srcJS, destJS);

@@ -7,7 +7,7 @@ body {
     "Segoe UI Variable Display" !important;
 }
 
-.WindowsControl body::after {
+.windows-control body::after {
   content: "";
   position: absolute;
   pointer-events: none;
@@ -19,7 +19,7 @@ body {
   height: var(--windowcontrol-height);
 }
 
-.AlbumBannerPage {
+.album-banner-page {
   .banner-image {
     position: absolute;
     width: 100%;
@@ -32,7 +32,7 @@ body {
     transition: background 0.5s ease;
   }
 
-  &.PlaylistPage {
+  &.playlist-page {
     .playlist-playlist-playlistContent,
     .main-actionBarBackground-background,
     .main-entityHeader-backgroundColor,

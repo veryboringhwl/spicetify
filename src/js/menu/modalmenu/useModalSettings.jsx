@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import Console from "../../utils/Console";
 import LocalStorage from "../../utils/LocalStorage";
 import getInitialOptions from "../helpers/getInitialOptions";
 
@@ -25,14 +24,7 @@ const useModalSettings = (options) => {
   }, [options]);
 
   const saveSettings = useCallback(() => {
-    const changedOptions = [];
-
     Object.entries(settings).forEach(([key, value]) => {
-      const storedValue = LocalStorage.get(key, null);
-      if (JSON.stringify(storedValue) !== JSON.stringify(value)) {
-        changedOptions.push(key);
-      }
-
       LocalStorage.set(key, value);
       const option = options.find((opt) => opt.name === key);
       if (option) {
@@ -41,10 +33,6 @@ const useModalSettings = (options) => {
         }
       }
     });
-
-    if (changedOptions.length > 0) {
-      Console.Log(`Saving modal settings: ${changedOptions.join(", ")}`);
-    }
   }, [settings, options]);
 
   return { settings, updateSetting, resetSettings, saveSettings };

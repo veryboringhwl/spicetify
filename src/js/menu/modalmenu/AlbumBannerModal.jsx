@@ -29,58 +29,58 @@ const AlbumBannerModal = memo(() => {
 export const albumBannerOptions = [
   {
     type: "toggle",
-    name: "AlbumBannerPage",
+    name: "album-banner-page",
     desc: "Puts album art in places",
     defaultVal: true,
     run(value) {
-      document.documentElement.classList.toggle("AlbumBannerPage", value);
+      document.documentElement.classList.toggle("album-banner-page", value);
     },
   },
   {
     type: "toggle",
-    name: "LyricsPage",
+    name: "lyrics-page",
     desc: "Adds Dynamic backgrounds to Lyrics Page",
     defaultVal: true,
     tippy: "Includes Spotify Lyrics page and Spicetify's Lyrics Plus",
     run(value) {
-      document.documentElement.classList.toggle("LyricsPage", value);
+      document.documentElement.classList.toggle("lyrics-page", value);
     },
   },
   {
     type: "toggle",
-    name: "PlaylistPage",
+    name: "playlist-page",
     desc: "Adds Dynamic backgrounds to your Playlist Pages",
     defaultVal: true,
     run(value) {
-      document.documentElement.classList.toggle("PlaylistPage", value);
+      document.documentElement.classList.toggle("playlist-page", value);
     },
   },
   {
     type: "toggle",
-    name: "ArtistPage",
+    name: "artist-page",
     desc: "Adds Dynamic backgrounds to Artist Pages",
     defaultVal: true,
     run(value) {
-      document.documentElement.classList.toggle("ArtistPage", value);
+      document.documentElement.classList.toggle("artist-page", value);
     },
   },
   {
     type: "toggle",
-    name: "AlbumPage",
+    name: "album-page",
     desc: "Adds Dynamic backgrounds to Album Pages",
     defaultVal: true,
     run(value) {
-      document.documentElement.classList.toggle("AlbumPage", value);
+      document.documentElement.classList.toggle("album-page", value);
     },
   },
   {
     type: "toggle",
-    name: "MiscPage",
+    name: "misc-page",
     desc: "Adds Dynamic backgrounds to Misc Pages",
     defaultVal: true,
     tippy: "Enables album art for Station, Collection, Show, Episode, Genre, User",
     run(value) {
-      document.documentElement.classList.toggle("MiscPage", value);
+      document.documentElement.classList.toggle("misc-page", value);
     },
   },
 ];

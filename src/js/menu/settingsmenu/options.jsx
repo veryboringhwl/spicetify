@@ -12,8 +12,8 @@ const options = {
   Features: [
     {
       type: "radiobutton",
-      name: "colourschemeselector",
-      desc: "Change the colour scheme of Spotify",
+      name: "colour-scheme",
+      desc: "Colour Scheme:",
       defaultVal: "default",
       options: [
         { value: "default", label: "Default" },
@@ -29,8 +29,8 @@ const options = {
     },
     {
       type: "dropdown",
-      name: "change-Spotify-mode",
-      desc: "Change Spotify mode",
+      name: "spotify-mode",
+      desc: "Spotify mode:",
       defaultVal: "default",
       tippy: "Only takes effect after a restart",
       options: [
@@ -44,20 +44,9 @@ const options = {
       },
     },
     {
-      type: "input",
-      name: "ZoomLevel",
-      desc: "Change the zoom level of Spotify page",
-      defaultVal: 100,
-      placeholder: "100%",
-      run(value) {
-        const Zoomlevel = value / 100;
-        document.documentElement.style.setProperty("--Zoomlevel", Zoomlevel);
-      },
-    },
-    {
       type: "toggle",
-      name: "AlbumBannerPage",
-      desc: "Put album cover art in various pages",
+      name: "album-banner-page",
+      desc: "Puts Track cover art in various pages",
       defaultVal: true,
       popupModal: AlbumBannerModal,
       run(value) {
@@ -66,8 +55,8 @@ const options = {
     },
     {
       type: "toggle",
-      name: "VolumePercentage",
-      desc: "Show volume percentage next to volume slider",
+      name: "volume-percentage",
+      desc: "Adds volume percentage next to volume slider",
       defaultVal: true,
       run(value) {
         VolPercent(value);
@@ -75,18 +64,18 @@ const options = {
     },
     {
       type: "toggle",
-      name: "WindowsControl",
-      desc: "Adjust the position and brightness of the windows controls",
+      name: "windows-control",
+      desc: "Adjusts brightness and position of windows controls",
       defaultVal: false,
       tippy: "This will override the themes default windows controls",
       popupModal: WindowsControlModal,
       run: (value) => {
-        document.documentElement.classList.toggle("WindowsControl", value);
+        document.documentElement.classList.toggle("windows-control", value);
       },
     },
     {
       type: "input",
-      name: "uifont",
+      name: "spotify-font",
       desc: "Changes the font of the Spotify app",
       defaultVal: "SpotifyMixUI",
       placeholder: "SpotifyMixUI",
@@ -99,127 +88,127 @@ const options = {
   Layouts: [
     {
       type: "toggle",
-      name: "LibX",
-      desc: "Restore the old UI >2024 (Pre Global Nav Bar)",
+      name: "libx-ui",
+      desc: "Restores the old UI >2024 (Pre Global Nav Bar)",
       defaultVal: false,
       incompatible: ["AppleMusic"],
       tippy: "Incompatible with AppleMusic",
       run(value) {
-        document.documentElement.classList.toggle("LibX", value);
+        document.documentElement.classList.toggle("libx-ui", value);
         ToggleLibXUI(value);
       },
       reveal: [
         {
           type: "toggle",
-          name: "highlightnav",
-          desc: "Adds highlight to the selected page",
+          name: "highlight-navlinks",
+          desc: "Adds highlights to the selected page",
           defaultVal: true,
           run(value) {
-            document.documentElement.classList.toggle("highlightnav", value);
+            document.documentElement.classList.toggle("highlight-navlinks", value);
           },
         },
         {
           type: "toggle",
-          name: "PreLibX",
-          desc: "Restore the old UI >2023 (Pre LibraryX)",
+          name: "pre-libx-ui",
+          desc: "Restores the old UI >2023 (Pre LibraryX)",
           defaultVal: false,
           run(value) {
-            document.documentElement.classList.toggle("PreLibX", value);
+            document.documentElement.classList.toggle("pre-libx-ui", value);
           },
         },
         {
           type: "toggle",
-          name: "CompactLib",
-          desc: "Makes library compact while keeping icons",
+          name: "compact-library",
+          desc: "Uses compact sidebar",
           defaultVal: false,
           tippy: "Broken if library is collapsed",
           run(value) {
-            document.documentElement.classList.toggle("CompactLib", value);
+            document.documentElement.classList.toggle("compact-library", value);
           },
         },
       ],
     },
     {
       type: "toggle",
-      name: "AppleMusic",
+      name: "apple-music-ui",
       desc: "Changes the UI to look like Apple Music",
       defaultVal: false,
       incompatible: ["LibX", "switchlayout", "TestLayout", "greenicon"],
       tippy: "Incompatible with LibX, Switchlayout, greenicon and testlayout",
       run(value) {
-        document.documentElement.classList.toggle("AppleMusic", value);
+        document.documentElement.classList.toggle("apple-music-ui", value);
         ToggleAppleMusic(value);
       },
     },
     {
       type: "toggle",
-      name: "TestLayout",
-      desc: "Rearrange playbutton to start and cover art to middle",
+      name: "modern-layout",
+      desc: "Reorders play button to start and cover art to middle",
       incompatible: ["AppleMusic"],
       tippy: "Incompatible with AppleMusic",
       defaultVal: true,
       run(value) {
-        document.documentElement.classList.toggle("TestLayout", value);
+        document.documentElement.classList.toggle("modern-layout", value);
       },
     },
     {
       type: "toggle",
-      name: "switchlayout",
-      desc: "Uses different grid layout for Now playing bar",
+      name: "switch-grid-layout",
+      desc: "Uses different grid layout",
       incompatible: ["AppleMusic"],
       tippy: "Incompatible with AppleMusic",
       defaultVal: true,
       run(value) {
-        document.documentElement.classList.toggle("switchlayout", value);
+        document.documentElement.classList.toggle("switch-grid-layout", value);
       },
     },
   ],
   Snippets: [
     {
       type: "toggle",
-      name: "hidetracklistnum",
-      desc: "Hide tracklist numbers in various pages",
+      name: "hide-tracklist-numbers",
+      desc: "Hides tracklist numbers in various pages",
       defaultVal: true,
       run(value) {
-        document.documentElement.classList.toggle("hidetracklistnum", value);
+        document.documentElement.classList.toggle("hide-tracklist-numbers", value);
       },
     },
     {
       type: "toggle",
-      name: "greenicon",
-      desc: "Make the selected tab icon green",
+      name: "green-navLink-icons",
+      desc: "Makes Navlinks green",
       incompatible: ["AppleMusic"],
       tippy: "Incompatible with AppleMusic",
       defaultVal: true,
       run(value) {
-        document.documentElement.classList.toggle("greenicon", value);
+        document.documentElement.classList.toggle("green-navLink-icons", value);
       },
     },
     {
       type: "toggle",
-      name: "transplayicon",
+      name: "transparent-playbutton",
       desc: "Make the play/pause button transparent",
       defaultVal: true,
       run(value) {
-        document.documentElement.classList.toggle("transplayicon", value);
+        document.documentElement.classList.toggle("transparent-playbutton", value);
       },
     },
     {
       type: "toggle",
-      name: "npvlargerlyrics",
+      name: "lyrics-only-npv",
       desc: "Show lyrics only in Now playing view",
       defaultVal: false,
       run(value) {
-        document.documentElement.classList.toggle("npvlargerlyrics", value);
+        document.documentElement.classList.toggle("lyrics-only-npv", value);
       },
     },
     {
       type: "toggle",
-      name: "homeheader",
-      desc: "Remove the coloured gradient from the home page header",
+      name: "no-gradient",
+      desc: "Remove the coloured gradient from header",
       defaultVal: true,
       run(value) {
-        document.documentElement.classList.toggle("homeheader", value);
+        document.documentElement.classList.toggle("no-gradient", value);
       },
     },
   ],

@@ -17,16 +17,16 @@ let cssWatcher = null;
 let shouldWatchSpotify = false;
 
 const watchJS = async () => {
-  const OUT = "dist/theme.mjs";
+  const OUT = "dist/theme.js";
   const SRC = "src/js/app.jsx";
-  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "theme.mjs");
+  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Themes", "boring", "theme.js");
   const SPOTIFY_OUT = join(
     process.env.APPDATA,
     "Spotify",
     "Apps",
     "xpui",
     "extensions",
-    "theme.mjs",
+    "theme.js",
   );
 
   jsWatcher = await esbuild.context({
@@ -39,7 +39,6 @@ const watchJS = async () => {
     outfile: OUT,
     minify: false,
     jsx: "automatic",
-    external: ["react", "react-dom"],
     plugins: [
       externalGlobalPlugin.externalGlobalPlugin({
         react: "Spicetify.React",
@@ -47,17 +46,18 @@ const watchJS = async () => {
         "react/jsx-runtime": "Spicetify.ReactJSX",
       }),
     ],
+    external: ["react", "react-dom", "react/jsx-runtime"],
     banner: {
       js: `
-        while (!Spicetify.React || !Spicetify.ReactDOM) {
-          await new Promise(resolve => setTimeout(resolve, 10));
-        }
-        console.debug(
-        "%c● ᴗ ● [Theme]%cTheme is running",
-        "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
-        "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
-        );
-    `.trim(),
+          while (!Spicetify.React || !Spicetify.ReactDOM) {
+            await new Promise(resolve => setTimeout(resolve, 10));
+          }
+              console.debug(
+              "%c● ᴗ ● [Theme]%cTheme is running",
+              "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
+              "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
+            );
+    `,
     },
   });
 
@@ -72,7 +72,7 @@ const watchJS = async () => {
       console.log("Theme's JS was updated.");
     }
   });
-  console.log("\x1b[36mJS watcher started.\x1b[0m");
+  console.log("\x1b[36js watcher started.\x1b[0m");
 };
 
 const watchCSS = async () => {

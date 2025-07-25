@@ -6,17 +6,15 @@
 .option__item--revealed {
   display: flex;
   flex-direction: column;
-}
-
-.option__item--revealed .themeOptionRow {
-  padding-left: 30px;
+  margin-left: 15px;
+  border-left: 2px solid rgba(var(--spice-rgb-selected-row), 0.1);
+  padding-left: 10px;
 }
 
 .themeOptionRow {
   display: flex;
-  height: 32px;
   justify-content: space-between;
-  margin: 6px 0;
+  height: 32px;
 }
 
 .theme-option-desc {

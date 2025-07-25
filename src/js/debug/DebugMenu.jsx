@@ -2,10 +2,10 @@ import { memo, useEffect, useState } from "react";
 import LoadingIndicator from "../components/LoadingIndicator";
 import Icons from "../icons/Icons";
 import OptionRow from "../menu/components/OptionRow";
+import RadioButton from "../menu/components/RadioButton";
 import Toggle from "../menu/components/Toggle";
 import Console from "../utils/Console";
 import Notification from "../utils/Notification";
-import RadioButton from "../menu/components/RadioButton";
 
 const DebugMenu = memo(() => {
   const [lastVersion, setLastVersion] = useState("Loading...");

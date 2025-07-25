@@ -2,8 +2,8 @@ import { memo, useCallback } from "react";
 import Dropdown from "./Dropdown";
 import Input from "./Input";
 import OptionRow from "./OptionRow";
-import Toggle from "./Toggle";
 import RadioButton from "./RadioButton";
+import Toggle from "./Toggle";
 
 const OptionType = memo(({ option, value, onChange, disabled }) => {
   const handleChange = useCallback(

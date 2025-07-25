@@ -29,16 +29,16 @@ const WindowsControlModal = memo(() => {
 export const windowsControlOptions = [
   {
     type: "toggle",
-    name: "WindowsControl",
+    name: "windows-control",
     desc: "Enable custom Windows Controls",
     defaultVal: false,
     run: (value) => {
-      document.documentElement.classList.toggle("WindowsControl", value);
+      document.documentElement.classList.toggle("windows-control", value);
     },
   },
   {
     type: "toggle",
-    name: "HideWindowsControl",
+    name: "hide-windows-control",
     desc: "Removes Spotifys Windows Controls completely",
     defaultVal: false,
     run: (value) => {
@@ -65,45 +65,45 @@ export const windowsControlOptions = [
   },
   {
     type: "input",
-    name: "WindowsControlBrightness",
+    name: "windows-control-brightness",
     desc: "Set Brightness",
     defaultVal: "2.12",
     run(value) {
-      if (document.documentElement.classList.contains("WindowsControl")) {
-        document.documentElement.style.setProperty("--windowcontrol-brightness", value);
+      if (document.documentElement.classList.contains("windows-control")) {
+        document.documentElement.style.setProperty("--windows-control-brightness", value);
       }
     },
   },
   {
     type: "input",
-    name: "WindowsControlTop",
+    name: "windows-control-top",
     desc: "Set Top",
     defaultVal: "16px",
     run(value) {
-      if (document.documentElement.classList.contains("WindowsControl")) {
-        document.documentElement.style.setProperty("--windowcontrol-top", value);
+      if (document.documentElement.classList.contains("windows-control")) {
+        document.documentElement.style.setProperty("--windows-control-top", value);
       }
     },
   },
   {
     type: "input",
-    name: "WindowsControlWidth",
+    name: "windows-control-width",
     desc: "Set Width",
     defaultVal: "135px",
     run(value) {
-      if (document.documentElement.classList.contains("WindowsControl")) {
-        document.documentElement.style.setProperty("--windowcontrol-width", value);
+      if (document.documentElement.classList.contains("windows-control")) {
+        document.documentElement.style.setProperty("--windows-control-width", value);
       }
     },
   },
   {
     type: "input",
-    name: "WindowsControlHeight",
+    name: "windows-control-height",
     desc: "Set Height",
     defaultVal: "32px",
     run(value) {
-      if (document.documentElement.classList.contains("WindowsControl")) {
-        document.documentElement.style.setProperty("--windowcontrol-height", value);
+      if (document.documentElement.classList.contains("windows-control")) {
+        document.documentElement.style.setProperty("--windows-control-height", value);
       }
     },
   },
