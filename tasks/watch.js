@@ -48,16 +48,13 @@ const watchJS = async () => {
     ],
     external: ["react", "react-dom", "react/jsx-runtime"],
     banner: {
-      js: `
-          while (!Spicetify.React || !Spicetify.ReactDOM) {
-            await new Promise(resolve => setTimeout(resolve, 10));
-          }
-              console.debug(
-              "%c● ᴗ ● [Theme]%cTheme is running",
-              "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
-              "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
-            );
-    `,
+      js: `(async function() {
+        while (!Spicetify.React || !Spicetify.ReactDOM) {
+          await new Promise(resolve => setTimeout(resolve, 1));
+        }`,
+    },
+    footer: {
+      js: "})();",
     },
   });
 

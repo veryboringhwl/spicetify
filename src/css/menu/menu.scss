@@ -1,8 +1,34 @@
+@import "./preview.scss";
+
+.modal__container--large:has(.settings-menu) {
+  max-height: 80vh;
+  width: clamp(720px, 75vw, 1280px) !important;
+}
+
 .settings-menu {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas:
+    "carousel carousel"
+    "options preview"
+    "buttons buttons";
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
-  width: 100%;
+}
+
+.settings-menu__carousel {
+  grid-area: carousel;
+}
+
+.settings-menu__options {
+  grid-area: options;
+}
+
+.settings-menu__preview {
+  grid-area: preview;
+}
+
+.settings-menu__buttons {
+  grid-area: buttons;
 }
 
 .settings-menu__options {
@@ -17,6 +43,7 @@
 .option__category {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .option__category-title {
@@ -36,4 +63,11 @@ kbd {
   min-width: 1.5em;
   padding: var(--encore-spacing-tighter-5) var(--encore-spacing-tighter-3);
   text-align: center;
+}
+
+.settings-modal__options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 0;
 }

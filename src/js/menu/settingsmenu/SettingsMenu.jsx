@@ -3,6 +3,7 @@ import ButtonContainer from "../components/ButtonContainer";
 import CategoryCarousel from "../components/CategoryCarousel";
 import RenderCategory from "../components/RenderCategory";
 import useSettings from "../hooks/useSettings";
+import Preview from "./Preview";
 import options from "./options";
 
 const SettingsMenu = memo(() => {
@@ -40,6 +41,9 @@ const SettingsMenu = memo(() => {
             onChange={handleSettingChange}
           />
         ))}
+      </div>
+      <div className="settings-menu__preview">
+        <Preview />
       </div>
       <div className="settings-menu__buttons">
         <ButtonContainer resetSettings={resetSettings} saveSettings={saveSettings} />
