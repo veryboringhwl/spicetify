@@ -21,8 +21,9 @@
   }
 
   .Root__top-container {
-    padding-top: 48px;
+    padding-top: 40px;
     grid-template-areas:
+      "top-banner top-banner top-banner"
       "global-nav main-view right-sidebar"
       "left-sidebar main-view right-sidebar"
       "now-playing-bar now-playing-bar now-playing-bar" !important;
@@ -326,6 +327,7 @@
     padding-top: 48px;
     grid-template-rows: auto auto 1fr;
     grid-template-areas:
+      "top-banner top-banner top-banner"
       "global-nav now-playing-bar now-playing-bar"
       "global-nav main-view right-sidebar"
       "left-sidebar main-view right-sidebar" !important;
@@ -348,6 +350,7 @@
 
   .Root__globalNav {
     height: unset;
+    grid-area: global-nav !important;
     background-color: var(--spice-main);
     border-radius: 8px;
     padding: unset !important;
@@ -664,6 +667,7 @@
 .switch-grid-layout {
   .Root__top-container {
     grid-template-areas:
+      "top-banner top-banner top-banner"
       "global-nav global-nav global-nav"
       "left-sidebar main-view right-sidebar"
       "left-sidebar now-playing-bar now-playing-bar" !important;
@@ -671,6 +675,7 @@
 
   &.libx-ui .Root__top-container {
     grid-template-areas:
+      "top-banner top-banner top-banner"
       "global-nav main-view right-sidebar"
       "left-sidebar main-view right-sidebar"
       "left-sidebar now-playing-bar now-playing-bar" !important;

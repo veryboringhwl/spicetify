@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { Fragment, memo } from "react";
 import options from "../settingsmenu/options";
 import OptionType from "./OptionType";
 
@@ -13,12 +13,12 @@ const RenderCategory = memo(({ category, categoryOptions, settings, onChange }) 
         (o) => o.incompatible?.includes(option.name) && settings[o.name],
       );
       return (
-        <React.Fragment key={option.name}>
-          <div className="option__item--main">
+        <Fragment key={option.name}>
+          <div className="option__item option__item--main" data-name={option.name}>
             <OptionType option={option} value={value} onChange={onChange} disabled={disabled} />
           </div>
           {value && option.reveal && (
-            <div className="option__item--revealed">
+            <div className="option__item option__item--revealed" data-name={option.name}>
               {option.reveal.map((sub) => (
                 <OptionType
                   key={sub.name}
@@ -30,7 +30,7 @@ const RenderCategory = memo(({ category, categoryOptions, settings, onChange }) 
               ))}
             </div>
           )}
-        </React.Fragment>
+        </Fragment>
       );
     })}
   </div>

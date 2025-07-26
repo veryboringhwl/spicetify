@@ -1,23 +1,29 @@
-.option__item--main {
+.option__item {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.option__item[data-name="colour-scheme"] {
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .option__item--revealed {
-  display: flex;
-  flex-direction: column;
   margin-left: 15px;
   border-left: 2px solid rgba(var(--spice-rgb-selected-row), 0.1);
   padding-left: 10px;
+  gap: 8px;
 }
 
-.themeOptionRow {
+.option__content {
   display: flex;
-  justify-content: space-between;
-  height: 32px;
+  align-items: center;
+  gap: 8px;
 }
 
-.theme-option-desc {
+.option__desc {
   display: flex;
   height: 100%;
   align-items: center;
@@ -25,8 +31,9 @@
   color: var(--spice-subtext);
 }
 
-.theme-option-control {
-  align-content: center;
+.option__control {
   display: flex;
+  align-content: center;
   gap: 8px;
 }
+

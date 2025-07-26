@@ -18,6 +18,8 @@
 @forward "menu/carousel";
 @forward "menu/options";
 @forward "menu/popupmodal";
+@forward "menu/preview";
+
 @forward "menu/types";
 
 @forward "features/features";
@@ -30,6 +32,6 @@ body {
 
 :root {
   --border-radius: 8px;
-  --box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;;
+  --box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
   --mica-effect: blur(20px) saturate(1.4) brightness(1.2);
 }

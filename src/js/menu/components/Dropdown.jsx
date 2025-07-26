@@ -7,14 +7,14 @@ const Dropdown = memo(({ value, options, onChange, disabled }) => {
   const anchorName = `--dropdown-anchor-${popoverId.replace(/:/g, "id")}`;
 
   const handleSelect = (option) => {
-    onChange?.({ target: { value: option.value } });
+    onChange?.(option.value);
     popoverRef.current?.hidePopover();
   };
 
   const selectedLabel = options.find((opt) => opt.value === value)?.label || "Select...";
 
   return (
-    <div className={`dropdown${disabled ? " dropdown--disabled" : ""}`}>
+    <div className={`dropdown ${disabled ? "dropdown--disabled" : ""}`}>
       <button
         className="dropdown__button"
         popovertarget={popoverId}

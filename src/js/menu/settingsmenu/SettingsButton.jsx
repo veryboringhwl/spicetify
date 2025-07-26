@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import PopupModal from "../../components/PopupModal";
-import DebugMenu from "../../debug/DebugMenu";
+import TestMenu from "../../debug/TestMenu";
 import Icons from "../../icons/Icons";
 import Window from "../../utils/Window";
 import SettingsMenu from "./SettingsMenu";
@@ -112,9 +112,9 @@ const SettingsButton = () => {
           Theme Settings
         </Spicetify.ReactComponent.MenuItem>
         <Spicetify.ReactComponent.MenuItem
-          key="debug-menu"
+          key="test-menu"
           onClick={() => {
-            PopupModal({ title: "Debug Menu", content: DebugMenu });
+            PopupModal({ title: "Test Menu", content: TestMenu });
             hideMenu();
           }}
           leadingIcon={
@@ -127,7 +127,7 @@ const SettingsButton = () => {
             />
           }
         >
-          Debug Menu
+          Test Menu
         </Spicetify.ReactComponent.MenuItem>
       </Spicetify.ReactComponent.Menu>,
     );
@@ -143,8 +143,7 @@ const SettingsButton = () => {
         buttons: (
           <Spicetify.ReactComponent.TooltipWrapper label="GitHub" placement="top">
             <button
-              type="button"
-              className="Modal__button Modal__button--github"
+              className="modal__button modal__button--github"
               onClick={() => window.open("https://github.com/veryboringhwl/spicetify")}
             >
               <Icons.React.github size={18} />

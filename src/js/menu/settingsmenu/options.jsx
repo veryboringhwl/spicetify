@@ -1,4 +1,4 @@
-import DebugMenu from "../../debug/DebugMenu";
+import TestMenu from "../../debug/TestMenu";
 import ColourScheme from "../../features/ColourScheme";
 import CoverArtBanner from "../../features/CoverArtBanner";
 import SpotifyMode from "../../features/SpotifyMode";
@@ -13,7 +13,7 @@ const options = {
     {
       type: "radiobutton",
       name: "colour-scheme",
-      desc: "Colour Scheme:",
+      desc: "Colour Scheme",
       defaultVal: "default",
       options: [
         { value: "default", label: "Default" },
@@ -30,7 +30,7 @@ const options = {
     {
       type: "dropdown",
       name: "spotify-mode",
-      desc: "Spotify mode:",
+      desc: "Spotify mode",
       defaultVal: "default",
       tippy: "Only takes effect after a restart",
       options: [
@@ -50,6 +50,7 @@ const options = {
       defaultVal: true,
       popupModal: AlbumBannerModal,
       run(value) {
+        document.documentElement.classList.toggle("album-banner-page", value);
         CoverArtBanner(value);
       },
     },
@@ -76,7 +77,7 @@ const options = {
     {
       type: "input",
       name: "spotify-font",
-      desc: "Changes the font of the Spotify app",
+      desc: "Spotify font",
       defaultVal: "SpotifyMixUI",
       placeholder: "SpotifyMixUI",
       tippy: "This will only work if you have the font installed locally",
@@ -218,7 +219,7 @@ const options = {
       name: "test-toggle",
       desc: "test-toggle",
       defaultVal: true,
-      popupModal: DebugMenu,
+      popupModal: TestMenu,
       incompatible: [
         "test-incompatible-toggle",
         "test-incompatible-input",

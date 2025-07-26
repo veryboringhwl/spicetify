@@ -7,8 +7,8 @@ import Toggle from "./Toggle";
 
 const OptionType = memo(({ option, value, onChange, disabled }) => {
   const handleChange = useCallback(
-    (e) => {
-      const newValue = option.type === "toggle" ? !value : e.target.value;
+    (ValueFromComponent) => {
+      const newValue = option.type === "toggle" ? !value : ValueFromComponent;
       onChange(option.name, newValue);
     },
     [option.name, option.type, value, onChange],
@@ -32,7 +32,7 @@ const OptionType = memo(({ option, value, onChange, disabled }) => {
   } else if (option.type === "radiobutton") {
     Component = RadioButton;
     componentProps.options = option.options;
-    componentProps.selected = value; // Pass current value as 'selected'
+    componentProps.selected = value;
   }
 
   return (

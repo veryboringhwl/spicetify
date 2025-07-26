@@ -1,4 +1,4 @@
-import React from "react";
+import { memo, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 function ConfirmDialog({
@@ -10,13 +10,14 @@ function ConfirmDialog({
   onClose,
   onOpen,
   onOutside,
+  confirmLabel,
   allowHTML,
 }) {
-  const ConfirmDialog = React.memo(() => {
-    const [state, setState] = Spicetify.React.useState(true);
+  const ConfirmDialog = memo(() => {
+    const [state, setState] = useState(true);
     const menu = document.querySelector(".ReactModalPortal:last-of-type");
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (state) onOpen?.();
     }, [state, onOpen]);
 
@@ -45,6 +46,7 @@ function ConfirmDialog({
             onConfirm?.();
             menu?.remove();
           }}
+          confirmLabel={confirmLabel}
           allowHTML={allowHTML}
         />
       </Spicetify.ReactComponent.RemoteConfigProvider>
