@@ -1,5 +1,8 @@
 import Notification from "../utils/Notification";
 
+let cachedIniContent = null;
+let cachedColourSchemes = null;
+
 const ColourScheme = async (scheme) => {
   if (scheme === "default") {
     const schemeTag = document.querySelector("style.customColourScheme");
@@ -7,36 +10,45 @@ const ColourScheme = async (scheme) => {
     return;
   }
 
-  const response = await fetch(
-    "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/dist/color.ini",
-  );
-  if (!response.ok) {
-    Notification({
-      isWarning: true,
-      autoHideDuration: 10000,
-      message:
-        "Unable to fetch the colour scheme options. You won't be able to change the colour scheme using the settings menu.",
-    });
-    return;
+  let iniContent = cachedIniContent;
+  let colourSchemes = cachedColourSchemes;
+
+  if (!iniContent) {
+    const response = await fetch(
+      "https://raw.githubusercontent.com/veryboringhwl/spicetify/main/dist/color.ini",
+    );
+    if (!response.ok) {
+      Notification({
+        isWarning: true,
+        autoHideDuration: 10000,
+        message:
+          "Unable to fetch the colour scheme options. You won't be able to change the colour scheme using the settings menu.",
+      });
+      return;
+    }
+    iniContent = await response.text();
+    cachedIniContent = iniContent;
   }
 
-  const iniContent = await response.text();
-  const colourSchemes = iniContent.split(/[\r\n]+/).reduce((acc, line) => {
-    const trimmedLine = line.trim();
-    if (trimmedLine.startsWith(";")) return acc;
-    const sectionMatch = trimmedLine.match(/^\[([^\]]+)\]$/);
-    if (sectionMatch) {
-      acc[sectionMatch[1]] = {};
+  if (!colourSchemes) {
+    colourSchemes = iniContent.split(/[\r\n]+/).reduce((acc, line) => {
+      const trimmedLine = line.trim();
+      if (trimmedLine.startsWith(";")) return acc;
+      const sectionMatch = trimmedLine.match(/^\[([^\]]+)\]$/);
+      if (sectionMatch) {
+        acc[sectionMatch[1]] = {};
+        return acc;
+      }
+      const paramMatch = trimmedLine.match(/^([^=]+?)\s*=\s*(.+)$/);
+      if (paramMatch) {
+        const [, key, value] = paramMatch;
+        const section = Object.keys(acc).pop();
+        if (section) acc[section][key] = value.split(";")[0].trim();
+      }
       return acc;
-    }
-    const paramMatch = trimmedLine.match(/^([^=]+?)\s*=\s*(.+)$/);
-    if (paramMatch) {
-      const [, key, value] = paramMatch;
-      const section = Object.keys(acc).pop();
-      if (section) acc[section][key] = value.split(";")[0].trim();
-    }
-    return acc;
-  }, {});
+    }, {});
+    cachedColourSchemes = colourSchemes;
+  }
 
   const injectStr = `${Object.entries(colourSchemes[scheme]).reduce((acc, [key, value]) => {
     const rgb =

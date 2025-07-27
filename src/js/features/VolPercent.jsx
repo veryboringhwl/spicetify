@@ -14,13 +14,11 @@ const VolPercent = async (isEnabled) => {
     if (!volumeBar.querySelector(".vol-percent")) {
       volumeBar.insertAdjacentHTML(
         "beforeend",
-        `
-							<div class="vol-percent" style="display: inline-flex; align-items: center;">
-									<input type="text" class="vol-input" 
-											style="width: 30px; font-size: 15px; border: none; background: transparent; text-align: right;">
-									<span style="font-size: 15px;">%</span>
-							</div>
-					`,
+        `<div class="vol-percent" style="display: inline-flex; align-items: center;">
+					<input type="text" class="vol-input" 
+						style="width: 30px; font-size: 15px; border: none; background: transparent; text-align: right;">
+					<span style="font-size: 15px;">%</span>
+				</div>`,
       );
       volumeBar.style.flex = "0 1 200px";
       const input = volumeBar.querySelector(".vol-input");

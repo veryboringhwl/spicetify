@@ -35,11 +35,16 @@ const CoverArtBanner = async () => {
         LocalStorage.get(key, false) && regex.test(Spicetify.Platform.History.location.pathname),
     );
 
-    if (showBanner) {
-      banner.style.display = "";
+    if (imageUrl) {
       const img = new Image();
       img.src = imageUrl;
       img.onload = () => document.documentElement.style.setProperty("--image", `url(${imageUrl})`);
+    } else {
+      document.documentElement.style.setProperty("--image", "none");
+    }
+
+    if (showBanner) {
+      banner.style.display = "";
     } else {
       banner.style.display = "none";
     }

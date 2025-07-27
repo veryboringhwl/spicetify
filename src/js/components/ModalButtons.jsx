@@ -1,4 +1,4 @@
-import Icons from "../icons/icons";
+import Icons from "../icons/Icons";
 
 const ModalButtons = () => {
   return (

@@ -44,6 +44,7 @@ async function enableLibXUI() {
     }
   };
 
+  Spicetify.Platform.ControlMessageAPI._updateUiClient.updateTitlebarHeight({ height: 40 });
   Spicetify.Platform.LocalStorageAPI.getEvents().addListener("update", sidebarStateListener);
   updateCollapsedClass();
 }
@@ -62,6 +63,8 @@ function disableLibXUI() {
     Spicetify.Platform.LocalStorageAPI.getEvents().removeListener("update", sidebarStateListener);
     sidebarStateListener = null;
   }
+
+  Spicetify.Platform.ControlMessageAPI._updateUiClient.updateTitlebarHeight({ height: 64 });
 
   const iconTexts = document.querySelectorAll(".main-globalNav-iconText");
   for (const el of iconTexts) {
