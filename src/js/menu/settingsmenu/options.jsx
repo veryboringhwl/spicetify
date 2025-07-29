@@ -36,8 +36,6 @@ const options = {
       options: [
         { value: "default", label: "Default" },
         { value: "developer", label: "Developer" },
-        { value: "employee", label: "Employee" },
-        { value: "both", label: "Dev + Empl" },
       ],
       run(value) {
         SpotifyMode(value);

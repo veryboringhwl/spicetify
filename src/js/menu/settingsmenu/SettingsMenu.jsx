@@ -43,7 +43,7 @@ const SettingsMenu = memo(() => {
         ))}
       </div>
       <div className="settings-menu__preview">
-        <Preview />
+        <Preview settings={settings} />
       </div>
       <div className="settings-menu__buttons">
         <ButtonContainer resetSettings={resetSettings} saveSettings={saveSettings} />

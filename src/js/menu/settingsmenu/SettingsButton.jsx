@@ -4,6 +4,7 @@ import PopupModal from "../../components/PopupModal";
 import TestMenu from "../../debug/TestMenu";
 import Icons from "../../icons/Icons";
 import Window from "../../utils/Window";
+import resetOptions from "../helpers/resetOptions";
 import SettingsMenu from "./SettingsMenu";
 
 const SettingsButton = () => {
@@ -32,7 +33,25 @@ const SettingsButton = () => {
     ReactDOM.createRoot(popoverElement).render(
       <Spicetify.ReactComponent.Menu>
         <Spicetify.ReactComponent.MenuItem
-          key="reload-theme"
+          key="reset-theme"
+          onClick={() => {
+            hideMenu();
+            resetOptions(() => {});
+          }}
+          leadingIcon={
+            <svg
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+              fill="currentColor"
+              dangerouslySetInnerHTML={{ __html: Spicetify.SVGIcons.repeat }}
+            />
+          }
+        >
+          Reset theme
+        </Spicetify.ReactComponent.MenuItem>
+        <Spicetify.ReactComponent.MenuItem
+          key="reload-spotify"
           onClick={() => {
             Window.Reload();
             hideMenu();
@@ -47,7 +66,7 @@ const SettingsButton = () => {
             />
           }
         >
-          Reload theme
+          Reload Spotify
         </Spicetify.ReactComponent.MenuItem>
         <Spicetify.ReactComponent.MenuItem
           key="restart-spotify"

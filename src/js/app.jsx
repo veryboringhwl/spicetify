@@ -58,7 +58,7 @@ async function theme() {
   });
 
   const MIN_PATCH_VERSION = 66;
-  const MAX_PATCH_VERSION = 66;
+  const MAX_PATCH_VERSION = 67;
   const [major, minor, patch] = Spicetify.Platform.version.split(".").map(Number);
   const isSupportedVersion = patch >= MIN_PATCH_VERSION && patch <= MAX_PATCH_VERSION;
 

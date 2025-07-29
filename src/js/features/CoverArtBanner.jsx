@@ -8,6 +8,7 @@ const CoverArtBanner = async () => {
   const channels = {
     Album: { regex: /^\/album\//, key: "album-page" },
     Artist: { regex: /^\/artist\/(?!artists\b)\w+$/, key: "artist-page" },
+    Home: { regex: /^\/$/, key: "home-page" },
     Lyrics: { regex: /^\/lyrics$/, key: "lyrics-page" },
     LyricsPlus: { regex: /^\/lyrics-plus$/, key: "lyrics-page" },
     Playlist: { regex: /^\/playlist\//, key: "playlist-page" },
@@ -24,7 +25,7 @@ const CoverArtBanner = async () => {
     (() => {
       const newBanner = document.createElement("div");
       newBanner.className = "banner-image";
-      document.querySelector(".under-main-view")?.appendChild(newBanner);
+      document.querySelector(".before-scroll-node")?.appendChild(newBanner);
       return newBanner;
     })();
 
