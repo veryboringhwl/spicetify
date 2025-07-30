@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "release": "node tasks/release.js",
-    "dev-build": "node tasks/build.js --all",
-    "dev-watch": "node tasks/watch.js --all",
-    "build": "node tasks/build.js --js --css",
-    "watch": "node tasks/watch.js --js --css",
-    "debug": "node tasks/debug.js",
+    "release": "bun tasks/release.js",
+    "dev-build": "bun tasks/build.js --all",
+    "dev-watch": "bun tasks/watch.js --all",
+    "build": "bun tasks/build.js --js --css",
+    "watch": "bun tasks/watch.js --js --css",
+    "debug": "bun tasks/debug.js",
     "lint": "biome lint --write",
     "format": "biome format --write",
     "check": "biome check --fix --unsafe"

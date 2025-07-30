@@ -1,6 +1,6 @@
-import { Fragment, memo } from "react";
+import { memo } from "react";
 import options from "../settingsmenu/options";
-import OptionType from "./OptionType";
+import RenderOption from "./RenderOption";
 
 const allOptions = Object.values(options).flat();
 
@@ -8,29 +8,17 @@ const RenderCategory = memo(({ category, categoryOptions, settings, onChange }) 
   <div className={`option__category option__category--${category.toLowerCase()}`}>
     <h2 className="option__category-title">{category}</h2>
     {categoryOptions.map((option) => {
-      const value = settings[option.name];
       const disabled = allOptions.some(
         (o) => o.incompatible?.includes(option.name) && settings[o.name],
       );
       return (
-        <Fragment key={option.name}>
-          <div className="option__item option__item--main" data-name={option.name}>
-            <OptionType option={option} value={value} onChange={onChange} disabled={disabled} />
-          </div>
-          {value && option.reveal && (
-            <div className="option__item option__item--revealed" data-name={option.name}>
-              {option.reveal.map((sub) => (
-                <OptionType
-                  key={sub.name}
-                  option={sub}
-                  value={settings[sub.name]}
-                  onChange={onChange}
-                  disabled={disabled}
-                />
-              ))}
-            </div>
-          )}
-        </Fragment>
+        <RenderOption
+          key={option.name}
+          option={option}
+          settings={settings}
+          onChange={onChange}
+          disabled={disabled}
+        />
       );
     })}
   </div>

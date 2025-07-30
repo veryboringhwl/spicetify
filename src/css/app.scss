@@ -27,11 +27,11 @@
 @forward "features/snippets";
 
 body {
-    overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 :root {
-    --border-radius: 8px;
-    --box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
-    --mica-effect: blur(20px) saturate(1.4) brightness(1.2);
+  --border-radius: 8px;
+  --box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
+  --mica-effect: blur(20px) saturate(1.4) brightness(1.2);
 }

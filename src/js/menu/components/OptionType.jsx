@@ -1,50 +1,44 @@
-import { memo, useCallback } from "react";
+import { memo } from "react";
 import Dropdown from "./Dropdown";
 import Input from "./Input";
-import OptionRow from "./OptionRow";
 import RadioButton from "./RadioButton";
 import Toggle from "./Toggle";
 
-const OptionType = memo(({ option, value, onChange, disabled }) => {
-  const handleChange = useCallback(
-    (ValueFromComponent) => {
-      const newValue = option.type === "toggle" ? !value : ValueFromComponent;
-      onChange(option.name, newValue);
-    },
-    [option.name, option.type, value, onChange],
-  );
+const OptionType = memo(({ option, value, onChange, disabled = false }) => {
+  switch (option.type) {
+    case "toggle":
+      return <Toggle value={value} onChange={onChange} disabled={disabled} />;
 
-  let Component;
-  const componentProps = {
-    value,
-    onChange: handleChange,
-    disabled,
-  };
+    case "input":
+      return (
+        <Input
+          value={value}
+          onChange={onChange}
+          placeholder={option.placeholder}
+          disabled={disabled}
+        />
+      );
 
-  if (option.type === "toggle") {
-    Component = Toggle;
-  } else if (option.type === "dropdown") {
-    Component = Dropdown;
-    componentProps.options = option.options;
-  } else if (option.type === "input") {
-    Component = Input;
-    componentProps.placeholder = option.placeholder;
-  } else if (option.type === "radiobutton") {
-    Component = RadioButton;
-    componentProps.options = option.options;
-    componentProps.selected = value;
+    case "dropdown":
+      return (
+        <Dropdown value={value} onChange={onChange} options={option.options} disabled={disabled} />
+      );
+
+    case "radiobutton":
+      return (
+        <RadioButton
+          name={option.name}
+          selectedValue={value}
+          onChange={onChange}
+          options={option.options}
+          disabled={disabled}
+        />
+      );
+
+    default:
+      Console.Warn(`Unknown option type: "${option.type}" for option "${option.name}"`);
+      return null;
   }
-
-  return (
-    <OptionRow
-      name={option.name}
-      desc={option.desc}
-      tippy={option.tippy}
-      popupModal={option.popupModal}
-    >
-      <Component {...componentProps} />
-    </OptionRow>
-  );
 });
 
 export default OptionType;

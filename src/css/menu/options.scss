@@ -1,20 +1,21 @@
-.option__item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.option__item[data-name="colour-scheme"] {
+[data-name="colour-scheme"] .option__row {
   flex-direction: column;
+  gap: 4px;
   align-items: flex-start;
 }
 
 .option__item--revealed {
+  display: flex;
+  flex-direction: column;
   margin-left: 15px;
   border-left: 2px solid rgba(var(--spice-rgb-selected-row), 0.1);
   padding-left: 10px;
   gap: 8px;
+}
+
+.option__row {
+  display: flex;
+  justify-content: space-between;
 }
 
 .option__content {
@@ -36,4 +37,3 @@
   align-content: center;
   gap: 8px;
 }
-
