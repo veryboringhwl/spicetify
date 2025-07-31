@@ -1,6 +1,6 @@
 import { memo } from "react";
 import ButtonContainer from "../components/ButtonContainer";
-import OptionType from "../components/OptionType";
+import RenderOption from "../components/RenderOption";
 import useModalSettings from "./useModalSettings";
 
 const WindowsControlModal = memo(() => {
@@ -11,10 +11,10 @@ const WindowsControlModal = memo(() => {
     <div className="settings-modal">
       <div className="settings-modal__options">
         {windowsControlOptions.map((option) => (
-          <OptionType
+          <RenderOption
             key={option.name}
             option={option}
-            value={settings[option.name]}
+            settings={settings}
             onChange={(key, value) => updateSetting(key, value)}
           />
         ))}

@@ -2,6 +2,7 @@ import { memo, useEffect, useState } from "react";
 import Dropdown from "../menu/components/Dropdown.jsx";
 import Input from "../menu/components/Input.jsx";
 import RadioButton from "../menu/components/RadioButton.jsx";
+import Slider from "../menu/components/Slider.jsx";
 import Toggle from "../menu/components/Toggle.jsx";
 import Console from "../utils/Console.jsx";
 
