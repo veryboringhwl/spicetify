@@ -1,0 +1,28 @@
+/*rounded filters turn square*/
+.x-filterBox-filterInput,
+.search-searchCategory-categoryGrid > div > button > span {
+  border-radius: var(--border-radius);
+}
+
+/* ctrl + k popup*/
+
+.search-modal-searchBar {
+  justify-self: center;
+  width: 658px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+}
+
+.N9tnwm0XDrt_eGJd2D2A {
+  border-radius: 8px;
+}
+
+.zZMsUUWG29PYcwWPXhOV {
+  padding: 32px;
+}
+
+.search-modal-listbox,
+.zZMsUUWG29PYcwWPXhOV .kfmGT75UTPoF_D2afwa {
+  border-radius: 0px;
+}

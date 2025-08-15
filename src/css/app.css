@@ -1,0 +1,38 @@
+@import "main/contextmenu.css";
+@import "main/experimental.css";
+@import "main/globalnav.css";
+@import "main/icons.css";
+@import "main/leftsidebar.css";
+@import "main/main.css";
+@import "main/misc.css";
+@import "main/nowplayingbar.css";
+@import "main/progressbar.css";
+
+@import "main/pages/home.css";
+@import "main/pages/lyrics.css";
+@import "main/pages/marketplace.css";
+@import "main/pages/playlist.css";
+
+@import "menu/menu.css";
+@import "menu/buttons.css";
+@import "menu/carousel.css";
+@import "menu/options.css";
+@import "menu/popupmodal.css";
+@import "menu/preview.css";
+
+@import "menu/types.css";
+
+@import "features/features.css";
+@import "features/layouts.css";
+@import "features/snippets.css";
+
+body {
+  overflow: hidden !important;
+}
+
+/*redo this maybe for v3?*/
+:root {
+  --border-radius: 8px;
+  --box-shadow: 0 0px 8px rgba(var(--spice-rgb-shadow), 0.1) !important;
+  --mica-effect: blur(20px) saturate(1.4) brightness(1.2);
+}

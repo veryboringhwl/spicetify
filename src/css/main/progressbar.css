@@ -1,0 +1,46 @@
+@property --progress-bar-transform {
+  inherits: true;
+  initial-value: 0%;
+  syntax: "<percentage>";
+}
+
+.progress-bar {
+  --bg-color: rgba(var(--spice-rgb-selected-row), 0.3);
+  --fg-color: var(--spice-accent);
+  --is-active-fg-color: var(--spice-accent);
+  transition: --progress-bar-transform 1s linear !important;
+}
+
+.progress-bar--isDragging {
+  transition-duration: 0ms !important;
+}
+
+.progress-bar__slider {
+  width: 8px;
+  height: 8px;
+  margin-left: -10px;
+  border: 10px solid var(--spice-highlight);
+  box-shadow: 0 0 3px 0 #080808 !important;
+}
+
+.progress-bar__slider::after {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  content: "";
+  background-color: var(--spice-accent);
+  border-radius: 50%;
+}
+
+.progress-bar__slider:hover::after {
+  transform: scale(1.25);
+}
+
+.progress-bar__slider:active::after {
+  transform: scale(0.8);
+}
+
+.x-progressBar-progressBarBg,
+.x-progressBar-sliderArea {
+  background-color: var(--spice-highlight);
+}

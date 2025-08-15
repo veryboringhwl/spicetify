@@ -1,0 +1,32 @@
+.button-container {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+
+  .button-container__button {
+    width: 85px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--spice-text);
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
+
+  .button-container__button--reset {
+    background-color: #ff0033;
+
+    &:active {
+      background-color: #ff1435;
+    }
+  }
+
+  .button-container__button--save {
+    background-color: var(--spice-button);
+
+    &:active {
+      background-color: var(--spice-button-active);
+    }
+  }
+}

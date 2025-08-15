@@ -1,0 +1,38 @@
+.Root__now-playing-bar {
+  padding: unset !important;
+  margin: unset !important;
+  background-color: var(--spice-main) !important;
+  border-radius: var(--border-radius);
+}
+
+.main-nowPlayingBar-nowPlayingBar {
+  height: 78px !important;
+}
+
+.main-nowPlayingWidget-coverArt .cover-art {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.main-trackInfo-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+[data-testid="control-button-playpause"] .Wrapper-small-only-small {
+  position: unset;
+}
+
+.main-nowPlayingBar-right {
+  max-width: 400px;
+  padding-right: 5px;
+}
+
+/*make album art centered*/
+.HD9s7U5E1RLSWKpXmrqx {
+  display: grid;
+}
+
+.player-controls__buttons {
+  margin-bottom: 0px !important;
+}

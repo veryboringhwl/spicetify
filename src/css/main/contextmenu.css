@@ -1,0 +1,18 @@
+.main-contextMenu-menu {
+  scrollbar-width: thin;
+  background-color: rgba(var(--spice-rgb-main), 0.9) !important;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0px 24px rgba(var(--spice-rgb-shadow), 0.5);
+}
+
+.main-contextMenu-menu:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  content: "";
+  border-radius: var(--border-radius);
+  backdrop-filter: var(--mica-effect);
+}

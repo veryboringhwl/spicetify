@@ -1,0 +1,71 @@
+.modal__container--large:has(.settings-menu) {
+  width: clamp(720px, 75vw, 1280px) !important;
+  max-height: 80vh;
+}
+
+.settings-menu {
+  display: grid;
+  grid-template-areas:
+    "carousel carousel"
+    "options preview"
+    "buttons buttons";
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.settings-menu__carousel {
+  grid-area: carousel;
+}
+
+.settings-menu__options {
+  grid-area: options;
+}
+
+.settings-menu__preview {
+  grid-area: preview;
+}
+
+.settings-menu__buttons {
+  grid-area: buttons;
+}
+
+.settings-menu__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  border-radius: var(--border-radius);
+}
+
+.option__category {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option__category-title {
+  font-size: 1.5rem;
+  color: var(--spice-text);
+  border-bottom: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.5em;
+  padding: var(--encore-spacing-tighter-5) var(--encore-spacing-tighter-3);
+  margin: var(--encore-spacing-tighter-5);
+  line-height: 1.5;
+  text-align: center;
+  border-radius: var(--encore-corner-radius-base);
+  box-shadow:
+    0 1px 0 var(--background-base),
+    0 0 0 1px var(--essential-subdued) inset;
+}
+
+.settings-modal__options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 0;
+}
