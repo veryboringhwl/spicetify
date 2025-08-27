@@ -1,11 +1,7 @@
-import React from "react";
+import type { FC } from "react";
+import type { IconProps } from "../types/temp.d.ts";
 
-interface IconProps {
-  size?: number;
-  fill?: string;
-}
-
-type ReactIconComponent = React.FC<IconProps> & {
+export type ReactIconComponent = FC<IconProps> & {
   defaultProps?: Partial<IconProps>;
 };
 
@@ -71,13 +67,11 @@ const iconData = {
     size: 16,
   },
 } as const;
-
 export type IconName = keyof typeof iconData;
 
 const createReactComponent = (name: IconName): ReactIconComponent => {
   const { path, size: defaultSize } = iconData[name];
-
-  const Component = ({ size = defaultSize, fill = "currentColor" }: IconProps) => (
+  const Component: ReactIconComponent = ({ size = defaultSize, fill = "currentColor" }) => (
     <svg
       fill={fill}
       height={size}
@@ -88,21 +82,25 @@ const createReactComponent = (name: IconName): ReactIconComponent => {
       <path d={path} />
     </svg>
   );
-
   Component.displayName = `Icon(${name})`;
   Component.defaultProps = {
     size: defaultSize,
     fill: "currentColor",
   };
-
   return Component;
 };
 
-const { raw, react, html } = (Object.keys(iconData) as IconName[]).reduce(
+interface IconCollection {
+  raw: Record<IconName, string>;
+  react: Record<IconName, ReactIconComponent>;
+  html: Record<IconName, string>;
+}
+
+const { raw, react, html } = (Object.keys(iconData) as IconName[]).reduce<IconCollection>(
   (acc, name) => {
     acc.raw[name] = iconData[name].path;
     acc.react[name] = createReactComponent(name);
-    acc.html[name] = `<path d=\"${iconData[name].path}\"/>`;
+    acc.html[name] = `<path d="${iconData[name].path}"/>`;
     return acc;
   },
   {
@@ -112,10 +110,8 @@ const { raw, react, html } = (Object.keys(iconData) as IconName[]).reduce(
   },
 );
 
-const Icons = {
+export const Icons = {
   React: react,
   HTML: html,
   RAW: raw,
 };
-
-export default Icons;

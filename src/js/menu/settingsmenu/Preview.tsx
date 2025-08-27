@@ -1,6 +1,7 @@
-import { useState } from "react";
-import Icons from "../../icons/Icons.tsx";
-import RadioButton from "../components/RadioButton.tsx";
+import { type FC, memo, useState } from "react";
+import { Icons } from "../../icons/Icons.tsx";
+import type { Settings } from "../../types/temp.d.ts";
+import { RadioButton } from "../components/RadioButton.tsx";
 
 const PlaylistIcon = () => (
   <svg fill="currentColor" height="50%" style={{ opacity: 0.5 }} viewBox="0 0 16 16" width="50%">
@@ -76,7 +77,12 @@ const Navbar = () => {
   );
 };
 
-const SidebarPlaylistItem = ({ name, info }) => {
+interface SidebarPlaylistItemProps {
+  name: string;
+  info: string;
+}
+
+const SidebarPlaylistItem = ({ name, info }: SidebarPlaylistItemProps) => {
   return (
     <div className="playlist-item">
       <div className="playlist-item__image">
@@ -114,12 +120,17 @@ const Sidebar = () => {
   );
 };
 
-const NowPlayingBarButton = ({ path, path2 }) => {
+interface NowPlayingBarButtonProps {
+  path: string;
+  path2?: string;
+}
+
+const NowPlayingBarButton = ({ path, path2 }: NowPlayingBarButtonProps) => {
   return (
     <div className="now-playing-bar__button">
       <svg fill="currentcolor" height={12} viewBox="0 0 16 16" width={12}>
         <path d={path} />
-        <path d={path2} />
+        {path2 && <path d={path2} />}
       </svg>
     </div>
   );
@@ -201,7 +212,11 @@ const NowPlayingBar = () => {
   );
 };
 
-const MainHomeShortcutItem = ({ name }) => {
+interface MainHomeShortcutItemProps {
+  name: string;
+}
+
+const MainHomeShortcutItem = ({ name }: MainHomeShortcutItemProps) => {
   return (
     <div className="shortcut-item">
       <div className="shortcut-item__image">
@@ -212,7 +227,11 @@ const MainHomeShortcutItem = ({ name }) => {
   );
 };
 
-const MainHomeCarouselItem = ({ name }) => {
+interface MainHomeCarouselItemProps {
+  name: string;
+}
+
+const MainHomeCarouselItem = ({ name }: MainHomeCarouselItemProps) => {
   return (
     <div className="carousel-item">
       <div className="carousel-item__image">
@@ -281,7 +300,15 @@ const MainHome = () => {
   );
 };
 
-const PlaylistTrack = ({ num, title, artist, album, time }) => {
+interface PlaylistTrackProps {
+  num: number;
+  title: string;
+  artist: string;
+  album: string;
+  time: string;
+}
+
+const PlaylistTrack = ({ num, title, artist, album, time }: PlaylistTrackProps) => {
   return (
     <div className="playlist-track">
       <div className="playlist-track__number">{num}</div>
@@ -357,73 +384,45 @@ const MainPlaylist = () => {
   );
 };
 
-const Preview = ({ settings }) => {
-  const [selectedRadio, setSelectedRadio] = useState("home");
+interface PreviewProps {
+  settings: Settings;
+}
 
-  console.log("Settings:", settings);
+export const Preview: FC<PreviewProps> = memo(({ settings }) => {
+  const [selectedView, setSelectedView] = useState<string>("home");
 
-  const dataParts = [];
-
-  for (const key in settings) {
-    if (
-      key === "colour-scheme" ||
-      key === "spotify-font" ||
-      key === "spotify-mode" ||
-      key === "volume-percentage" ||
-      key === "test-toggle" ||
-      key === "test-incompatible-toggle" ||
-      key === "test-incompatible-input" ||
-      key === "test-incompatible-dropdown" ||
-      key === "test-input" ||
-      key === "test-dropdown" ||
-      key === "test-reveal" ||
-      key === "revealed-toggle" ||
-      key === "revealed-input" ||
-      key === "revealed-dropdown" ||
-      key === "test-radiobutton"
-    )
-      continue;
-    const value = settings[key];
-
-    if (typeof value === "boolean" && value) {
-      dataParts.push(key);
-    } else if (value !== null && value !== undefined && typeof value !== "boolean") {
-      dataParts.push(`${key}-${value}`);
-    }
-  }
+  const dataParts: string[] = Object.entries(settings)
+    .filter(([key, value]) => {
+      if (key.startsWith("test-") || key.startsWith("revealed-")) return false;
+      if (["colour-scheme", "spotify-font", "spotify-mode", "volume-percentage"].includes(key))
+        return false;
+      return value; // Keep if truthy
+    })
+    .map(([key, value]) => (typeof value === "boolean" ? key : `${key}-${value}`));
 
   const dataString = dataParts.join(" ");
-
-  const colourScheme = settings["colour-scheme"];
-  const spotifyFont = settings["spotify-font"];
+  const colourScheme = settings["colour-scheme"] || "default";
+  const spotifyFont = settings["spotify-font"] || "SpotifyMixUI";
 
   return (
     <>
       <div className="preview__header">
         <h2>Preview</h2>
         <RadioButton
-          name="debugRadio"
-          onChange={setSelectedRadio}
+          onChange={setSelectedView}
           options={[
             { label: "Home", value: "home" },
             { label: "Playlist", value: "playlist" },
           ]}
-          selected={selectedRadio}
+          value={selectedView}
         />
       </div>
       <div
         className="preview__spotify-app"
         colour-scheme={colourScheme}
         data={dataString.trim()}
-        style={{ "--preview-font-family": spotifyFont }}
-      >
-        <Navbar />
-        <Sidebar />
-        {selectedRadio === "playlist" ? <MainPlaylist /> : <MainHome />}
-        <NowPlayingBar />
-      </div>
+        style={{ "--preview-font-family": spotifyFont } as React.CSSProperties}
+      ></div>
     </>
   );
-};
-
-export default Preview;
+});

@@ -1,36 +1,34 @@
-import Console from "../utils/Console";
-import waitForElements from "../utils/waitForElements";
+import { Console } from "../utils/Console.ts";
+import { waitForElements } from "../utils/waitForElements.ts";
 
-let textObserverApple = null;
-let sidebarStateListenerApple = null;
+let textObserverApple: MutationObserver | null = null;
+let sidebarStateListenerApple: ((event: any) => void) | null = null;
 
-function ToggleAppleMusic(isEnabled) {
-  disableAppleMusic();
-  if (isEnabled) {
-    enableAppleMusic();
-  }
-}
-
-async function enableAppleMusic() {
-  const globalNav = await waitForElements(".Root__globalNav");
-
-  const addTextToButtons = () => {
-    const elements = globalNav.querySelectorAll(".main-globalNav-navLink, ._b3hhmbWtOY8_1M1mM1H");
-    // .main-globalNav-navLink: Nav Links
-    // _b3hhmbWtOY8_1M1mM1H: Search tab
-    for (const el of elements) {
-      if (!el.querySelector(".main-globalNav-iconText")) {
-        const text = el.getAttribute("aria-label") || (el.querySelector("input") ? "Search" : "");
+const addTextToButtons = (globalNav: Element) => {
+  const elements = globalNav.querySelectorAll<HTMLElement>(
+    ".main-globalNav-navLink, ._b3hhmbWtOY8_1M1mM1H",
+  );
+  for (const el of elements) {
+    if (!el.querySelector(".main-globalNav-iconText")) {
+      const text = el.getAttribute("aria-label") || (el.querySelector("input") ? "Search" : "");
+      if (text) {
         const div = document.createElement("div");
         div.className = "main-globalNav-iconText encore-text-body-medium-bold";
         div.textContent = text;
         el.appendChild(div);
       }
     }
-  };
+  }
+};
 
-  addTextToButtons();
-  textObserverApple = new MutationObserver(addTextToButtons);
+async function enableAppleMusic() {
+  const globalNav = await waitForElements(".Root__globalNav");
+  if (!globalNav) return;
+
+  const performInitialSetup = () => addTextToButtons(globalNav);
+  performInitialSetup();
+
+  textObserverApple = new MutationObserver(() => addTextToButtons(globalNav));
   textObserverApple.observe(globalNav, { childList: true, subtree: true });
 
   const updateCollapsedClass = () => {
@@ -38,7 +36,7 @@ async function enableAppleMusic() {
     document.documentElement.classList.toggle("collapsed", sidebarState === 1);
   };
 
-  sidebarStateListenerApple = (event) => {
+  sidebarStateListenerApple = (event: { data: { key: string } }) => {
     if (event.data.key === "left-sidebar-state") {
       updateCollapsedClass();
     }
@@ -50,23 +48,25 @@ async function enableAppleMusic() {
 
 function disableAppleMusic() {
   document.documentElement.classList.remove("collapsed");
-
   if (textObserverApple) {
     Console.Log("Removing AppleMusic observer");
     textObserverApple.disconnect();
     textObserverApple = null;
   }
-
   if (sidebarStateListenerApple) {
-    Console.Log("Removing sidebar state listener");
-    Spicetify.Platform.LocalStorageAPI.getEvents().removeListener("update", sidebarStateListener);
+    Console.Log("Removing AppleMusic sidebar state listener");
+    Spicetify.Platform.LocalStorageAPI.getEvents().removeListener(
+      "update",
+      sidebarStateListenerApple,
+    );
     sidebarStateListenerApple = null;
   }
-
-  const iconTexts = document.querySelectorAll(".main-globalNav-iconText");
-  for (const el of iconTexts) {
-    el.remove();
-  }
+  document.querySelectorAll(".main-globalNav-iconText").forEach((el) => el.remove());
 }
 
-export default ToggleAppleMusic;
+export function ToggleAppleMusic(isEnabled: boolean): void {
+  disableAppleMusic();
+  if (isEnabled) {
+    enableAppleMusic();
+  }
+}

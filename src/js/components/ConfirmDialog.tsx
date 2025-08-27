@@ -1,20 +1,8 @@
-// @ts-nocheck
 import { memo, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
+import { ConfirmDialogProps } from "../types/temp.d.ts";
 
-interface ConfirmDialogProps {
-  titleText: string;
-  descriptionText: string;
-  cancelText?: string;
-  confirmText?: string;
-  onConfirm?: () => void;
-  onClose?: () => void;
-  onOpen?: () => void;
-  onOutside?: () => void;
-  allowHTML?: boolean;
-}
-
-function ConfirmDialog({
+export function ConfirmDialog({
   titleText,
   descriptionText,
   cancelText = "Cancel",
@@ -77,5 +65,3 @@ function ConfirmDialog({
 //   confirmText: "Ok",
 //   allowHTML: true,
 // });
-
-export default ConfirmDialog;

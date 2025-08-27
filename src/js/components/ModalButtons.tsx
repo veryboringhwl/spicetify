@@ -1,6 +1,7 @@
-import Icons from "../icons/Icons.tsx";
+import type { FC } from "react";
+import { Icons } from "../icons/Icons.tsx";
 
-const ModalButtons = () => {
+export const ModalButtons: FC = () => {
   return (
     <>
       <Spicetify.ReactComponent.TooltipWrapper label="GitHub" placement="top">
@@ -22,5 +23,3 @@ const ModalButtons = () => {
     </>
   );
 };
-
-export default ModalButtons;

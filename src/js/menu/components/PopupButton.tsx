@@ -1,22 +1,16 @@
-import React, { memo } from "react";
-import PopupModal from "../../components/PopupModal.tsx";
-import Icons from "../../icons/Icons.tsx";
+import { type FC, memo } from "react";
+import { PopupModal } from "../../components/PopupModal.tsx";
+import { Icons } from "../../icons/Icons.tsx";
+import type { PopupButtonProps } from "../../types/temp.d.ts";
 
-interface PopupButtonProps {
-  name: string;
-  popupModal: string;
-}
-
-const PopupButton = memo(({ name, popupModal }: PopupButtonProps) => {
-  if (!popupModal) return null;
-
+export const PopupButton: FC<PopupButtonProps> = memo(({ name, popupModal: PopupModalContent }) => {
   return (
     <button
       className="popup-button"
       onClick={() =>
         PopupModal({
           title: name,
-          content: React.createElement(popupModal),
+          content: <PopupModalContent />,
           isLarge: false,
         })
       }
@@ -25,5 +19,3 @@ const PopupButton = memo(({ name, popupModal }: PopupButtonProps) => {
     </button>
   );
 });
-
-export default PopupButton;

@@ -1,14 +1,8 @@
-import { memo } from "react";
+import { type ChangeEvent, type FC, memo } from "react";
+import type { RadioButtonProps } from "../../types/temp.d.ts";
 
-interface RadioButtonProps {
-  options: { value: string; label: string }[];
-  value: string;
-  onChange: (value: string) => void;
-  disabled?: boolean;
-}
-
-const RadioButton = memo(({ options, value, onChange, disabled }: RadioButtonProps) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+export const RadioButton: FC<RadioButtonProps> = memo(({ options, value, onChange, disabled }) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
 
@@ -30,5 +24,3 @@ const RadioButton = memo(({ options, value, onChange, disabled }: RadioButtonPro
     </div>
   );
 });
-
-export default RadioButton;

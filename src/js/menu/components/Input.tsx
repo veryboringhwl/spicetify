@@ -1,14 +1,8 @@
-import { memo } from "react";
+import { type ChangeEvent, type FC, memo } from "react";
+import type { InputProps } from "../../types/temp.d.ts";
 
-interface InputProps {
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
-  disabled?: boolean;
-}
-
-const Input = memo(({ value, onChange, placeholder, disabled = false }: InputProps) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+export const Input: FC<InputProps> = memo(({ value, onChange, placeholder, disabled = false }) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
 
@@ -23,4 +17,3 @@ const Input = memo(({ value, onChange, placeholder, disabled = false }: InputPro
     />
   );
 });
-export default Input;

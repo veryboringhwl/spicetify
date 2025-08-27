@@ -1,26 +1,23 @@
-import React, { memo, RefObject, useEffect, useRef } from "react";
+import { type FC, memo, type RefObject, useEffect, useRef, type WheelEvent } from "react";
+import type { CategoryCarouselProps } from "../../types/temp.d.ts";
 
-interface CategoryCarouselProps {
-  categories: string[];
-  selectedCategory: string;
-  onSelectCategory: (category: string) => void;
-}
-
-const CategoryCarousel = memo(
-  ({ categories, selectedCategory, onSelectCategory }: CategoryCarouselProps) => {
+export const CategoryCarousel: FC<CategoryCarouselProps> = memo(
+  ({ categories, selectedCategory, onSelectCategory }) => {
     const carouselRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-        if (carouselRef.current) {
-          carouselRef.current.scrollLeft += e.deltaY;
+      const carousel = carouselRef.current;
+      const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
+        if (carousel) {
+          carousel.scrollLeft += e.deltaY;
           e.preventDefault();
         }
       };
-
-      const carousel = carouselRef.current;
-      carousel?.addEventListener("wheel", handleWheel, { passive: false });
-      return () => carousel?.removeEventListener("wheel", handleWheel);
+      // Type assertion is needed because the event listener API is generic
+      carousel?.addEventListener("wheel", handleWheel as unknown as EventListener, {
+        passive: false,
+      });
+      return () => carousel?.removeEventListener("wheel", handleWheel as unknown as EventListener);
     }, []);
 
     return (
@@ -38,5 +35,3 @@ const CategoryCarousel = memo(
     );
   },
 );
-
-export default CategoryCarousel;

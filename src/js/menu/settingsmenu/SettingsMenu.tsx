@@ -1,26 +1,28 @@
-import { memo, useCallback, useMemo, useState } from "react";
-import ButtonContainer from "../components/ButtonContainer";
-import CategoryCarousel from "../components/CategoryCarousel";
-import RenderCategory from "../components/RenderCategory";
-import useSettings from "../hooks/useSettings";
-import options from "./options";
-import Preview from "./Preview";
+import { type FC, memo, useCallback, useMemo, useState } from "react";
+import type { OptionsCategories } from "../../types/temp.d.ts";
+import { ButtonContainer } from "../components/ButtonContainer.tsx";
+import { CategoryCarousel } from "../components/CategoryCarousel.tsx";
+import { RenderCategory } from "../components/RenderCategory.tsx";
+import { useSettings } from "../hooks/useSettings.ts";
+import { options } from "./options.ts";
+import { Preview } from "./Preview.tsx";
 
-const SettingsMenu = memo(() => {
+export const SettingsMenu: FC = memo(() => {
   const { settings, handleSettingChange, resetSettings, saveSettings } = useSettings();
-  const allCategories = ["All", ...Object.keys(options)];
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const typedOptions = options as OptionsCategories;
 
-  const handleSelectCategory = useCallback((category) => {
+  const allCategories = ["All", ...Object.keys(typedOptions)];
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const handleSelectCategory = useCallback((category: string) => {
     setSelectedCategory(category);
   }, []);
 
   const filteredOptions = useMemo(() => {
-    if (selectedCategory === "All") {
-      return Object.entries(options);
-    }
-    return Object.entries(options).filter(([category]) => category === selectedCategory);
-  }, [selectedCategory]);
+    return selectedCategory === "All"
+      ? Object.entries(typedOptions)
+      : Object.entries(typedOptions).filter(([category]) => category === selectedCategory);
+  }, [selectedCategory, typedOptions]);
 
   return (
     <div className="settings-menu">
@@ -51,5 +53,3 @@ const SettingsMenu = memo(() => {
     </div>
   );
 });
-
-export default SettingsMenu;

@@ -1,29 +1,20 @@
-import LocalStorage from "../../utils/LocalStorage.ts";
+import type { Option, Settings } from "../../types/temp.d.ts";
+import { LocalStorage } from "../../utils/LocalStorage.ts";
 
-interface SubOption {
-  name: string;
-  defaultVal: any;
-}
+export function getInitialOptions(optionList: Option[]): Settings {
+  const acc: Settings = {};
 
-interface Option {
-  name: string;
-  defaultVal: any;
-  reveal?: SubOption[];
-}
-
-function getInitialOptions(optionList: Option[]): Record<string, any> {
-  const acc: Record<string, any> = {};
   for (const option of optionList) {
-    const mainKey = option.name;
-    acc[mainKey] = LocalStorage.get(mainKey, option.defaultVal);
-    if (option.reveal) {
+    acc[option.name] = LocalStorage.get(option.name, option.defaultVal);
+
+    if (option.type === "toggle" && option.reveal) {
       for (const subOption of option.reveal) {
-        const subKey = subOption.name;
-        acc[subKey] = acc[mainKey] ? LocalStorage.get(subKey, subOption.defaultVal) : false;
+        // Load sub-option's value only if parent is enabled, otherwise default to false.
+        acc[subOption.name] = acc[option.name]
+          ? LocalStorage.get(subOption.name, subOption.defaultVal)
+          : false;
       }
     }
   }
   return acc;
 }
-
-export default getInitialOptions;

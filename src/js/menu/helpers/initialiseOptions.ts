@@ -1,62 +1,39 @@
-import Console from "../../utils/Console.ts";
-import LocalStorage from "../../utils/LocalStorage.ts";
+import type { Option, Settings } from "../../types/temp.d.ts";
+import { Console } from "../../utils/Console.ts";
+import { LocalStorage } from "../../utils/LocalStorage.ts";
 import { albumBannerOptions } from "../modalmenu/AlbumBannerModal.tsx";
 import { windowsControlOptions } from "../modalmenu/WindowsControlModal.tsx";
-import options from "../settingsmenu/options.ts";
-import applyOptions from "./applyOptions.ts";
-import getInitialOptions from "./getInitialOptions.ts";
+import { options } from "../settingsmenu/options.ts";
+import { applyOptions } from "./applyOptions.ts";
+import { getInitialOptions } from "./getInitialOptions.ts";
 
-interface SubOption {
-  name: string;
-  defaultVal?: any;
-}
-
-interface Option {
-  name: string;
-  defaultVal?: any;
-  reveal?: SubOption[];
-  run?: (value: any) => void;
-}
-
-const initialiseOptions = (): Record<string, any> => {
+export const initialiseOptions = (): Settings => {
   Console.Log("Initialising options");
-  const loadedOptions: Record<string, any> = getInitialOptions(Object.values(options).flat());
+
   const allOptions: Option[] = [
     ...Object.values(options).flat(),
-    ...windowsControlOptions,
     ...albumBannerOptions,
+    ...windowsControlOptions,
   ];
 
-  allOptions.forEach((option: Option) => {
-    const key = option.name;
-    if (LocalStorage.get(key, null) === null) {
-      LocalStorage.set(key, option.defaultVal);
+  // Set default values in localStorage if they don't exist
+  allOptions.forEach((option) => {
+    if (LocalStorage.get(option.name, null) === null) {
+      LocalStorage.set(option.name, option.defaultVal);
     }
-
-    if (option.reveal) {
-      option.reveal.forEach((subOption: SubOption) => {
-        const subKey = subOption.name;
-        if (LocalStorage.get(subKey, null) === null) {
-          const parentValue =
-            loadedOptions[key] !== undefined ? loadedOptions[key] : option.defaultVal;
-          LocalStorage.set(subKey, parentValue ? subOption.defaultVal : false);
+    if (option.type === "toggle" && option.reveal) {
+      option.reveal.forEach((subOption) => {
+        if (LocalStorage.get(subOption.name, null) === null) {
+          LocalStorage.set(subOption.name, subOption.defaultVal);
         }
       });
     }
   });
 
-  allOptions.forEach((option: Option) => {
-    const key = option.name;
-    const value = LocalStorage.get(key, option.defaultVal);
-    if (option.run) {
-      option.run(value);
-    }
-  });
+  const loadedSettings = getInitialOptions(allOptions);
 
-  const allKeys = Object.keys(loadedOptions);
-  applyOptions({ settings: loadedOptions, changedOptions: allKeys });
+  // Run all functions on startup
+  applyOptions({ settings: loadedSettings, changedOptions: Object.keys(loadedSettings) });
 
-  return loadedOptions;
+  return loadedSettings;
 };
-
-export default initialiseOptions;

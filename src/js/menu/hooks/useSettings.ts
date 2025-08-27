@@ -1,32 +1,28 @@
 import { useCallback, useState } from "react";
-import getInitialOptions from "../helpers/getInitialOptions.ts";
-import resetOptions from "../helpers/resetOptions.ts";
-import saveOptions from "../helpers/saveOptions.ts";
-import options from "../settingsmenu/options.ts";
+import type { Option, Settings, UseSettingsReturn } from "../../types/temp.d.ts";
+import { getInitialOptions } from "../helpers/getInitialOptions.ts";
+import { resetOptions } from "../helpers/resetOptions.ts";
+import { saveOptions } from "../helpers/saveOptions.ts";
+import { options } from "../settingsmenu/options.ts";
 
-const useSettings = () => {
-  const allOptions = Object.values(options).flat();
-  const [settings, setSettings] = useState(() => getInitialOptions(allOptions));
+export const useSettings = (): UseSettingsReturn => {
+  const allOptions: Option[] = Object.values(options).flat();
+  const [settings, setSettings] = useState<Settings>(() => getInitialOptions(allOptions));
 
   const handleSettingChange = useCallback(
-    (key, value) => {
+    (key: string, value: any) => {
       setSettings((prev) => {
-        const newSettings = { ...prev, [key]: value };
-        const optionName = key;
+        const newSettings: Settings = { ...prev, [key]: value };
+        const changedOption = allOptions.find((opt) => opt.name === key);
 
-        const changedOption = allOptions.find((opt) => opt.name === optionName);
-
-        if (changedOption?.reveal) {
+        // If a toggle is turned off, disable its revealed sub-options
+        if (changedOption?.type === "toggle" && changedOption.reveal && !value) {
           changedOption.reveal.forEach((subOption) => {
-            const subKey = subOption.name;
-            if (value) {
-              newSettings[subKey] = subOption.defaultVal;
-            } else {
-              newSettings[subKey] = false;
-            }
+            newSettings[subOption.name] = false;
           });
         }
 
+        // If a toggle is turned on, handle incompatibilities
         if (value && changedOption?.incompatible) {
           changedOption.incompatible.forEach((incompName) => {
             newSettings[incompName] = false;
@@ -45,9 +41,7 @@ const useSettings = () => {
     resetSettings: () => resetOptions(setSettings),
     saveSettings: () => {
       const updatedSettings = saveOptions(settings);
-      setSettings(updatedSettings);
+      setSettings(updatedSettings); // Sync state with what was actually saved
     },
   };
 };
-
-export default useSettings;

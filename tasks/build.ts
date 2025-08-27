@@ -74,19 +74,32 @@ const applySpotify = async () => {
   await Deno.copyFile("dist/user.css", join(SPOTIFY_OUT, "user.css"));
 
   const bnkPath = join(LOCALAPPDATA, "Spotify", "offline.bnk");
+  try {
+    const decoder = new TextDecoder("utf-8");
+    const fileBytes = await Deno.readFile(bnkPath);
+    const content = decoder.decode(fileBytes);
 
-  const fileBytes = await Deno.readFile(bnkPath);
-  const content = new TextDecoder().decode(fileBytes);
+    const pattern = /(?<=app-developer..|app-developer>)[01]/g;
 
-  const firstLocation = content.indexOf("app-developer");
-  const firstPatchLocation = firstLocation + 14;
-  const secondLocation = content.lastIndexOf("app-developer");
-  const secondPatchLocation = secondLocation + 15;
+    const modifiedBytes = new Uint8Array(fileBytes);
+    let modified = false;
+    let match;
 
-  const modifiedBytes = new Uint8Array(fileBytes);
-  modifiedBytes[firstPatchLocation] = 50;
-  modifiedBytes[secondPatchLocation] = 50;
-  await Deno.writeFile(bnkPath, modifiedBytes);
+    while ((match = pattern.exec(content)) !== null) {
+      modifiedBytes[match.index] = "2".charCodeAt(0);
+      modified = true;
+    }
+
+    if (modified) {
+      await Deno.writeFile(bnkPath, modifiedBytes);
+    }
+  } catch (e) {
+    if (e instanceof Deno.errors.NotFound) {
+      // It's fine if the file doesn't exist.
+    } else {
+      console.error(`\x1b[31mError patching "offline.bnk": ${e.message}\x1b[0m`);
+    }
+  }
 
   console.log("\x1b[36mFinished applying to Spotify\x1b[0m");
 };

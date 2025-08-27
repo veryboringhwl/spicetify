@@ -1,33 +1,30 @@
-/** biome-ignore-all lint/security/noDangerouslySetInnerHtml: temporary fix */
 import ReactDOM from "react-dom/client";
-import ConfirmDialog from "../../components/ConfirmDialog.tsx";
-import PopupModal from "../../components/PopupModal.tsx";
-import TestMenu from "../../debug/TestMenu.tsx";
-import Icons from "../../icons/Icons.tsx";
-import Window from "../../utils/Window.ts";
-import resetOptions from "../helpers/resetOptions.ts";
-import SettingsMenu from "./SettingsMenu.tsx";
+import { ConfirmDialog } from "../../components/ConfirmDialog.tsx";
+import { PopupModal } from "../../components/PopupModal.tsx";
+import { TestMenu } from "../../debug/TestMenu.tsx";
+import { Icons } from "../../icons/Icons.tsx";
+import { Window } from "../../utils/Window.ts";
+import { resetOptions } from "../helpers/resetOptions.ts";
+import { SettingsMenu } from "./SettingsMenu.tsx";
 
-const SettingsButton = () => {
+export const SettingsButton = () => {
   const popoverId = "settings-menu-popover";
-  let popoverElement = document.getElementById(popoverId);
-
-  const hideMenu = () => {
-    popoverElement?.hidePopover?.();
+  let popoverElement = document.getElementById(popoverId) as HTMLDivElement & {
+    hidePopover?: () => void;
+    showPopover?: () => void;
   };
 
+  const hideMenu = () => popoverElement?.hidePopover?.();
   const showMenu = (event: MouseEvent) => {
     event.preventDefault();
     popoverElement?.showPopover?.();
   };
 
   if (!popoverElement) {
-    popoverElement = document.createElement("div");
+    popoverElement = document.createElement("div") as any;
     popoverElement.id = popoverId;
-    popoverElement.style.top = "calc(anchor(--SettingsButton bottom) + 8px)";
-    popoverElement.style.left = "anchor(--SettingsButton left)";
-    popoverElement.style.background = "transparent";
-    popoverElement.style.overflow = "visible";
+    popoverElement.style.cssText =
+      "top: calc(anchor(--SettingsButton bottom) + 8px); left: anchor(--SettingsButton left); background: transparent; overflow: visible;";
     popoverElement.popover = "auto";
     document.body.appendChild(popoverElement);
 
@@ -45,8 +42,8 @@ const SettingsButton = () => {
             />
           }
           onClick={() => {
-            resetOptions(() => {});
             hideMenu();
+            resetOptions(() => {});
           }}
         >
           Reset theme
@@ -124,7 +121,7 @@ const SettingsButton = () => {
             />
           }
           onClick={() => {
-            PopupModal({ title: "Theme Settings", content: <SettingsMenu /> });
+            PopupModal({ title: "Theme Settings", content: SettingsMenu });
             hideMenu();
           }}
         >
@@ -142,7 +139,7 @@ const SettingsButton = () => {
             />
           }
           onClick={() => {
-            PopupModal({ title: "Test Menu", content: <TestMenu /> });
+            PopupModal({ title: "Test Menu", content: TestMenu });
             hideMenu();
           }}
         >
@@ -152,13 +149,14 @@ const SettingsButton = () => {
     );
   }
 
-  const SettingsButton = new Spicetify.Topbar.Button(
+  const button = new Spicetify.Topbar.Button(
     "Theme Settings",
     `<svg viewBox="0 0 16 16" width="16px" height="16px" fill="currentColor">${Icons.HTML.settings}</svg>`,
     () => {
       PopupModal({
         title: "Theme Settings",
         content: <SettingsMenu />,
+        isLarge: true,
         buttons: (
           <Spicetify.ReactComponent.TooltipWrapper label="GitHub" placement="top">
             <button
@@ -176,10 +174,7 @@ const SettingsButton = () => {
     true,
   );
 
-  SettingsButton.element.oncontextmenu = showMenu;
+  button.element.oncontextmenu = showMenu;
   // @ts-ignore f u
-  SettingsButton.element.style.anchorName = "--SettingsButton";
-  return SettingsButton;
+  button.element.style.anchorName = "--SettingsButton";
 };
-
-export default SettingsButton;

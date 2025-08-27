@@ -1,32 +1,21 @@
-import { memo } from "react";
-import options from "../settingsmenu/options.ts";
-import RenderOption from "./RenderOption.tsx";
+import { type FC, memo } from "react";
+import type { Option, RenderCategoryProps } from "../../types/temp.d.ts";
+import { options } from "../settingsmenu/options.ts";
+import { RenderOption } from "./RenderOption.tsx";
 
-interface OptionType {
-  name: string;
-  incompatible?: string[];
-}
+const allOptions: Option[] = Object.values(options).flat();
 
-interface RenderCategoryProps {
-  category: string;
-  categoryOptions: OptionType[];
-  settings: Record<string, any>;
-  onChange: (name: string, value: boolean) => void;
-}
-
-const allOptions: OptionType[] = Object.values(options).flat();
-
-const RenderCategory = memo<RenderCategoryProps>(
+export const RenderCategory: FC<RenderCategoryProps> = memo(
   ({ category, categoryOptions, settings, onChange }) => (
     <div className={`option__category option__category--${category.toLowerCase()}`}>
       <h2 className="option__category-title">{category}</h2>
       {categoryOptions.map((option) => {
-        const disabled = allOptions.some(
+        const isDisabled = allOptions.some(
           (o) => o.incompatible?.includes(option.name) && settings[o.name],
         );
         return (
           <RenderOption
-            disabled={disabled}
+            disabled={isDisabled}
             key={option.name}
             onChange={onChange}
             option={option}
@@ -37,5 +26,3 @@ const RenderCategory = memo<RenderCategoryProps>(
     </div>
   ),
 );
-
-export default RenderCategory;

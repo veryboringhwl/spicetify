@@ -1,24 +1,13 @@
-import { memo, useId, useRef } from "react";
-import Icons from "../../icons/Icons.tsx";
+import { type FC, memo, useId, useRef } from "react";
+import { Icons } from "../../icons/Icons.tsx";
+import type { DropdownOptionDef, DropdownProps } from "../../types/temp.d.ts";
 
-interface DropdownOption {
-  value: string | number;
-  label: string;
-}
-
-interface DropdownProps {
-  value: string | number;
-  options: DropdownOption[];
-  onChange?: (value: string | number) => void;
-  disabled?: boolean;
-}
-
-const Dropdown = memo(({ value, options, onChange, disabled }: DropdownProps) => {
+export const Dropdown: FC<DropdownProps> = memo(({ value, options, onChange, disabled }) => {
   const popoverId = useId();
   const popoverRef = useRef<HTMLDivElement>(null);
   const anchorName = `--dropdown-anchor-${popoverId.replace(/:/g, "id")}`;
 
-  const handleSelect = (option: DropdownOption) => {
+  const handleSelect = (option: DropdownOptionDef) => {
     onChange?.(option.value);
     popoverRef.current?.hidePopover();
   };
@@ -30,10 +19,9 @@ const Dropdown = memo(({ value, options, onChange, disabled }: DropdownProps) =>
       <button
         className="dropdown__button"
         disabled={disabled}
-        popovertarget={popoverId}
-        popovertargetaction="toggle"
-        // @ts-ignore
-        style={{ anchorName: anchorName }}
+        popoverTarget={popoverId}
+        popoverTargetAction="toggle"
+        style={{ anchorName: "anchorName" }}
       >
         <div className="dropdown__text">{selectedLabel}</div>
         <div className="dropdown__arrow">
@@ -53,9 +41,13 @@ const Dropdown = memo(({ value, options, onChange, disabled }: DropdownProps) =>
       >
         {options.map((option) => (
           <div
+            aria-selected={value === option.value}
             className={`dropdown__option${value === option.value ? " dropdown__option--selected" : ""}`}
             key={option.value}
             onClick={() => handleSelect(option)}
+            onKeyDown={(e) => e.key === "Enter" && handleSelect(option)}
+            role="option"
+            tabIndex={0}
           >
             {option.label}
           </div>
@@ -64,5 +56,3 @@ const Dropdown = memo(({ value, options, onChange, disabled }: DropdownProps) =>
     </div>
   );
 });
-
-export default Dropdown;

@@ -1,4 +1,6 @@
-const LoadingIndicator = () => (
+import type { FC } from "react";
+
+export const LoadingIndicator: FC = () => (
   <div className="loading-indicator-container">
     <svg className="loading-indicator" viewBox="0 0 120 40">
       <circle className="loading-indicator-circle" cx="20" cy="20" r="8" stroke="none" />
@@ -7,5 +9,3 @@ const LoadingIndicator = () => (
     </svg>
   </div>
 );
-
-export default LoadingIndicator;

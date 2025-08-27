@@ -1,25 +1,23 @@
-import Console from "../../utils/Console.ts";
-import options from "../settingsmenu/options.ts";
+import type { Option, Settings } from "../../types/temp.d.ts";
+import { Console } from "../../utils/Console.ts";
+import { options } from "../settingsmenu/options.ts";
 
 interface ApplyOptionsParams {
-  settings: Record<string, any>;
+  settings: Settings;
   changedOptions?: string[];
 }
 
-const applyOptions = ({ settings, changedOptions = [] }: ApplyOptionsParams) => {
+export const applyOptions = ({ settings, changedOptions = [] }: ApplyOptionsParams): void => {
   try {
-    Object.values(options)
-      .flat()
-      .forEach((option: { name: string; run?: (value: any) => void }) => {
-        const key = option.name;
-        const value = settings[key];
-        if (changedOptions.includes(key) && option.run) {
-          option.run(value);
-        }
-      });
+    const allOptions: Option[] = Object.values(options).flat();
+    allOptions.forEach((option) => {
+      const { name, run } = option;
+      const value = settings[name];
+      if (changedOptions.includes(name) && run) {
+        run(value);
+      }
+    });
   } catch (error) {
     Console.Error("Failed to apply options:", error);
   }
 };
-
-export default applyOptions;

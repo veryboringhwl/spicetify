@@ -1,33 +1,11 @@
-import { memo } from "react";
-import waitForElements from "../../utils/waitForElements.ts";
-import ButtonContainer from "../components/ButtonContainer.tsx";
-import RenderOption from "../components/RenderOption.tsx";
-import useModalSettings from "./useModalSettings.ts";
+import { type FC, memo } from "react";
+import type { InputOption, Option, ToggleOption } from "../../types/temp.d.ts";
+import { waitForElements } from "../../utils/waitForElements.ts";
+import { ButtonContainer } from "../components/ButtonContainer.tsx";
+import { RenderOption } from "../components/RenderOption.tsx";
+import { useModalSettings } from "./useModalSettings.ts";
 
-const WindowsControlModal = memo(() => {
-  const { settings, updateSetting, resetSettings, saveSettings } =
-    useModalSettings(windowsControlOptions);
-
-  return (
-    <div className="settings-modal">
-      <div className="settings-modal__options">
-        {windowsControlOptions.map((option) => (
-          <RenderOption
-            key={option.name}
-            onChange={(key, value) => updateSetting(key, value)}
-            option={option}
-            settings={settings}
-          />
-        ))}
-      </div>
-      <div className="settings-modal__buttons">
-        <ButtonContainer resetSettings={resetSettings} saveSettings={saveSettings} />
-      </div>
-    </div>
-  );
-});
-
-export const windowsControlOptions = [
+export const windowsControlOptions: Option[] = [
   {
     type: "toggle",
     name: "windows-control",
@@ -121,5 +99,28 @@ export const windowsControlOptions = [
     },
   },
 ];
+
+export const WindowsControlModal: FC = memo(() => {
+  const { settings, handleSettingChange, resetSettings, saveSettings } =
+    useModalSettings(windowsControlOptions);
+
+  return (
+    <div className="settings-modal">
+      <div className="settings-modal__options">
+        {windowsControlOptions.map((option) => (
+          <RenderOption
+            key={option.name}
+            onChange={handleSettingChange}
+            option={option}
+            settings={settings}
+          />
+        ))}
+      </div>
+      <div className="settings-modal__buttons">
+        <ButtonContainer resetSettings={resetSettings} saveSettings={saveSettings} />
+      </div>
+    </div>
+  );
+});
 
 export default WindowsControlModal;

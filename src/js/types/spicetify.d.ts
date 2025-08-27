@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { PlatformTypes } from "./platform.d.ts";
 
 declare global {
@@ -503,6 +504,10 @@ declare global {
      * @deprecated
      */
     const CosmosAPI: any;
+
+    const Events: any;
+    const Snackbar: any;
+
     /**
      * Async wrappers of CosmosAPI
      */
@@ -1367,6 +1372,7 @@ declare global {
 
     /** Stock React components exposed from Spotify library */
     namespace ReactComponent {
+      const RemoteConfigProvider: any;
       type ContextMenuProps = {
         /**
          * Decide whether to use the global singleton context menu (rendered in <body>)

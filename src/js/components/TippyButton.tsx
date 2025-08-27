@@ -1,11 +1,8 @@
-import { memo } from "react";
-import Icons from "../icons/Icons.tsx";
+import { type FC, memo } from "react";
+import { Icons } from "../icons/Icons.tsx";
+import type { TippyButtonProps } from "../types/temp.d.ts";
 
-interface TippyButtonProps {
-  tippy: string;
-}
-
-const TippyButton = memo(({ tippy }: TippyButtonProps) => {
+export const TippyButton: FC<TippyButtonProps> = memo(({ tippy }) => {
   return (
     <Spicetify.ReactComponent.TooltipWrapper label={tippy} placement="top" showDelay={0}>
       <div className="info-tippy">
@@ -14,5 +11,3 @@ const TippyButton = memo(({ tippy }: TippyButtonProps) => {
     </Spicetify.ReactComponent.TooltipWrapper>
   );
 });
-
-export default TippyButton;

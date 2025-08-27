@@ -1,20 +1,14 @@
-import React, { ComponentType, memo, ReactNode, useEffect, useRef } from "react";
-import ReactDOM from "react-dom/client";
-import Icons from "../icons/Icons.tsx";
-
-interface PopupModalProps {
-  title?: string;
-  content: ReactNode | ComponentType<any>;
-  isLarge?: boolean;
-  buttons?: ReactNode;
-  icon?: ReactNode;
-}
+import type { ComponentType, FC, MouseEvent, ReactNode } from "react";
+import { isValidElement, memo, useEffect, useRef } from "react";
+import { createRoot, type Root } from "react-dom/client";
+import { Icons } from "../icons/Icons.tsx";
+import type { PopupModalProps } from "../types/temp.d.ts";
 
 interface ModalComponentProps extends PopupModalProps {
   onClose: () => void;
 }
 
-let modalRoot: ReactDOM.Root | null = null;
+let modalRoot: Root | null = null;
 const modalContainerId = "popup-modal-container";
 
 const closeModal = (): void => {
@@ -29,8 +23,8 @@ const closeModal = (): void => {
   document.body.style.overflow = "auto";
 };
 
-const ModalComponent = memo(
-  ({ title, content, isLarge, buttons, icon, onClose }: ModalComponentProps) => {
+const ModalComponent: FC<ModalComponentProps> = memo(
+  ({ title, content, isLarge, buttons, icon, onClose }) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {
@@ -39,14 +33,10 @@ const ModalComponent = memo(
         dialogElement.addEventListener("cancel", (event) => {
           event.preventDefault();
         });
-
         dialogElement.showModal();
         document.body.style.overflow = "hidden";
 
-        const handleDialogClose = () => {
-          onClose();
-        };
-
+        const handleDialogClose = () => onClose();
         dialogElement.addEventListener("close", handleDialogClose);
 
         return () => {
@@ -56,24 +46,21 @@ const ModalComponent = memo(
     }, [onClose]);
 
     const handleClose = () => {
-      const dialogElement = dialogRef.current;
-      if (dialogElement) {
-        dialogElement.close();
-      }
+      dialogRef.current?.close();
     };
 
-    const handleBackdropClick = (event: React.MouseEvent<HTMLDialogElement>) => {
+    const handleBackdropClick = (event: MouseEvent<HTMLDialogElement>) => {
       if (event.target === dialogRef.current) {
         handleClose();
       }
     };
 
     const renderContent = (): ReactNode => {
-      if (React.isValidElement(content)) {
+      if (isValidElement(content)) {
         return content;
       }
       if (typeof content === "function") {
-        const ContentComponent = content as ComponentType<any>;
+        const ContentComponent = content as ComponentType;
         return <ContentComponent />;
       }
       return content;
@@ -103,35 +90,16 @@ const ModalComponent = memo(
   },
 );
 
-const PopupModal = ({
-  title = "",
-  content,
-  isLarge = true,
-  buttons,
-  icon = "",
-}: PopupModalProps): void => {
+export const PopupModal = (props: PopupModalProps): void => {
   if (document.getElementById(modalContainerId)) {
     closeModal();
   }
-
   const container = document.createElement("div");
   container.id = modalContainerId;
   document.body.appendChild(container);
 
-  modalRoot = ReactDOM.createRoot(container);
-  modalRoot.render(
-    <ModalComponent
-      buttons={buttons}
-      content={content}
-      icon={icon}
-      isLarge={isLarge}
-      onClose={closeModal}
-      title={title}
-    />,
-  );
+  modalRoot = createRoot(container);
+  modalRoot.render(<ModalComponent {...props} onClose={closeModal} />);
 };
 
 PopupModal.hide = closeModal;
-
-export default PopupModal;
-export type { PopupModalProps };

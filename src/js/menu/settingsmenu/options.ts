@@ -1,14 +1,15 @@
-import TestMenu from "../../debug/TestMenu.tsx";
-import ColourScheme from "../../features/ColourScheme.ts";
-import CoverArtBanner from "../../features/CoverArtBanner.ts";
-import SpotifyMode from "../../features/SpotifyMode.ts";
-import ToggleAppleMusic from "../../features/ToggleAppleMusic.ts";
-import ToggleLibXUI from "../../features/ToggleLibXUI.ts";
-import VolPercent from "../../features/VolPercent.tsx";
-import AlbumBannerModal from "../../menu/modalmenu/AlbumBannerModal.tsx";
-import WindowsControlModal from "../../menu/modalmenu/WindowsControlModal.tsx";
+import { TestMenu } from "../../debug/TestMenu.tsx";
+import { ColourScheme } from "../../features/ColourScheme.ts";
+import { CoverArtBanner } from "../../features/CoverArtBanner.ts";
+import { SpotifyMode } from "../../features/SpotifyMode.ts";
+import { ToggleAppleMusic } from "../../features/ToggleAppleMusic.ts";
+import { ToggleLibXUI } from "../../features/ToggleLibXUI.ts";
+import { VolPercent } from "../../features/VolPercent.tsx";
+import type { OptionsCategories } from "../../types/temp.d.ts";
+import { AlbumBannerModal } from "../modalmenu/AlbumBannerModal.tsx";
+import { WindowsControlModal } from "../modalmenu/WindowsControlModal.tsx";
 
-const options = {
+export const options: OptionsCategories = {
   Features: [
     {
       type: "radiobutton",
@@ -297,7 +298,7 @@ const options = {
           type: "input",
           name: "revealed-input",
           desc: "revealed-input",
-          defaultVal: true,
+          defaultVal: "true",
         },
         {
           type: "dropdown",

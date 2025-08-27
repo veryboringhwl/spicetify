@@ -1,13 +1,11 @@
-const Window = {
-  Reload: () => {
+export const Window = {
+  Reload: (): void => {
     location.reload();
   },
-  Restart: () => {
+  Restart: (): void => {
     Spicetify.Platform.LifecycleAPI.restart();
   },
-  stop: () => {
+  Stop: (): void => {
     Spicetify.Platform.LifecycleAPI.shutdown();
   },
 };
-
-export default Window;

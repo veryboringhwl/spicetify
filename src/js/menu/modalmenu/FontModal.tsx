@@ -1,11 +1,25 @@
-import { memo } from "react";
-import ButtonContainer from "../components/ButtonContainer";
-import RenderOption from "../components/RenderOption";
-import { ModalOption } from "./types";
-import useModalSettings from "./useModalSettings";
+import { type FC, memo } from "react";
+import type { Option } from "../../types/temp.d.ts";
+import { ButtonContainer } from "../components/ButtonContainer.tsx";
+import { RenderOption } from "../components/RenderOption.tsx";
+import { useModalSettings } from "./useModalSettings.ts";
 
-const FontModal = memo(() => {
-  const { settings, updateSetting, resetSettings, saveSettings } = useModalSettings(fontOptions);
+export const fontOptions: Option[] = [
+  {
+    type: "input",
+    name: "uifont",
+    desc: "Changes the font of the Spotify app",
+    defaultVal: "Segoe UI Variable Display",
+    tippy: "This will only work if you have the font installed on your system",
+    run(value: string) {
+      document.documentElement.style.setProperty("--FontFamily", value);
+    },
+  },
+];
+
+export const FontModal: FC = memo(() => {
+  const { settings, handleSettingChange, resetSettings, saveSettings } =
+    useModalSettings(fontOptions);
 
   return (
     <div className="settings-modal">
@@ -13,7 +27,7 @@ const FontModal = memo(() => {
         {fontOptions.map((option) => (
           <RenderOption
             key={option.name}
-            onChange={(key, value) => updateSetting(key, value)}
+            onChange={handleSettingChange}
             option={option}
             settings={settings}
           />
@@ -25,19 +39,3 @@ const FontModal = memo(() => {
     </div>
   );
 });
-
-export const fontOptions: ModalOption[] = [
-  {
-    type: "input",
-    name: "uifont",
-    desc: "Changes the font of the Spotify app",
-    defaultVal: "Segoe UI Variable Display",
-    tippy: "This will only work if you have the font installed",
-    popupModal: FontModal,
-    run(value) {
-      document.documentElement.style.setProperty("--FontFamily", value);
-    },
-  },
-];
-
-export default FontModal;

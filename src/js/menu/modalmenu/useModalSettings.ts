@@ -1,57 +1,47 @@
 import { useCallback, useState } from "react";
-import Console from "../../utils/Console";
-import LocalStorage from "../../utils/LocalStorage";
-import getInitialOptions from "../helpers/getInitialOptions";
-import { ModalOption, ModalSettings } from "./types";
+import type { Option, Settings, UseSettingsReturn } from "../../types/temp.d.ts";
+import { Console } from "../../utils/Console.ts";
+import { LocalStorage } from "../../utils/LocalStorage.ts";
+import { getInitialOptions } from "../helpers/getInitialOptions.ts";
 
-const useModalSettings = (options: ModalOption[]) => {
-  const [settings, setSettings] = useState<ModalSettings>(() => getInitialOptions(options));
+export const useModalSettings = (modalOptions: Option[]): UseSettingsReturn => {
+  const [settings, setSettings] = useState<Settings>(() => getInitialOptions(modalOptions));
 
-  const updateSetting = useCallback((key: string, value: string | boolean) => {
+  const handleSettingChange = useCallback((key: string, value: any) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
   }, []);
 
   const resetSettings = useCallback(() => {
-    const defaultSettings: ModalSettings = Object.fromEntries(
-      options.map((option) => [option.name, option.defaultVal]),
+    const defaultSettings: Settings = Object.fromEntries(
+      modalOptions.map((option) => [option.name, option.defaultVal]),
     );
     setSettings(defaultSettings);
-
-    options.forEach((option) => {
+    modalOptions.forEach((option) => {
       LocalStorage.set(option.name, option.defaultVal);
-      if (option.run) {
-        option.run(option.defaultVal);
-      }
+      option.run?.(option.defaultVal);
     });
-  }, [options]);
+    Spicetify.showNotification("Settings reset to default.");
+  }, [modalOptions]);
 
   const saveSettings = useCallback(() => {
     const changedOptions: string[] = [];
-
     Object.entries(settings).forEach(([key, value]) => {
-      const storedValue: string | boolean | null = LocalStorage.get(key, null);
+      const storedValue = LocalStorage.get(key, null);
       if (JSON.stringify(storedValue) !== JSON.stringify(value)) {
+        LocalStorage.set(key, value);
         changedOptions.push(key);
-      }
-
-      LocalStorage.set(key, value);
-      const option = options.find((opt): opt is ModalOption => opt.name === key);
-      if (option) {
-        if (option.run) {
-          // The 'run' function can take either boolean or string based on option type
-          // We cast value to any to satisfy the type checker for now.
-          // A more robust solution might involve type guards based on option.type.
-          option.run(value as any);
-        }
+        const option = modalOptions.find((opt) => opt.name === key);
+        option?.run?.(value);
       }
     });
 
     if (changedOptions.length > 0) {
       Console.Log(`Saving modal settings: ${changedOptions.join(", ")}`);
+      Spicetify.showNotification("Modal settings saved.");
+    } else {
+      Spicetify.showNotification("No changes to save.");
     }
-  }, [settings, options]);
+  }, [settings, modalOptions]);
 
-  return { settings, updateSetting, resetSettings, saveSettings };
+  return { settings, handleSettingChange, resetSettings, saveSettings };
 };
-
-export default useModalSettings;

@@ -1,7 +1,7 @@
-import PopupModal from "../components/PopupModal.tsx";
-import TestMenu from "./TestMenu.tsx";
+import { PopupModal } from "../components/PopupModal.tsx";
+import { TestMenu } from "./TestMenu.tsx";
 
-const Mousetrap = () => {
+export const Mousetrap = (): void => {
   Spicetify.Mousetrap.bind(
     [
       "up up down down left right left right b a",
@@ -13,11 +13,9 @@ const Mousetrap = () => {
     ],
     () => {
       PopupModal({
-        title: "Theme Version",
+        title: "Theme Version / Debug",
         content: <TestMenu />,
       });
     },
   );
 };
-
-export default Mousetrap;

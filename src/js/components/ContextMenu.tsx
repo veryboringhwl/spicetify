@@ -1,13 +1,12 @@
 import { memo } from "react";
-import ReactDOM from "react-dom/client";
-import DebugMenu from "../debug/DebugMenu";
-import SettingsMenu from "../menu/settingsmenu/SettingsMenu";
-import Window from "../utils/Window";
-import waitForElements from "../utils/waitForElements";
-import ConfirmDialog from "./ConfirmDialog";
-import PopupModal from "./PopupModal";
+import { createRoot } from "react-dom/client";
+import { TestMenu } from "../debug/TestMenu.tsx";
+import { SettingsMenu } from "../menu/settingsmenu/SettingsMenu.tsx";
+import { Window } from "../utils/Window.ts";
+import { waitForElements } from "../utils/waitForElements.ts";
+import { ConfirmDialog } from "./ConfirmDialog.tsx";
+import { PopupModal } from "./PopupModal.tsx";
 
-//why divider not work
 const ContextMenuButton = memo(() => (
   <Spicetify.ReactComponent.ContextMenu
     menu={
@@ -15,30 +14,20 @@ const ContextMenuButton = memo(() => (
         configuration={Spicetify.Platform.RemoteConfiguration}
       >
         <Spicetify.ReactComponent.Menu>
-          <Spicetify.ReactComponent.MenuItem
-            divider="before"
-            onClick={() => {
-              Window.Reload();
-            }}
-          >
+          <Spicetify.ReactComponent.MenuItem divider="before" onClick={() => Window.Reload()}>
             Reload theme
           </Spicetify.ReactComponent.MenuItem>
-          <Spicetify.ReactComponent.MenuItem
-            divider="before"
-            onClick={() => {
-              Window.Restart();
-            }}
-          >
+          <Spicetify.ReactComponent.MenuItem divider="before" onClick={() => Window.Restart()}>
             Restart Spotify
           </Spicetify.ReactComponent.MenuItem>
           <Spicetify.ReactComponent.MenuItem
-            divider={"before"}
+            divider="before"
             onClick={() => {
               ConfirmDialog({
                 titleText: "Confirm Dialog",
                 descriptionText: "Are you <b>sure</b>?",
                 onOutside: () => Spicetify.showNotification("Clicked outside"),
-                confirmLabel: "Ok",
+                confirmText: "Ok",
                 allowHTML: true,
               });
             }}
@@ -46,7 +35,7 @@ const ContextMenuButton = memo(() => (
             Confirm Dialog
           </Spicetify.ReactComponent.MenuItem>
           <Spicetify.ReactComponent.MenuItem
-            divider={before}
+            divider="before"
             onClick={() => {
               PopupModal({
                 title: "Theme Settings",
@@ -57,11 +46,11 @@ const ContextMenuButton = memo(() => (
             Theme Settings
           </Spicetify.ReactComponent.MenuItem>
           <Spicetify.ReactComponent.MenuItem
-            divider={true}
+            divider="before"
             onClick={() => {
               PopupModal({
                 title: "Debug Menu",
-                content: DebugMenu,
+                content: TestMenu,
               });
             }}
           >
@@ -81,22 +70,20 @@ const ContextMenuButton = memo(() => (
         height: "100%",
         background: "unset",
         border: "none",
+        cursor: "context-menu",
       }}
     />
   </Spicetify.ReactComponent.ContextMenu>
 ));
 
-async function mountComponent() {
+export async function mountComponent(): Promise<void> {
   const mountPoint = await waitForElements('[aria-label="Theme Settings"]');
+  if (!mountPoint) return;
+
   const container = document.createElement("div");
   container.className = "context-menu-container";
   container.style.position = "absolute";
-  container.style.color = "transparent";
-  container.style.height = "100%";
-  container.style.width = "100%";
+  container.style.inset = "0";
   mountPoint.appendChild(container);
-
-  ReactDOM.createRoot(container).render(<ContextMenuButton />);
+  createRoot(container).render(<ContextMenuButton />);
 }
-
-export default mountComponent;

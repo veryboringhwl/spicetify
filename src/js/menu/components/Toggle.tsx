@@ -1,12 +1,7 @@
-import { memo } from "react";
+import { type FC, memo } from "react";
+import type { ToggleProps } from "../../types/temp.d.ts";
 
-interface ToggleProps {
-  value: boolean;
-  onChange: (newValue: boolean) => void;
-  disabled?: boolean;
-}
-
-const Toggle = memo(({ value, onChange, disabled }: ToggleProps) => {
+export const Toggle: FC<ToggleProps> = memo(({ value, onChange, disabled }) => {
   const handleClick = () => {
     if (!disabled) {
       onChange(!value);
@@ -14,14 +9,20 @@ const Toggle = memo(({ value, onChange, disabled }: ToggleProps) => {
   };
 
   return (
-    <button className="toggle" disabled={disabled} onClick={handleClick}>
+    <button
+      aria-checked={value}
+      className="toggle"
+      disabled={disabled}
+      onClick={handleClick}
+      role="switch"
+    >
       <span className="toggle__background">
         <span
-          className={`toggle__slider${value ? " toggle__slider--enabled" : ""}${disabled ? " toggle__slider--disabled" : ""}`}
+          className={`toggle__slider${value ? " toggle__slider--enabled" : ""}${
+            disabled ? " toggle__slider--disabled" : ""
+          }`}
         />
       </span>
     </button>
   );
 });
-
-export default Toggle;

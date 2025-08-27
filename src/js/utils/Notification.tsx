@@ -1,17 +1,8 @@
-import React from "react";
-import Icons from "../icons/Icons.tsx";
-import Console from "../utils/Console.ts";
+import { Icons } from "../icons/Icons.tsx";
+import { NotificationProps } from "../types/temp.d.ts";
+import { Console } from "../utils/Console.ts";
 
-interface NotificationProps {
-  message?: string | React.JSX.Element;
-  keyPrefix?: string;
-  autoHideDuration?: number;
-  backgroundColour?: string;
-  colour?: string;
-  isWarning?: boolean;
-}
-
-const Notification = ({
+export const Notification = ({
   message = "",
   keyPrefix = "custom-notif",
   autoHideDuration = 3000,
@@ -66,5 +57,3 @@ const Notification = ({
 //   isWarning: true,
 //   message: <span>Theme only supports Spotify versions greater than 1.2.66.000</span>,
 // });
-
-export default Notification;

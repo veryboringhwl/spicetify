@@ -1,11 +1,7 @@
-import { memo } from "react";
+import { type FC, memo } from "react";
+import type { ButtonContainerProps } from "../../types/temp.d.ts";
 
-interface ButtonContainerProps {
-  resetSettings: () => void;
-  saveSettings: () => void;
-}
-
-const ButtonContainer = memo(({ resetSettings, saveSettings }: ButtonContainerProps) => (
+export const ButtonContainer: FC<ButtonContainerProps> = memo(({ resetSettings, saveSettings }) => (
   <div className="button-container">
     <button
       className="button-container__button button-container__button--reset"
@@ -21,5 +17,3 @@ const ButtonContainer = memo(({ resetSettings, saveSettings }: ButtonContainerPr
     </button>
   </div>
 ));
-
-export default ButtonContainer;

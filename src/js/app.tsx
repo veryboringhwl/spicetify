@@ -1,8 +1,8 @@
-import Mousetrap from "./debug/Mousetrap.tsx";
-import initialiseOptions from "./menu/helpers/initialiseOptions.ts";
-import SettingsButton from "./menu/settingsmenu/SettingsButton.tsx";
-import Console from "./utils/Console.ts";
-import Notification from "./utils/Notification.tsx";
+import { Mousetrap } from "./debug/Mousetrap.tsx";
+import { initialiseOptions } from "./menu/helpers/initialiseOptions.ts";
+import { SettingsButton } from "./menu/settingsmenu/SettingsButton.tsx";
+import { Console } from "./utils/Console.ts";
+import { Notification } from "./utils/Notification.tsx";
 
 // run npx react-devtools in a terminal, and copy-paste the contents of http://localhost:8097 into xpui.js
 // or add react devtools as chrome extension
