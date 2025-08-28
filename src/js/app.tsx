@@ -4,38 +4,34 @@ import { SettingsButton } from "./menu/settingsmenu/SettingsButton.tsx";
 import { Console } from "./utils/Console.ts";
 import { Notification } from "./utils/Notification.tsx";
 
-// run npx react-devtools in a terminal, and copy-paste the contents of http://localhost:8097 into xpui.js
-// or add react devtools as chrome extension
-
 // TODO:
-// add save and reset icon to button
 // Add types of input (number, string)
-// Use esbuild for css so i can use biome
-// Redo basically all css as its very messy
-// Redo all classnames
-// Use absolute path instead of relative for imports (esbuild-plugin-alias)
-//.body-drag-top make it bigger
 // Use custom contextmenu icons
 // Auto update theme?
-// EVENTUALLY SWITCH TO TYPESCRIPT
+// Add more custom features/settings
 
 async function theme() {
   const timeout = 5000;
-  await Promise.race([
-    (async () => {
-      await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));
-      while (
-        !(
-          Spicetify.Snackbar.enqueueCustomSnackbar &&
-          Spicetify.Snackbar.enqueueSnackbar &&
-          Spicetify.Platform.ProductStateAPI.productStateApi
-        )
-      ) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-      }
-    })(),
-    new Promise((_, reject) => setTimeout(() => reject("Initialization timeout"), timeout)),
-  ]).catch((error) => {
+  const { promise: timeoutPromise, reject: timeoutReject } = Promise.withResolvers<never>();
+  const timeoutId = setTimeout(() => timeoutReject("Initialization timeout"), timeout);
+
+  try {
+    await Promise.race([
+      (async () => {
+        await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));
+        while (
+          !(
+            Spicetify.Snackbar.enqueueCustomSnackbar &&
+            Spicetify.Snackbar.enqueueSnackbar &&
+            Spicetify.Platform.ProductStateAPI.productStateApi
+          )
+        ) {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+        }
+      })(),
+      timeoutPromise,
+    ]);
+  } catch (error) {
     console.log(
       `${error}: Failed to initialize after ${timeout / 1000} seconds. Some features may not work.`,
     );
@@ -44,11 +40,13 @@ async function theme() {
       isWarning: true,
       message: (
         <span>
-          {error}: Failed to initialize after {timeout / 1000} seconds. Some features may not work.
+          Failed to initialize after {timeout / 1000} seconds. Some features may not work.
         </span>
       ),
     });
-  });
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   Console.Log("Spicetify theme initialising");
 
@@ -56,10 +54,15 @@ async function theme() {
     Spicetify.PopupModal.hide();
   });
 
-  const MIN_PATCH_VERSION = 69;
-  const MAX_PATCH_VERSION = 69;
-  const [major, minor, patch] = Spicetify.Platform.version.split(".").map(Number);
-  const isSupportedVersion = patch >= MIN_PATCH_VERSION && patch <= MAX_PATCH_VERSION;
+  const compareVersions = (v1: string, v2: string) =>
+    v1.localeCompare(v2, undefined, { numeric: true, sensitivity: "base" });
+
+  const MIN_VERSION = "1.2.68";
+  const MAX_VERSION = "1.2.69";
+  const currentVersion = Spicetify.Platform.version.split(".").slice(0, 3).join(".");
+  const isSupportedVersion =
+    compareVersions(currentVersion, MIN_VERSION) >= 0 &&
+    compareVersions(currentVersion, MAX_VERSION) <= 0;
 
   if (!isSupportedVersion) {
     Notification({
@@ -68,8 +71,8 @@ async function theme() {
       message: (
         <>
           <span>
-            Theme supports Spotify v1.2.{MIN_PATCH_VERSION} to v1.2.{MAX_PATCH_VERSION}. Your
-            version: {major}.{minor}.{patch} may not work.
+            Theme supports Spotify v{MIN_VERSION} to v{MAX_VERSION}. Your version: {currentVersion}{" "}
+            may not work.
           </span>
         </>
       ),
